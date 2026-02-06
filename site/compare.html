@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How This Compares — Epstein Network Projects</title>
+<meta name="description" content="Comparison of open-source Epstein investigation projects. Archives, search engines, NLP visualizations, and gap analysis — what each does and how they fit together.">
+<meta property="og:title" content="How This Compares — Epstein Network Projects">
+<meta property="og:description" content="8+ open-source Epstein investigation projects compared. What each does, how they differ, and why gap analysis matters.">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; background: #0a0a0f; color: #c8c8d0; font-size: 13px; line-height: 1.7; }
+a { color: #6ea8fe; }
+a:hover { color: #9dc4ff; }
+
+.page { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; }
+
+header { padding: 8px 16px; background: #12121a; border-bottom: 1px solid #2a2a3a; display: flex; justify-content: space-between; align-items: center; }
+header h1 { font-size: 14px; font-weight: 600; color: #e8e8f0; }
+header a { font-size: 11px; text-decoration: none; padding: 4px 12px; border: 1px solid #2a2a3a; border-radius: 3px; color: #888; }
+header a:hover { color: #e8e8f0; background: #1a1a2a; }
+
+h2 { font-size: 18px; color: #e8e8f0; margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #2a2a3a; }
+h2:first-of-type { margin-top: 24px; }
+h3 { font-size: 14px; color: #6ea8fe; margin: 24px 0 8px; }
+
+p { margin-bottom: 12px; color: #999; }
+strong { color: #e8e8f0; }
+em { color: #f0ad4e; font-style: normal; }
+code { background: #1a1a2a; padding: 1px 5px; border-radius: 2px; font-size: 12px; }
+
+/* Layer diagram */
+.layers { display: grid; gap: 2px; margin: 20px 0 32px; }
+.layer-row { display: grid; grid-template-columns: 36px 200px 1fr; gap: 0; align-items: stretch; }
+.layer-num { background: #1a1a2a; padding: 10px 8px; text-align: center; font-weight: 700; font-size: 16px; border-right: 1px solid #2a2a3a; display: flex; align-items: center; justify-content: center; }
+.layer-desc { background: #12121a; padding: 10px 12px; border-right: 1px solid #2a2a3a; display: flex; align-items: center; }
+.layer-projects { background: #12121a; padding: 10px 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.layer-row.highlight .layer-num { background: #2a1a3a; color: #a29bfe; }
+.layer-row.highlight .layer-desc { background: #1a1a2a; }
+.layer-row.highlight .layer-projects { background: #1a1a2a; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; border: 1px solid; }
+.tag-archive { background: #1a2a2a; border-color: #3a5a5a; color: #4ecdc4; }
+.tag-search { background: #2a2a1a; border-color: #5a5a3a; color: #fdcb6e; }
+.tag-extract { background: #1a1a2a; border-color: #3a3a5a; color: #74b9ff; }
+.tag-model { background: #2a1a3a; border-color: #5a3a6a; color: #a29bfe; font-weight: 600; }
+
+/* Pipeline diagrams */
+.pipeline { background: #12121a; border: 1px solid #2a2a3a; border-radius: 4px; padding: 16px 20px; margin: 16px 0; font-size: 14px; text-align: center; letter-spacing: 0.5px; }
+.pipeline .arrow { color: #555; }
+.pipeline .dim { color: #666; }
+.pipeline .highlight-text { color: #a29bfe; font-weight: 600; }
+
+/* Comparison table */
+.table-wrap { overflow-x: auto; margin: 20px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 11px; }
+th { text-align: left; padding: 8px 10px; color: #888; border-bottom: 2px solid #2a2a3a; white-space: nowrap; position: sticky; top: 0; background: #0a0a0f; }
+td { padding: 7px 10px; border-bottom: 1px solid #1a1a2a; vertical-align: top; }
+tr:hover { background: #12121a; }
+td:first-child { color: #888; white-space: nowrap; min-width: 120px; }
+td:last-child { font-weight: 600; }
+.col-ug { background: rgba(162, 155, 254, 0.05); }
+
+/* Lead types */
+.lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+.lead-card { background: #12121a; border: 1px solid #2a2a3a; border-radius: 4px; padding: 12px; }
+.lead-card .lead-title { color: #f0ad4e; font-weight: 600; font-size: 12px; margin-bottom: 4px; }
+.lead-card .lead-desc { color: #888; font-size: 12px; }
+.lead-card .lead-example { color: #666; font-size: 11px; margin-top: 6px; font-style: italic; }
+
+/* Complementary section */
+.complement { background: #12121a; border: 1px solid #2a2a3a; border-radius: 4px; padding: 20px; margin: 20px 0; }
+.complement-flow { display: flex; align-items: center; gap: 12px; margin: 12px 0; flex-wrap: wrap; }
+.complement-box { background: #1a1a2a; border: 1px solid #3a3a5a; border-radius: 4px; padding: 8px 14px; text-align: center; }
+.complement-box .box-name { font-weight: 600; color: #e8e8f0; font-size: 12px; }
+.complement-box .box-desc { color: #666; font-size: 10px; }
+.complement-arrow { color: #555; font-size: 18px; }
+
+@media (max-width: 700px) {
+  .layer-row { grid-template-columns: 30px 1fr; }
+  .layer-desc { display: none; }
+  .lead-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>How This Compares</h1>
+  <div style="display:flex;gap:8px">
+    <a href="./">Graph</a>
+    <a href="https://github.com/unify-graph/unify-graph">Source</a>
+  </div>
+</header>
+
+<div class="page">
+
+<h2>Four Layers of Epstein Investigation Projects</h2>
+
+<p>There are 8+ open-source projects analyzing the Epstein documents. They fall into four layers — most do layer 1 or 2, a few do layer 3. Only this project does layer 4.</p>
+
+<div class="layers">
+  <div class="layer-row">
+    <div class="layer-num">1</div>
+    <div class="layer-desc">Archive — collect &amp; host raw documents</div>
+    <div class="layer-projects">
+      <a class="tag tag-archive" href="https://github.com/theelderemo/FULL_EPSTEIN_INDEX">FULL_EPSTEIN_INDEX</a>
+      <a class="tag tag-archive" href="https://github.com/epstein-docs/epstein-docs.github.io">epstein-docs</a>
+    </div>
+  </div>
+  <div class="layer-row">
+    <div class="layer-num">2</div>
+    <div class="layer-desc">Search — full-text search + entity tagging</div>
+    <div class="layer-projects">
+      <a class="tag tag-search" href="https://analytics.dugganusa.com/epstein/">DugganUSA</a>
+      <a class="tag tag-search" href="https://github.com/ErikVeland/epstein-archive">epstein-archive</a>
+    </div>
+  </div>
+  <div class="layer-row">
+    <div class="layer-num">3</div>
+    <div class="layer-desc">Extract → Visualize — NLP/LLM builds graphs</div>
+    <div class="layer-projects">
+      <a class="tag tag-extract" href="https://github.com/phelix001/epstein-network">phelix001</a>
+      <a class="tag tag-extract" href="https://github.com/maxandrews/Epstein-doc-explorer">maxandrews</a>
+      <a class="tag tag-extract" href="https://github.com/SvetimFM/epstein-files-visualizations">SvetimFM</a>
+      <a class="tag tag-extract" href="https://github.com/consigcody94/OWL-DOJ-Epstein-Analysis">OWL-DOJ</a>
+    </div>
+  </div>
+  <div class="layer-row highlight">
+    <div class="layer-num">4</div>
+    <div class="layer-desc">Model → Analyze gaps</div>
+    <div class="layer-projects">
+      <a class="tag tag-model" href="./">unify-graph</a>
+      <span style="color:#666;font-size:11px">typed schema where constraint violations = investigative leads</span>
+    </div>
+  </div>
+</div>
+
+<h2>The Standard Pipeline (Layers 1-3)</h2>
+
+<p>Every other project follows a variation of this pipeline:</p>
+
+<div class="pipeline">
+  <span class="dim">Documents</span> <span class="arrow">→</span>
+  <span class="dim">OCR</span> <span class="arrow">→</span>
+  <span class="dim">NLP / LLM</span> <span class="arrow">→</span>
+  <span class="dim">Entities</span> <span class="arrow">→</span>
+  <span class="dim">Graph</span> <span class="arrow">→</span>
+  <span class="dim">"Look at all these connections"</span>
+</div>
+
+<p>They differ in scale (47 entities to 86,000), extraction method (regex to Claude AI), and visualization (2D force graphs to 3D clouds and Sankey diagrams). But they all answer the same question: <strong>"What do we know?"</strong></p>
+
+<h2>The Inverted Pipeline (Layer 4)</h2>
+
+<p>This project inverts the question:</p>
+
+<div class="pipeline">
+  <span class="highlight-text">Entities</span> <span class="arrow">→</span>
+  <span class="highlight-text">Typed Schema</span> <span class="arrow">→</span>
+  <span class="highlight-text">Constraint Violations</span> <span class="arrow">→</span>
+  <span class="highlight-text">"Here's what we DON'T know"</span>
+</div>
+
+<p>132 hand-curated entities modeled in <a href="https://cuelang.org">CUE</a> — a configuration language designed for infrastructure-as-code. The CUE compiler enforces that every reference resolves, every type is consistent, every constraint is satisfied. When something <em>doesn't</em> satisfy the schema, that's not a bug — it's a lead.</p>
+
+<div class="lead-grid">
+  <div class="lead-card">
+    <div class="lead-title">Dangling Reference</div>
+    <div class="lead-desc">Entity mentions a person not yet modeled.</div>
+    <div class="lead-example">→ Who are they? Why are they connected?</div>
+  </div>
+  <div class="lead-card">
+    <div class="lead-title">Empty Evidence Map</div>
+    <div class="lead-desc">Entity exists in the graph but has zero document citations.</div>
+    <div class="lead-example">→ 117 of 132 entities are structurally connected but unverified.</div>
+  </div>
+  <div class="lead-card">
+    <div class="lead-title">Type Inconsistency</div>
+    <div class="lead-desc">Tagged as FinancialEnabler but no financial flows documented.</div>
+    <div class="lead-example">→ Where's the paper trail?</div>
+  </div>
+  <div class="lead-card">
+    <div class="lead-title">Sole Connector</div>
+    <div class="lead-desc">One person is the only bridge between two cluster worlds.</div>
+    <div class="lead-example">→ 44 cluster pairs depend on a single entity. Discredit them, the connection vanishes.</div>
+  </div>
+  <div class="lead-card">
+    <div class="lead-title">Exposure Cascade</div>
+    <div class="lead-desc">Pre-computed BFS: if X cooperates, who's within 2 degrees?</div>
+    <div class="lead-example">→ Maxwell cascade reaches 127/132 entities.</div>
+  </div>
+  <div class="lead-card">
+    <div class="lead-title">Cluster Isolation</div>
+    <div class="lead-desc">Entity is assigned to a cluster but has zero connections to peers.</div>
+    <div class="lead-example">→ Misclassified, or genuinely isolated?</div>
+  </div>
+</div>
+
+<h2>Detailed Comparison</h2>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>DugganUSA</th>
+      <th>phelix001</th>
+      <th>maxandrews</th>
+      <th>SvetimFM</th>
+      <th>OWL-DOJ</th>
+      <th>epstein-archive</th>
+      <th>FULL_EPSTEIN_INDEX</th>
+      <th class="col-ug">unify-graph</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Layer</td>
+      <td>Search</td>
+      <td>Extract→Viz</td>
+      <td>Extract→Viz</td>
+      <td>Extract→Viz</td>
+      <td>Extract→Viz</td>
+      <td>Search</td>
+      <td>Archive</td>
+      <td class="col-ug">Model→Gaps</td>
+    </tr>
+    <tr>
+      <td>Core question</td>
+      <td>What's in the docs?</td>
+      <td>Who connects?</td>
+      <td>What relationships?</td>
+      <td>What clusters?</td>
+      <td>Enough for conviction?</td>
+      <td>What's in the corpus?</td>
+      <td>Where are the files?</td>
+      <td class="col-ug">What's missing?</td>
+    </tr>
+    <tr>
+      <td>Docs indexed</td>
+      <td>71k+</td>
+      <td>19,154</td>
+      <td>House Oversight</td>
+      <td>69k chunks</td>
+      <td>14,674</td>
+      <td>51k+</td>
+      <td>~20k pg + DOJ + FBI</td>
+      <td class="col-ug">Consumes DugganUSA API</td>
+    </tr>
+    <tr>
+      <td>Entities</td>
+      <td>—</td>
+      <td>47</td>
+      <td>15k+ triples</td>
+      <td>31</td>
+      <td>30+</td>
+      <td>86k</td>
+      <td>—</td>
+      <td class="col-ug">132 (typed, curated)</td>
+    </tr>
+    <tr>
+      <td>Entity method</td>
+      <td>API search</td>
+      <td>pdfplumber + regex</td>
+      <td>Claude AI + dedup</td>
+      <td>Ollama embeddings</td>
+      <td>OWL autonomous</td>
+      <td>NLP pipeline</td>
+      <td>OCR text</td>
+      <td class="col-ug">Human-authored CUE</td>
+    </tr>
+    <tr>
+      <td>Analysis</td>
+      <td>Preset viz</td>
+      <td>Co-occurrence</td>
+      <td>Cluster filtering</td>
+      <td>Embedding clusters</td>
+      <td>Legal framework</td>
+      <td>Full-text search</td>
+      <td>—</td>
+      <td class="col-ug">Gap detection, bridges, cascades, BFS, reciprocity</td>
+    </tr>
+    <tr>
+      <td>Tracks missing data?</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td class="col-ug" style="color:#a29bfe">Yes — that's the point</td>
+    </tr>
+    <tr>
+      <td>Backend required?</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>Yes (SQLite)</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes (SQLite)</td>
+      <td>No</td>
+      <td class="col-ug">No (static JSON)</td>
+    </tr>
+    <tr>
+      <td>Tech</td>
+      <td>Custom</td>
+      <td>Python + vis-network</td>
+      <td>React + Claude + SQLite</td>
+      <td>Python + Plotly + Ollama</td>
+      <td>Vanilla JS + D3</td>
+      <td>React + Express</td>
+      <td>CSV + GDrive</td>
+      <td class="col-ug">CUE + D3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Complementary, Not Competing</h2>
+
+<div class="complement">
+  <p style="margin-bottom:16px">This project already consumes DugganUSA's API to get corpus mention counts. Layer 4 sits on top of layers 1-3:</p>
+  <div class="complement-flow">
+    <div class="complement-box">
+      <div class="box-name">FULL_EPSTEIN_INDEX</div>
+      <div class="box-desc">Raw documents</div>
+    </div>
+    <span class="complement-arrow">→</span>
+    <div class="complement-box">
+      <div class="box-name">DugganUSA</div>
+      <div class="box-desc">Search API (71k docs)</div>
+    </div>
+    <span class="complement-arrow">→</span>
+    <div class="complement-box" style="border-color:#5a3a6a">
+      <div class="box-name" style="color:#a29bfe">unify-graph</div>
+      <div class="box-desc">Gap analysis (132 entities)</div>
+    </div>
+    <span class="complement-arrow">→</span>
+    <div class="complement-box">
+      <div class="box-name">Investigative leads</div>
+      <div class="box-desc">What to look at next</div>
+    </div>
+  </div>
+  <p style="color:#888;margin-bottom:0">DugganUSA tells you what's <strong>in</strong> the documents. This project tells you what's <strong>still missing from the picture</strong>.</p>
+</div>
+
+<h2>Key Findings</h2>
+
+<p>What the gap analysis surfaced:</p>
+
+<table style="max-width:700px">
+  <tbody>
+    <tr><td>Evidence coverage</td><td><strong style="color:#f85149">11.4%</strong> — 15 of 132 entities have linked evidence. 117 are unverified.</td></tr>
+    <tr><td>High-mention, zero-evidence</td><td><strong>35 entities</strong> have 100+ corpus mentions but zero evidence citations. Banking sector dominates.</td></tr>
+    <tr><td>Sole connector pairs</td><td><strong>44 cluster pairs</strong> depend on a single entity as their only bridge.</td></tr>
+    <tr><td>Reachability</td><td><strong>100%</strong> reachable from Epstein within 2 hops.</td></tr>
+    <tr><td>Maxwell cascade</td><td>If Maxwell cooperated: <strong>127/132</strong> entities within 2 degrees of exposure.</td></tr>
+  </tbody>
+</table>
+
+<p style="margin-top:32px;color:#555;font-size:11px">
+  Built with <a href="https://cuelang.org">CUE</a> and <a href="https://d3js.org">D3.js</a>.
+  Data from <a href="https://analytics.dugganusa.com/epstein/">DugganUSA</a>, DOJ EFTA Release, and public reporting.
+  <a href="https://github.com/unify-graph/unify-graph">Source on GitHub</a>.
+</p>
+
+</div>
+</body>
+</html>

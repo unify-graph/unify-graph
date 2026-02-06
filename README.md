@@ -66,6 +66,58 @@ Four views, all rendering pre-computed JSON:
 - **Node ring** = gap severity (red = 3+ gaps, orange = 1-2 gaps)
 - **Edge style** = solid (bidirectional) / dashed (one-way claim)
 
+## How this compares
+
+There are 8+ open-source Epstein network projects. They fall into four layers — most do layer 1 or 2, a few do layer 3, only this one does layer 4.
+
+| Layer | What it does | Projects |
+|-------|-------------|----------|
+| **1. Archive** | Collect, OCR, and host raw documents | [FULL_EPSTEIN_INDEX](https://github.com/theelderemo/FULL_EPSTEIN_INDEX), [epstein-docs](https://github.com/epstein-docs/epstein-docs.github.io) |
+| **2. Search** | Full-text search + entity tagging over the corpus | [DugganUSA](https://analytics.dugganusa.com/epstein/), [epstein-archive](https://github.com/ErikVeland/epstein-archive) |
+| **3. Extract → Visualize** | NLP/LLM extracts entities from documents, renders a graph | [phelix001](https://github.com/phelix001/epstein-network), [maxandrews](https://github.com/maxandrews/Epstein-doc-explorer), [SvetimFM](https://github.com/SvetimFM/epstein-files-visualizations), [OWL-DOJ](https://github.com/consigcody94/OWL-DOJ-Epstein-Analysis) |
+| **4. Model → Analyze gaps** | Typed schema where constraint violations = investigative leads | **unify-graph** |
+
+### Every other project follows the same pipeline
+
+```
+Documents → OCR → NLP/LLM → Entities → Graph → "Look at all these connections"
+```
+
+They differ in scale (47 entities to 86,000), extraction method (regex to Claude AI), and visualization (2D force to 3D cloud). But they all answer: **"What do we know?"**
+
+### This project inverts it
+
+```
+Entities → Typed Schema → Constraint Violations → "Here's what we DON'T know"
+```
+
+132 hand-curated entities modeled in CUE. The compiler enforces that every reference resolves, every type is consistent, every constraint is satisfied. When something *doesn't* satisfy the schema, that's not a bug — it's a lead:
+
+- **Dangling reference** → someone mentions a person not yet modeled. Who are they?
+- **Empty evidence map** → entity exists in the graph but no document citation. Unverified.
+- **FinancialEnabler with no flows** → the type says they moved money but no flow is documented.
+- **Sole connector** → one person is the only bridge between two clusters. Discredit them, the connection vanishes.
+- **Exposure cascade** → if Maxwell cooperates, 127/132 entities are within 2 degrees. Pre-computed, not guessed.
+
+### Detailed comparison
+
+| | DugganUSA | phelix001 | maxandrews | SvetimFM | OWL-DOJ | epstein-archive | FULL_EPSTEIN_INDEX | **unify-graph** |
+|---|---|---|---|---|---|---|---|---|
+| **Layer** | Search | Extract→Viz | Extract→Viz | Extract→Viz | Extract→Viz | Search | Archive | **Model→Gaps** |
+| **Core question** | What's in the docs? | Who connects? | What relationships? | What clusters? | Sufficient for conviction? | What's in the corpus? | Where are the files? | **What's missing?** |
+| **Docs indexed** | 71k+ | 19,154 | House Oversight | 69k chunks | 14,674 | 51k+ | ~20k pages + DOJ + FBI | Consumes DugganUSA API |
+| **Entities** | — | 47 | 15k+ triples | 31 | 30+ | 86k | — | **132 (typed, curated)** |
+| **Entity method** | API search results | pdfplumber + regex | Claude AI + dedup | Ollama embeddings | OWL autonomous | NLP pipeline | OCR text | **Human-authored CUE schemas** |
+| **Analysis** | Preset visualizations | Co-occurrence | Cluster filtering | Embedding clusters, RAG | Legal framework | Full-text search | — | **Gap detection, sole connectors, exposure cascades, evidence chains, BFS reachability, reciprocity** |
+| **Tracks what's missing?** | No | No | No | No | No | No | No | **Yes** |
+| **Tech** | Custom backend | Python + vis-network | React + Claude + SQLite | Python + Plotly + Ollama | Vanilla JS + D3 | React + Express + SQLite | CSV + GDrive | **CUE + D3 (static, zero backend)** |
+
+### Complementary, not competing
+
+This project consumes DugganUSA's API (via `scripts/discover.py`) to get corpus mention counts for each entity. DugganUSA tells you what's *in* the documents. This project tells investigators what's *still missing from the picture*. Layer 4 sits on top of layers 1-3.
+
+See the [full interactive comparison](https://unify-graph.github.io/unify-graph/compare.html) on the project site.
+
 ## Build & run
 
 Requires [CUE](https://cuelang.org/docs/install/).
