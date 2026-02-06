@@ -165,6 +165,7 @@ tr.clickable { cursor: pointer; }
     <button data-view="cascade">Exposure Cascade</button>
     <button data-view="scatter">Evidence Gaps</button>
     <button data-view="chord">Cluster Map</button>
+    <button data-view="structural">Structural</button>
     <a href="compare.html" style="background:#1a1a2a;border:1px solid #2a2a3a;color:#888;padding:4px 12px;text-decoration:none;font-size:11px;border-radius:3px;display:inline-flex;align-items:center;margin-left:auto">How This Compares</a>
   </nav>
   <div class="main graph-mode" id="main">
@@ -414,6 +415,9 @@ function selectNode(d) {
       <div class="field"><span class="field-label">Reciprocity</span><span class="field-value">${Math.round(d.reciprocity_pct)}%</span></div>
       <div class="field"><span class="field-label">Bridges</span><span class="field-value">${d.bridge_count > 0 ? d.bridge_clusters.map(c => `<span class="badge badge-bridge">${c}</span>`).join('') : 'none'}</span></div>
       ${soleConn ? `<div class="field"><span class="field-label">Sole bridge</span><span class="field-value">${soleConn.sole_bridge_pairs.map(p => `<span class="badge badge-bridge">${p}</span>`).join('')}</span></div>` : ''}
+      <div class="field"><span class="field-label">Clustering</span><span class="field-value" style="color:${d.clustering_coeff === 0 ? '#f0ad4e' : '#c8c8d0'}">${Math.round(d.clustering_coeff)}%${d.clustering_coeff === 0 && (d.connection_count + d.inbound_count) >= 2 ? ' (structural hole)' : ''}</span></div>
+      <div class="field"><span class="field-label">Power</span><span class="field-value" style="color:${d.power_asymmetry > 20 ? '#4caf50' : d.power_asymmetry < -50 ? '#f85149' : '#c8c8d0'}">${d.power_asymmetry > 0 ? '+' : ''}${Math.round(d.power_asymmetry)} ${d.power_asymmetry > 20 ? '(authority)' : d.power_asymmetry < -50 ? '(claimer)' : ''}</span></div>
+      <div class="field"><span class="field-label">Affinity</span><span class="field-value" style="color:${d.cluster_affinity < 30 ? '#f0ad4e' : '#c8c8d0'}">${Math.round(d.cluster_affinity)}% in-cluster</span></div>
 
       <div class="field" style="margin-top:8px"><span class="field-label">Connections</span><span class="field-value">${d.connection_count} out / ${d.inbound_count} in</span></div>
       <ul class="conn-list">
@@ -944,6 +948,196 @@ function _renderChord(container) {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// STRUCTURAL ANALYSIS — pure topology derivations
+// Clustering coefficient, power asymmetry, cluster density,
+// bridge redundancy, cascading orphans, cluster affinity.
+// ═══════════════════════════════════════════════════════════════
+
+function renderStructural() {
+  const dashboard = document.getElementById('dashboard');
+  const st = analysisData.structural;
+  const nodes = graphData.nodes;
+
+  // Pre-sort data for each section
+  const byCC = [...nodes].filter(n => (n.connection_count + n.inbound_count) >= 2)
+    .sort((a, b) => a.clustering_coeff - b.clustering_coeff);
+  const byPA = [...nodes].filter(n => (n.connection_count + n.inbound_count) >= 2)
+    .sort((a, b) => b.power_asymmetry - a.power_asymmetry);
+  const orphans = [...st.cascading_orphans].sort((a, b) => b.orphan_count - a.orphan_count);
+  const densities = Object.entries(st.cluster_density)
+    .sort((a, b) => b[1].density_pct - a[1].density_pct);
+  const pairs = Object.entries(st.cluster_pair_bridges);
+  const spofCount = pairs.filter(([, v]) => v.is_spof).length;
+  const fragileCount = pairs.filter(([, v]) => v.is_fragile).length;
+  const healthyCount = pairs.filter(([, v]) => !v.is_spof && !v.is_fragile).length;
+
+  dashboard.innerHTML = `
+    <h2 style="margin-bottom:4px;color:#6ea8fe">Structural Analysis — Pure Topology</h2>
+    <p style="margin-bottom:12px;color:#888">All metrics derived from graph structure alone. No external data, no inference — just set operations over the adjacency matrix at CUE compile time.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-bottom:16px">
+      <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+        <div style="color:#888;font-size:10px">STRUCTURAL HOLES</div>
+        <div style="color:#f0ad4e;font-size:20px;font-weight:600">${nodes.filter(n => n.clustering_coeff === 0 && (n.connection_count + n.inbound_count) >= 2).length}</div>
+        <div style="color:#666;font-size:10px">CC=0%, degree 2+</div>
+      </div>
+      <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+        <div style="color:#888;font-size:10px">BRIDGE REDUNDANCY</div>
+        <div style="color:#f85149;font-size:20px;font-weight:600">${spofCount} / ${fragileCount} / ${healthyCount}</div>
+        <div style="color:#666;font-size:10px">SPOF / fragile / healthy pairs</div>
+      </div>
+      <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+        <div style="color:#888;font-size:10px">CASCADE RISK</div>
+        <div style="color:#f85149;font-size:20px;font-weight:600">${orphans.length > 0 ? orphans[0].orphan_count : 0}</div>
+        <div style="color:#666;font-size:10px">max orphans if one entity removed</div>
+      </div>
+      <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+        <div style="color:#888;font-size:10px">LOW AFFINITY</div>
+        <div style="color:#f0ad4e;font-size:20px;font-weight:600">${st.low_affinity.length}</div>
+        <div style="color:#666;font-size:10px">entities &lt;30% in declared cluster</div>
+      </div>
+      <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+        <div style="color:#888;font-size:10px">EVIDENCE FRAGILITY</div>
+        <div style="color:#f0ad4e;font-size:20px;font-weight:600">${nodes.filter(n => n.evidence_fragility).length}</div>
+        <div style="color:#666;font-size:10px">entities with exactly 1 evidence doc</div>
+      </div>
+    </div>
+
+    <div id="structural-tabs" style="display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap">
+      <button class="dash-filter active" data-stab="holes">Structural Holes</button>
+      <button class="dash-filter" data-stab="power">Power Asymmetry</button>
+      <button class="dash-filter" data-stab="density">Cluster Density</button>
+      <button class="dash-filter" data-stab="redundancy">Bridge Redundancy</button>
+      <button class="dash-filter" data-stab="orphans">Cascading Orphans</button>
+      <button class="dash-filter" data-stab="affinity">Cluster Affinity</button>
+    </div>
+    <div id="structural-content"></div>
+  `;
+
+  const content = document.getElementById('structural-content');
+
+  function showTab(tab) {
+    dashboard.querySelectorAll('#structural-tabs .dash-filter').forEach(b => b.classList.toggle('active', b.dataset.stab === tab));
+
+    if (tab === 'holes') {
+      content.innerHTML = `
+        <p style="color:#888;margin-bottom:8px;font-size:11px">Clustering coefficient = % of your neighbor pairs that are also connected to each other. CC=0% means you sit in a <strong style="color:#f0ad4e">structural hole</strong> — your neighbors don't know each other. You're the information broker.</p>
+        <table><thead><tr>
+          <th>Entity</th><th>Cluster</th><th>CC%</th><th>Degree</th><th>Bridges</th><th>Gaps</th>
+        </tr></thead><tbody>
+          ${byCC.map(n => `
+            <tr class="clickable" onclick="switchToGraphAndSelect('${esc(n.id)}')">
+              <td><strong>${esc(n.name)}</strong></td>
+              <td><span class="badge badge-cluster cluster-${esc(n.cluster)}">${esc(n.cluster)}</span></td>
+              <td style="color:${n.clustering_coeff === 0 ? '#f0ad4e' : n.clustering_coeff < 30 ? '#f85149' : '#4caf50'}">${Math.round(n.clustering_coeff)}%</td>
+              <td>${n.connection_count + n.inbound_count}</td>
+              <td>${n.bridge_count}</td>
+              <td>${n.gap_count}</td>
+            </tr>
+          `).join('')}
+        </tbody></table>
+      `;
+    } else if (tab === 'power') {
+      content.innerHTML = `
+        <p style="color:#888;margin-bottom:8px;font-size:11px"><strong style="color:#4caf50">Authorities</strong> (positive): many entities connect TO them. <strong style="color:#f85149">Claimers</strong> (negative): they connect to many entities but few reciprocate. The sign reveals power direction in the network.</p>
+        <table><thead><tr>
+          <th>Entity</th><th>Cluster</th><th>Asymmetry</th><th>Inbound</th><th>Outbound</th><th>Reciprocity</th>
+        </tr></thead><tbody>
+          ${byPA.map(n => `
+            <tr class="clickable" onclick="switchToGraphAndSelect('${esc(n.id)}')">
+              <td><strong>${esc(n.name)}</strong></td>
+              <td><span class="badge badge-cluster cluster-${esc(n.cluster)}">${esc(n.cluster)}</span></td>
+              <td style="color:${n.power_asymmetry > 0 ? '#4caf50' : n.power_asymmetry < -50 ? '#f85149' : '#f0ad4e'}">${n.power_asymmetry > 0 ? '+' : ''}${Math.round(n.power_asymmetry)}</td>
+              <td>${n.inbound_count}</td>
+              <td>${n.connection_count}</td>
+              <td>${Math.round(n.reciprocity_pct)}%</td>
+            </tr>
+          `).join('')}
+        </tbody></table>
+      `;
+    } else if (tab === 'density') {
+      content.innerHTML = `
+        <p style="color:#888;margin-bottom:8px;font-size:11px">Internal edge density per cluster. High density = entities actually interact with each other. Zero density = they share a label but are structurally isolated from each other.</p>
+        <table><thead><tr>
+          <th>Cluster</th><th>Density</th><th>Internal Edges</th><th>Possible Edges</th><th>Members</th><th style="width:200px">Bar</th>
+        </tr></thead><tbody>
+          ${densities.map(([c, v]) => `
+            <tr>
+              <td><span class="badge badge-cluster cluster-${esc(c)}">${esc(c)}</span></td>
+              <td style="color:${v.density_pct === 0 ? '#f85149' : v.density_pct < 15 ? '#f0ad4e' : '#4caf50'}">${Math.round(v.density_pct)}%</td>
+              <td>${v.internal_edges}</td>
+              <td>${v.possible_edges}</td>
+              <td>${v.members}</td>
+              <td><div style="background:#2a2a3a;border-radius:2px;height:12px"><div style="background:${CLUSTER_COLORS[c] || '#636e72'};height:100%;width:${Math.min(100, v.density_pct)}%;border-radius:2px"></div></div></td>
+            </tr>
+          `).join('')}
+        </tbody></table>
+      `;
+    } else if (tab === 'redundancy') {
+      const sorted = [...pairs].sort((a, b) => a[1].bridge_count - b[1].bridge_count);
+      content.innerHTML = `
+        <p style="color:#888;margin-bottom:8px;font-size:11px">How many entities bridge each cluster pair? <span style="color:#f85149">SPOF (1)</span> = single point of failure. <span style="color:#f0ad4e">Fragile (2)</span> = low redundancy. <span style="color:#4caf50">Healthy (3+)</span> = resilient.</p>
+        <table><thead><tr>
+          <th>Cluster Pair</th><th>Bridges</th><th>Status</th><th>Bridge Entities</th>
+        </tr></thead><tbody>
+          ${sorted.map(([pair, v]) => {
+            const [c1, c2] = pair.split('|');
+            const status = v.is_spof ? 'SPOF' : v.is_fragile ? 'Fragile' : 'Healthy';
+            const color = v.is_spof ? '#f85149' : v.is_fragile ? '#f0ad4e' : '#4caf50';
+            return `
+              <tr>
+                <td><span class="badge badge-cluster cluster-${esc(c1)}">${esc(c1)}</span> → <span class="badge badge-cluster cluster-${esc(c2)}">${esc(c2)}</span></td>
+                <td style="color:${color};font-weight:600">${v.bridge_count}</td>
+                <td style="color:${color}">${status}</td>
+                <td>${v.bridge_entities.map(e => `<span class="badge badge-cluster" style="cursor:pointer" onclick="switchToGraphAndSelect('${esc(e)}')">${entitiesData[e]?.name || e}</span>`).join(' ')}</td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody></table>
+      `;
+    } else if (tab === 'orphans') {
+      content.innerHTML = `
+        <p style="color:#888;margin-bottom:8px;font-size:11px">If entity X is removed from the graph, which entities lose ALL their inbound connections? Those entities' only lifeline was through X — the infrastructure equivalent of cascading failure from removing a load balancer.</p>
+        ${orphans.map(o => `
+          <div style="margin-bottom:12px;padding:10px;background:#12121a;border:1px solid #2a2a3a;border-radius:4px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <strong style="color:#e8e8f0;cursor:pointer" onclick="switchToGraphAndSelect('${esc(o.entity)}')">${esc(o.name)}</strong>
+              <span class="badge badge-cluster cluster-${esc(o.cluster)}">${esc(o.cluster)}</span>
+            </div>
+            <div style="color:#f85149;margin-bottom:4px">${o.orphan_count} entities would become orphans:</div>
+            <div>${o.would_orphan.map(e => `<span class="badge badge-cluster cluster-${graphData._nodeMap[e]?.cluster}" style="cursor:pointer" onclick="switchToGraphAndSelect('${esc(e)}')">${entitiesData[e]?.name || e}</span>`).join(' ')}</div>
+          </div>
+        `).join('')}
+      `;
+    } else if (tab === 'affinity') {
+      content.innerHTML = `
+        <p style="color:#888;margin-bottom:8px;font-size:11px">Cluster affinity = % of connections within declared cluster. Low affinity means an entity's connections don't match their label — either the cluster assignment is wrong, or the entity is a cross-cluster operator.</p>
+        <table><thead><tr>
+          <th>Entity</th><th>Declared Cluster</th><th>Affinity</th><th>In-Cluster / Total</th><th>Bridges To</th>
+        </tr></thead><tbody>
+          ${[...nodes].filter(n => n.connection_count >= 2).sort((a, b) => a.cluster_affinity - b.cluster_affinity).map(n => `
+            <tr class="clickable" onclick="switchToGraphAndSelect('${esc(n.id)}')">
+              <td><strong>${esc(n.name)}</strong></td>
+              <td><span class="badge badge-cluster cluster-${esc(n.cluster)}">${esc(n.cluster)}</span></td>
+              <td style="color:${n.cluster_affinity === 0 ? '#f85149' : n.cluster_affinity < 30 ? '#f0ad4e' : '#4caf50'}">${Math.round(n.cluster_affinity)}%</td>
+              <td>${Math.round(n.cluster_affinity * n.connection_count / 100)} / ${n.connection_count}</td>
+              <td>${n.bridge_clusters.map(c => `<span class="badge badge-cluster cluster-${esc(c)}">${esc(c)}</span>`).join('')}</td>
+            </tr>
+          `).join('')}
+        </tbody></table>
+      `;
+    }
+  }
+
+  // Tab click handlers
+  dashboard.querySelectorAll('#structural-tabs .dash-filter').forEach(btn => {
+    btn.addEventListener('click', () => showTab(btn.dataset.stab));
+  });
+
+  showTab('holes');
+}
+
+// ═══════════════════════════════════════════════════════════════
 // VIEW SWITCHING
 // ═══════════════════════════════════════════════════════════════
 
@@ -973,6 +1167,7 @@ function switchView(view) {
     else if (view === 'cascade') renderCascade();
     else if (view === 'scatter') renderGapScatter();
     else if (view === 'chord') renderChordDiagram();
+    else if (view === 'structural') renderStructural();
   }
 }
 

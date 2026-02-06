@@ -191,6 +191,142 @@ _docDependents: {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// STRUCTURAL ANALYSIS — derived from pure graph topology
+// All computed as side effects of CUE unification over _adjacency.
+// ═══════════════════════════════════════════════════════════════
+
+// ── CLUSTERING COEFFICIENT ──────────────────────────────────
+// For each entity: what fraction of neighbor pairs are also
+// connected to each other? High = tightly-knit neighborhood.
+// Low = structural hole (entity bridges otherwise disconnected
+// groups — the Burt structural holes insight).
+
+_neighborConnectedPairs: {
+	for _e, _ in entities {
+		if _adjacency[_e] != _|_ {
+			(_e): len([
+				for _a, _ in _adjacency[_e]
+				for _b, _ in _adjacency[_e]
+				if (_a < _b)
+				if _adjacency[_a] != _|_
+				if _adjacency[_a][_b] != _|_ {1},
+			])
+		}
+		if _adjacency[_e] == _|_ {
+			(_e): 0
+		}
+	}
+}
+
+_neighborTotalPairs: {
+	for _e, _ in entities {
+		if _adjacency[_e] != _|_ {
+			(_e): len([
+				for _a, _ in _adjacency[_e]
+				for _b, _ in _adjacency[_e]
+				if (_a < _b) {1},
+			])
+		}
+		if _adjacency[_e] == _|_ {
+			(_e): 0
+		}
+	}
+}
+
+_clusteringCoeff: {
+	for _e, _ in entities {
+		if _neighborTotalPairs[_e] > 0 {
+			(_e): _neighborConnectedPairs[_e] * 100 / _neighborTotalPairs[_e]
+		}
+		if _neighborTotalPairs[_e] == 0 {
+			(_e): 0
+		}
+	}
+}
+
+// ── POWER ASYMMETRY ─────────────────────────────────────────
+// (inbound - outbound) / total, scaled -100..+100.
+// +100 = pure authority (everyone connects TO you)
+// -100 = pure claimer (you connect to everyone, nobody reciprocates)
+
+_powerAsymmetry: {
+	for _e, _ in entities {
+		if (_totalValidConns[_e] + _inboundCounts[_e]) > 0 {
+			(_e): (_inboundCounts[_e] - _totalValidConns[_e]) * 100 / (_totalValidConns[_e] + _inboundCounts[_e])
+		}
+		if (_totalValidConns[_e] + _inboundCounts[_e]) == 0 {
+			(_e): 0
+		}
+	}
+}
+
+// ── CLUSTER AFFINITY ────────────────────────────────────────
+// % of connections within declared cluster. Low affinity +
+// high connections to another cluster = possible misclassification.
+
+_clusterAffinity: {
+	for _e, _ in entities {
+		if _totalValidConns[_e] > 0 {
+			(_e): _clusterConnCounts[_e] * 100 / _totalValidConns[_e]
+		}
+		if _totalValidConns[_e] == 0 {
+			(_e): 0
+		}
+	}
+}
+
+// ── INTERNAL CLUSTER DENSITY ────────────────────────────────
+// For each cluster: actual internal edges / possible edges.
+// Low density = entities share a label but don't interact.
+
+_clusterInternalEdges: {
+	for _c, _members in _clusterMembers {
+		(_c): len([
+			for _a, _ in _members
+			for _b, _ in _members
+			if (_a < _b)
+			if _adjacency[_a] != _|_
+			if _adjacency[_a][_b] != _|_ {1},
+		])
+	}
+}
+
+_clusterMemberCount: {
+	for _c, _members in _clusterMembers {
+		(_c): len([for _m, _ in _members {_m}])
+	}
+}
+
+// ── CLUSTER PAIR BRIDGE COUNTS ──────────────────────────────
+// Extends sole connectors: how many entities bridge each pair?
+// 1 = SPOF, 2 = fragile, 3+ = healthy redundancy.
+
+_clusterPairBridgeCounts: {
+	for _pair, _members in _clusterPairBridges {
+		(_pair): {
+			count: len([for _m, _ in _members {_m}])
+			entities: [for _m, _ in _members {_m}]
+		}
+	}
+}
+
+// ── CASCADING ORPHANIZATION ─────────────────────────────────
+// If entity X is removed, which entities lose ALL inbound?
+// Those entities' only lifeline into the graph was through X.
+
+_orphansIfRemoved: {
+	for _target, _ in entities {
+		(_target): [
+			for _other, _ in entities
+			if _other != _target
+			if _inboundFrom[_other] != _|_
+			if _inboundFrom[_other][_target] != _|_
+			if len([for _src, _ in _inboundFrom[_other] {_src}]) == 1 {_other},
+		]
+	}
+}
+
+// ═══════════════════════════════════════════════════════════════
 // ANALYSIS EXPORT
 // cue export -e analysis ./...
 // ═══════════════════════════════════════════════════════════════
@@ -270,5 +406,63 @@ analysis: {
 				count: len([for _e, _ in _deps {_e}])
 			}
 		}
+	}
+
+	// Structural analysis — pure topology derivations
+	structural: {
+		// Per-cluster internal edge density
+		cluster_density: {
+			for _c, _ in _clusterMembers {
+				(_c): {
+					members:        _clusterMemberCount[_c]
+					internal_edges: _clusterInternalEdges[_c]
+					possible_edges: _clusterMemberCount[_c] * (_clusterMemberCount[_c] - 1) / 2
+					if (_clusterMemberCount[_c] * (_clusterMemberCount[_c] - 1) / 2) > 0 {
+						density_pct: _clusterInternalEdges[_c] * 100 / (_clusterMemberCount[_c] * (_clusterMemberCount[_c] - 1) / 2)
+					}
+					if (_clusterMemberCount[_c] * (_clusterMemberCount[_c] - 1) / 2) == 0 {
+						density_pct: 0
+					}
+				}
+			}
+		}
+
+		// Cluster pair bridge counts (extends sole connectors)
+		cluster_pair_bridges: {
+			for _pair, _data in _clusterPairBridgeCounts {
+				(_pair): {
+					bridge_count:    _data.count
+					bridge_entities: _data.entities
+					is_spof:         _data.count == 1
+					is_fragile:      _data.count == 2
+				}
+			}
+		}
+
+		// Cascading orphans — entities that become orphans if a key entity is removed
+		cascading_orphans: [
+			for _target, _ in entities
+			if len(_orphansIfRemoved[_target]) > 0 {
+				entity:        _target
+				name:          entities[_target].name
+				cluster:       entities[_target].cluster
+				would_orphan:  _orphansIfRemoved[_target]
+				orphan_count:  len(_orphansIfRemoved[_target])
+			},
+		]
+
+		// Low-affinity entities — cluster assignment may not match behavior
+		low_affinity: [
+			for _e, _ in entities
+			if _totalValidConns[_e] >= 3
+			if _clusterAffinity[_e] < 30 {
+				entity:          _e
+				name:            entities[_e].name
+				declared_cluster: entities[_e].cluster
+				affinity_pct:    _clusterAffinity[_e]
+				in_cluster:      _clusterConnCounts[_e]
+				total_conns:     _totalValidConns[_e]
+			},
+		]
 	}
 }

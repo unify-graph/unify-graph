@@ -160,6 +160,11 @@ graph: {
 			// Bridge analysis
 			bridge_count:    _bridgeCounts[_ename]
 			bridge_clusters: [for _c, _ in _bridgeClusterSets[_ename] {_c}]
+			// Structural metrics
+			clustering_coeff:    _clusteringCoeff[_ename]
+			power_asymmetry:     _powerAsymmetry[_ename]
+			cluster_affinity:    _clusterAffinity[_ename]
+			evidence_fragility:  len([for _k, _ in _e.evidence {_k}]) == 1
 			// Optional metadata (CUE unification includes only if present)
 			if _e.role != _|_ {
 				role: _e.role
