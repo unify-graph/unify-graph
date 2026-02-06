@@ -557,7 +557,6 @@ entities: {
 		connections: {
 			epstein: true
 			boris_nikolic: true
-			melinda_gates: true
 			larry_summers: true
 		}
 		evidence: {}

@@ -408,7 +408,7 @@ function selectNode(d) {
       ${d.notes ? `<div class="field"><span class="field-label">Notes</span><span class="field-value">${esc(d.notes)}</span></div>` : ''}
       <div class="field"><span class="field-label">Corpus hits</span><span class="field-value">${d.mention_count || 0}</span></div>
       <div class="field"><span class="field-label">Hops from E</span><span class="field-value">${hopDist}</span></div>
-      <div class="field"><span class="field-label">Reciprocity</span><span class="field-value">${d.reciprocity_pct}%</span></div>
+      <div class="field"><span class="field-label">Reciprocity</span><span class="field-value">${Math.round(d.reciprocity_pct)}%</span></div>
       <div class="field"><span class="field-label">Bridges</span><span class="field-value">${d.bridge_count > 0 ? d.bridge_clusters.map(c => `<span class="badge badge-bridge">${c}</span>`).join('') : 'none'}</span></div>
       ${soleConn ? `<div class="field"><span class="field-label">Sole bridge</span><span class="field-value">${soleConn.sole_bridge_pairs.map(p => `<span class="badge badge-bridge">${p}</span>`).join('')}</span></div>` : ''}
 
@@ -519,7 +519,7 @@ function renderDashboard() {
         <td>${r.total_degree}</td>
         <td>${r.gap_count}</td>
         <td>${r.bridge_count}</td>
-        <td>${r.reciprocity_pct}%</td>
+        <td>${Math.round(r.reciprocity_pct)}%</td>
         <td>${r.gap_categories.map(g => `<span class="gap-pill gap-${g}">${g.replace(/_/g,' ')}</span>`).join('')}</td>
       </tr>
     `).join('');
@@ -596,8 +596,8 @@ function renderCascade() {
       <div style="margin-bottom:24px;padding:12px;background:#12121a;border:1px solid #2a2a3a;border-radius:4px">
         <h3 style="color:#e8e8f0;margin-bottom:8px">${entitiesData[c.target]?.name || c.target} cooperates</h3>
         <div class="field"><span class="field-label">Total exposed</span><span class="field-value" style="color:#f85149;font-weight:600">${c.total_exposed} entities</span></div>
-        <div class="field"><span class="field-label">Wave 1 (direct)</span><span class="field-value">${c.wave_1.length}: ${c.wave_1.sort().map(e => `<span class="badge badge-cluster cluster-${graphData._nodeMap[e]?.cluster}">${entitiesData[e]?.name || e}</span>`).join(' ')}</span></div>
-        <div class="field"><span class="field-label">Wave 2 (2nd deg)</span><span class="field-value">${c.wave_2.length} entities</span></div>
+        <div class="field"><span class="field-label">Wave 1 (direct)</span><span class="field-value">${c.wave_1.length}: ${c.wave_1.sort().map(e => `<span class="badge badge-cluster cluster-${graphData._nodeMap[e]?.cluster}" style="cursor:pointer" onclick="switchToGraphAndSelect('${e}')">${entitiesData[e]?.name || e}</span>`).join(' ')}</span></div>
+        <div class="field"><span class="field-label">Wave 2 (2nd deg)</span><span class="field-value">${c.wave_2.length}: ${c.wave_2.sort().map(e => `<span class="badge badge-cluster cluster-${graphData._nodeMap[e]?.cluster}" style="cursor:pointer" onclick="switchToGraphAndSelect('${e}')">${entitiesData[e]?.name || e}</span>`).join(' ')}</span></div>
       </div>
     `).join('')}
   `;
