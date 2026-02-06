@@ -29,13 +29,12 @@ Most network analyses start with raw data and compute metrics at query time or i
 
 **132 curated entities vs. 1.5M extracted nodes** is a deliberate tradeoff. NLP extraction gives breadth — name co-occurrence across thousands of documents. Typed modeling gives depth — every connection is directional, every evidence citation resolves to a document ID, every gap is classified and ranked. Both are useful. This is the depth side.
 
-## What it found
+## Current model state
 
-- **11.4% evidence coverage** — 15 of 132 entities have linked evidence. 117 are structurally modeled but unverified.
-- **35 entities with 100+ corpus mentions but zero evidence** — the banking sector dominates: Deutsche Bank, JP Morgan, Bank of America all have 1000+ mentions in the DOJ corpus, zero evidence citations.
-- **44 sole connector pairs** — cluster pairs that depend on a single entity as their only bridge. Virginia Giuffre is the sole bridge between the victim cluster and three other worlds. Remove her testimony, those connections vanish.
-- **100% reachable within 2 hops** — every entity in the model is reachable from Epstein in 2 or fewer steps. Small world.
-- **Maxwell cascade: 127/132** — if Maxwell cooperated, 127 of 132 entities would be within 2 degrees of exposure.
+- **11.4% evidence coverage** — most entities were added from structural relationships before evidence was linked. The gap is the work queue, not a surprise.
+- **44 sole connector pairs** — cluster pairs that depend on a single bridge entity. Discredit that person and the connection between those worlds disappears from the public record. This is non-obvious: the graph looks dense but is actually fragile.
+- **Directionality bias** — almost all connections are one-way, reflecting the investigation's perspective (who was connected to whom), not mutual relationships.
+- **Hub-and-spoke topology** — high reachability from Epstein is a mathematical consequence of the central hub structure, not an investigative finding. The cascade and BFS views are useful for exploring the network, not for headline numbers.
 
 ## Graph analysis: infrastructure patterns adapted
 
@@ -52,12 +51,15 @@ Key difference: infrastructure graphs are directed acyclic (`depends_on`). Socia
 
 ## Visualization
 
-Four views, all rendering pre-computed JSON:
+Seven views, all rendering pre-computed JSON:
 
 1. **Force Graph + Entity Inspector** — click any node to see known info, gaps, and investigative leads
 2. **Gap Dashboard** — sortable table of all entities with gap category filters
 3. **Sole Connectors** — entities that are the only bridge between two cluster worlds
 4. **Exposure Cascade** — if entity X cooperates, who's exposed at wave 1 (direct) and wave 2 (second-degree)
+5. **Evidence Gap Scatter** — corpus mentions vs. evidence citations; high-mention entities with zero evidence are work prioritization targets
+6. **Cluster Chord Diagram** — cross-cluster connection volume with SPOF highlighting
+7. **Structural Analysis** — clustering coefficient, power asymmetry, cluster density, bridge redundancy, cascading orphans, cluster affinity
 
 ### Reading the graph
 
@@ -97,7 +99,7 @@ Entities → Typed Schema → Constraint Violations → "Here's what we DON'T kn
 - **Empty evidence map** → entity exists in the graph but no document citation. Unverified.
 - **FinancialEnabler with no flows** → the type says they moved money but no flow is documented.
 - **Sole connector** → one person is the only bridge between two clusters. Discredit them, the connection vanishes.
-- **Exposure cascade** → if Maxwell cooperates, 127/132 entities are within 2 degrees. Pre-computed, not guessed.
+- **Exposure cascade** → pre-computed BFS: if X cooperates, who's within 2 degrees? High reach is expected in hub-and-spoke networks — the value is identifying who's NOT reachable.
 
 ### Detailed comparison
 
@@ -108,7 +110,7 @@ Entities → Typed Schema → Constraint Violations → "Here's what we DON'T kn
 | **Docs indexed** | 71k+ | 19,154 | House Oversight | 69k chunks | 14,674 | 51k+ | ~20k pages + DOJ + FBI | Consumes DugganUSA API |
 | **Entities** | — | 47 | 15k+ triples | 31 | 30+ | 86k | — | **132 (typed, curated)** |
 | **Entity method** | API search results | pdfplumber + regex | Claude AI + dedup | Ollama embeddings | OWL autonomous | NLP pipeline | OCR text | **Human-authored CUE schemas** |
-| **Analysis** | Preset visualizations | Co-occurrence | Cluster filtering | Embedding clusters, RAG | Legal framework | Full-text search | — | **Gap detection, sole connectors, exposure cascades, evidence chains, BFS reachability, reciprocity** |
+| **Analysis** | Preset visualizations | Co-occurrence | Cluster filtering | Embedding clusters, RAG | Legal framework | Full-text search | — | **Gap detection, sole connectors, exposure cascades, evidence chains, BFS, clustering coefficient, structural analysis** |
 | **Tracks what's missing?** | No | No | No | No | No | No | No | **Yes** |
 | **Tech** | Custom backend | Python + vis-network | React + Claude + SQLite | Python + Plotly + Ollama | Vanilla JS + D3 | React + Express + SQLite | CSV + GDrive | **CUE + D3 (static, zero backend)** |
 
@@ -150,14 +152,15 @@ python3 -m http.server -d site 8080     # serve locally
   vocab.cue            Schemas (#Entity, #Document, #Flow, #Event)
   validate.cue         10 validation checks, report export
   exports.cue          Graph/insights exports with CUE unification
-  analysis.cue         BFS reachability, sole connectors, exposure cascades
+  analysis.cue         BFS reachability, sole connectors, exposure cascades, structural analysis
   people.cue           Person entities
   organizations.cue    Organization entities
   financial_*.cue      Financial institution entities
   properties.cue       Property entities
 
 site/                  Static visualization
-  index.html           D3 force graph + inspector + dashboards
+  index.html           D3 force graph + inspector + 7 dashboard views
+  compare.html         Comparison page vs other Epstein projects
   data/*.json          Pre-computed exports (generated by build.sh)
 
 build.sh               Validate + export pipeline
