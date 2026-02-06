@@ -790,6 +790,7 @@ function renderChordDiagram() {
 }
 
 function _renderChord(container) {
+  const sc = analysisData.sole_connectors;
   const size = Math.max(200, Math.min(container.clientWidth, container.clientHeight) - 40);
   const outerRadius = size / 2;
   const innerRadius = outerRadius - 24;
@@ -822,14 +823,14 @@ function _renderChord(container) {
 
   // Build sole-connector pair lookup
   const solePairs = new Set();
-  if (sc.pairs) {
+  if (sc && sc.pairs) {
     sc.pairs.forEach(p => {
       const key = [clusterIndex[p.cluster_a], clusterIndex[p.cluster_b]].sort().join('-');
       solePairs.add(key);
     });
   }
   // Also build from by_entity data
-  if (sc.by_entity) {
+  if (sc && sc.by_entity) {
     sc.by_entity.forEach(e => {
       e.sole_bridge_pairs.forEach(pair => {
         const parts = pair.split('|');
@@ -926,7 +927,7 @@ function _renderChord(container) {
       const isSole = solePairs.has(key);
       const count = matrix[d.source.index][d.target.index] + matrix[d.target.index][d.source.index];
       let bridgeEntity = '';
-      if (isSole && sc.by_entity) {
+      if (isSole && sc && sc.by_entity) {
         const pairStr1 = clusters[d.source.index] + '|' + clusters[d.target.index];
         const pairStr2 = clusters[d.target.index] + '|' + clusters[d.source.index];
         const bridge = sc.by_entity.find(e =>
@@ -965,7 +966,7 @@ function switchView(view) {
     main.className = 'main dash-mode';
     graphContainer.style.display = 'none';
     inspector.style.display = 'none';
-    dashboard.style.display = '';
+    dashboard.style.display = 'block';
     legend.style.display = 'none';
     if (view === 'dashboard') renderDashboard();
     else if (view === 'bridges') renderBridges();
