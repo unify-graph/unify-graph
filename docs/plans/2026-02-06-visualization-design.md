@@ -56,34 +56,28 @@ Sortable table of all entities with gap category filters. Columns: name, cluster
 
 ### 3. Sole Connectors View
 
-Table of entities that are the only bridge between two cluster worlds. Ranked by pair count. Epstein bridges 6 pairs, Trump 3, Giuffre 3.
+Table of entities that are the only bridge between two cluster worlds. Ranked by pair count. These are the fragility points — remove any one and the public record connecting those two worlds disappears.
 
 ### 4. Exposure Cascade View
 
-Pre-computed scenarios: if entity X cooperates, wave 1 (direct testimony exposure) and wave 2 (second-degree) counts. Maxwell cascade: 127/132 entities within 2 hops.
+Pre-computed scenarios: if entity X cooperates, wave 1 (direct testimony exposure) and wave 2 (second-degree) counts. High reach numbers are expected in hub-and-spoke networks — the value is identifying which entities are NOT reachable and where cascade paths are fragile (single bridge dependency).
 
-## Key Findings (from CUE analysis)
+## Current Model State (from CUE analysis)
 
 ### Network Structure
 - 132 entities, 398 links (292 bidirectional, 106 unidirectional)
-- 100% reachable from Epstein within 2 hops (small world)
-- Epstein: degree 177 (57 out, 120 in), bridges all 16 non-core clusters
+- Hub-and-spoke topology centered on Epstein — high reachability is a mathematical consequence of this structure, not an investigative finding
+- Almost all connections are one-way, reflecting the investigation's perspective (who was connected to whom), not mutual relationships
 
-### Sole Connectors (investigation critical)
-- 44 cluster pairs depend on a single entity
-- Kathryn Ruemmler: sole legal↔banking bridge
-- Donald Barr: sole family↔doj bridge
-- Virginia Giuffre: sole victim↔core, victim↔allegations, victim↔legal bridge
+### Sole Connectors (genuine structural finding)
+- 44 cluster pairs depend on a single bridge entity — discredit that person and the connection between those worlds disappears from the public record
+- This is non-obvious: the graph looks dense but is actually fragile
+- Examples: Kathryn Ruemmler (legal↔banking), Donald Barr (family↔doj), Virginia Giuffre (victim↔core, victim↔allegations, victim↔legal)
 
-### Research Priority Stack
-- 35 entities with 100+ corpus mentions but zero evidence
-- Banking sector dominates: Deutsche Bank, JP Morgan, Bank of America all 1000+ mentions, zero evidence linked
-- Maxwell: 15,306 corpus mentions, zero evidence citations
-
-### Evidence Coverage
-- 11.4% (15/132 entities have evidence)
-- 20 entities in 3+ gap categories simultaneously
-- 3 entities in all 4 categories (Mort Zuckerman, Andrew Farkas, Tom Pritzker)
+### Evidence Coverage (model completeness, not a finding)
+- 11.4% of entities have linked evidence — most were added from structural relationships before evidence was linked
+- The gap is the work queue, not a discovery about the network
+- The scatter plot shows where to prioritize: high corpus mentions with zero evidence are the best candidates for evidence linking
 
 ## Data Model Review
 
@@ -95,7 +89,7 @@ Per brainstorming decision: review suitability of data model regularly. Check:
 
 ### 5. Evidence Gap Scatter (NEW — pitch visualization)
 
-**Purpose:** Show the gap between DugganUSA corpus presence and documented evidence. The x-axis is Patrick's own data; the 117 dots at y=0 are the story.
+**Purpose:** Show the gap between DugganUSA corpus presence and documented evidence. High-mention entities with zero evidence are the best candidates for evidence linking — the corpus already found them, so they're the natural next step in the work queue.
 
 **Encoding:**
 - X: corpus mention count (symlog scale, 0–31k)
@@ -103,7 +97,7 @@ Per brainstorming decision: review suitability of data model regularly. Check:
 - Dot size: total connection degree (sqrt scale)
 - Dot color: cluster, opacity: evidence status
 - Red dashed line at y=0.4 separates DOCUMENTED / UNDOCUMENTED zones
-- Labels on high-mention zero-evidence entities (Deutsche Bank, JP Morgan, Maxwell)
+- Labels on high-mention zero-evidence entities (work prioritization targets)
 - Click → jump to graph view
 
 **Data:** `graph.json` nodes (mention_count, evidence_count, connection_count, inbound_count, cluster, has_evidence, gap_count)

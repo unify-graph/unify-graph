@@ -171,7 +171,7 @@ td:last-child { font-weight: 600; }
   <div class="lead-card">
     <div class="lead-title">Empty Evidence Map</div>
     <div class="lead-desc">Entity exists in the graph but has zero document citations.</div>
-    <div class="lead-example">→ 117 of 132 entities are structurally connected but unverified.</div>
+    <div class="lead-example">→ Most entities were added from structural relationships before evidence was linked. The gap is the work queue.</div>
   </div>
   <div class="lead-card">
     <div class="lead-title">Type Inconsistency</div>
@@ -186,7 +186,7 @@ td:last-child { font-weight: 600; }
   <div class="lead-card">
     <div class="lead-title">Exposure Cascade</div>
     <div class="lead-desc">Pre-computed BFS: if X cooperates, who's within 2 degrees?</div>
-    <div class="lead-example">→ Maxwell cascade reaches 127/132 entities.</div>
+    <div class="lead-example">→ High reach is expected in a hub-and-spoke network — what matters is which entities are NOT reachable.</div>
   </div>
   <div class="lead-card">
     <div class="lead-title">Cluster Isolation</div>
@@ -344,17 +344,16 @@ td:last-child { font-weight: 600; }
   <p style="color:#888;margin-bottom:0">DugganUSA tells you what's <strong>in</strong> the documents. This project tells you what's <strong>still missing from the picture</strong>.</p>
 </div>
 
-<h2>Key Findings</h2>
+<h2>What This Shows (And Doesn't)</h2>
 
-<p>What the gap analysis surfaced:</p>
+<p>Honest framing — the model is young and intentionally incomplete. The gap analysis distinguishes between structural findings about the graph and statements about the model's own completeness.</p>
 
 <table style="max-width:700px">
   <tbody>
-    <tr><td>Evidence coverage</td><td><strong style="color:#f85149">11.4%</strong> — 15 of 132 entities have linked evidence. 117 are unverified.</td></tr>
-    <tr><td>High-mention, zero-evidence</td><td><strong>35 entities</strong> have 100+ corpus mentions but zero evidence citations. Banking sector dominates.</td></tr>
-    <tr><td>Sole connector pairs</td><td><strong>44 cluster pairs</strong> depend on a single entity as their only bridge.</td></tr>
-    <tr><td>Reachability</td><td><strong>100%</strong> reachable from Epstein within 2 hops.</td></tr>
-    <tr><td>Maxwell cascade</td><td>If Maxwell cooperated: <strong>127/132</strong> entities within 2 degrees of exposure.</td></tr>
+    <tr><td>Evidence coverage</td><td><strong style="color:#f85149">11.4%</strong> — most entities were added from structural relationships before evidence was linked. The gap is the work queue, not a discovery about the network.</td></tr>
+    <tr><td>Fragility</td><td>Most cross-cluster relationships depend on a single bridge entity. Discredit that person and the connection between those worlds disappears from the public record. <em>This is a genuine structural finding</em> — the graph looks dense but is actually hub-and-spoke.</td></tr>
+    <tr><td>Directionality bias</td><td>Almost all connections are one-way — the model reflects who investigators connected to whom, not mutual relationships. The graph shows the investigation's perspective, not the network's actual topology.</td></tr>
+    <tr><td>Reachability</td><td>Everyone is within 2 hops of Epstein. This is a mathematical consequence of hub-and-spoke structure, not an investigative finding — it would be true of any network built around a central figure.</td></tr>
   </tbody>
 </table>
 

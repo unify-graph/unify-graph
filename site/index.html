@@ -58,7 +58,7 @@ nav button:hover { background: #2a2a3a; }
 .inspector-section.missing h3 { color: #f85149; }
 .inspector-section.leads h3 { color: #f0ad4e; }
 .field { display: flex; gap: 8px; margin-bottom: 4px; }
-.field-label { color: #666; min-width: 90px; flex-shrink: 0; }
+.field-label { color: #666; min-width: 110px; flex-shrink: 0; }
 .field-value { color: #c8c8d0; word-break: break-word; }
 .badge { display: inline-block; padding: 1px 6px; border-radius: 2px; font-size: 10px; margin: 1px; }
 .badge-cluster { background: #1a1a3a; border: 1px solid #3a3a5a; }
@@ -149,9 +149,10 @@ tr.clickable { cursor: pointer; }
     schema violations become leads. Dangling references = unknown persons. Missing evidence = unverified claims.
     Type inconsistencies = logical gaps. All analysis is pre-computed at export time — the browser renders static JSON.
     <br><br>
-    <strong style="color:#e8e8f0">Key findings:</strong> 132 entities, 398 connections, 11.4% evidence coverage. 35 entities have 100+ corpus mentions
-    but zero linked evidence — banking sector dominates. 44 cluster pairs depend on a single sole connector.
-    Maxwell cascade reaches 127/132 entities within 2 hops.
+    <strong style="color:#e8e8f0">Current state:</strong> 132 entities, 398 connections. Evidence coverage is intentionally low (11.4%) — most entities
+    were added from structural relationships before evidence was linked. The gap is the work queue, not a surprise.
+    The structural analysis is more revealing: most cross-cluster relationships depend on a single bridge entity.
+    Discredit that person and the connection between those worlds disappears from the public record.
     <br><br>
     <strong style="color:#e8e8f0">Reading the graph:</strong> Node size = degree. Opacity = evidence (opaque = documented, ghost = unverified).
     Red/orange rings = gap severity. Solid lines = bidirectional. Dashed = one-way claims.
@@ -240,7 +241,7 @@ function renderStats() {
     <div class="stat"><span class="stat-val ${s.evidence_coverage_pct < 50 ? 'stat-bad' : ''}">${s.evidence_coverage_pct.toFixed(1)}%</span> evidence</div>
     <div class="stat"><span class="stat-val stat-bad">${s.orphan_entities}</span> orphans</div>
     <div class="stat"><span class="stat-val stat-bad">${s.unidirectional_connections}</span> one-way</div>
-    <div class="stat"><span class="stat-val">${analysisData.hop_distance.from_epstein.reachability.total_reachable}</span> reachable</div>
+    <div class="stat"><span class="stat-val">${analysisData.hop_distance.from_epstein.reachability.total_reachable}</span> reachable from Epstein</div>
   `;
 }
 
@@ -410,14 +411,14 @@ function selectNode(d) {
       <div class="field"><span class="field-label">Types</span><span class="field-value">${d.types.map(t => `<span class="badge badge-type">${esc(t)}</span>`).join('')}</span></div>
       ${d.role ? `<div class="field"><span class="field-label">Role</span><span class="field-value">${esc(d.role)}</span></div>` : ''}
       ${d.notes ? `<div class="field"><span class="field-label">Notes</span><span class="field-value">${esc(d.notes)}</span></div>` : ''}
-      <div class="field"><span class="field-label">Corpus hits</span><span class="field-value">${d.mention_count || 0}</span></div>
-      <div class="field"><span class="field-label">Hops from E</span><span class="field-value">${hopDist}</span></div>
+      <div class="field"><span class="field-label">Corpus mentions</span><span class="field-value">${d.mention_count || 0}</span></div>
+      <div class="field"><span class="field-label">Hops from Epstein</span><span class="field-value">${hopDist}</span></div>
       <div class="field"><span class="field-label">Reciprocity</span><span class="field-value">${Math.round(d.reciprocity_pct)}%</span></div>
       <div class="field"><span class="field-label">Bridges</span><span class="field-value">${d.bridge_count > 0 ? d.bridge_clusters.map(c => `<span class="badge badge-bridge">${c}</span>`).join('') : 'none'}</span></div>
       ${soleConn ? `<div class="field"><span class="field-label">Sole bridge</span><span class="field-value">${soleConn.sole_bridge_pairs.map(p => `<span class="badge badge-bridge">${p}</span>`).join('')}</span></div>` : ''}
       <div class="field"><span class="field-label">Clustering</span><span class="field-value" style="color:${d.clustering_coeff === 0 ? '#f0ad4e' : '#c8c8d0'}">${Math.round(d.clustering_coeff)}%${d.clustering_coeff === 0 && (d.connection_count + d.inbound_count) >= 2 ? ' (structural hole)' : ''}</span></div>
-      <div class="field"><span class="field-label">Power</span><span class="field-value" style="color:${d.power_asymmetry > 20 ? '#4caf50' : d.power_asymmetry < -50 ? '#f85149' : '#c8c8d0'}">${d.power_asymmetry > 0 ? '+' : ''}${Math.round(d.power_asymmetry)} ${d.power_asymmetry > 20 ? '(authority)' : d.power_asymmetry < -50 ? '(claimer)' : ''}</span></div>
-      <div class="field"><span class="field-label">Affinity</span><span class="field-value" style="color:${d.cluster_affinity < 30 ? '#f0ad4e' : '#c8c8d0'}">${Math.round(d.cluster_affinity)}% in-cluster</span></div>
+      <div class="field"><span class="field-label">Power asymmetry</span><span class="field-value" style="color:${d.power_asymmetry > 20 ? '#4caf50' : d.power_asymmetry < -50 ? '#f85149' : '#c8c8d0'}">${d.power_asymmetry > 0 ? '+' : ''}${Math.round(d.power_asymmetry)} ${d.power_asymmetry > 20 ? '(authority)' : d.power_asymmetry < -50 ? '(claimer)' : ''}</span></div>
+      <div class="field"><span class="field-label">Cluster affinity</span><span class="field-value" style="color:${d.cluster_affinity < 30 ? '#f0ad4e' : '#c8c8d0'}">${Math.round(d.cluster_affinity)}% in-cluster</span></div>
 
       <div class="field" style="margin-top:8px"><span class="field-label">Connections</span><span class="field-value">${d.connection_count} out / ${d.inbound_count} in</span></div>
       <ul class="conn-list">
@@ -467,7 +468,7 @@ function selectNode(d) {
       <h3>Leads</h3>
       ${d.mention_count > 0 && !d.has_evidence ? `<div class="field"><span class="field-value"><a href="https://analytics.dugganusa.com/api/v1/search?q=${encodeURIComponent(d.name)}&indexes=epstein_files" target="_blank">Search API: ${d.mention_count} hits available</a></span></div>` : ''}
       ${d.mention_count === 0 ? '<div class="field"><span class="field-value" style="color:#666">Zero corpus presence — may not appear in DOJ documents</span></div>' : ''}
-      ${!d.has_evidence ? '<div class="field"><span class="field-value" style="color:#f85149">Needs evidence: find EFTA/DB-SDNY document IDs</span></div>' : ''}
+      ${!d.has_evidence ? '<div class="field"><span class="field-value" style="color:#f85149">Needs evidence: find document IDs from DOJ releases, court filings, or depositions</span></div>' : ''}
     </div>
   `;
 }
@@ -573,7 +574,7 @@ function renderBridges() {
     <h2 style="margin-bottom:12px;color:#f0ad4e">Sole Connectors — ${sc.count} cluster pairs depend on a single entity</h2>
     <p style="margin-bottom:16px;color:#888">These entities are the ONLY bridge between two cluster worlds. Removing them disconnects those communities.</p>
     <table>
-      <thead><tr><th>Entity</th><th>Cluster</th><th>Bridge Pairs</th><th>Count</th></tr></thead>
+      <thead><tr><th>Entity</th><th>Cluster</th><th>Bridge Pairs</th><th>#</th></tr></thead>
       <tbody>
         ${byEntity.map(e => `
           <tr class="clickable" onclick="switchToGraphAndSelect('${esc(e.entity)}')">
@@ -627,7 +628,7 @@ function renderGapScatter() {
     <p style="margin-bottom:12px;color:#666;font-size:11px">
       <span style="color:#f85149;font-weight:600">${noEvidence} entities</span> below the line (undocumented) vs.
       <span style="color:#4caf50;font-weight:600">${withEvidence}</span> above (documented).
-      The banking cluster dominates the high-mention, zero-evidence zone.
+      High-mention entities below the line are the best candidates for evidence linking — the corpus already found them.
     </p>
     <div id="scatter-container" style="width:100%;height:calc(100vh - 180px);position:relative"></div>
   `;
@@ -829,8 +830,11 @@ function _renderChord(container) {
   const solePairs = new Set();
   if (sc && sc.pairs) {
     sc.pairs.forEach(p => {
-      const key = [clusterIndex[p.cluster_a], clusterIndex[p.cluster_b]].sort().join('-');
-      solePairs.add(key);
+      const parts = p.pair.split('|');
+      if (parts.length === 2) {
+        const key = [clusterIndex[parts[0]], clusterIndex[parts[1]]].sort().join('-');
+        solePairs.add(key);
+      }
     });
   }
   // Also build from by_entity data
@@ -979,7 +983,7 @@ function renderStructural() {
       <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
         <div style="color:#888;font-size:10px">STRUCTURAL HOLES</div>
         <div style="color:#f0ad4e;font-size:20px;font-weight:600">${nodes.filter(n => n.clustering_coeff === 0 && (n.connection_count + n.inbound_count) >= 2).length}</div>
-        <div style="color:#666;font-size:10px">CC=0%, degree 2+</div>
+        <div style="color:#666;font-size:10px">clustering coeff = 0%, degree 2+</div>
       </div>
       <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
         <div style="color:#888;font-size:10px">BRIDGE REDUNDANCY</div>
@@ -1029,7 +1033,7 @@ function renderStructural() {
             <tr class="clickable" onclick="switchToGraphAndSelect('${esc(n.id)}')">
               <td><strong>${esc(n.name)}</strong></td>
               <td><span class="badge badge-cluster cluster-${esc(n.cluster)}">${esc(n.cluster)}</span></td>
-              <td style="color:${n.clustering_coeff === 0 ? '#f0ad4e' : n.clustering_coeff < 30 ? '#f85149' : '#4caf50'}">${Math.round(n.clustering_coeff)}%</td>
+              <td style="color:${n.clustering_coeff === 0 ? '#f0ad4e' : n.clustering_coeff < 30 ? '#c8c8d0' : '#4caf50'}">${Math.round(n.clustering_coeff)}%</td>
               <td>${n.connection_count + n.inbound_count}</td>
               <td>${n.bridge_count}</td>
               <td>${n.gap_count}</td>
