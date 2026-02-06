@@ -163,6 +163,8 @@ tr.clickable { cursor: pointer; }
     <button data-view="dashboard">Gap Dashboard</button>
     <button data-view="bridges">Sole Connectors</button>
     <button data-view="cascade">Exposure Cascade</button>
+    <button data-view="scatter">Evidence Gaps</button>
+    <button data-view="chord">Cluster Map</button>
     <a href="compare.html" style="background:#1a1a2a;border:1px solid #2a2a3a;color:#888;padding:4px 12px;text-decoration:none;font-size:11px;border-radius:3px;display:inline-flex;align-items:center;margin-left:auto">How This Compares</a>
   </nav>
   <div class="main graph-mode" id="main">
@@ -605,6 +607,333 @@ function renderCascade() {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// EVIDENCE GAP SCATTER — "Your API found them, nobody documented them"
+// X = corpus mentions (from DugganUSA API), Y = evidence count
+// The 117 dots at y=0 ARE the story.
+// ═══════════════════════════════════════════════════════════════
+
+function renderGapScatter() {
+  const dashboard = document.getElementById('dashboard');
+  const noEvidence = graphData.nodes.filter(n => !n.has_evidence).length;
+  const withEvidence = graphData.nodes.filter(n => n.has_evidence).length;
+
+  dashboard.innerHTML = `
+    <h2 style="margin-bottom:4px;color:#f85149">Evidence Gaps — Corpus Presence vs. Documentation</h2>
+    <p style="margin-bottom:4px;color:#888">X = mentions in 71k-doc DugganUSA corpus. Y = linked evidence citations. Dot size = connection degree. Opacity = evidence status.</p>
+    <p style="margin-bottom:12px;color:#666;font-size:11px">
+      <span style="color:#f85149;font-weight:600">${noEvidence} entities</span> below the line (undocumented) vs.
+      <span style="color:#4caf50;font-weight:600">${withEvidence}</span> above (documented).
+      The banking cluster dominates the high-mention, zero-evidence zone.
+    </p>
+    <div id="scatter-container" style="width:100%;height:calc(100vh - 180px);position:relative"></div>
+  `;
+
+  const container = document.getElementById('scatter-container');
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+  const margin = {top: 30, right: 30, bottom: 50, left: 60};
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  // Prepare data — jitter y=0 entities slightly for visibility
+  const rng = d3.randomNormal(0, 0.15);
+  const dots = graphData.nodes.map(n => ({
+    ...n,
+    total_degree: n.connection_count + n.inbound_count,
+    jitteredEvidence: n.evidence_count > 0 ? n.evidence_count : Math.min(0, rng()),
+  }));
+
+  const maxMentions = d3.max(dots, d => d.mention_count) || 1;
+  const maxEvidence = d3.max(dots, d => d.evidence_count) || 1;
+
+  // Scales
+  const x = d3.scaleSymlog()
+    .domain([0, maxMentions])
+    .range([0, innerW]);
+
+  const y = d3.scaleLinear()
+    .domain([-0.8, Math.max(maxEvidence, 1) + 0.8])
+    .range([innerH, 0]);
+
+  const r = d3.scaleSqrt()
+    .domain([0, d3.max(dots, d => d.total_degree)])
+    .range([3, 18]);
+
+  const svg = d3.select('#scatter-container').append('svg')
+    .attr('width', width).attr('height', height);
+
+  const g = svg.append('g')
+    .attr('transform', `translate(${margin.left},${margin.top})`);
+
+  // Danger zone background (below evidence line)
+  g.append('rect')
+    .attr('x', 0).attr('y', y(0.4))
+    .attr('width', innerW).attr('height', innerH - y(0.4))
+    .attr('fill', '#1a0a0a').attr('opacity', 0.4);
+
+  // Safe zone label
+  g.append('text')
+    .attr('x', innerW - 8).attr('y', y(maxEvidence) + 14)
+    .attr('text-anchor', 'end')
+    .attr('fill', '#4caf50').attr('font-size', '10px').attr('opacity', 0.7)
+    .text('DOCUMENTED');
+
+  // Danger zone label
+  g.append('text')
+    .attr('x', innerW - 8).attr('y', y(-0.6))
+    .attr('text-anchor', 'end')
+    .attr('fill', '#f85149').attr('font-size', '10px').attr('opacity', 0.7)
+    .text('UNDOCUMENTED');
+
+  // Threshold line
+  g.append('line')
+    .attr('x1', 0).attr('x2', innerW)
+    .attr('y1', y(0.4)).attr('y2', y(0.4))
+    .attr('stroke', '#f85149').attr('stroke-dasharray', '6,4').attr('opacity', 0.5);
+
+  // Axes
+  const xAxis = d3.axisBottom(x)
+    .tickValues([0, 10, 100, 1000, 5000].filter(v => v <= maxMentions))
+    .tickFormat(d => d >= 1000 ? (d/1000)+'k' : d);
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(xAxis)
+    .selectAll('text,line,path').attr('stroke', '#444').attr('fill', '#666');
+
+  const yAxis = d3.axisLeft(y).tickValues([0, 1, 2, 3, 4, 5].filter(v => v <= maxEvidence));
+  g.append('g')
+    .call(yAxis)
+    .selectAll('text,line,path').attr('stroke', '#444').attr('fill', '#666');
+
+  // Axis labels
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 40)
+    .attr('text-anchor', 'middle').attr('fill', '#888').attr('font-size', '11px')
+    .text('Corpus mentions (DugganUSA API) →');
+
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerH / 2).attr('y', -45)
+    .attr('text-anchor', 'middle').attr('fill', '#888').attr('font-size', '11px')
+    .text('↑ Evidence citations');
+
+  // Tooltip
+  const tip = d3.select('#scatter-container').append('div')
+    .attr('class', 'tooltip').style('display', 'none');
+
+  // Dots
+  g.selectAll('circle.dot')
+    .data(dots.sort((a, b) => b.total_degree - a.total_degree))
+    .join('circle')
+    .attr('class', 'dot')
+    .attr('cx', d => x(d.mention_count))
+    .attr('cy', d => y(d.jitteredEvidence))
+    .attr('r', d => r(d.total_degree))
+    .attr('fill', d => CLUSTER_COLORS[d.cluster] || '#636e72')
+    .attr('fill-opacity', d => d.has_evidence ? 0.85 : 0.3)
+    .attr('stroke', d => d.has_evidence ? '#4caf50' : (d.gap_count >= 3 ? '#f85149' : '#555'))
+    .attr('stroke-width', d => d.has_evidence ? 2 : 1)
+    .attr('cursor', 'pointer')
+    .on('click', (e, d) => switchToGraphAndSelect(d.id))
+    .on('mouseover', (e, d) => {
+      tip.style('display', 'block')
+        .style('left', (e.offsetX + 14) + 'px').style('top', (e.offsetY - 14) + 'px')
+        .html(`<strong>${esc(d.name)}</strong> [${d.cluster}]<br>
+          ${d.mention_count} corpus mentions<br>
+          ${d.evidence_count} evidence citations<br>
+          ${d.total_degree} connections / ${d.gap_count} gaps`);
+    })
+    .on('mouseout', () => tip.style('display', 'none'));
+
+  // Label high-mention zero-evidence entities (the story)
+  const labelDots = dots
+    .filter(d => (d.mention_count >= 500 && !d.has_evidence) || d.has_evidence)
+    .sort((a, b) => b.mention_count - a.mention_count)
+    .slice(0, 20);
+
+  g.selectAll('text.label')
+    .data(labelDots)
+    .join('text')
+    .attr('class', 'label')
+    .attr('x', d => x(d.mention_count) + r(d.total_degree) + 4)
+    .attr('y', d => y(d.jitteredEvidence) + 3)
+    .attr('fill', d => d.has_evidence ? '#4caf50' : '#f85149')
+    .attr('font-size', '9px')
+    .attr('opacity', 0.8)
+    .text(d => d.name);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CLUSTER CHORD DIAGRAM — inter-cluster connectivity + SPOFs
+// Thick chords = many connections. Thin/dashed = sole connector.
+// Infra analogy: network segmentation map with single points of failure.
+// ═══════════════════════════════════════════════════════════════
+
+function renderChordDiagram() {
+  const dashboard = document.getElementById('dashboard');
+  const sc = analysisData.sole_connectors;
+
+  dashboard.innerHTML = `
+    <h2 style="margin-bottom:4px;color:#6ea8fe">Cluster Connectivity Map</h2>
+    <p style="margin-bottom:4px;color:#888">Chord thickness = number of cross-cluster connections. <span style="color:#f0ad4e">Orange dashed</span> = sole connector (SPOF — only one entity bridges these clusters).</p>
+    <p style="margin-bottom:12px;color:#666;font-size:11px">${sc.count} cluster pairs depend on a single bridge entity. Hover for details.</p>
+    <div id="chord-container" style="width:100%;height:calc(100vh - 180px);display:flex;align-items:center;justify-content:center;position:relative"></div>
+  `;
+
+  const container = document.getElementById('chord-container');
+  const size = Math.min(container.clientWidth, container.clientHeight) - 40;
+  const outerRadius = size / 2;
+  const innerRadius = outerRadius - 24;
+
+  // Build cluster list (only clusters with entities)
+  const clusterCounts = {};
+  graphData.nodes.forEach(n => {
+    clusterCounts[n.cluster] = (clusterCounts[n.cluster] || 0) + 1;
+  });
+  const clusters = Object.keys(clusterCounts).sort((a, b) => clusterCounts[b] - clusterCounts[a]);
+  const n = clusters.length;
+  const clusterIndex = {};
+  clusters.forEach((c, i) => clusterIndex[c] = i);
+
+  // Build weighted matrix from links
+  const matrix = Array.from({length: n}, () => new Array(n).fill(0));
+  graphData.links.forEach(l => {
+    const src = l.source.id || l.source;
+    const tgt = l.target.id || l.target;
+    const srcCluster = graphData._nodeMap[src]?.cluster;
+    const tgtCluster = graphData._nodeMap[tgt]?.cluster;
+    if (srcCluster && tgtCluster && srcCluster !== tgtCluster) {
+      const i = clusterIndex[srcCluster];
+      const j = clusterIndex[tgtCluster];
+      if (i !== undefined && j !== undefined) {
+        matrix[i][j] += 1;
+      }
+    }
+  });
+
+  // Build sole-connector pair lookup
+  const solePairs = new Set();
+  if (sc.pairs) {
+    sc.pairs.forEach(p => {
+      const key = [clusterIndex[p.cluster_a], clusterIndex[p.cluster_b]].sort().join('-');
+      solePairs.add(key);
+    });
+  }
+  // Also build from by_entity data
+  if (sc.by_entity) {
+    sc.by_entity.forEach(e => {
+      e.sole_bridge_pairs.forEach(pair => {
+        const parts = pair.split('|');
+        if (parts.length === 2) {
+          const i = clusterIndex[parts[0]];
+          const j = clusterIndex[parts[1]];
+          if (i !== undefined && j !== undefined) {
+            solePairs.add([i, j].sort().join('-'));
+          }
+        }
+      });
+    });
+  }
+
+  // D3 chord layout
+  const chord = d3.chord()
+    .padAngle(0.04)
+    .sortSubgroups(d3.descending);
+
+  const chords = chord(matrix);
+  const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+  const ribbon = d3.ribbon().radius(innerRadius);
+
+  const svg = d3.select('#chord-container').append('svg')
+    .attr('width', size + 80).attr('height', size + 80)
+    .append('g')
+    .attr('transform', `translate(${(size + 80) / 2},${(size + 80) / 2})`);
+
+  // Tooltip
+  const tip = d3.select('#chord-container').append('div')
+    .attr('class', 'tooltip').style('display', 'none');
+
+  // Arcs (cluster segments)
+  svg.selectAll('path.arc')
+    .data(chords.groups)
+    .join('path')
+    .attr('class', 'arc')
+    .attr('d', arc)
+    .attr('fill', d => CLUSTER_COLORS[clusters[d.index]] || '#636e72')
+    .attr('stroke', '#0a0a0f')
+    .attr('stroke-width', 1)
+    .attr('opacity', 0.85)
+    .on('mouseover', (e, d) => {
+      tip.style('display', 'block')
+        .style('left', (e.offsetX + 14) + 'px').style('top', (e.offsetY - 14) + 'px')
+        .html(`<strong>${clusters[d.index]}</strong><br>${clusterCounts[clusters[d.index]]} entities`);
+    })
+    .on('mouseout', () => tip.style('display', 'none'));
+
+  // Arc labels
+  svg.selectAll('text.cluster-label')
+    .data(chords.groups)
+    .join('text')
+    .attr('class', 'cluster-label')
+    .each(function(d) {
+      const angle = (d.startAngle + d.endAngle) / 2;
+      const flip = angle > Math.PI;
+      d3.select(this)
+        .attr('transform', `rotate(${angle * 180 / Math.PI - 90}) translate(${outerRadius + 8}) ${flip ? 'rotate(180)' : ''}`)
+        .attr('text-anchor', flip ? 'end' : 'start')
+        .attr('fill', CLUSTER_COLORS[clusters[d.index]] || '#636e72')
+        .attr('font-size', '10px')
+        .text(clusters[d.index]);
+    });
+
+  // Ribbons (chords between clusters)
+  svg.selectAll('path.ribbon')
+    .data(chords)
+    .join('path')
+    .attr('class', 'ribbon')
+    .attr('d', ribbon)
+    .attr('fill', d => {
+      const key = [d.source.index, d.target.index].sort().join('-');
+      return solePairs.has(key) ? '#f0ad4e' : CLUSTER_COLORS[clusters[d.source.index]] || '#636e72';
+    })
+    .attr('opacity', d => {
+      const key = [d.source.index, d.target.index].sort().join('-');
+      return solePairs.has(key) ? 0.6 : 0.25;
+    })
+    .attr('stroke', d => {
+      const key = [d.source.index, d.target.index].sort().join('-');
+      return solePairs.has(key) ? '#f0ad4e' : 'none';
+    })
+    .attr('stroke-dasharray', d => {
+      const key = [d.source.index, d.target.index].sort().join('-');
+      return solePairs.has(key) ? '4,3' : null;
+    })
+    .attr('stroke-width', d => {
+      const key = [d.source.index, d.target.index].sort().join('-');
+      return solePairs.has(key) ? 1.5 : 0;
+    })
+    .on('mouseover', (e, d) => {
+      const key = [d.source.index, d.target.index].sort().join('-');
+      const isSole = solePairs.has(key);
+      const count = matrix[d.source.index][d.target.index] + matrix[d.target.index][d.source.index];
+      let bridgeEntity = '';
+      if (isSole && sc.by_entity) {
+        const pairStr1 = clusters[d.source.index] + '|' + clusters[d.target.index];
+        const pairStr2 = clusters[d.target.index] + '|' + clusters[d.source.index];
+        const bridge = sc.by_entity.find(e =>
+          e.sole_bridge_pairs.includes(pairStr1) || e.sole_bridge_pairs.includes(pairStr2)
+        );
+        if (bridge) bridgeEntity = `<br>SPOF: <strong>${esc(bridge.name)}</strong>`;
+      }
+      tip.style('display', 'block')
+        .style('left', (e.offsetX + 14) + 'px').style('top', (e.offsetY - 14) + 'px')
+        .html(`<strong>${clusters[d.source.index]}</strong> ↔ <strong>${clusters[d.target.index]}</strong><br>
+          ${count} connections${isSole ? '<br><span style="color:#f0ad4e">⚠ Sole connector — single point of failure</span>' : ''}${bridgeEntity}`);
+    })
+    .on('mouseout', () => tip.style('display', 'none'));
+}
+
+// ═══════════════════════════════════════════════════════════════
 // VIEW SWITCHING
 // ═══════════════════════════════════════════════════════════════
 
@@ -632,6 +961,8 @@ function switchView(view) {
     if (view === 'dashboard') renderDashboard();
     else if (view === 'bridges') renderBridges();
     else if (view === 'cascade') renderCascade();
+    else if (view === 'scatter') renderGapScatter();
+    else if (view === 'chord') renderChordDiagram();
   }
 }
 
