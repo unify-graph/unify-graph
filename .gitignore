@@ -1,0 +1,20 @@
+# Generated exports (rebuilt by build.sh)
+site/data/*.json
+graph.json
+report.json
+insights.json
+analysis_export.json
+
+# Discovery data (intermediate)
+discovery.json
+discovery2.json
+
+# Editor / OS
+.DS_Store
+*.swp
+*~
+.vscode/
+.idea/
+
+# Claude session data
+.claude/

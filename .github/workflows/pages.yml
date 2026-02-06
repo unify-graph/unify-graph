@@ -1,0 +1,63 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install CUE
+        run: |
+          curl -sSL https://github.com/cue-lang/cue/releases/latest/download/cue_v0.12.0_linux_amd64.tar.gz | tar xz
+          sudo mv cue /usr/local/bin/
+
+      - name: Validate & Export
+        run: |
+          cue vet ./...
+          mkdir -p site/data
+          cue export -e graph ./... > site/data/graph.json
+          cue export -e analysis ./... > site/data/analysis.json
+          cue export -e insights ./... > site/data/insights.json
+          cue export -e report ./... > site/data/report.json
+          cue export -e entities ./... > site/data/entities.json
+          cue export -e flows ./... > site/data/flows.json
+          cue export -e documents ./... > site/data/documents.json
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to Surge
+        if: env.SURGE_TOKEN != ''
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+        run: |
+          npm install -g surge
+          surge site/ unify-missing-links.surge.sh
+
+  deploy-pages:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Epstein Network — CUE Investigation Model</title>
+<meta name="description" content="Open investigation model of the Epstein network. 132 entities, 398 connections, gap analysis, exposure cascades. Built with CUE and D3.">
+<meta property="og:title" content="Epstein Network — CUE Investigation Model">
+<meta property="og:description" content="132 entities, 398 connections. CUE's type system surfaces investigative gaps as structured data — dangling references, missing evidence, type inconsistencies.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Epstein Network — CUE Investigation Model">
+<meta name="twitter:description" content="Open investigation model. Gap analysis, sole connectors, exposure cascades. Data-first, computation in CUE.">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; background: #0a0a0f; color: #c8c8d0; font-size: 13px; overflow: hidden; height: 100vh; }
+a { color: #6ea8fe; }
+
+/* Layout */
+.app { display: grid; grid-template-rows: auto auto 1fr; height: 100vh; }
+header { padding: 8px 16px; background: #12121a; border-bottom: 1px solid #2a2a3a; display: flex; justify-content: space-between; align-items: center; }
+header h1 { font-size: 14px; font-weight: 600; color: #e8e8f0; }
+.stats { display: flex; gap: 16px; font-size: 11px; color: #888; }
+.stats .stat { display: flex; gap: 4px; }
+.stats .stat-val { color: #6ea8fe; font-weight: 600; }
+.stats .stat-bad { color: #f85149; }
+
+nav { display: flex; gap: 2px; padding: 4px 16px; background: #12121a; border-bottom: 1px solid #2a2a3a; }
+nav button { background: #1a1a2a; border: 1px solid #2a2a3a; color: #888; padding: 4px 12px; cursor: pointer; font-family: inherit; font-size: 11px; border-radius: 3px; }
+nav button.active { background: #2a2a4a; color: #e8e8f0; border-color: #4a4a6a; }
+nav button:hover { background: #2a2a3a; }
+
+.main { display: grid; overflow: hidden; }
+.main.graph-mode { grid-template-columns: 1fr 380px; }
+.main.dash-mode { grid-template-columns: 1fr; }
+
+/* Search */
+.search-box { position: relative; }
+.search-box input { background: #1a1a2a; border: 1px solid #2a2a3a; color: #e8e8f0; padding: 4px 8px; font-family: inherit; font-size: 11px; border-radius: 3px; width: 200px; }
+.search-box input::placeholder { color: #555; }
+
+/* Graph */
+#graph-container { overflow: hidden; background: #0a0a0f; position: relative; }
+#graph-container svg { width: 100%; height: 100%; }
+.node circle { cursor: pointer; stroke-width: 1.5; }
+.node text { font-size: 9px; fill: #888; pointer-events: none; }
+.node.selected circle { stroke: #fff !important; stroke-width: 3; }
+.link { stroke-opacity: 0.4; }
+.link.bidirectional { stroke-opacity: 0.6; }
+.link.highlighted { stroke-opacity: 1; stroke-width: 3 !important; }
+
+/* Inspector */
+#inspector { background: #12121a; border-left: 1px solid #2a2a3a; overflow-y: auto; padding: 12px; }
+#inspector.empty { display: flex; align-items: center; justify-content: center; color: #555; font-style: italic; }
+.inspector-section { margin-bottom: 16px; }
+.inspector-section h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6ea8fe; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid #2a2a3a; }
+.inspector-section.missing h3 { color: #f85149; }
+.inspector-section.leads h3 { color: #f0ad4e; }
+.field { display: flex; gap: 8px; margin-bottom: 4px; }
+.field-label { color: #666; min-width: 90px; flex-shrink: 0; }
+.field-value { color: #c8c8d0; word-break: break-word; }
+.badge { display: inline-block; padding: 1px 6px; border-radius: 2px; font-size: 10px; margin: 1px; }
+.badge-cluster { background: #1a1a3a; border: 1px solid #3a3a5a; }
+.badge-type { background: #1a2a1a; border: 1px solid #3a5a3a; color: #8fbc8f; }
+.badge-gap { background: #2a1a1a; border: 1px solid #5a3a3a; color: #f85149; }
+.badge-bridge { background: #2a2a1a; border: 1px solid #5a5a3a; color: #f0ad4e; }
+.conn-list { list-style: none; }
+.conn-list li { padding: 2px 0; cursor: pointer; }
+.conn-list li:hover { color: #6ea8fe; }
+.conn-list .bidir::before { content: '↔ '; color: #4caf50; }
+.conn-list .unidir-out::before { content: '→ '; color: #f0ad4e; }
+.conn-list .unidir-in::before { content: '← '; color: #888; }
+.entity-name { font-weight: 600; font-size: 16px; color: #e8e8f0; margin-bottom: 4px; }
+.entity-id { font-size: 11px; color: #555; margin-bottom: 12px; }
+
+/* Dashboard */
+#dashboard { overflow-y: auto; padding: 16px; display: none; }
+.dash-header { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.dash-filter { background: #1a1a2a; border: 1px solid #2a2a3a; color: #888; padding: 4px 10px; cursor: pointer; font-family: inherit; font-size: 11px; border-radius: 3px; }
+.dash-filter.active { background: #2a2a4a; color: #e8e8f0; border-color: #4a4a6a; }
+.dash-filter .count { color: #6ea8fe; margin-left: 4px; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th { text-align: left; padding: 6px 8px; color: #888; border-bottom: 1px solid #2a2a3a; cursor: pointer; user-select: none; position: sticky; top: 0; background: #0a0a0f; }
+th:hover { color: #e8e8f0; }
+td { padding: 5px 8px; border-bottom: 1px solid #1a1a2a; }
+tr:hover { background: #1a1a2a; }
+tr.clickable { cursor: pointer; }
+.gap-pill { display: inline-block; padding: 1px 5px; border-radius: 2px; font-size: 10px; margin: 1px; }
+.gap-missing_evidence { background: #2a1a1a; color: #f85149; }
+.gap-orphan { background: #2a2a1a; color: #f0ad4e; }
+.gap-cluster_isolated { background: #1a1a2a; color: #6ea8fe; }
+.gap-type_inconsistent { background: #2a1a2a; color: #d68fd6; }
+
+/* Cluster colors */
+.cluster-core { color: #ff6b6b; }
+.cluster-financial { color: #4ecdc4; }
+.cluster-hedge_fund { color: #45b7d1; }
+.cluster-paypal_mafia { color: #96ceb4; }
+.cluster-crypto { color: #ffeaa7; }
+.cluster-allegations { color: #ff7675; }
+.cluster-political { color: #74b9ff; }
+.cluster-cabinet { color: #a29bfe; }
+.cluster-legal { color: #fd79a8; }
+.cluster-doj { color: #e17055; }
+.cluster-shell { color: #636e72; }
+.cluster-academia { color: #00b894; }
+.cluster-media { color: #fdcb6e; }
+.cluster-banking { color: #00cec9; }
+.cluster-victim { color: #d63031; }
+.cluster-intelligence { color: #6c5ce7; }
+.cluster-tech { color: #0984e3; }
+.cluster-staff { color: #b2bec3; }
+.cluster-family { color: #e84393; }
+.cluster-unclassified { color: #636e72; }
+
+/* Legend */
+.legend { position: absolute; bottom: 10px; left: 10px; background: rgba(18,18,26,0.9); padding: 8px; border-radius: 4px; border: 1px solid #2a2a3a; font-size: 10px; display: flex; flex-wrap: wrap; gap: 6px; max-width: 500px; }
+.legend-item { display: flex; align-items: center; gap: 3px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* Tooltip */
+.tooltip { position: absolute; background: #1a1a2a; border: 1px solid #3a3a5a; padding: 6px 10px; border-radius: 4px; pointer-events: none; font-size: 11px; z-index: 100; white-space: nowrap; }
+
+/* Loading / Error */
+#loading { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #0a0a0f; z-index: 200; flex-direction: column; gap: 12px; }
+#loading .spinner { width: 32px; height: 32px; border: 3px solid #2a2a3a; border-top-color: #6ea8fe; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+#loading .load-text { color: #888; font-size: 12px; }
+.error-banner { background: #2a1a1a; border: 1px solid #5a3a3a; color: #f85149; padding: 12px 16px; margin: 16px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div id="loading"><div class="spinner"></div><div class="load-text">Loading 132 entities...</div></div>
+<div class="app">
+  <header>
+    <h1>Epstein Network — CUE Investigation Model</h1>
+    <div class="stats" id="stats"></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div class="search-box">
+        <input type="text" id="search" placeholder="Search entities...">
+      </div>
+      <button id="about-btn" style="background:none;border:1px solid #2a2a3a;color:#888;padding:3px 8px;cursor:pointer;font-family:inherit;font-size:11px;border-radius:3px" title="About this project">?</button>
+    </div>
+  </header>
+  <div id="about-panel" style="display:none;padding:12px 16px;background:#12121a;border-bottom:1px solid #2a2a3a;font-size:12px;line-height:1.6;color:#999">
+    <strong style="color:#e8e8f0">What is this?</strong> Most Epstein network projects show what's known — who's connected, what documents mention whom.
+    This one measures <em>what's missing</em>. It uses <a href="https://cuelang.org">CUE</a>'s type system as an investigative tool:
+    schema violations become leads. Dangling references = unknown persons. Missing evidence = unverified claims.
+    Type inconsistencies = logical gaps. All analysis is pre-computed at export time — the browser renders static JSON.
+    <br><br>
+    <strong style="color:#e8e8f0">Key findings:</strong> 132 entities, 398 connections, 11.4% evidence coverage. 35 entities have 100+ corpus mentions
+    but zero linked evidence — banking sector dominates. 44 cluster pairs depend on a single sole connector.
+    Maxwell cascade reaches 127/132 entities within 2 hops.
+    <br><br>
+    <strong style="color:#e8e8f0">Reading the graph:</strong> Node size = degree. Opacity = evidence (opaque = documented, ghost = unverified).
+    Red/orange rings = gap severity. Solid lines = bidirectional. Dashed = one-way claims.
+    <br><br>
+    <span style="color:#555">CUE files are the source of truth. <a href="https://cuelang.org">cuelang.org</a></span>
+  </div>
+  <nav>
+    <button class="active" data-view="graph">Graph</button>
+    <button data-view="dashboard">Gap Dashboard</button>
+    <button data-view="bridges">Sole Connectors</button>
+    <button data-view="cascade">Exposure Cascade</button>
+  </nav>
+  <div class="main graph-mode" id="main">
+    <div id="graph-container">
+      <div class="legend" id="legend"></div>
+    </div>
+    <div id="inspector" class="empty">Click a node to inspect</div>
+    <div id="dashboard"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// DATA LOADING
+// ═══════════════════════════════════════════════════════════════
+
+const CLUSTER_COLORS = {
+  core: '#ff6b6b', financial: '#4ecdc4', hedge_fund: '#45b7d1',
+  paypal_mafia: '#96ceb4', crypto: '#ffeaa7', allegations: '#ff7675',
+  political: '#74b9ff', cabinet: '#a29bfe', legal: '#fd79a8',
+  doj: '#e17055', shell: '#636e72', academia: '#00b894',
+  media: '#fdcb6e', banking: '#00cec9', victim: '#d63031',
+  intelligence: '#6c5ce7', tech: '#0984e3', staff: '#b2bec3',
+  family: '#e84393', unclassified: '#636e72'
+};
+
+let graphData, reportData, insightsData, analysisData, entitiesData, flowsData, docsData;
+let selectedNode = null;
+
+async function loadData() {
+  try {
+    const files = ['graph','report','insights','analysis','entities','flows','documents'];
+    const results = await Promise.all(files.map(f =>
+      fetch(`data/${f}.json`).then(r => {
+        if (!r.ok) throw new Error(`Failed to load ${f}.json: ${r.status}`);
+        return r.json();
+      })
+    ));
+    [graphData, reportData, insightsData, analysisData, entitiesData, flowsData, docsData] = results;
+
+    // Build node lookup
+    graphData._nodeMap = {};
+    graphData.nodes.forEach(n => graphData._nodeMap[n.id] = n);
+
+    document.getElementById('loading').remove();
+    renderStats();
+    renderLegend();
+    renderGraph();
+    renderDashboard();
+  } catch (err) {
+    const loading = document.getElementById('loading');
+    loading.innerHTML = `<div class="error-banner">
+      <strong>Failed to load data</strong><br>
+      ${esc(err.message)}<br><br>
+      Run <code>./build.sh</code> to generate the data files, then serve with:<br>
+      <code>python3 -m http.server -d site 8080</code>
+    </div>`;
+  }
+}
+
+// Minimal HTML escaping for dynamic text
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// ═══════════════════════════════════════════════════════════════
+// HEADER STATS
+// ═══════════════════════════════════════════════════════════════
+
+function renderStats() {
+  const s = reportData.summary;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><span class="stat-val">${s.total_entities}</span> entities</div>
+    <div class="stat"><span class="stat-val ${s.evidence_coverage_pct < 50 ? 'stat-bad' : ''}">${s.evidence_coverage_pct.toFixed(1)}%</span> evidence</div>
+    <div class="stat"><span class="stat-val stat-bad">${s.orphan_entities}</span> orphans</div>
+    <div class="stat"><span class="stat-val stat-bad">${s.unidirectional_connections}</span> one-way</div>
+    <div class="stat"><span class="stat-val">${analysisData.hop_distance.from_epstein.reachability.total_reachable}</span> reachable</div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// LEGEND
+// ═══════════════════════════════════════════════════════════════
+
+function renderLegend() {
+  const clusters = reportData.coverage.clusters;
+  document.getElementById('legend').innerHTML = Object.entries(clusters)
+    .sort((a,b) => b[1] - a[1])
+    .map(([c, n]) => `<div class="legend-item"><div class="legend-dot" style="background:${CLUSTER_COLORS[c] || '#636e72'}"></div>${c} (${n})</div>`)
+    .join('');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FORCE GRAPH
+// ═══════════════════════════════════════════════════════════════
+
+function renderGraph() {
+  const container = document.getElementById('graph-container');
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+
+  // Deduplicate links: keep one per pair, prefer bidirectional
+  const linkMap = new Map();
+  graphData.links.forEach(l => {
+    const key = [l.source, l.target].sort().join('--');
+    const existing = linkMap.get(key);
+    if (!existing || l.bidirectional) {
+      linkMap.set(key, {...l, bidirectional: l.bidirectional || (existing && existing.bidirectional)});
+    }
+  });
+  const links = Array.from(linkMap.values());
+
+  const svg = d3.select('#graph-container').append('svg')
+    .attr('viewBox', [0, 0, width, height]);
+
+  // Zoom
+  const g = svg.append('g');
+  svg.call(d3.zoom().scaleExtent([0.1, 8]).on('zoom', e => g.attr('transform', e.transform)));
+
+  // Simulation
+  const sim = d3.forceSimulation(graphData.nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(80))
+    .force('charge', d3.forceManyBody().strength(-120))
+    .force('center', d3.forceCenter(width/2, height/2))
+    .force('collision', d3.forceCollide().radius(d => nodeRadius(d) + 2))
+    .force('x', d3.forceX(width/2).strength(0.03))
+    .force('y', d3.forceY(height/2).strength(0.03));
+
+  // Links
+  const link = g.append('g').selectAll('line')
+    .data(links).join('line')
+    .attr('class', d => `link ${d.bidirectional ? 'bidirectional' : ''}`)
+    .attr('stroke', d => d.bidirectional ? '#3a3a5a' : '#2a2a3a')
+    .attr('stroke-width', d => d.bidirectional ? 1.5 : 0.8)
+    .attr('stroke-dasharray', d => d.bidirectional ? null : '4,3');
+
+  // Nodes
+  const node = g.append('g').selectAll('g')
+    .data(graphData.nodes).join('g')
+    .attr('class', 'node')
+    .call(d3.drag().on('start', dragStart).on('drag', dragging).on('end', dragEnd));
+
+  // Node circles
+  node.append('circle')
+    .attr('r', d => nodeRadius(d))
+    .attr('fill', d => CLUSTER_COLORS[d.cluster] || '#636e72')
+    .attr('fill-opacity', d => d.has_evidence ? 0.9 : 0.25)
+    .attr('stroke', d => {
+      if (d.gap_count >= 3) return '#f85149';
+      if (d.gap_count >= 1) return '#f0ad4e';
+      return CLUSTER_COLORS[d.cluster] || '#636e72';
+    })
+    .on('click', (e, d) => selectNode(d))
+    .on('mouseover', (e, d) => showTooltip(e, d))
+    .on('mouseout', hideTooltip);
+
+  // Labels for larger nodes
+  node.filter(d => d.connection_count + d.inbound_count >= 8)
+    .append('text')
+    .attr('dx', d => nodeRadius(d) + 3)
+    .attr('dy', 3)
+    .text(d => d.name);
+
+  // Simulation tick
+  sim.on('tick', () => {
+    link
+      .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+
+  function nodeRadius(d) {
+    return Math.max(3, Math.min(20, Math.sqrt(d.connection_count + d.inbound_count) * 2.5));
+  }
+
+  function dragStart(e, d) { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; }
+  function dragging(e, d) { d.fx = e.x; d.fy = e.y; }
+  function dragEnd(e, d) { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }
+
+  // Store references for highlighting
+  window._graphLink = link;
+  window._graphNode = node;
+
+  // Tooltip element
+  const tooltip = d3.select('body').append('div').attr('class', 'tooltip').style('display', 'none');
+  function showTooltip(e, d) {
+    tooltip.style('display', 'block')
+      .style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 12) + 'px')
+      .html(`<strong>${esc(d.name)}</strong> [${esc(d.cluster)}]<br>
+        ${d.connection_count} out / ${d.inbound_count} in / ${d.gap_count} gaps
+        ${d.mention_count > 0 ? '<br>' + d.mention_count + ' corpus mentions' : ''}`);
+  }
+  function hideTooltip() { tooltip.style('display', 'none'); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// NODE SELECTION & INSPECTOR
+// ═══════════════════════════════════════════════════════════════
+
+function selectNode(d) {
+  selectedNode = d;
+
+  // Highlight in graph
+  window._graphNode.classed('selected', n => n.id === d.id);
+  window._graphLink.classed('highlighted', l =>
+    (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id);
+
+  const entity = entitiesData[d.id];
+  const panel = document.getElementById('inspector');
+  panel.classList.remove('empty');
+
+  // Build connections list
+  const connections = Object.keys(entity.connections || {});
+  const inbound = [];
+  graphData.links.forEach(l => {
+    const src = l.source.id || l.source;
+    const tgt = l.target.id || l.target;
+    if (tgt === d.id && !connections.includes(src)) inbound.push(src);
+  });
+
+  // Get flows for this entity
+  const entityFlows = insightsData.flows_by_entity[d.id] || {};
+  const entityDocs = insightsData.docs_mentioning[d.id] || {};
+
+  // Get hop distance
+  const hop = analysisData.hop_distance.from_epstein;
+  let hopDist = 'unknown';
+  if (hop.wave_0.includes(d.id)) hopDist = '0 (self)';
+  else if (hop.wave_1.includes(d.id)) hopDist = '1';
+  else if (hop.wave_2.includes(d.id)) hopDist = '2';
+  else if (hop.wave_3.includes(d.id)) hopDist = '3';
+  else if (hop.wave_4.includes(d.id)) hopDist = '4';
+
+  // Check sole connector status
+  const soleConn = analysisData.sole_connectors.by_entity.find(e => e.entity === d.id);
+
+  panel.innerHTML = `
+    <div class="entity-name">${esc(d.name)}</div>
+    <div class="entity-id">${esc(d.id)}</div>
+
+    <div class="inspector-section">
+      <h3>Known</h3>
+      <div class="field"><span class="field-label">Cluster</span><span class="field-value"><span class="badge badge-cluster cluster-${esc(d.cluster)}">${esc(d.cluster)}</span></span></div>
+      <div class="field"><span class="field-label">Types</span><span class="field-value">${d.types.map(t => `<span class="badge badge-type">${esc(t)}</span>`).join('')}</span></div>
+      ${d.role ? `<div class="field"><span class="field-label">Role</span><span class="field-value">${esc(d.role)}</span></div>` : ''}
+      ${d.notes ? `<div class="field"><span class="field-label">Notes</span><span class="field-value">${esc(d.notes)}</span></div>` : ''}
+      <div class="field"><span class="field-label">Corpus hits</span><span class="field-value">${d.mention_count || 0}</span></div>
+      <div class="field"><span class="field-label">Hops from E</span><span class="field-value">${hopDist}</span></div>
+      <div class="field"><span class="field-label">Reciprocity</span><span class="field-value">${d.reciprocity_pct}%</span></div>
+      <div class="field"><span class="field-label">Bridges</span><span class="field-value">${d.bridge_count > 0 ? d.bridge_clusters.map(c => `<span class="badge badge-bridge">${c}</span>`).join('') : 'none'}</span></div>
+      ${soleConn ? `<div class="field"><span class="field-label">Sole bridge</span><span class="field-value">${soleConn.sole_bridge_pairs.map(p => `<span class="badge badge-bridge">${p}</span>`).join('')}</span></div>` : ''}
+
+      <div class="field" style="margin-top:8px"><span class="field-label">Connections</span><span class="field-value">${d.connection_count} out / ${d.inbound_count} in</span></div>
+      <ul class="conn-list">
+        ${connections.filter(c => graphData._nodeMap[c]).map(c => {
+          const target = graphData._nodeMap[c];
+          const bidir = target && Object.keys(entitiesData[c]?.connections || {}).includes(d.id);
+          return `<li class="${bidir ? 'bidir' : 'unidir-out'}" onclick="selectNode(graphData._nodeMap['${c}'])">${entitiesData[c]?.name || c} <span class="badge badge-cluster cluster-${target?.cluster}">${target?.cluster}</span></li>`;
+        }).join('')}
+        ${inbound.filter(c => graphData._nodeMap[c]).map(c => {
+          const src = graphData._nodeMap[c];
+          return `<li class="unidir-in" onclick="selectNode(graphData._nodeMap['${c}'])">${entitiesData[c]?.name || c} <span class="badge badge-cluster cluster-${src?.cluster}">${src?.cluster}</span></li>`;
+        }).join('')}
+      </ul>
+
+      ${Object.keys(entityFlows).length ? `
+        <div class="field" style="margin-top:8px"><span class="field-label">Flows</span></div>
+        ${Object.entries(entityFlows).map(([fname, f]) =>
+          `<div class="field"><span class="field-label" style="min-width:20px">${f.role === 'source' ? '→' : '←'}</span><span class="field-value">${f.amount} ${f.role === 'source' ? 'to' : 'from'} ${f.other} (${f.flow_type})</span></div>`
+        ).join('')}
+      ` : ''}
+
+      ${Object.keys(entityDocs).length ? `
+        <div class="field" style="margin-top:8px"><span class="field-label">Documents</span></div>
+        ${Object.keys(entityDocs).map(doc =>
+          `<div class="field"><span class="field-label" style="min-width:20px"></span><span class="field-value">${doc}</span></div>`
+        ).join('')}
+      ` : ''}
+
+      ${Object.keys(entity.evidence || {}).length ? `
+        <div class="field" style="margin-top:8px"><span class="field-label">Evidence</span></div>
+        ${Object.keys(entity.evidence).map(e =>
+          `<div class="field"><span class="field-label" style="min-width:20px"></span><span class="field-value">${e}</span></div>`
+        ).join('')}
+      ` : ''}
+    </div>
+
+    ${d.gap_count > 0 ? `
+    <div class="inspector-section missing">
+      <h3>Missing (${d.gap_count} gaps)</h3>
+      ${d.gap_categories.map(g => `<div class="field"><span class="gap-pill gap-${g}">${g.replace(/_/g, ' ')}</span></div>`).join('')}
+      ${d.is_orphan ? '<div class="field"><span class="field-value" style="color:#f0ad4e">No entity connects TO this node</span></div>' : ''}
+      ${d.unidirectional_out > 0 ? `<div class="field"><span class="field-value" style="color:#f0ad4e">${d.unidirectional_out} connections not reciprocated</span></div>` : ''}
+    </div>
+    ` : ''}
+
+    <div class="inspector-section leads">
+      <h3>Leads</h3>
+      ${d.mention_count > 0 && !d.has_evidence ? `<div class="field"><span class="field-value"><a href="https://analytics.dugganusa.com/api/v1/search?q=${encodeURIComponent(d.name)}&indexes=epstein_files" target="_blank">Search API: ${d.mention_count} hits available</a></span></div>` : ''}
+      ${d.mention_count === 0 ? '<div class="field"><span class="field-value" style="color:#666">Zero corpus presence — may not appear in DOJ documents</span></div>' : ''}
+      ${!d.has_evidence ? '<div class="field"><span class="field-value" style="color:#f85149">Needs evidence: find EFTA/DB-SDNY document IDs</span></div>' : ''}
+    </div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// GAP DASHBOARD
+// ═══════════════════════════════════════════════════════════════
+
+function renderDashboard() {
+  // Flatten all nodes with gap info into a sortable table
+  const rows = graphData.nodes.map(n => ({
+    ...n,
+    total_degree: n.connection_count + n.inbound_count,
+  })).sort((a, b) => b.gap_count - a.gap_count || b.mention_count - a.mention_count);
+
+  const dashboard = document.getElementById('dashboard');
+  dashboard.innerHTML = `
+    <div class="dash-header">
+      <button class="dash-filter active" data-filter="all">All <span class="count">${rows.length}</span></button>
+      <button class="dash-filter" data-filter="missing_evidence">No evidence <span class="count">${rows.filter(r => r.gap_categories.includes('missing_evidence')).length}</span></button>
+      <button class="dash-filter" data-filter="orphan">Orphans <span class="count">${rows.filter(r => r.gap_categories.includes('orphan')).length}</span></button>
+      <button class="dash-filter" data-filter="cluster_isolated">Cluster isolated <span class="count">${rows.filter(r => r.gap_categories.includes('cluster_isolated')).length}</span></button>
+      <button class="dash-filter" data-filter="type_inconsistent">Type mismatch <span class="count">${rows.filter(r => r.gap_categories.includes('type_inconsistent')).length}</span></button>
+      <button class="dash-filter" data-filter="has_evidence">Has evidence <span class="count">${rows.filter(r => r.has_evidence).length}</span></button>
+    </div>
+    <table>
+      <thead><tr>
+        <th data-sort="name">Name</th>
+        <th data-sort="cluster">Cluster</th>
+        <th data-sort="mention_count">Mentions</th>
+        <th data-sort="total_degree">Degree</th>
+        <th data-sort="gap_count">Gaps</th>
+        <th data-sort="bridge_count">Bridges</th>
+        <th data-sort="reciprocity_pct">Recip%</th>
+        <th>Gap Types</th>
+      </tr></thead>
+      <tbody id="dash-body"></tbody>
+    </table>
+  `;
+
+  let currentFilter = 'all';
+  let sortKey = 'gap_count';
+  let sortDir = -1;
+
+  function renderRows() {
+    let filtered = rows;
+    if (currentFilter === 'has_evidence') filtered = rows.filter(r => r.has_evidence);
+    else if (currentFilter !== 'all') filtered = rows.filter(r => r.gap_categories.includes(currentFilter));
+    filtered.sort((a, b) => (a[sortKey] > b[sortKey] ? 1 : -1) * sortDir);
+
+    document.getElementById('dash-body').innerHTML = filtered.map(r => `
+      <tr class="clickable" onclick="switchToGraphAndSelect('${esc(r.id)}')">
+        <td><strong>${esc(r.name)}</strong></td>
+        <td><span class="badge badge-cluster cluster-${esc(r.cluster)}">${esc(r.cluster)}</span></td>
+        <td>${r.mention_count}</td>
+        <td>${r.total_degree}</td>
+        <td>${r.gap_count}</td>
+        <td>${r.bridge_count}</td>
+        <td>${r.reciprocity_pct}%</td>
+        <td>${r.gap_categories.map(g => `<span class="gap-pill gap-${g}">${g.replace(/_/g,' ')}</span>`).join('')}</td>
+      </tr>
+    `).join('');
+  }
+
+  // Filter buttons
+  dashboard.querySelectorAll('.dash-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      dashboard.querySelectorAll('.dash-filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderRows();
+    });
+  });
+
+  // Sort headers
+  dashboard.querySelectorAll('th[data-sort]').forEach(th => {
+    th.addEventListener('click', () => {
+      if (sortKey === th.dataset.sort) sortDir *= -1;
+      else { sortKey = th.dataset.sort; sortDir = -1; }
+      renderRows();
+    });
+  });
+
+  renderRows();
+}
+
+function switchToGraphAndSelect(id) {
+  switchView('graph');
+  const node = graphData._nodeMap[id];
+  if (node) selectNode(node);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BRIDGES VIEW
+// ═══════════════════════════════════════════════════════════════
+
+function renderBridges() {
+  const dashboard = document.getElementById('dashboard');
+  const sc = analysisData.sole_connectors;
+  const byEntity = sc.by_entity.sort((a, b) => b.pair_count - a.pair_count);
+
+  dashboard.innerHTML = `
+    <h2 style="margin-bottom:12px;color:#f0ad4e">Sole Connectors — ${sc.count} cluster pairs depend on a single entity</h2>
+    <p style="margin-bottom:16px;color:#888">These entities are the ONLY bridge between two cluster worlds. Removing them disconnects those communities.</p>
+    <table>
+      <thead><tr><th>Entity</th><th>Cluster</th><th>Bridge Pairs</th><th>Count</th></tr></thead>
+      <tbody>
+        ${byEntity.map(e => `
+          <tr class="clickable" onclick="switchToGraphAndSelect('${esc(e.entity)}')">
+            <td><strong>${esc(e.name)}</strong></td>
+            <td><span class="badge badge-cluster cluster-${esc(e.cluster)}">${esc(e.cluster)}</span></td>
+            <td>${e.sole_bridge_pairs.map(p => `<span class="badge badge-bridge">${p.replace('|', ' → ')}</span>`).join(' ')}</td>
+            <td>${e.pair_count}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CASCADE VIEW
+// ═══════════════════════════════════════════════════════════════
+
+function renderCascade() {
+  const dashboard = document.getElementById('dashboard');
+  const ec = analysisData.exposure_cascades;
+
+  dashboard.innerHTML = `
+    <h2 style="margin-bottom:12px;color:#f85149">Exposure Cascades — If someone cooperates, who's at risk?</h2>
+    <p style="margin-bottom:16px;color:#888">Wave 1 = directly named in testimony. Wave 2 = second-degree exposure through wave 1 connections.</p>
+    ${Object.entries(ec).map(([key, c]) => `
+      <div style="margin-bottom:24px;padding:12px;background:#12121a;border:1px solid #2a2a3a;border-radius:4px">
+        <h3 style="color:#e8e8f0;margin-bottom:8px">${entitiesData[c.target]?.name || c.target} cooperates</h3>
+        <div class="field"><span class="field-label">Total exposed</span><span class="field-value" style="color:#f85149;font-weight:600">${c.total_exposed} entities</span></div>
+        <div class="field"><span class="field-label">Wave 1 (direct)</span><span class="field-value">${c.wave_1.length}: ${c.wave_1.sort().map(e => `<span class="badge badge-cluster cluster-${graphData._nodeMap[e]?.cluster}">${entitiesData[e]?.name || e}</span>`).join(' ')}</span></div>
+        <div class="field"><span class="field-label">Wave 2 (2nd deg)</span><span class="field-value">${c.wave_2.length} entities</span></div>
+      </div>
+    `).join('')}
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// VIEW SWITCHING
+// ═══════════════════════════════════════════════════════════════
+
+function switchView(view) {
+  const main = document.getElementById('main');
+  const graphContainer = document.getElementById('graph-container');
+  const inspector = document.getElementById('inspector');
+  const dashboard = document.getElementById('dashboard');
+  const legend = document.getElementById('legend');
+
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+
+  if (view === 'graph') {
+    main.className = 'main graph-mode';
+    graphContainer.style.display = '';
+    inspector.style.display = '';
+    dashboard.style.display = 'none';
+    legend.style.display = '';
+  } else {
+    main.className = 'main dash-mode';
+    graphContainer.style.display = 'none';
+    inspector.style.display = 'none';
+    dashboard.style.display = '';
+    legend.style.display = 'none';
+    if (view === 'dashboard') renderDashboard();
+    else if (view === 'bridges') renderBridges();
+    else if (view === 'cascade') renderCascade();
+  }
+}
+
+document.querySelectorAll('nav button').forEach(btn => {
+  btn.addEventListener('click', () => switchView(btn.dataset.view));
+});
+
+// ═══════════════════════════════════════════════════════════════
+// SEARCH
+// ═══════════════════════════════════════════════════════════════
+
+document.getElementById('search').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase();
+  if (!q) {
+    window._graphNode.style('display', null);
+    window._graphLink.style('display', null);
+    return;
+  }
+  const matches = new Set(graphData.nodes.filter(n =>
+    n.name.toLowerCase().includes(q) || n.id.includes(q) || n.cluster.includes(q)
+  ).map(n => n.id));
+
+  window._graphNode.style('display', n => matches.has(n.id) ? null : 'none');
+  window._graphLink.style('display', l => {
+    const src = l.source.id || l.source;
+    const tgt = l.target.id || l.target;
+    return matches.has(src) && matches.has(tgt) ? null : 'none';
+  });
+});
+
+// About panel toggle
+document.getElementById('about-btn').addEventListener('click', () => {
+  const p = document.getElementById('about-panel');
+  p.style.display = p.style.display === 'none' ? '' : 'none';
+});
+
+// Boot
+loadData();
+</script>
+</body>
+</html>

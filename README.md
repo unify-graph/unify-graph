@@ -1,93 +1,118 @@
-# unify-graph
+# Epstein Network — CUE Investigation Model
 
+Every other Epstein network project asks **"what do we know?"** — indexing documents, extracting names, rendering who-knows-whom graphs. There are [15+ of them](https://github.com/topics/epstein-files) now, from DugganUSA's 71k-document search engine to SomaliScan's 1.5M-node graph.
 
+This project asks **"what don't we know?"**
 
-## Getting started
+It uses [CUE](https://cuelang.org)'s type system as an investigative tool, where schema violations surface actionable leads:
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+- **Dangling references** = unknown persons of interest
+- **Missing evidence fields** = unverified claims that need document citations
+- **Type inconsistencies** = logical gaps (e.g. `FinancialEnabler` entities with no documented financial flows)
+- **Cluster isolation** = entities disconnected from their own community
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+The result: 132 entities modeled in depth, where the data model itself tells you what to investigate next.
 
-## Add your files
+## Why CUE?
 
-* [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+CUE is a configuration language with types, constraints, and unification — designed for infrastructure-as-code, not journalism. That's what makes it interesting here.
+
+Most network analyses start with raw data and compute metrics at query time or in the browser. This project defines a **typed schema** for entities, connections, evidence, and financial flows, then lets CUE's compiler do the analysis:
+
+- `cue vet` catches referential integrity errors — if you reference a connection that doesn't exist, it fails. That failure is a lead.
+- `cue export` unifies all data and pre-computes every metric (gap counts, bridge analysis, BFS hop distance, exposure cascades) into static JSON. The browser does zero computation.
+- Adding an entity means satisfying the schema — you must declare a cluster, connection set, and evidence map. Empty evidence maps are valid but flagged.
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/unity-requirement/unify-graph.git
-git branch -M main
-git push -uf origin main
+*.cue files  →  cue vet  →  cue export  →  JSON  →  static D3 site
 ```
 
-## Integrate with your tools
+**132 curated entities vs. 1.5M extracted nodes** is a deliberate tradeoff. NLP extraction gives breadth — name co-occurrence across thousands of documents. Typed modeling gives depth — every connection is directional, every evidence citation resolves to a document ID, every gap is classified and ranked. Both are useful. This is the depth side.
 
-* [Set up project integrations](https://gitlab.com/unity-requirement/unify-graph/-/settings/integrations)
+## What it found
 
-## Collaborate with your team
+- **11.4% evidence coverage** — 15 of 132 entities have linked evidence. 117 are structurally modeled but unverified.
+- **35 entities with 100+ corpus mentions but zero evidence** — the banking sector dominates: Deutsche Bank, JP Morgan, Bank of America all have 1000+ mentions in the DOJ corpus, zero evidence citations.
+- **44 sole connector pairs** — cluster pairs that depend on a single entity as their only bridge. Virginia Giuffre is the sole bridge between the victim cluster and three other worlds. Remove her testimony, those connections vanish.
+- **100% reachable within 2 hops** — every entity in the model is reachable from Epstein in 2 or fewer steps. Small world.
+- **Maxwell cascade: 127/132** — if Maxwell cooperated, 127 of 132 entities would be within 2 degrees of exposure.
 
-* [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+## Graph analysis: infrastructure patterns adapted
 
-## Test and Deploy
+The analysis layer adapts patterns from infrastructure dependency analysis (fan-in, cascade failure, SPOF detection) to investigative network modeling:
 
-Use the built-in continuous integration in GitLab.
+| Infrastructure Pattern | Investigation Adaptation |
+|----------------------|--------------------------|
+| Transitive dependency closure (DAG) | BFS hop distance (cycle-safe, 4 waves) |
+| Blast radius: what breaks if X goes down | Exposure cascade: who's at risk if X cooperates |
+| Single points of failure | Sole connectors: only bridge between cluster pairs |
+| Health/degradation propagation | Evidence integrity: if a document is discredited, which entities lose their evidence base |
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+Key difference: infrastructure graphs are directed acyclic (`depends_on`). Social networks are bidirectional and cyclic. Solved by pre-computing an undirected adjacency matrix and using BFS waves instead of transitive closure.
 
-***
+## Visualization
 
-# Editing this README
+Four views, all rendering pre-computed JSON:
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+1. **Force Graph + Entity Inspector** — click any node to see known info, gaps, and investigative leads
+2. **Gap Dashboard** — sortable table of all entities with gap category filters
+3. **Sole Connectors** — entities that are the only bridge between two cluster worlds
+4. **Exposure Cascade** — if entity X cooperates, who's exposed at wave 1 (direct) and wave 2 (second-degree)
 
-## Suggestions for a good README
+### Reading the graph
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+- **Node size** = total connection degree
+- **Node opacity** = evidence coverage (opaque = has evidence, ghost = unverified)
+- **Node ring** = gap severity (red = 3+ gaps, orange = 1-2 gaps)
+- **Edge style** = solid (bidirectional) / dashed (one-way claim)
 
-## Name
-Choose a self-explaining name for your project.
+## Build & run
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Requires [CUE](https://cuelang.org/docs/install/).
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+```bash
+./build.sh                              # validate + export
+python3 -m http.server -d site 8080     # serve locally
+```
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## Data pipeline
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+| Export | Contents |
+|--------|----------|
+| `graph` | D3-ready node-link format with gap flags, bridge analysis, reciprocity |
+| `insights` | Top bridges, research priorities, multi-flag entities, cluster connectivity |
+| `analysis` | Hop distance (BFS), sole connectors, exposure cascades, evidence chains |
+| `report` | Gap analysis — dangling connections, missing evidence, orphans, type inconsistencies |
+| `entities` / `flows` / `documents` | Raw data |
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## Data sources
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+- DOJ EFTA Release documents (OCR corpus, 71k+ documents)
+- [DugganUSA](https://analytics.dugganusa.com/epstein/) Epstein Files search API
+- Public court filings and reporting
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## Structure
+
+```
+*.cue                  CUE source of truth
+  vocab.cue            Schemas (#Entity, #Document, #Flow, #Event)
+  validate.cue         10 validation checks, report export
+  exports.cue          Graph/insights exports with CUE unification
+  analysis.cue         BFS reachability, sole connectors, exposure cascades
+  people.cue           Person entities
+  organizations.cue    Organization entities
+  financial_*.cue      Financial institution entities
+  properties.cue       Property entities
+
+site/                  Static visualization
+  index.html           D3 force graph + inspector + dashboards
+  data/*.json          Pre-computed exports (generated by build.sh)
+
+build.sh               Validate + export pipeline
+```
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Open data project. The CUE data model uses open structs (`...`) so new fields can be added without schema changes.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+To add entities, evidence, or connections: edit the relevant `.cue` file and run `./build.sh`. CUE will tell you if your additions break referential integrity — and that's the point.
