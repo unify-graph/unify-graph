@@ -29,12 +29,11 @@ Most network analyses start with raw data and compute metrics at query time or i
 
 **132 curated entities vs. 1.5M extracted nodes** is a deliberate tradeoff. NLP extraction gives breadth — name co-occurrence across thousands of documents. Typed modeling gives depth — every connection is directional, every evidence citation resolves to a document ID, every gap is classified and ranked. Both are useful. This is the depth side.
 
-## Current model state
+## What the model shows
 
-- **11.4% evidence coverage** — most entities were added from structural relationships before evidence was linked. The gap is the work queue, not a surprise.
-- **44 sole connector pairs** — cluster pairs that depend on a single bridge entity. Discredit that person and the connection between those worlds disappears from the public record. This is non-obvious: the graph looks dense but is actually fragile.
-- **Directionality bias** — almost all connections are one-way, reflecting the investigation's perspective (who was connected to whom), not mutual relationships.
-- **Hub-and-spoke topology** — high reachability from Epstein is a mathematical consequence of the central hub structure, not an investigative finding. The cascade and BFS views are useful for exploring the network, not for headline numbers.
+- **Fragility** — 44 cluster pairs depend on a single bridge entity. The graph looks dense but is actually hub-and-spoke. Example: Virginia Giuffre is the only link between the victim cluster and three others (core, allegations, legal). If her testimony is discredited, those connections disappear from the public record. See the [sole connectors view](https://unify-graph.github.io/unify-graph/) and [structural analysis](https://unify-graph.github.io/unify-graph/) for the full SPOF breakdown.
+- **Work queue** — 11.4% of entities have linked evidence. Most were added from structural relationships before evidence was linked. The [evidence gap scatter](https://unify-graph.github.io/unify-graph/) shows where to start: entities like Ghislaine Maxwell (15k+ corpus mentions, zero evidence citations) are the highest-priority targets for document linking.
+- **Perspective bias** — most connections are one-way. We modeled "Epstein → Deutsche Bank" from investigation records, but Deutsche Bank doesn't connect back — because the model reflects who investigators connected to whom, not mutual relationships. The graph is the investigation's view, not the network's actual topology.
 
 ## Graph analysis: infrastructure patterns adapted
 
