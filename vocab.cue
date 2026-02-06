@@ -68,6 +68,15 @@ import "list"
 	first_appearance?: string // date or year
 	last_appearance?:  string
 
+	// Optional: external identifiers for cross-source linking
+	external_ids?: {
+		wikidata?:       string // e.g., "Q312959"
+		opencorporates?: string
+		littlesis?:      string
+		opensanctions?:  string
+		courtlistener?:  string
+	}
+
 	// Allow extension for entity-specific fields
 	...
 }

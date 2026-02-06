@@ -326,6 +326,86 @@ _orphansIfRemoved: {
 	}
 }
 
+// ── MULTI-WAVE CASCADE FAILURE ────────────────────────────────
+// Extends cascading orphanization: after wave 1 orphans are also
+// gone, who NOW loses all inbound? Adapted from quicue.ca
+// #CascadeAnalysis (resilience.cue) — domino failure simulation.
+//
+// Wave 0: entity X removed
+// Wave 1: entities whose only inbound was X (immediate orphans)
+// Wave 2: entities whose remaining inbound were all wave 1 orphans
+
+// Set of all removed entities after wave 1 (target + wave 1 orphans)
+_removedAfterWave1: {
+	for _target, _ in entities {
+		(_target): {
+			(_target): true
+			for _o in _orphansIfRemoved[_target] {
+				(_o): true
+			}
+		}
+	}
+}
+
+// Wave 2: among survivors, who now has zero inbound?
+_wave2Orphans: {
+	for _target, _ in entities {
+		(_target): [
+			for _other, _ in entities
+			if _removedAfterWave1[_target][_other] == _|_
+			if _inboundFrom[_other] != _|_
+			if len([
+				for _src, _ in _inboundFrom[_other]
+				if _removedAfterWave1[_target][_src] == _|_ {_src},
+			]) == 0 {_other},
+		]
+	}
+}
+
+// Total cascade impact: wave 1 + wave 2 orphans
+_cascadeImpact: {
+	for _target, _ in entities {
+		(_target): len(_orphansIfRemoved[_target]) + len(_wave2Orphans[_target])
+	}
+}
+
+// ── BOTTLENECK RANKING ────────────────────────────────────────
+// Composite criticality score per entity. Adapted from quicue.ca
+// #BottleneckAnalysis (resilience.cue) — fan-in ranking + tiers.
+//
+// Score = inbound connections + (sole bridge pairs × 3) + (cascade impact × 2)
+// Weights: sole bridges are severe (disconnects entire cluster pairs),
+// cascade impact matters but inbound is the base signal.
+
+_soleConnPairCount: {
+	for _ename, _ in entities {
+		if _soleConnectorByEntity[_ename] != _|_ {
+			(_ename): len([for _p, _ in _soleConnectorByEntity[_ename].pairs {_p}])
+		}
+		if _soleConnectorByEntity[_ename] == _|_ {
+			(_ename): 0
+		}
+	}
+}
+
+_bottleneckScore: {
+	for _ename, _ in entities {
+		(_ename): _inboundCounts[_ename] + (_soleConnPairCount[_ename] * 3) + (_cascadeImpact[_ename] * 2)
+	}
+}
+
+// ── NETWORK RESILIENCE ────────────────────────────────────────
+// Aggregate fragility metrics. Adapted from quicue.ca
+// #ResilienceScore (resilience.cue) — composite score 0-100.
+//
+// Penalties for: high SPOF count, concentrated bottlenecks,
+// high max cascade impact.
+
+_totalEntities:       len([for _e, _ in entities {_e}])
+_spofPairs:           len(_soleConnectorPairs)
+_totalClusterPairs:   len([for _p, _ in _clusterPairBridgeCounts {_p}])
+_entitiesWithCascade: len([for _e, _ in entities if _cascadeImpact[_e] > 0 {_e}])
+
 // ═══════════════════════════════════════════════════════════════
 // ANALYSIS EXPORT
 // cue export -e analysis ./...
@@ -456,13 +536,39 @@ analysis: {
 			for _e, _ in entities
 			if _totalValidConns[_e] >= 3
 			if _clusterAffinity[_e] < 30 {
-				entity:          _e
-				name:            entities[_e].name
+				entity:           _e
+				name:             entities[_e].name
 				declared_cluster: entities[_e].cluster
-				affinity_pct:    _clusterAffinity[_e]
-				in_cluster:      _clusterConnCounts[_e]
-				total_conns:     _totalValidConns[_e]
+				affinity_pct:     _clusterAffinity[_e]
+				in_cluster:       _clusterConnCounts[_e]
+				total_conns:      _totalValidConns[_e]
 			},
 		]
+
+		// Bottleneck ranking — entities ranked by composite criticality
+		// Score = inbound + (sole bridge pairs × 3) + (cascade impact × 2)
+		bottleneck: [
+			for _e, _ in entities
+			if _bottleneckScore[_e] > 0 {
+				entity:           _e
+				name:             entities[_e].name
+				cluster:          entities[_e].cluster
+				score:            _bottleneckScore[_e]
+				inbound:          _inboundCounts[_e]
+				sole_bridge:      _soleConnPairCount[_e]
+				cascade_wave1:    len(_orphansIfRemoved[_e])
+				cascade_wave2:    len(_wave2Orphans[_e])
+				cascade_total:    _cascadeImpact[_e]
+			},
+		]
+
+		// Network resilience summary
+		resilience: {
+			total_entities:       _totalEntities
+			spof_pairs:           _spofPairs
+			total_cluster_pairs:  _totalClusterPairs
+			spof_pct:             _spofPairs * 100 / _totalClusterPairs
+			entities_with_cascade: _entitiesWithCascade
+		}
 	}
 }

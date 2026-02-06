@@ -1,0 +1,45 @@
+{
+  "@context": {
+    "@vocab": "https://unify-graph.github.io/schema/",
+    "schema": "https://schema.org/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Person": "schema:Person",
+    "Organization": "schema:Organization",
+    "GovernmentOfficial": "schema:GovernmentOrganization",
+    "LawFirm": "schema:LegalService",
+    "FinancialInstitution": "schema:FinancialService",
+    "HedgeFund": "schema:FinancialService",
+    "InvestmentFirm": "schema:FinancialService",
+    "Foundation": "schema:NGO",
+    "Property": "schema:Place",
+    "Aircraft": "schema:Vehicle",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "identifier": "schema:identifier",
+    "cluster": "unify:cluster",
+    "connections": {
+      "@id": "schema:knows",
+      "@type": "@id"
+    },
+    "evidence": {
+      "@id": "schema:citation",
+      "@type": "@id"
+    },
+    "mention_count": "schema:interactionStatistic",
+
+    "source": "dcterms:source",
+    "date": "dcterms:date",
+
+    "wikidata": {
+      "@id": "schema:sameAs",
+      "@type": "@id"
+    },
+    "opencorporates": {
+      "@id": "schema:sameAs",
+      "@type": "@id"
+    }
+  }
+}

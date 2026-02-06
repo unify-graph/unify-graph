@@ -1014,6 +1014,7 @@ function renderStructural() {
       <button class="dash-filter" data-stab="redundancy">Bridge Redundancy</button>
       <button class="dash-filter" data-stab="orphans">Cascading Orphans</button>
       <button class="dash-filter" data-stab="affinity">Cluster Affinity</button>
+      <button class="dash-filter" data-stab="bottleneck">Bottleneck</button>
     </div>
     <div id="structural-content"></div>
   `;
@@ -1126,6 +1127,46 @@ function renderStructural() {
               <td style="color:${n.cluster_affinity === 0 ? '#f85149' : n.cluster_affinity < 30 ? '#f0ad4e' : '#4caf50'}">${Math.round(n.cluster_affinity)}%</td>
               <td>${Math.round(n.cluster_affinity * n.connection_count / 100)} / ${n.connection_count}</td>
               <td>${n.bridge_clusters.map(c => `<span class="badge badge-cluster cluster-${esc(c)}">${esc(c)}</span>`).join('')}</td>
+            </tr>
+          `).join('')}
+        </tbody></table>
+      `;
+    } else if (tab === 'bottleneck') {
+      const res = st.resilience || {};
+      const bottlenecks = st.bottleneck ? [...st.bottleneck].sort((a, b) => b.score - a.score) : [];
+      const spofPct = res.total_cluster_pairs > 0 ? Math.round((res.spof_pairs / res.total_cluster_pairs) * 100) : 0;
+      content.innerHTML = `
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:12px">
+          <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+            <div style="color:#888;font-size:10px">SPOF PAIRS</div>
+            <div style="color:#f85149;font-size:18px;font-weight:600">${res.spof_pairs || 0}/${res.total_cluster_pairs || 0}</div>
+            <div style="color:#f85149;font-size:11px;font-weight:600">${spofPct}%</div>
+          </div>
+          <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+            <div style="color:#888;font-size:10px">CASCADE ENTITIES</div>
+            <div style="color:#f0ad4e;font-size:18px;font-weight:600">${res.entities_with_cascade || 0}</div>
+            <div style="color:#666;font-size:10px">have cascade impact</div>
+          </div>
+          <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+            <div style="color:#888;font-size:10px">TOTAL ENTITIES</div>
+            <div style="color:#6ea8fe;font-size:18px;font-weight:600">${res.total_entities || 0}</div>
+            <div style="color:#666;font-size:10px">in network</div>
+          </div>
+        </div>
+        <p style="color:#888;margin-bottom:8px;font-size:11px"><strong style="color:#e8e8f0">Bottleneck score</strong> = inbound connections + (sole bridge pairs × 3) + (cascade impact × 2). High scores indicate entities whose removal would most damage the network's connectivity and cascade failures across multiple hops.</p>
+        <table><thead><tr>
+          <th data-sort="score">Score</th><th>Entity</th><th>Cluster</th><th>Inbound</th><th>Sole Bridge</th><th>Wave 1</th><th>Wave 2</th><th>Total Cascade</th>
+        </tr></thead><tbody>
+          ${bottlenecks.map(b => `
+            <tr class="clickable" onclick="switchToGraphAndSelect('${esc(b.entity)}')">
+              <td style="color:#f85149;font-weight:600">${b.score}</td>
+              <td><strong>${esc(b.name)}</strong></td>
+              <td><span class="badge badge-cluster cluster-${esc(b.cluster)}">${esc(b.cluster)}</span></td>
+              <td>${b.inbound}</td>
+              <td>${b.sole_bridge}</td>
+              <td style="color:${b.cascade_wave1 > 0 ? '#f0ad4e' : '#666'}">${b.cascade_wave1}</td>
+              <td style="color:${b.cascade_wave2 > 0 ? '#f85149' : '#666'}">${b.cascade_wave2}</td>
+              <td style="color:${b.cascade_total > 0 ? '#f85149' : '#666'};font-weight:600">${b.cascade_total}</td>
             </tr>
           `).join('')}
         </tbody></table>

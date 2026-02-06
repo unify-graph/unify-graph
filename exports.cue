@@ -138,6 +138,7 @@ _unidirOutCount: {
 // ═══════════════════════════════════════════════════════════════
 
 graph: {
+	"@context": "data/context.jsonld"
 	nodes: [
 		for _ename, _e in entities {
 			id:               _ename
@@ -165,6 +166,8 @@ graph: {
 			power_asymmetry:     _powerAsymmetry[_ename]
 			cluster_affinity:    _clusterAffinity[_ename]
 			evidence_fragility:  len([for _k, _ in _e.evidence {_k}]) == 1
+			bottleneck_score:    _bottleneckScore[_ename]
+			cascade_impact:      _cascadeImpact[_ename]
 			// Optional metadata (CUE unification includes only if present)
 			if _e.role != _|_ {
 				role: _e.role

@@ -18,3 +18,4 @@ discovery2.json
 
 # Claude session data
 .claude/
+.venv/
