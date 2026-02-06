@@ -1,10 +1,8 @@
 # Epstein Network — CUE Investigation Model
 
-Every other Epstein network project asks **"what do we know?"** — indexing documents, extracting names, rendering who-knows-whom graphs. There are [15+ of them](https://github.com/topics/epstein-files) now, from DugganUSA's 71k-document search engine to SomaliScan's 1.5M-node graph.
+There are [15+ open-source Epstein network projects](https://github.com/topics/epstein-files) now — from [DugganUSA](https://analytics.dugganusa.com/epstein/)'s 71k-document search engine to [Andrew Walsh](https://github.com/Tsardoz)'s AI-powered OCR pipeline to SomaliScan's 1.5M-node graph. They process documents, extract entities, and build relationship graphs at scales this project can't match.
 
-This project asks **"what don't we know?"**
-
-It uses [CUE](https://cuelang.org)'s type system as an investigative tool, where schema violations surface actionable leads:
+This project does something CUE is suited for that document processing isn't: **typed data modeling where the schema enforces completeness**. It uses [CUE](https://cuelang.org)'s type system so that constraint violations surface as structured leads:
 
 - **Dangling references** = unknown persons of interest
 - **Missing evidence fields** = unverified claims that need document citations
@@ -69,30 +67,32 @@ Seven views, all rendering pre-computed JSON:
 
 ## How this compares
 
-There are 8+ open-source Epstein network projects. They fall into four layers — most do layer 1 or 2, a few do layer 3, only this one does layer 4.
+These projects fall into layers. Most do 1–3. This project does layer 4 — it consumes outputs from layers 1–3 and adds typed modeling on top.
 
 | Layer | What it does | Projects |
 |-------|-------------|----------|
 | **1. Archive** | Collect, OCR, and host raw documents | [FULL_EPSTEIN_INDEX](https://github.com/theelderemo/FULL_EPSTEIN_INDEX), [epstein-docs](https://github.com/epstein-docs/epstein-docs.github.io) |
-| **2. Search** | Full-text search + entity tagging over the corpus | [DugganUSA](https://analytics.dugganusa.com/epstein/), [epstein-archive](https://github.com/ErikVeland/epstein-archive) |
-| **3. Extract → Visualize** | NLP/LLM extracts entities from documents, renders a graph | [phelix001](https://github.com/phelix001/epstein-network), [maxandrews](https://github.com/maxandrews/Epstein-doc-explorer), [SvetimFM](https://github.com/SvetimFM/epstein-files-visualizations), [OWL-DOJ](https://github.com/consigcody94/OWL-DOJ-Epstein-Analysis) |
-| **4. Model → Analyze gaps** | Typed schema where constraint violations = investigative leads | **unify-graph** |
+| **2. Search** | Full-text search + entity tagging over the corpus | [DugganUSA](https://analytics.dugganusa.com/epstein/), [epstein-archive](https://github.com/ErikVeland/epstein-archive), [Epstein Files Project](https://github.com/Tsardoz) |
+| **3. Extract → Visualize** | NLP/LLM extracts entities from documents, renders a graph | [phelix001](https://github.com/phelix001/epstein-network), [maxandrews](https://github.com/maxandrews/Epstein-doc-explorer), [SvetimFM](https://github.com/SvetimFM/epstein-files-visualizations), [OWL-DOJ](https://github.com/consigcody94/OWL-DOJ-Epstein-Analysis), [DanHouseman](https://github.com/DanHouseman/epstein-files-analysis) |
+| **4. Typed model → Schema enforcement** | CUE type system enforces completeness; constraint violations = structured leads | **unify-graph** |
 
-### Every other project follows the same pipeline
+### Different tool, different job
 
-```
-Documents → OCR → NLP/LLM → Entities → Graph → "Look at all these connections"
-```
-
-They differ in scale (47 entities to 86,000), extraction method (regex to Claude AI), and visualization (2D force to 3D cloud). But they all answer: **"What do we know?"**
-
-### This project inverts it
+Most projects in this space start from documents:
 
 ```
-Entities → Typed Schema → Constraint Violations → "Here's what we DON'T know"
+Documents → OCR → NLP/LLM → Entities → Graph
 ```
 
-132 hand-curated entities modeled in CUE. The compiler enforces that every reference resolves, every type is consistent, every constraint is satisfied. When something *doesn't* satisfy the schema, that's not a bug — it's a lead:
+They differ in scale (47 entities to 1.5M nodes), extraction method (regex to Claude AI), and visualization (2D force to 3D cloud). CUE can't compete at document processing — that's not what it's for.
+
+This project starts from a hand-curated model and adds what CUE *is* good at — referential integrity, type constraints, and pre-computed derived metrics:
+
+```
+Entities → Typed Schema → Constraint Violations → Structured leads
+```
+
+132 entities modeled in CUE. The compiler enforces that every reference resolves, every type is consistent, every constraint is satisfied. When something *doesn't* satisfy the schema, that's not a bug — it's a lead:
 
 - **Dangling reference** → someone mentions a person not yet modeled. Who are they?
 - **Empty evidence map** → entity exists in the graph but no document citation. Unverified.
@@ -104,18 +104,18 @@ Entities → Typed Schema → Constraint Violations → "Here's what we DON'T kn
 
 | | DugganUSA | phelix001 | maxandrews | SvetimFM | OWL-DOJ | epstein-archive | FULL_EPSTEIN_INDEX | **unify-graph** |
 |---|---|---|---|---|---|---|---|---|
-| **Layer** | Search | Extract→Viz | Extract→Viz | Extract→Viz | Extract→Viz | Search | Archive | **Model→Gaps** |
-| **Core question** | What's in the docs? | Who connects? | What relationships? | What clusters? | Sufficient for conviction? | What's in the corpus? | Where are the files? | **What's missing?** |
+| **Layer** | Search | Extract→Viz | Extract→Viz | Extract→Viz | Extract→Viz | Search | Archive | **Typed model** |
+| **Core question** | What's in the docs? | Who connects? | What relationships? | What clusters? | Sufficient for conviction? | What's in the corpus? | Where are the files? | **What's incomplete?** |
 | **Docs indexed** | 71k+ | 19,154 | House Oversight | 69k chunks | 14,674 | 51k+ | ~20k pages + DOJ + FBI | Consumes DugganUSA API |
 | **Entities** | — | 47 | 15k+ triples | 31 | 30+ | 86k | — | **132 (typed, curated)** |
 | **Entity method** | API search results | pdfplumber + regex | Claude AI + dedup | Ollama embeddings | OWL autonomous | NLP pipeline | OCR text | **Human-authored CUE schemas** |
-| **Analysis** | Preset visualizations | Co-occurrence | Cluster filtering | Embedding clusters, RAG | Legal framework | Full-text search | — | **Gap detection, sole connectors, exposure cascades, evidence chains, BFS, clustering coefficient, structural analysis** |
-| **Tracks what's missing?** | No | No | No | No | No | No | No | **Yes** |
+| **Analysis** | Preset visualizations | Co-occurrence | Cluster filtering | Embedding clusters, RAG | Legal framework | Full-text search | — | **Sole connectors, exposure cascades, evidence chains, BFS, clustering coefficient, structural analysis** |
+| **Completeness enforcement** | — | — | — | — | — | — | — | **CUE type constraints** |
 | **Tech** | Custom backend | Python + vis-network | React + Claude + SQLite | Python + Plotly + Ollama | Vanilla JS + D3 | React + Express + SQLite | CSV + GDrive | **CUE + D3 (static, zero backend)** |
 
 ### Complementary, not competing
 
-This project consumes DugganUSA's API (via `scripts/discover.py`) to get corpus mention counts for each entity. DugganUSA tells you what's *in* the documents. This project tells investigators what's *still missing from the picture*. Layer 4 sits on top of layers 1-3.
+This project consumes DugganUSA's API (via `scripts/discover.py`) to get corpus mention counts for each entity. Layer 1–3 projects tell you what's *in* the documents. This project adds typed modeling on top — enforcing completeness requirements that surface what's still incomplete. It depends on those layers, not replaces them.
 
 See the [full interactive comparison](https://unify-graph.github.io/unify-graph/compare.html) on the project site.
 
