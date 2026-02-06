@@ -93,11 +93,48 @@ Per brainstorming decision: review suitability of data model regularly. Check:
 - Is the `#Entity` schema open enough for entity-specific fields?
 - Should `#EvidenceStrength` be applied to individual evidence citations?
 
+### 5. Evidence Gap Scatter (NEW — pitch visualization)
+
+**Purpose:** Show the gap between DugganUSA corpus presence and documented evidence. The x-axis is Patrick's own data; the 117 dots at y=0 are the story.
+
+**Encoding:**
+- X: corpus mention count (symlog scale, 0–31k)
+- Y: evidence citation count (linear, jittered at y=0 for visibility)
+- Dot size: total connection degree (sqrt scale)
+- Dot color: cluster, opacity: evidence status
+- Red dashed line at y=0.4 separates DOCUMENTED / UNDOCUMENTED zones
+- Labels on high-mention zero-evidence entities (Deutsche Bank, JP Morgan, Maxwell)
+- Click → jump to graph view
+
+**Data:** `graph.json` nodes (mention_count, evidence_count, connection_count, inbound_count, cluster, has_evidence, gap_count)
+
+### 6. Cluster Chord Diagram (NEW — infra-language visualization)
+
+**Purpose:** Network segmentation map. Thick chords = healthy multi-path connectivity. Thin orange dashed chords = SPOFs (sole connector pairs).
+
+**Encoding:**
+- Arcs: cluster color, sized by cross-cluster connection volume
+- Ribbons: source cluster color at 25% opacity (normal), orange 60% + dashed stroke (SPOF)
+- Hover reveals: cluster pair, connection count, SPOF status + bridge entity name
+- Labels: cluster name along arc
+
+**Data:** `graph.json` links (compute cluster-pair matrix), `analysis.json` sole_connectors (pairs/by_entity)
+
+## Rejected Alternatives
+
+- **Sankey (financial flows):** DugganUSA already has one. Redundant.
+- **Timeline:** Would need temporal data not yet modeled.
+- **Treemap (gaps by cluster):** Less immediately legible than scatter.
+- **Radial BFS tree:** Interesting but doesn't speak to "what's missing" thesis directly.
+- **Adjacency matrix heatmap:** Too abstract for pitch; chord is more striking.
+
 ## Future Work
 
+- Radial BFS from Epstein: concentric rings showing hop distance, evidence status
+- Evidence dependency Sankey: if a document is discredited, who loses their evidence base
+- Geographic map: properties are modeled (Zorro Ranch, Little St James, 71st Street)
 - JSON-LD `@context` for semantic web interoperability
 - Jupyter notebook for NetworkX analysis (betweenness centrality, community detection)
 - Live DugganUSA API integration (search directly from inspector)
-- Timeline view (events with temporal ordering)
 - TOON compact export for token-efficient LLM context
 - Role-scoped views (legal, financial, political)

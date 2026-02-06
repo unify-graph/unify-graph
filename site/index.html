@@ -629,8 +629,12 @@ function renderGapScatter() {
   `;
 
   const container = document.getElementById('scatter-container');
-  const width = container.clientWidth;
-  const height = container.clientHeight;
+  requestAnimationFrame(() => _renderScatter(container));
+}
+
+function _renderScatter(container) {
+  const width = Math.max(300, container.clientWidth);
+  const height = Math.max(200, container.clientHeight);
   const margin = {top: 30, right: 30, bottom: 50, left: 60};
   const innerW = width - margin.left - margin.right;
   const innerH = height - margin.top - margin.bottom;
@@ -781,7 +785,12 @@ function renderChordDiagram() {
   `;
 
   const container = document.getElementById('chord-container');
-  const size = Math.min(container.clientWidth, container.clientHeight) - 40;
+  // Defer to next frame so container has layout dimensions
+  requestAnimationFrame(() => _renderChord(container));
+}
+
+function _renderChord(container) {
+  const size = Math.max(200, Math.min(container.clientWidth, container.clientHeight) - 40);
   const outerRadius = size / 2;
   const innerRadius = outerRadius - 24;
 
