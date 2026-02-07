@@ -534,29 +534,29 @@ entities: {
 		name: "Kevin Spacey"
 		"@type": {Person: true, Allegations: true}
 		cluster: "allegations"
-		mention_count: 18
+		mention_count: 455
 		role: "Actor — photographed at Epstein properties"
 		connections: {epstein: true, maxwell: true, bill_clinton: true}
 		evidence: {}
-		notes: "18 hits."
+		notes: "455 hits."
 	}
 
 	boris_nikolic: {
 		name: "Boris Nikolic"
 		"@type": {Person: true}
 		cluster: "tech"
-		mention_count: 17
+		mention_count: 142
 		role: "Physician / Gates Foundation science advisor"
 		connections: {epstein: true, bill_gates: true}
 		evidence: {}
-		notes: "17 hits. Named in Epstein's will as backup executor."
+		notes: "142 hits. Named in Epstein's will as backup executor."
 	}
 
 	david_copperfield: {
 		name: "David Copperfield"
 		"@type": {Person: true, Allegations: true}
 		cluster: "allegations"
-		mention_count: 17
+		mention_count: 1000
 		role: "Illusionist — named in documents"
 		connections: {epstein: true}
 		evidence: {EFTA00013505: true}
@@ -566,18 +566,18 @@ entities: {
 		name: "Peter Mandelson"
 		"@type": {Person: true, Politician: true}
 		cluster: "political"
-		mention_count: 15
+		mention_count: 994
 		role: "Former UK Ambassador to US — resigned over Epstein payment allegations"
 		connections: {epstein: true, maxwell: true, tony_blair: true}
 		evidence: {}
-		notes: "15 hits. Resigned from Labour Party after EFTA release."
+		notes: "994 hits. Resigned from Labour Party after EFTA release."
 	}
 
 	bill_gates: {
 		name: "Bill Gates"
 		"@type": {Person: true}
 		cluster: "tech"
-		mention_count: 15
+		mention_count: 1000
 		role: "Microsoft co-founder — meetings with Epstein documented"
 		connections: {
 			epstein: true
@@ -585,25 +585,25 @@ entities: {
 			larry_summers: true
 		}
 		evidence: {}
-		notes: "15 hits. Met Epstein multiple times. Gates Foundation advisor Boris Nikolic named in will."
+		notes: "1000 hits. Met Epstein multiple times. Gates Foundation advisor Boris Nikolic named in will."
 	}
 
 	mort_zuckerman: {
 		name: "Mort Zuckerman"
 		"@type": {Person: true, FinancialEnabler: true}
 		cluster: "media"
-		mention_count: 15
+		mention_count: 197
 		role: "Real estate / media mogul — NY Daily News, US News"
 		connections: {epstein: true}
 		evidence: {}
-		notes: "15 hits."
+		notes: "197 hits."
 	}
 
 	juan_alessi: {
 		name: "Juan Alessi"
 		"@type": {Person: true, Witness: true}
 		cluster: "staff"
-		mention_count: 14
+		mention_count: 638
 		role: "Former house manager — testified extensively"
 		connections: {
 			epstein: true
@@ -612,91 +612,91 @@ entities: {
 			janusz_banasiak: true
 		}
 		evidence: {}
-		notes: "14 hits. Testified about household operations and visitors."
+		notes: "638 hits. Testified about household operations and visitors."
 	}
 
 	lawrence_krauss: {
 		name: "Lawrence Krauss"
 		"@type": {Person: true}
 		cluster: "academia"
-		mention_count: 14
+		mention_count: 713
 		role: "Physicist — Origins Project, Epstein funding recipient"
 		connections: {epstein: true, martin_nowak: true, stephen_hawking: true}
 		evidence: {}
-		notes: "14 hits. Resigned from ASU."
+		notes: "713 hits. Resigned from ASU."
 	}
 
 	marvin_minsky: {
 		name: "Marvin Minsky"
 		"@type": {Person: true}
 		cluster: "academia"
-		mention_count: 14
+		mention_count: 1000
 		role: "MIT AI pioneer — allegations in Virginia Giuffre deposition"
 		connections: {epstein: true, virginia_giuffre: true}
 		evidence: {}
-		notes: "14 hits. Deceased 2016. Named in Giuffre deposition."
+		notes: "1000 hits. Deceased 2016. Named in Giuffre deposition."
 	}
 
 	stephen_hawking: {
 		name: "Stephen Hawking"
 		"@type": {Person: true}
 		cluster: "academia"
-		mention_count: 13
+		mention_count: 431
 		role: "Physicist — attended Epstein events"
 		connections: {epstein: true, lawrence_krauss: true}
 		evidence: {}
-		notes: "13 hits. Deceased 2018."
+		notes: "431 hits. Deceased 2018."
 	}
 
 	glenn_dubin: {
 		name: "Glenn Dubin"
 		"@type": {Person: true, Allegations: true, FinancialEnabler: true}
 		cluster: "allegations"
-		mention_count: 13
+		mention_count: 239
 		role: "Highbridge Capital — allegations in victim statements"
 		connections: {epstein: true, eva_dubin: true, highbridge_capital: true}
 		evidence: {}
-		notes: "13 hits."
+		notes: "239 hits."
 	}
 
 	andrew_farkas: {
 		name: "Andrew Farkas"
 		"@type": {Person: true, FinancialEnabler: true}
 		cluster: "financial"
-		mention_count: 12
+		mention_count: 1000
 		role: "Real estate investor — Island Capital Group"
 		connections: {epstein: true}
 		evidence: {}
-		notes: "12 hits."
+		notes: "1000 hits."
 	}
 
 	jeff_bezos: {
 		name: "Jeff Bezos"
 		"@type": {Person: true}
 		cluster: "tech"
-		mention_count: 11
+		mention_count: 1000
 		role: "Amazon founder"
 		connections: {epstein: true}
 		evidence: {}
-		notes: "11 hits. Nature of mentions unclear."
+		notes: "1000 hits. Nature of mentions unclear."
 	}
 
 	melania_trump: {
 		name: "Melania Trump"
 		"@type": {Person: true}
 		cluster: "political"
-		mention_count: 11
+		mention_count: 278
 		role: "Former/current First Lady"
 		connections: {trump: true, epstein: true}
 		evidence: {}
-		notes: "11 hits."
+		notes: "278 hits."
 	}
 
 	larry_summers: {
 		name: "Larry Summers"
 		"@type": {Person: true}
 		cluster: "academia"
-		mention_count: 11
+		mention_count: 1000
 		role: "Former Treasury Secretary / Harvard president"
 		connections: {
 			epstein: true
@@ -705,36 +705,36 @@ entities: {
 			martin_nowak: true
 		}
 		evidence: {}
-		notes: "11 hits. Flew on Epstein's plane."
+		notes: "1000 hits. Flew on Epstein's plane."
 	}
 
 	sergey_brin: {
 		name: "Sergey Brin"
 		"@type": {Person: true}
 		cluster: "tech"
-		mention_count: 10
+		mention_count: 51
 		role: "Google co-founder"
 		connections: {epstein: true}
 		evidence: {}
-		notes: "10 hits."
+		notes: "51 hits."
 	}
 
 	naomi_campbell: {
 		name: "Naomi Campbell"
 		"@type": {Person: true}
 		cluster: "media"
-		mention_count: 10
+		mention_count: 86
 		role: "Supermodel — social connections"
 		connections: {epstein: true, maxwell: true}
 		evidence: {}
-		notes: "10 hits."
+		notes: "86 hits."
 	}
 
 	bill_barr: {
 		name: "William Barr"
 		"@type": {Person: true, GovernmentOfficial: true}
 		cluster: "doj"
-		mention_count: 10
+		mention_count: 1000
 		role: "AG during Epstein death — father hired Epstein at Dalton"
 		connections: {
 			epstein: true
@@ -745,14 +745,14 @@ entities: {
 			mcc_manhattan: true
 		}
 		evidence: {}
-		notes: "10 hits. AG when Epstein died in MCC."
+		notes: "1000 hits. AG when Epstein died in MCC."
 	}
 
 	george_mitchell: {
 		name: "George Mitchell"
 		"@type": {Person: true, Allegations: true, Politician: true}
 		cluster: "allegations"
-		mention_count: 9
+		mention_count: 518
 		role: "Former Senate Majority Leader — named in depositions"
 		connections: {epstein: true, bill_richardson: true}
 		evidence: {}
@@ -762,7 +762,7 @@ entities: {
 		name: "Ehud Barak"
 		"@type": {Person: true, Politician: true}
 		cluster: "political"
-		mention_count: 8
+		mention_count: 292
 		role: "Former Israeli PM — photographed entering Epstein residence"
 		connections: {epstein: true, maxwell: true}
 		evidence: {}
@@ -772,7 +772,7 @@ entities: {
 		name: "Steven Pinker"
 		"@type": {Person: true}
 		cluster: "academia"
-		mention_count: 8
+		mention_count: 1000
 		role: "Harvard cognitive scientist"
 		connections: {
 			epstein: true
@@ -787,7 +787,7 @@ entities: {
 		name: "Seth Lloyd"
 		"@type": {Person: true}
 		cluster: "academia"
-		mention_count: 8
+		mention_count: 109
 		role: "MIT quantum computing professor — received Epstein funding"
 		connections: {epstein: true, marvin_minsky: true}
 		evidence: {}
@@ -797,7 +797,7 @@ entities: {
 		name: "George Stephanopoulos"
 		"@type": {Person: true}
 		cluster: "media"
-		mention_count: 7
+		mention_count: 518
 		role: "ABC News anchor — attended Epstein dinner"
 		connections: {epstein: true}
 		evidence: {}
@@ -807,7 +807,7 @@ entities: {
 		name: "Woody Allen"
 		"@type": {Person: true, Allegations: true}
 		cluster: "allegations"
-		mention_count: 7
+		mention_count: 562
 		role: "Filmmaker"
 		connections: {epstein: true}
 		evidence: {}
@@ -817,7 +817,7 @@ entities: {
 		name: "Richard Branson"
 		"@type": {Person: true}
 		cluster: "tech"
-		mention_count: 7
+		mention_count: 1000
 		role: "Virgin Group founder — exchanged emails with Epstein"
 		connections: {epstein: true}
 		evidence: {}
@@ -827,7 +827,7 @@ entities: {
 		name: "Peggy Siegal"
 		"@type": {Person: true}
 		cluster: "media"
-		mention_count: 7
+		mention_count: 190
 		role: "Hollywood publicist — social connector"
 		connections: {epstein: true, maxwell: true}
 		evidence: {}
@@ -837,7 +837,7 @@ entities: {
 		name: "James Comey"
 		"@type": {Person: true, GovernmentOfficial: true}
 		cluster: "doj"
-		mention_count: 7
+		mention_count: 1000
 		role: "Former FBI Director"
 		connections: {epstein: true, robert_mueller: true}
 		evidence: {}
@@ -847,7 +847,7 @@ entities: {
 		name: "Steve Cohen"
 		"@type": {Person: true, FinancialEnabler: true}
 		cluster: "hedge_fund"
-		mention_count: 7
+		mention_count: 746
 		role: "Point72/SAC Capital — $10M to Honeycomb"
 		connections: {epstein: true, honeycomb: true}
 		evidence: {"DB-SDNY-0008151": "financial_record"}
@@ -857,18 +857,18 @@ entities: {
 		name: "Elon Musk"
 		"@type": {Person: true}
 		cluster: "tech"
-		mention_count: 6
+		mention_count: 22
 		role: "Tesla/SpaceX founder — mentioned in Epstein communications"
 		connections: {epstein: true}
 		evidence: {}
-		notes: "6 hits. Discussed island visits per reporting."
+		notes: "22 hits. Discussed island visits per reporting."
 	}
 
 	sarah_ferguson: {
 		name: "Sarah Ferguson"
 		"@type": {Person: true}
 		cluster: "allegations"
-		mention_count: 5
+		mention_count: 395
 		role: "Duchess of York — Epstein debt payment"
 		connections: {prince_andrew: true, epstein: true, maxwell: true}
 		evidence: {}
@@ -878,7 +878,7 @@ entities: {
 		name: "Tom Pritzker"
 		"@type": {Person: true, FinancialEnabler: true}
 		cluster: "financial"
-		mention_count: 5
+		mention_count: 1000
 		role: "Hyatt Hotels heir"
 		connections: {epstein: true}
 		evidence: {}
@@ -888,7 +888,7 @@ entities: {
 		name: "Virginia Giuffre"
 		"@type": {Person: true, Victim: true}
 		cluster: "victim"
-		mention_count: 5
+		mention_count: 289
 		role: "Key accuser — civil suits against Prince Andrew, Dershowitz"
 		connections: {
 			epstein: true
@@ -914,7 +914,7 @@ entities: {
 		name: "Chelsea Clinton"
 		"@type": {Person: true}
 		cluster: "political"
-		mention_count: 4
+		mention_count: 55
 		role: "Bill Clinton's daughter"
 		connections: {bill_clinton: true, maxwell: true}
 		evidence: {}
@@ -925,7 +925,7 @@ entities: {
 		name: "Eva Dubin"
 		"@type": {Person: true}
 		cluster: "allegations"
-		mention_count: 4
+		mention_count: 178
 		role: "Glenn Dubin's wife — former Miss Sweden"
 		connections: {glenn_dubin: true, epstein: true}
 		evidence: {}
@@ -935,7 +935,7 @@ entities: {
 		name: "Joi Ito"
 		"@type": {Person: true}
 		cluster: "academia"
-		mention_count: 4
+		mention_count: 105
 		role: "Former MIT Media Lab director — resigned over Epstein ties"
 		connections: {epstein: true, reid_hoffman: true}
 		evidence: {"DB-SDNY-0003972": "financial_record"}
@@ -945,7 +945,7 @@ entities: {
 		name: "Casey Wasserman"
 		"@type": {Person: true}
 		cluster: "media"
-		mention_count: 3
+		mention_count: 1000
 		role: "2028 LA Olympics committee president"
 		connections: {epstein: true}
 		evidence: {}
@@ -955,7 +955,7 @@ entities: {
 		name: "Sarah Kellen"
 		"@type": {Person: true, CoreNetwork: true, Scheduler: true}
 		cluster: "staff"
-		mention_count: 3
+		mention_count: 395
 		role: "Alleged recruiter/scheduler — named co-conspirator"
 		connections: {
 			epstein: true
@@ -970,7 +970,7 @@ entities: {
 		name: "Reid Hoffman"
 		"@type": {Person: true}
 		cluster: "paypal_mafia"
-		mention_count: 2
+		mention_count: 540
 		role: "LinkedIn founder — newsletter email to Epstein April 2014"
 		connections: {epstein: true, peter_thiel: true, lesley_groff: true, joichi_ito: true}
 		evidence: {EFTA01925403: true}
@@ -980,7 +980,7 @@ entities: {
 		name: "Howard Lutnick"
 		"@type": {Person: true, Politician: true, GovernmentOfficial: true}
 		cluster: "cabinet"
-		mention_count: 2
+		mention_count: 173
 		role: "Commerce Secretary — Cantor Fitzgerald CEO"
 		connections: {epstein: true, trump: true, cantor_fitzgerald: true}
 		evidence: {EFTA00020515: true}
@@ -990,7 +990,7 @@ entities: {
 		name: "Tony Blair"
 		"@type": {Person: true, Politician: true}
 		cluster: "political"
-		mention_count: 2
+		mention_count: 1000
 		role: "Former UK PM"
 		connections: {epstein: true, peter_mandelson: true}
 		evidence: {}
@@ -1000,7 +1000,7 @@ entities: {
 		name: "Brett Ratner"
 		"@type": {Person: true, Allegations: true}
 		cluster: "media"
-		mention_count: 2
+		mention_count: 211
 		role: "Filmmaker — separate misconduct allegations"
 		connections: {epstein: true}
 		evidence: {}
@@ -1010,7 +1010,7 @@ entities: {
 		name: "Nadia Marcinkova"
 		"@type": {Person: true, CoreNetwork: true}
 		cluster: "core"
-		mention_count: 1
+		mention_count: 151
 		role: "Known associate — pilot, named co-conspirator"
 		connections: {epstein: true, maxwell: true, sarah_kellen: true}
 		evidence: {}
@@ -1020,7 +1020,7 @@ entities: {
 		name: "Katie Couric"
 		"@type": {Person: true}
 		cluster: "media"
-		mention_count: 1
+		mention_count: 317
 		role: "Journalist — attended Epstein dinner"
 		connections: {epstein: true}
 		evidence: {}
@@ -1030,7 +1030,7 @@ entities: {
 		name: "Gordon Brown"
 		"@type": {Person: true, Politician: true}
 		cluster: "political"
-		mention_count: 1
+		mention_count: 175
 		role: "Former UK PM"
 		connections: {epstein: true}
 		evidence: {}
@@ -1040,7 +1040,7 @@ entities: {
 		name: "Kathryn Ruemmler"
 		"@type": {Person: true}
 		cluster: "legal"
-		mention_count: 1
+		mention_count: 38
 		role: "Former White House Counsel — Goldman Sachs general counsel"
 		connections: {epstein: true, goldman_sachs: true, obama: true}
 		evidence: {}
@@ -1050,7 +1050,7 @@ entities: {
 		name: "Adriana Ross"
 		"@type": {Person: true}
 		cluster: "staff"
-		mention_count: 1
+		mention_count: 43
 		role: "Epstein associate — named co-conspirator"
 		connections: {epstein: true, maxwell: true}
 		evidence: {}
@@ -1060,7 +1060,7 @@ entities: {
 		name: "Emmy Taylor"
 		"@type": {Person: true}
 		cluster: "staff"
-		mention_count: 1
+		mention_count: 24
 		role: "Maxwell's personal assistant"
 		connections: {maxwell: true, epstein: true}
 		evidence: {}
@@ -1070,7 +1070,7 @@ entities: {
 		name: "Leon Botstein"
 		"@type": {Person: true}
 		cluster: "academia"
-		mention_count: 1
+		mention_count: 931
 		role: "Bard College president"
 		connections: {epstein: true}
 		evidence: {}
@@ -1080,7 +1080,7 @@ entities: {
 		name: "Alberto Gonzales"
 		"@type": {Person: true, GovernmentOfficial: true}
 		cluster: "doj"
-		mention_count: 1
+		mention_count: 110
 		role: "Former AG — preceded Acosta-era prosecution"
 		connections: {epstein: true, acosta: true}
 		evidence: {}
@@ -1089,60 +1089,66 @@ entities: {
 	philippe_laffont: {
 		name: "Philippe Laffont"
 		"@type": {Person: true, FinancialEnabler: true}
+		mention_count: 110
 		cluster: "hedge_fund"
 		role: "Coatue Management founder"
 		connections: {epstein: true, coatue_management: true}
 		evidence: {"DB-SDNY-0007748": "financial_record"}
-		notes: "ZERO corpus hits but listed on DugganUSA visualization."
+		notes: "110 EFTA hits. Listed on DugganUSA visualization."
 	}
 
 	peter_thiel: {
 		name: "Peter Thiel"
 		"@type": {Person: true, FinancialEnabler: true}
+		mention_count: 994
 		cluster: "paypal_mafia"
 		role: "Palantir/PayPal — $4.45M+ to Valar Ventures"
 		connections: {epstein: true, reid_hoffman: true, valar_ventures: true}
 		evidence: {"DB-SDNY-0004924": "financial_record"}
-		notes: "ZERO corpus hits. On visualization but not in DOJ text."
+		notes: "994 EFTA hits. Direct emails with Epstein."
 	}
 
 	brock_pierce: {
 		name: "Brock Pierce"
 		"@type": {Person: true}
+		mention_count: 1000
 		cluster: "crypto"
 		role: "Crypto entrepreneur"
 		connections: {epstein: true, bart_stephens: true, blockchain_capital: true}
 		evidence: {}
-		notes: "ZERO corpus hits."
+		notes: "1000+ EFTA hits."
 	}
 
 	adam_back: {
 		name: "Adam Back"
 		"@type": {Person: true}
+		mention_count: 382
 		cluster: "crypto"
 		role: "Blockstream CEO"
 		connections: {epstein: true, blockstream: true}
 		evidence: {"DB-SDNY-0000478": "financial_record"}
-		notes: "ZERO corpus hits."
+		notes: "382 EFTA hits. Mostly OCR false positives on 'adam' + 'back' tokens."
 	}
 
 	bart_stephens: {
 		name: "Bart Stephens"
 		"@type": {Person: true}
+		mention_count: 81
 		cluster: "crypto"
 		role: "Blockchain Capital co-founder"
 		connections: {epstein: true, brock_pierce: true, blockchain_capital: true}
 		evidence: {}
-		notes: "ZERO corpus hits."
+		notes: "81 EFTA hits. Mostly false positives on 'Deutsche Bart Trust Company'."
 	}
 
 	donald_barr: {
 		name: "Donald Barr"
 		"@type": {Person: true}
+		mention_count: 564
 		cluster: "family"
 		role: "William Barr's father — hired Epstein at Dalton School 1973"
 		connections: {bill_barr: true, dalton_school: true, epstein: true}
 		evidence: {}
-		notes: "ZERO corpus hits. Hired Epstein to teach at Dalton despite no degree."
+		notes: "564 EFTA hits. Hired Epstein to teach at Dalton despite no degree."
 	}
 }

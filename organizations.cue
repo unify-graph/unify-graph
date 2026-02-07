@@ -126,7 +126,7 @@ entities: {
 		name: "Coatue Management"
 		"@type": {Organization: true, HedgeFund: true}
 		cluster: "hedge_fund"
-		mention_count: 20
+		mention_count: 46
 		role: "Laffont's hedge fund"
 		connections: {philippe_laffont: true}
 		evidence: {}
@@ -146,7 +146,7 @@ entities: {
 		name: "Cantor Fitzgerald"
 		"@type": {Organization: true, FinancialInstitution: true}
 		cluster: "financial"
-		mention_count: 15
+		mention_count: 358
 		role: "Financial services — Lutnick CEO"
 		connections: {howard_lutnick: true}
 		evidence: {}
@@ -156,7 +156,7 @@ entities: {
 		name: "L Brands"
 		"@type": {Organization: true}
 		cluster: "financial"
-		mention_count: 14
+		mention_count: 1000
 		role: "Wexner's retail conglomerate"
 		connections: {wexner: true, victoria_secret: true, epstein: true}
 		evidence: {}
@@ -176,7 +176,7 @@ entities: {
 		name: "Clinton Foundation"
 		"@type": {Organization: true, Foundation: true}
 		cluster: "political"
-		mention_count: 8
+		mention_count: 544
 		role: "Clinton charitable foundation"
 		connections: {bill_clinton: true, chelsea_clinton: true}
 		evidence: {}
@@ -186,7 +186,7 @@ entities: {
 		name: "Kyara"
 		"@type": {Organization: true, ShellCompany: true}
 		cluster: "shell"
-		mention_count: 7
+		mention_count: 292
 		role: "Shell company — minimal information"
 		connections: {epstein: true}
 		evidence: {}
@@ -196,7 +196,7 @@ entities: {
 		name: "Liquid Funding"
 		"@type": {Organization: true, ShellCompany: true}
 		cluster: "shell"
-		mention_count: 5
+		mention_count: 334
 		role: "Financial vehicle"
 		connections: {epstein: true}
 		evidence: {}
@@ -206,7 +206,7 @@ entities: {
 		name: "Blockchain Capital"
 		"@type": {Organization: true, InvestmentFirm: true}
 		cluster: "crypto"
-		mention_count: 3
+		mention_count: 27
 		role: "Crypto VC — Bart Stephens"
 		connections: {bart_stephens: true, brock_pierce: true, epstein: true}
 		evidence: {}
@@ -216,7 +216,7 @@ entities: {
 		name: "Valar Ventures"
 		"@type": {Organization: true, ShellCompany: true, InvestmentFirm: true}
 		cluster: "shell"
-		mention_count: 1
+		mention_count: 104
 		role: "Investment vehicle — $40M, Thiel invested $4.45M+"
 		connections: {peter_thiel: true, epstein: true}
 		evidence: {}
@@ -245,6 +245,7 @@ entities: {
 	rothschild_geneva: {
 		name: "Rothschild Geneva"
 		"@type": {Organization: true, FinancialInstitution: true, FinancialEnabler: true}
+		mention_count: 109
 		cluster: "financial"
 		role: "Geneva banking — Epstein financial relationship"
 		connections: {epstein: true}
