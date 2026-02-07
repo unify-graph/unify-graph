@@ -114,7 +114,7 @@ Entities → Typed Schema → Constraint Violations → Structured leads
 | **Entity method** | API search results | pdfplumber + regex | Claude AI + dedup | Ollama embeddings | OWL autonomous | NLP pipeline | OCR text | **Human-authored CUE schemas** |
 | **Analysis** | Preset visualizations | Co-occurrence | Cluster filtering | Embedding clusters, RAG | Legal framework | Full-text search | — | **Sole connectors, exposure cascades, evidence chains, BFS, structural analysis, NetworkX (betweenness, PageRank, community detection, k-core)** |
 | **Completeness enforcement** | — | — | — | — | — | — | — | **CUE type constraints** |
-| **External ID reconciliation** | — | — | — | — | — | — | — | **111/132 Wikidata QIDs** |
+| **External ID reconciliation** | — | — | — | — | — | — | — | **114/132 Wikidata QIDs** |
 | **Tech** | Custom backend | Python + vis-network | React + Claude + SQLite | Python + Plotly + Ollama | Vanilla JS + D3 | React + Express + SQLite | CSV + GDrive | **CUE + Python/NetworkX + D3 (static, zero backend)** |
 
 ### Complementary, not competing
@@ -143,12 +143,16 @@ python3 -m http.server -d site 8080     # serve locally
 | `report` | Gap analysis — dangling connections, missing evidence, orphans, type inconsistencies |
 | `networkx` | Betweenness, PageRank, eigenvector, community detection, k-core decomposition |
 | `graph.toon` | TOON compact format — 87% smaller than graph.json, for LLM context |
+| `propublica_enriched` | ProPublica 990 filings for foundations (EIN, revenue, assets, tax filings) |
+| `wikidata_enriched` | Wikidata SPARQL data for matched entities (descriptions, properties) |
 | `entities` / `flows` / `documents` | Raw data |
 
 ## Data sources
 
 - DOJ EFTA Release documents (OCR corpus, 71k+ documents)
 - [DugganUSA](https://analytics.dugganusa.com/epstein/) Epstein Files search API
+- [Wikidata](https://www.wikidata.org/) entity reconciliation (114/132 QIDs) + SPARQL enrichment
+- [ProPublica Nonprofit Explorer](https://projects.propublica.org/nonprofits/) IRS 990 filings for foundations
 - Public court filings and reporting
 
 ## Structure
@@ -159,16 +163,18 @@ python3 -m http.server -d site 8080     # serve locally
   validate.cue         10 validation checks, report export
   exports.cue          Graph/insights exports with CUE unification
   analysis.cue         BFS reachability, sole connectors, exposure cascades, structural analysis
-  external_ids.cue     Wikidata QIDs for 111/132 entities (additive overlay)
+  external_ids.cue     Wikidata QIDs for 114/132 entities (additive overlay)
   people.cue           Person entities
   organizations.cue    Organization entities
   financial_*.cue      Financial institution entities
   properties.cue       Property entities
 
-scripts/               Analysis & reconciliation
+scripts/               Analysis & enrichment
   analyze.py           NetworkX graph analysis (betweenness, PageRank, communities, k-core)
   toon_export.py       TOON compact export for LLM context (25KB vs 198KB)
   wikidata_reconcile.py  Batch Wikidata QID lookup, generates external_ids.cue
+  wikidata_enrich.py   Wikidata SPARQL enrichment (descriptions, properties)
+  propublica_enrich.py ProPublica 990 enrichment for foundations
   discover.py          DugganUSA API corpus sweep
 
 site/                  Static visualization

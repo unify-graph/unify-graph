@@ -10,11 +10,11 @@
 
 ## Data Enrichment — External IDs
 
-`external_ids.cue` overlay has 111/132 Wikidata QIDs. 21 entities unmatched (obscure staff, Epstein shell entities).
+`external_ids.cue` overlay has 114/132 Wikidata QIDs. 18 entities confirmed no valid Wikidata entry.
 
 - [x] Wikidata QIDs for 111 entities (auto-reconciled + manually disambiguated)
 - [x] Reconciliation script (`scripts/wikidata_reconcile.py`) + CI job (`wikidata-reconcile`)
-- [ ] Fill remaining 21 entities (manual Wikidata search or accept no QID exists)
+- [x] Fill remaining 21 entities → 3 new matches (dechert_llp, east_71st, rothschild_geneva), 18 confirmed no QID
 - [ ] Query OpenCorporates for corporate entities (J. Epstein & Co, Southern Trust, etc.)
 - [ ] Query LittleSis for relationship cross-referencing
 - [ ] Cross-reference against OpenSanctions dataset
@@ -80,7 +80,7 @@
 - [x] Network resilience aggregates in CUE
 - [x] JSON-LD `@context` (context.jsonld + exports.cue integration)
 - [x] `external_ids` field added to `#Entity` schema
-- [x] Wikidata QIDs for 111/132 entities (`external_ids.cue` overlay)
+- [x] Wikidata QIDs for 114/132 entities (`external_ids.cue` overlay) — 18 confirmed no valid QID
 - [x] Wikidata reconciliation script + CI job
 - [x] NetworkX analysis script (betweenness, PageRank, eigenvector, communities, k-core)
 - [x] NetworkX wired into `build.sh` + CI pipeline
