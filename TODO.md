@@ -4,12 +4,12 @@ Prioritized roadmap. Top sections are highest impact / lowest effort.
 
 ---
 
-## P0 — Quick wins (data quality)
+## P0 — Quick wins (data quality) ✓
 
-- [ ] Fill remaining 21 Wikidata QIDs (manual Wikidata search or confirm no QID exists)
-- [ ] Review `@type` tags for sufficiency — are current 32 types covering all entities correctly?
-- [ ] Add `#EvidenceStrength` to individual evidence citations (not just entity-level)
-- [ ] Reconcile DugganUSA discovery results → CUE evidence citations (close the loop on discover.py output)
+- [x] Fill remaining 21 Wikidata QIDs → 115/132 reconciled, 17 confirmed no entry
+- [x] Review `@type` tags for sufficiency → 15 fixes across entities and orgs
+- [x] Add `#EvidenceStrength` to individual evidence citations → schema + 18 annotations
+- [x] Reconcile DugganUSA discovery results → `scripts/reconcile_discovery.py` ready
 
 ## P1 — External ID enrichment
 
@@ -77,3 +77,7 @@ Prioritized roadmap. Top sections are highest impact / lowest effort.
 - [x] Dual deployment: GitLab Pages + GitHub Pages
 - [x] README honest framing (CUE strengths, not uniqueness claims)
 - [x] `requirements.txt` for Python deps
+- [x] Wikidata QIDs 115/132 (4 new: brad_edwards, dechert_llp, east_71st, rothschild_geneva)
+- [x] @type review: 15 fixes (LegalProtection, Recruiter, GovernmentOfficial, Allegations, CoreNetwork)
+- [x] EvidenceStrength per-citation: schema change + 18 typed annotations
+- [x] DugganUSA reconciliation script (`scripts/reconcile_discovery.py`)
