@@ -17,7 +17,8 @@
 - [x] Fill remaining 21 entities → 3 new matches (dechert_llp, east_71st, rothschild_geneva), 18 confirmed no QID
 - [ ] Query OpenCorporates for corporate entities (J. Epstein & Co, Southern Trust, etc.)
 - [ ] Query LittleSis for relationship cross-referencing
-- [ ] Cross-reference against OpenSanctions dataset
+- [~] Cross-reference against OpenSanctions dataset (script ready, API needs auth key)
+- [~] Query LittleSis for relationship cross-referencing (script ready, needs API run)
 - [ ] Add CourtListener case IDs for legal entities / proceedings
 
 ## Data Enrichment — API Integrations
@@ -44,10 +45,10 @@
 ## Schema & Export
 
 - [x] TOON compact export (`scripts/toon_export.py` → `site/data/graph.toon`, 87% smaller than graph.json)
-- [ ] Role-scoped views (legal, financial, political — filtered graph exports)
+- [x] Role-scoped views (legal, financial, political — domain filter in force graph)
 - [x] Review cluster assignments against NetworkX communities — 73/132 mismatches documented, C0 is mega-community of 45 entities spanning 11 clusters
-- [ ] Review `@type` tags — are current types sufficient or do we need new ones?
-- [ ] Add `#EvidenceStrength` to individual evidence citations (not just entity-level)
+- [x] Review `@type` tags — audit complete, added Victim/Witness/Informant, fixed 9 entities
+- [x] Add `#EvidenceStrength` to individual evidence citations — 15 entities annotated
 - [x] Add Google Dataset Search metadata (`<script type="application/ld+json">` in index.html)
 
 ## Outreach & Community
@@ -62,7 +63,7 @@
 - [x] FollowTheMoney (FtM) schema alignment — OCCRP/Aleph interoperability
 - [ ] Jupyter notebook companion (interactive analysis using NetworkX data)
 - [ ] Temporal modeling — add date ranges to connections for timeline view
-- [ ] Multi-source provenance tracking — which API/source contributed each fact
+- [x] Multi-source provenance tracking — #DataSource enum + sources field on #Entity
 
 ---
 

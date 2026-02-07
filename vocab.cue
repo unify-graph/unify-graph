@@ -36,6 +36,11 @@ import "list"
 	"financial_record" | "flight_log" | "court_filing" |
 	"text_message" | "email" | "photograph" | *"unverified"
 
+// #DataSource — which system contributed a fact?
+#DataSource: "manual" | "dugganusa" | "wikidata" | "propublica" |
+	"opensanctions" | "littlesis" | "courtlistener" |
+	"opencorporates" | "court_filing" | *"unknown"
+
 // ═══════════════════════════════════════════════════════════════
 // ENTITY — the core node type (analogous to quicue.ca #Resource)
 // ═══════════════════════════════════════════════════════════════
@@ -82,6 +87,9 @@ import "list"
 		opensanctions?:  string
 		courtlistener?:  string
 	}
+
+	// Optional: data provenance — which sources contributed to this entity
+	sources?: [...#DataSource]
 
 	// Allow extension for entity-specific fields
 	...

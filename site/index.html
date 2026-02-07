@@ -226,6 +226,12 @@ tr.clickable { cursor: pointer; }
         <button class="active" data-color="clusters">Clusters</button>
         <button data-color="communities">Communities</button>
         <button data-color="bottleneck">Bottleneck</button>
+        <span style="border-left:1px solid #444;margin:0 4px"></span>
+        <button class="active" data-domain="all">All</button>
+        <button data-domain="legal">Legal</button>
+        <button data-domain="financial">Financial</button>
+        <button data-domain="political">Political</button>
+        <button data-domain="core">Core</button>
       </div>
       <div class="legend" id="legend"></div>
     </div>
@@ -252,7 +258,22 @@ const CLUSTER_COLORS = {
 let graphData, reportData, insightsData, analysisData, entitiesData, flowsData, docsData, networkxData, enrichedData, propublicaData;
 let selectedNode = null;
 let currentColorMode = 'clusters';
+let currentDomainFilter = 'all';
 let bottleneckScores = {};
+
+// Domain filter: map @type tags and clusters to domains
+const DOMAIN_MAP = {
+  legal:     { types: ['LegalProtection','Prosecutor','LawFirm','Allegations'], clusters: ['legal','doj'] },
+  financial: { types: ['FinancialEnabler','FinancialInstitution','HedgeFund','InvestmentFirm','ShellCompany','Foundation'], clusters: ['financial','hedge_fund','banking','shell'] },
+  political: { types: ['Politician','GovernmentOfficial'], clusters: ['political','cabinet'] },
+  core:      { types: ['CoreNetwork','Recruiter','Scheduler','Victim','Informant','Witness'], clusters: ['core','staff','victim'] },
+};
+function nodeDomain(d) {
+  for (const [domain, {types, clusters}] of Object.entries(DOMAIN_MAP)) {
+    if (d.types?.some(t => types.includes(t)) || clusters.includes(d.cluster)) return domain;
+  }
+  return null;
+}
 let maxBottleneck = 1;
 const COMMUNITY_COLORS = ['#4e79a7','#f28e2b','#e15759','#76b7b2','#59a14f','#edc948','#b07aa1','#ff9da7','#9c755f','#bab0ac','#86bcb6','#8cd17d'];
 
@@ -425,8 +446,12 @@ function renderGraph() {
   window._graphNode = node;
 
   // Graph color mode controls
-  document.querySelectorAll('#graph-controls button').forEach(btn => {
+  document.querySelectorAll('#graph-controls button[data-color]').forEach(btn => {
     btn.addEventListener('click', () => recolorNodes(btn.dataset.color));
+  });
+  // Domain filter controls
+  document.querySelectorAll('#graph-controls button[data-domain]').forEach(btn => {
+    btn.addEventListener('click', () => filterByDomain(btn.dataset.domain));
   });
 
   // Tooltip element
@@ -508,6 +533,62 @@ function updateLegend(mode) {
       '<div class="legend-item"><div class="legend-dot" style="background:' + d3.interpolateYlOrRd(1.0) + '"></div>high (' + maxBottleneck + ')</div>';
   } else {
     renderLegend();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DOMAIN FILTER
+// ═══════════════════════════════════════════════════════════════
+
+function filterByDomain(domain) {
+  currentDomainFilter = domain;
+  document.querySelectorAll('#graph-controls button[data-domain]').forEach(b =>
+    b.classList.toggle('active', b.dataset.domain === domain));
+
+  const isAll = domain === 'all';
+
+  // Build set of visible node IDs
+  const visibleNodes = new Set();
+  graphData.nodes.forEach(d => {
+    if (isAll || d.id === 'epstein' || nodeDomain(d) === domain) visibleNodes.add(d.id);
+  });
+
+  // Also include direct neighbors of visible nodes (1-hop context)
+  if (!isAll) {
+    graphData.links.forEach(l => {
+      const sid = typeof l.source === 'object' ? l.source.id : l.source;
+      const tid = typeof l.target === 'object' ? l.target.id : l.target;
+      if (visibleNodes.has(sid) || visibleNodes.has(tid)) {
+        visibleNodes.add(sid);
+        visibleNodes.add(tid);
+      }
+    });
+  }
+
+  // Count for legend
+  const domainCount = isAll ? graphData.nodes.length :
+    graphData.nodes.filter(d => nodeDomain(d) === domain).length;
+
+  window._graphNode.transition().duration(300)
+    .attr('opacity', d => visibleNodes.has(d.id) ? 1 : 0.06);
+  window._graphNode.select('text')
+    .transition().duration(300)
+    .attr('opacity', d => visibleNodes.has(d.id) ? 1 : 0);
+
+  window._graphLink.transition().duration(300)
+    .attr('opacity', d => {
+      const sid = typeof d.source === 'object' ? d.source.id : d.source;
+      const tid = typeof d.target === 'object' ? d.target.id : d.target;
+      return (visibleNodes.has(sid) && visibleNodes.has(tid)) ? 1 : 0.03;
+    });
+
+  // Update legend with domain info
+  if (!isAll) {
+    const types = DOMAIN_MAP[domain]?.types || [];
+    const legend = document.getElementById('legend');
+    legend.innerHTML = `<div class="legend-item" style="color:#aaa">${domain.charAt(0).toUpperCase() + domain.slice(1)}: ${domainCount} entities (${types.join(', ')})</div>`;
+  } else {
+    updateLegend(currentColorMode);
   }
 }
 
