@@ -1,0 +1,5201 @@
+{
+  "bill_clinton": {
+    "qid": "Q1124",
+    "properties": {
+      "father": [
+        "William Jefferson Blythe Jr."
+      ],
+      "mother": [
+        "Virginia Clinton Kelley"
+      ],
+      "spouse": [
+        "Hillary Clinton"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "President of the United States",
+        "President-elect of the United States",
+        "Governor of Arkansas",
+        "Attorney General of Arkansas"
+      ],
+      "child": [
+        "Chelsea Clinton"
+      ],
+      "educated_at": [
+        "University College, Oxford",
+        "Walsh School of Foreign Service",
+        "Yale Law School",
+        "Hot Springs High School"
+      ],
+      "occupation": [
+        "writer",
+        "teacher",
+        "lawyer",
+        "politician",
+        "governor",
+        "jurist",
+        "diplomat",
+        "statesperson",
+        "saxophonist",
+        "autobiographer"
+      ],
+      "employer": [
+        "United Nations",
+        "University of Arkansas"
+      ],
+      "isni": [
+        "0000000120967620"
+      ],
+      "viaf": [
+        "102338519"
+      ],
+      "gnd": [
+        "119063395"
+      ],
+      "loc_authority": [
+        "n82029644"
+      ],
+      "imdb": [
+        "nm0001051"
+      ],
+      "member_of": [
+        "Trilateral Commission",
+        "American Academy of Arts and Sciences",
+        "Phi Beta Kappa Society",
+        "French-American Foundation"
+      ],
+      "residence": [
+        "President William Jefferson Clinton Birthplace Home National Historic Site",
+        "Chappaqua",
+        "Clinton House",
+        "Bill Clinton Boyhood Home",
+        "Boyhood Home of Bill Clinton"
+      ],
+      "date_of_birth": [
+        "1946-08-19T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0157m"
+      ],
+      "sibling": [
+        "Roger Clinton Jr.",
+        "Leon Ritzenthaler"
+      ]
+    }
+  },
+  "bill_gates": {
+    "qid": "Q5284",
+    "properties": {
+      "father": [
+        "Bill Gates Sr."
+      ],
+      "mother": [
+        "Mary Maxwell Gates"
+      ],
+      "spouse": [
+        "Melinda Gates"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "chief executive officer"
+      ],
+      "child": [
+        "Jennifer Katherine Gates",
+        "Phoebe Adele Gates",
+        "Rory John Gates"
+      ],
+      "educated_at": [
+        "Harvard College",
+        "Lakeside School"
+      ],
+      "occupation": [
+        "computer scientist",
+        "entrepreneur",
+        "investor",
+        "programmer"
+      ],
+      "employer": [
+        "Gates Foundation"
+      ],
+      "isni": [
+        "0000000109296053"
+      ],
+      "viaf": [
+        "102370574"
+      ],
+      "gnd": [
+        "119081199"
+      ],
+      "loc_authority": [
+        "n91008414"
+      ],
+      "imdb": [
+        "nm0309540"
+      ],
+      "member_of": [
+        "American Academy of Arts and Sciences",
+        "Chinese Academy of Engineering",
+        "National Academy of Engineering"
+      ],
+      "residence": [
+        "Bill Gates's house"
+      ],
+      "date_of_birth": [
+        "1955-10-28T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/017nt"
+      ],
+      "sibling": [
+        "Kristianne Gates",
+        "Libby Gates MacPhee"
+      ]
+    }
+  },
+  "alberto_gonzales": {
+    "qid": "Q202350",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "United States Attorney General",
+        "White House Counsel"
+      ],
+      "educated_at": [
+        "Harvard Law School",
+        "Rice University",
+        "MacArthur High School"
+      ],
+      "occupation": [
+        "judge",
+        "lawyer",
+        "politician"
+      ],
+      "employer": [
+        "Texas Tech University",
+        "University of Houston"
+      ],
+      "isni": [
+        "0000000114748333"
+      ],
+      "viaf": [
+        "26396959"
+      ],
+      "gnd": [
+        "132473062"
+      ],
+      "loc_authority": [
+        "n99046122"
+      ],
+      "date_of_birth": [
+        "1955-08-04T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/049006"
+      ]
+    }
+  },
+  "barclays": {
+    "qid": "Q245343",
+    "properties": {
+      "country": [
+        "United Kingdom"
+      ],
+      "headquarters": [
+        "London",
+        "One Churchill Place"
+      ],
+      "ceo": [
+        "Jes Staley"
+      ],
+      "isni": [
+        "0000000115338731"
+      ],
+      "viaf": [
+        "146326270"
+      ],
+      "gnd": [
+        "43587-9"
+      ],
+      "loc_authority": [
+        "n50065254"
+      ],
+      "subsidiary": [
+        "Barclays Bank",
+        "Barclays Bank PLC  France"
+      ],
+      "industry": [
+        "economics of banking",
+        "financial services",
+        "financial service activities, except insurance and pension funding",
+        "financial sector"
+      ],
+      "member_of": [
+        "Net-Zero Banking Alliance"
+      ],
+      "inception": [
+        "1690-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/05t8c5"
+      ]
+    }
+  },
+  "bill_richardson": {
+    "qid": "Q311782",
+    "properties": {
+      "father": [
+        "William Blaney Richardson"
+      ],
+      "mother": [
+        "Maria Luisa López-Collada Márquez"
+      ],
+      "spouse": [
+        "Barbara Richardson"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "United States Secretary of Energy",
+        "United States Ambassador to the United Nations",
+        "member of the United States House of Representatives",
+        "Governor of New Mexico"
+      ],
+      "educated_at": [
+        "Tufts University",
+        "The Fletcher School of Law and Diplomacy",
+        "Middlesex School"
+      ],
+      "occupation": [
+        "writer",
+        "politician",
+        "governor",
+        "diplomat",
+        "baseball player",
+        "business consultant"
+      ],
+      "employer": [
+        "Harvard University",
+        "United States Department of State",
+        "F. Bradford Morse",
+        "United States Senate Committee on Foreign Relations"
+      ],
+      "isni": [
+        "0000000114883869"
+      ],
+      "viaf": [
+        "34064252"
+      ],
+      "gnd": [
+        "133848388"
+      ],
+      "loc_authority": [
+        "no97050046"
+      ],
+      "imdb": [
+        "nm1807680"
+      ],
+      "date_of_birth": [
+        "1947-11-15T00:00:00Z"
+      ],
+      "date_of_death": [
+        "2023-09-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/020z31"
+      ]
+    }
+  },
+  "brett_ratner": {
+    "qid": "Q319204",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "New York University Tisch School of the Arts",
+        "Miami Beach Senior High School"
+      ],
+      "occupation": [
+        "screenwriter",
+        "film director",
+        "film producer"
+      ],
+      "isni": [
+        "0000000121027489"
+      ],
+      "viaf": [
+        "84321188"
+      ],
+      "gnd": [
+        "137627688"
+      ],
+      "loc_authority": [
+        "no99012176"
+      ],
+      "imdb": [
+        "nm0711840"
+      ],
+      "partner": [
+        "Alina Pușcău"
+      ],
+      "date_of_birth": [
+        "1969-03-28T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0162c8"
+      ]
+    }
+  },
+  "adam_back": {
+    "qid": "Q348671",
+    "properties": {
+      "citizenship": [
+        "United Kingdom"
+      ],
+      "educated_at": [
+        "University of Exeter"
+      ],
+      "occupation": [
+        "businessperson",
+        "cypherpunk",
+        "cryptographer"
+      ],
+      "employer": [
+        "Blockstream"
+      ],
+      "residence": [
+        "Sliema"
+      ],
+      "date_of_birth": [
+        "1970-07-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/02q93bn"
+      ]
+    }
+  },
+  "bank_of_america": {
+    "qid": "Q487907",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "founded_by": [
+        "Amadeo Giannini"
+      ],
+      "owned_by": [
+        "Berkshire Hathaway",
+        "BlackRock",
+        "The Vanguard Group"
+      ],
+      "headquarters": [
+        "Charlotte"
+      ],
+      "ceo": [
+        "Brian Moynihan"
+      ],
+      "isni": [
+        "0000000103736759"
+      ],
+      "viaf": [
+        "155048466"
+      ],
+      "gnd": [
+        "19010-X"
+      ],
+      "loc_authority": [
+        "n80026791"
+      ],
+      "subsidiary": [
+        "Merrill",
+        "Bank of America Merrill Lynch",
+        "Endeavour Foundation",
+        "1st Franklin Financial",
+        "Incapital",
+        "Seafirst Bank"
+      ],
+      "industry": [
+        "financial services",
+        "International Standard Industrial Classification",
+        "financial sector"
+      ],
+      "member_of": [
+        "World Wide Web Consortium",
+        "FIDO Alliance",
+        "Net-Zero Banking Alliance"
+      ],
+      "inception": [
+        "1998-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01yx7f"
+      ]
+    }
+  },
+  "apollo": {
+    "qid": "Q619121",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "founded_by": [
+        "Leon Black",
+        "Josh Harris",
+        "Antony Ressler",
+        "Marc Rowan"
+      ],
+      "headquarters": [
+        "Solow Building"
+      ],
+      "ceo": [
+        "Leon Black",
+        "Marc Rowan"
+      ],
+      "isni": [
+        "0000000405779535"
+      ],
+      "viaf": [
+        "160822814"
+      ],
+      "subsidiary": [
+        "CEVA Logistics"
+      ],
+      "industry": [
+        "asset management"
+      ],
+      "inception": [
+        "1990-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0gp95l"
+      ]
+    }
+  },
+  "bill_barr": {
+    "qid": "Q723917",
+    "properties": {
+      "father": [
+        "Donald Barr"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "United States Attorney General",
+        "United States Deputy Attorney General"
+      ],
+      "educated_at": [
+        "Columbia University",
+        "George Washington University",
+        "Horace Mann School"
+      ],
+      "occupation": [
+        "lawyer",
+        "politician",
+        "political scientist"
+      ],
+      "employer": [
+        "Central Intelligence Agency",
+        "Verizon Communications",
+        "Executive Office of the President of the United States",
+        "United States Department of Justice",
+        "Kirkland & Ellis",
+        "GTE",
+        "Pillsbury Winthrop Shaw Pittman"
+      ],
+      "isni": [
+        "0000000050325250"
+      ],
+      "viaf": [
+        "2034913"
+      ],
+      "gnd": [
+        "1178147312"
+      ],
+      "loc_authority": [
+        "no92015764"
+      ],
+      "date_of_birth": [
+        "1950-05-23T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/027mccx"
+      ]
+    }
+  },
+  "bear_stearns": {
+    "qid": "Q813018",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "headquarters": [
+        "New York City"
+      ],
+      "ceo": [
+        "Alan Schwartz"
+      ],
+      "viaf": [
+        "147604903"
+      ],
+      "loc_authority": [
+        "nr94015164"
+      ],
+      "industry": [
+        "other monetary intermediation"
+      ],
+      "inception": [
+        "1923-01-01T00:00:00Z"
+      ],
+      "dissolved": [
+        "2008-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/03qv4n"
+      ],
+      "parent_org": [
+        "JPMorgan Chase"
+      ]
+    }
+  },
+  "brock_pierce": {
+    "qid": "Q2925904",
+    "properties": {
+      "spouse": [
+        "Crystal Rose Pierce"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "occupation": [
+        "businessperson",
+        "film actor"
+      ],
+      "employer": [
+        "Bitcoin Foundation"
+      ],
+      "isni": [
+        "0000000119831849"
+      ],
+      "viaf": [
+        "170821394"
+      ],
+      "loc_authority": [
+        "no2011069224"
+      ],
+      "imdb": [
+        "nm0682302"
+      ],
+      "residence": [
+        "San Juan"
+      ],
+      "date_of_birth": [
+        "1980-11-14T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0f0vkm"
+      ]
+    }
+  },
+  "cantor_fitzgerald": {
+    "qid": "Q2936874",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "headquarters": [
+        "New York City"
+      ],
+      "ceo": [
+        "Howard Lutnick"
+      ],
+      "viaf": [
+        "143437854"
+      ],
+      "loc_authority": [
+        "n2002109551"
+      ],
+      "industry": [
+        "financial services"
+      ],
+      "inception": [
+        "1945-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01yd7"
+      ]
+    }
+  },
+  "casey_wasserman": {
+    "qid": "Q5048600",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "University of California, Los Angeles",
+        "Brentwood School"
+      ],
+      "occupation": [
+        "investment banker"
+      ],
+      "date_of_birth": [
+        "1974-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0bbp_y"
+      ]
+    }
+  },
+  "acosta": {
+    "qid": "Q7273452",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "dean",
+        "United States Secretary of Labor",
+        "United States Attorney for the Southern District of Florida",
+        "Member of the National Labor Relations Board"
+      ],
+      "educated_at": [
+        "Harvard Law School",
+        "Harvard College"
+      ],
+      "occupation": [
+        "lawyer",
+        "politician"
+      ],
+      "employer": [
+        "Florida International University"
+      ],
+      "viaf": [
+        "7953155708726122580004"
+      ],
+      "loc_authority": [
+        "no2019055716"
+      ],
+      "date_of_birth": [
+        "1969-01-16T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/03mb1hj"
+      ]
+    }
+  },
+  "blockstream": {
+    "qid": "Q24909896",
+    "properties": {
+      "country": [
+        "Canada"
+      ],
+      "founded_by": [
+        "Adam Back",
+        "Pieter Wuille",
+        "Gregory Maxwell"
+      ],
+      "headquarters": [
+        "Victoria"
+      ],
+      "industry": [
+        "cryptocurrency"
+      ],
+      "member_of": [
+        "World Wide Web Consortium"
+      ],
+      "inception": [
+        "2014-01-01T00:00:00Z"
+      ]
+    }
+  },
+  "blockchain_capital": {
+    "qid": "Q30588516",
+    "properties": {
+      "inception": [
+        "2013-01-01T00:00:00Z"
+      ]
+    }
+  },
+  "brunel": {
+    "qid": "Q74631975",
+    "properties": {
+      "citizenship": [
+        "France"
+      ],
+      "position_held": [
+        "président-directeur général"
+      ],
+      "occupation": [
+        "entrepreneur",
+        "model agent"
+      ],
+      "employer": [
+        "Karin Models"
+      ],
+      "cause_of_death": [
+        "hanging to death"
+      ],
+      "date_of_birth": [
+        "1946-09-18T00:00:00Z"
+      ],
+      "date_of_death": [
+        "2022-02-19T00:00:00Z"
+      ]
+    }
+  },
+  "andrew_farkas": {
+    "qid": "Q137441763",
+    "properties": {
+      "occupation": [
+        "businessperson",
+        "banker"
+      ],
+      "date_of_birth": [
+        "1960-06-17T00:00:00Z"
+      ]
+    }
+  },
+  "deutsche_bank": {
+    "qid": "Q66048",
+    "properties": {
+      "country": [
+        "Germany"
+      ],
+      "founded_by": [
+        "Ludwig Bamberger"
+      ],
+      "owned_by": [
+        "BlackRock",
+        "Cerberus Capital Management",
+        "Capital Group Companies"
+      ],
+      "headquarters": [
+        "Frankfurt"
+      ],
+      "ceo": [
+        "Christian Sewing"
+      ],
+      "isni": [
+        "0000000121569691",
+        "000000040402347X"
+      ],
+      "viaf": [
+        "130112035"
+      ],
+      "gnd": [
+        "2002604-3"
+      ],
+      "loc_authority": [
+        "n50005103"
+      ],
+      "subsidiary": [
+        "Deutsche Postbank",
+        "Deutsche Bank Polska",
+        "Deutsche Bank",
+        "Deutsche Beamten-Zentralbank",
+        "Aktiengesellschaft für Vermögensverwertung",
+        "Deutsche Bank Trust Company Americas"
+      ],
+      "industry": [
+        "financial services",
+        "financial service activities, except insurance and pension funding",
+        "other monetary intermediation",
+        "financial sector"
+      ],
+      "member_of": [
+        "Federation of German Food and Drink Industries",
+        "Afrika-Verein",
+        "American Chamber of Commerce in Germany",
+        "European Movement Germany",
+        "Asien-Pazifik-Ausschuss der Deutschen Wirtschaft",
+        "Atlantik-Brücke",
+        "Linux Foundation",
+        "Cologne Institute for Economic Research",
+        "Cash Group",
+        "Bundesnetzwerk Bürgerschaftliches Engagement",
+        "bitkom",
+        "German Solar Industry Association",
+        "Bundesverband WindEnergie",
+        "Bundesverband der Deutschen Entsorgungs-, Wasser- und Rohstoffwirtschaft",
+        "Federal Association of German Banks",
+        "diversity charter",
+        "Deutsche Gesellschaft für Personalführung",
+        "Deutsche Schutzvereinigung für Wertpapierbesitz",
+        "Q1204710",
+        "Deutscher Dialogmarketing Verband",
+        "DIRK e.V.",
+        "Q1205091",
+        "Deutsches Aktieninstitut",
+        "Ostausschuss der Deutschen Wirtschaft",
+        "Förderkreis Deutsches Heer",
+        "Gesellschaft für Datenschutz und Datensicherheit",
+        "Association of German Pfandbrief Banks",
+        "Initiative Finanzstandort Deutschland",
+        "Stiftung Marktwirtschaft",
+        "Nah- und Mittelost-Verein",
+        "Stiftung Bildungspakt Bayern",
+        "German Asia-Pacific Business Association",
+        "British Chamber of Commerce in Germany",
+        "Economic Council Germany",
+        "Latin America Association",
+        "German Startups Association",
+        "Aspen Institute Germany",
+        "Ostdeutscher Bankenverband",
+        "Association for Financial Markets in Europe",
+        "Verein für Umweltmanagement und Nachhaltigkeit in Finanzinstituten",
+        "ICC Germany",
+        "Grüner Wirtschaftsdialog e. V.",
+        "Bayerischer Bankenverband",
+        "Q105978661",
+        "Finanzplatz München Initiative",
+        "Future Energies Forum",
+        "Wirtschaftsforum der SPD",
+        "Q111512539",
+        "Q111647250",
+        "Q117312734",
+        "Net-Zero Banking Alliance",
+        "Q131883053",
+        "Q131895560",
+        "Q131898524",
+        "Q136548731",
+        "Q136548757",
+        "Wirtschaftskoalition Daten & Digitales",
+        "Q136548953"
+      ],
+      "inception": [
+        "1870-03-10T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/02lc8s"
+      ]
+    }
+  },
+  "ehud_barak": {
+    "qid": "Q125731",
+    "properties": {
+      "spouse": [
+        "Nava Barak",
+        "Nili Priel"
+      ],
+      "citizenship": [
+        "Israel"
+      ],
+      "position_held": [
+        "Prime Minister of Israel",
+        "Chief of the General Staff",
+        "Knesset member",
+        "Deputy Prime Minister of Israel",
+        "Minister of Defense of Israel",
+        "Minister of Foreign Affairs, Israel",
+        "Minister of Tourism",
+        "Minister of Agriculture and Rural Development",
+        "Head of Military Intelligence of Israel"
+      ],
+      "educated_at": [
+        "Stanford University",
+        "Hebrew University of Jerusalem"
+      ],
+      "occupation": [
+        "politician",
+        "military officer",
+        "diplomat"
+      ],
+      "isni": [
+        "0000000081688134"
+      ],
+      "viaf": [
+        "149149294073580520052"
+      ],
+      "gnd": [
+        "122143442"
+      ],
+      "loc_authority": [
+        "n98096884"
+      ],
+      "imdb": [
+        "nm1383992"
+      ],
+      "date_of_birth": [
+        "1942-02-12T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/016hk4"
+      ]
+    }
+  },
+  "david_copperfield": {
+    "qid": "Q139637",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "Fordham University",
+        "Metuchen High School"
+      ],
+      "occupation": [
+        "actor",
+        "writer",
+        "stunt performer",
+        "illusionist",
+        "television actor",
+        "film actor",
+        "hypnotist"
+      ],
+      "employer": [
+        "New York University"
+      ],
+      "isni": [
+        "0000000110287365"
+      ],
+      "viaf": [
+        "67555852"
+      ],
+      "gnd": [
+        "129808938"
+      ],
+      "loc_authority": [
+        "n95055679"
+      ],
+      "imdb": [
+        "nm0004518"
+      ],
+      "partner": [
+        "Claudia Schiffer"
+      ],
+      "residence": [
+        "Las Vegas"
+      ],
+      "date_of_birth": [
+        "1956-09-16T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01ppv3"
+      ],
+      "pseudonym": [
+        "David Copperfield"
+      ]
+    }
+  },
+  "dershowitz": {
+    "qid": "Q183058",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "child": [
+        "Ella Dershowitz"
+      ],
+      "educated_at": [
+        "Brooklyn College",
+        "Yale Law School",
+        "Marsha Stern Talmudical Academy"
+      ],
+      "occupation": [
+        "screenwriter",
+        "lawyer",
+        "university teacher",
+        "art collector"
+      ],
+      "employer": [
+        "Harvard University"
+      ],
+      "isni": [
+        "0000000108559878"
+      ],
+      "viaf": [
+        "24646085"
+      ],
+      "gnd": [
+        "119065959"
+      ],
+      "loc_authority": [
+        "n81139399"
+      ],
+      "imdb": [
+        "nm0220641"
+      ],
+      "date_of_birth": [
+        "1938-09-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/097qj4"
+      ],
+      "email": [
+        "mailto:alder@law.harvard.edu"
+      ]
+    }
+  },
+  "goldman_sachs": {
+    "qid": "Q193326",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "founded_by": [
+        "Marcus Goldman",
+        "Samuel Sachs"
+      ],
+      "owned_by": [
+        "BlackRock",
+        "The Vanguard Group",
+        "State Street Corporation"
+      ],
+      "headquarters": [
+        "New York City",
+        "200 West Street"
+      ],
+      "ceo": [
+        "David M. Solomon"
+      ],
+      "isni": [
+        "0000000094185536",
+        "0000000121644655",
+        "000000040443827X",
+        "0000000406039627"
+      ],
+      "viaf": [
+        "136070081"
+      ],
+      "gnd": [
+        "5291369-7"
+      ],
+      "loc_authority": [
+        "n82161448"
+      ],
+      "industry": [
+        "financial services",
+        "International Standard Industrial Classification",
+        "financial service activities, except insurance and pension funding",
+        "financial sector"
+      ],
+      "member_of": [
+        "Linux Foundation",
+        "Initiative Finanzstandort Deutschland",
+        "FIDO Alliance",
+        "Net-Zero Banking Alliance"
+      ],
+      "inception": [
+        "1869-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01xdn1"
+      ]
+    }
+  },
+  "chelsea_clinton": {
+    "qid": "Q229671",
+    "properties": {
+      "father": [
+        "Bill Clinton"
+      ],
+      "mother": [
+        "Hillary Clinton"
+      ],
+      "spouse": [
+        "Marc Mezvinsky"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "child": [
+        "Charlotte Mezvinsky",
+        "Aidan Mezvinsky",
+        "Jasper Mezvinsky"
+      ],
+      "educated_at": [
+        "Stanford University",
+        "University College, Oxford",
+        "Robert F. Wagner Graduate School of Public Service",
+        "Sidwell Friends School",
+        "Columbia University Mailman School of Public Health",
+        "Mann Arts and Science Magnet Middle School"
+      ],
+      "occupation": [
+        "writer",
+        "businessperson",
+        "entrepreneur",
+        "historian",
+        "political scientist",
+        "university teacher",
+        "journalist",
+        "film producer",
+        "children's writer"
+      ],
+      "employer": [
+        "NBC",
+        "New York University",
+        "McKinsey & Company",
+        "Clinton Foundation",
+        "Avenue Capital Group",
+        "Columbia University Mailman School of Public Health",
+        "Expedia Group"
+      ],
+      "isni": [
+        "0000000354258413"
+      ],
+      "viaf": [
+        "26295145"
+      ],
+      "gnd": [
+        "1160306389"
+      ],
+      "loc_authority": [
+        "n94073291"
+      ],
+      "imdb": [
+        "nm0166911"
+      ],
+      "residence": [
+        "Flatiron District"
+      ],
+      "date_of_birth": [
+        "1980-02-27T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01chwz"
+      ]
+    }
+  },
+  "elon_musk": {
+    "qid": "Q317521",
+    "properties": {
+      "father": [
+        "Errol Musk"
+      ],
+      "mother": [
+        "Maye Musk"
+      ],
+      "spouse": [
+        "Talulah Riley",
+        "Justine Musk"
+      ],
+      "citizenship": [
+        "Canada",
+        "United States",
+        "South Africa"
+      ],
+      "position_held": [
+        "chairperson",
+        "chief executive officer",
+        "Senior Advisor to the President of the United States",
+        "co-president"
+      ],
+      "child": [
+        "X Æ A-Ⅻ Musk",
+        "Griffin Musk",
+        "Kai Musk",
+        "Vivian Wilson",
+        "Saxon Musk",
+        "Damian Musk",
+        "Nevada Musk",
+        "Exa Musk",
+        "Tau Musk",
+        "Strider Musk",
+        "Azure Musk",
+        "Seldon Musk",
+        "Arcadia Musk"
+      ],
+      "educated_at": [
+        "Stanford University",
+        "University of Pennsylvania",
+        "University of Pretoria",
+        "The Wharton School",
+        "Queen's University",
+        "Pretoria Boys High School",
+        "Waterkloof House Preparatory School",
+        "Bryanston High School",
+        "Smith School of Business"
+      ],
+      "occupation": [
+        "engineer",
+        "politician",
+        "entrepreneur",
+        "inventor",
+        "civil servant",
+        "investor",
+        "programmer",
+        "dub actor",
+        "technology entrepreneur"
+      ],
+      "employer": [
+        "SpaceX",
+        "Tesla, Inc.",
+        "PayPal",
+        "SolarCity",
+        "OpenAI",
+        "The Boring Company",
+        "Neuralink",
+        "Department of Government Efficiency"
+      ],
+      "isni": [
+        "0000000426582862"
+      ],
+      "viaf": [
+        "306339060"
+      ],
+      "gnd": [
+        "1062481119"
+      ],
+      "loc_authority": [
+        "n2014017754"
+      ],
+      "imdb": [
+        "nm1907769"
+      ],
+      "partner": [
+        "Grimes",
+        "Amber Heard",
+        "Natasha Bassett",
+        "Shivon Zilis"
+      ],
+      "member_of": [
+        "Royal Society",
+        "The Planetary Society",
+        "PayPal Mafia",
+        "Network of the Department of Government Efficiency"
+      ],
+      "residence": [
+        "Saskatchewan",
+        "Bel Air",
+        "Kingston",
+        "Boca Chica"
+      ],
+      "date_of_birth": [
+        "1971-06-28T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/03nzf1"
+      ],
+      "email": [
+        "mailto:elon@x.com"
+      ],
+      "sibling": [
+        "Kimbal Musk",
+        "Tosca Musk",
+        "Elliot Rush Musk",
+        "Alexandra Musk",
+        "Asha Rose Musk"
+      ]
+    }
+  },
+  "george_mitchell": {
+    "qid": "Q368920",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "United States senator",
+        "United States Special Envoy for Northern Ireland",
+        "http://www.wikidata.org/.well-known/genid/043fb09d954f54de95bdda6ba266d7e9"
+      ],
+      "educated_at": [
+        "Georgetown University Law Center",
+        "Bowdoin College"
+      ],
+      "occupation": [
+        "judge",
+        "screenwriter",
+        "lawyer",
+        "politician",
+        "entrepreneur",
+        "diplomat"
+      ],
+      "isni": [
+        "0000000110727316"
+      ],
+      "viaf": [
+        "79438803"
+      ],
+      "gnd": [
+        "120571234"
+      ],
+      "loc_authority": [
+        "n87856778"
+      ],
+      "imdb": [
+        "nm1586239"
+      ],
+      "member_of": [
+        "American Academy of Arts and Sciences"
+      ],
+      "date_of_birth": [
+        "1933-08-20T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/02c643"
+      ]
+    }
+  },
+  "credit_suisse": {
+    "qid": "Q372657",
+    "properties": {
+      "country": [
+        "Switzerland"
+      ],
+      "founded_by": [
+        "Alfred Escher"
+      ],
+      "headquarters": [
+        "Zurich"
+      ],
+      "ceo": [
+        "Tidjane Thiam",
+        "Thomas Gottstein"
+      ],
+      "isni": [
+        "0000000106737829",
+        "000000040487328X"
+      ],
+      "viaf": [
+        "154496717"
+      ],
+      "gnd": [
+        "10003624-7"
+      ],
+      "loc_authority": [
+        "n50017132"
+      ],
+      "industry": [
+        "economics of banking",
+        "financial services",
+        "financial sector"
+      ],
+      "member_of": [
+        "Forum Nachhaltige Geldanlagen",
+        "German-Swiss Chamber of Commerce"
+      ],
+      "inception": [
+        "1856-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/03g776"
+      ],
+      "parent_org": [
+        "UBS"
+      ]
+    }
+  },
+  "citibank": {
+    "qid": "Q857063",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "founded_by": [
+        "Samuel Osgood"
+      ],
+      "owned_by": [
+        "Citigroup"
+      ],
+      "headquarters": [
+        "New York City",
+        "Sioux Falls"
+      ],
+      "ceo": [
+        "Michael Corbat"
+      ],
+      "isni": [
+        "0000000405940771"
+      ],
+      "viaf": [
+        "138281743"
+      ],
+      "gnd": [
+        "6529572-9"
+      ],
+      "loc_authority": [
+        "n80030671"
+      ],
+      "subsidiary": [
+        "Financial Group Banamex",
+        "Citibank Canada",
+        "Citibank Berhad",
+        "CitiFX Pro",
+        "Citibank (China)",
+        "Citibank Singapore",
+        "Citibank Korea",
+        "Citibank Taiwan, Ltd.",
+        "Vidacos Nominees"
+      ],
+      "industry": [
+        "economics of banking",
+        "financial services",
+        "financial sector"
+      ],
+      "member_of": [
+        "Net-Zero Banking Alliance",
+        "Alpha-Omega"
+      ],
+      "inception": [
+        "1812-01-01T00:00:00Z",
+        "1865-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01hlzm"
+      ],
+      "parent_org": [
+        "Citigroup"
+      ]
+    }
+  },
+  "george_stephanopoulos": {
+    "qid": "Q1655924",
+    "properties": {
+      "spouse": [
+        "Ali Wentworth"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "White House Press Secretary",
+        "White House Communications Director",
+        "Senior Advisor to the President of the United States"
+      ],
+      "educated_at": [
+        "Columbia University",
+        "Balliol College"
+      ],
+      "occupation": [
+        "writer",
+        "politician",
+        "news presenter",
+        "journalist",
+        "political adviser",
+        "blogger"
+      ],
+      "isni": [
+        "0000000081242917"
+      ],
+      "viaf": [
+        "34618964"
+      ],
+      "gnd": [
+        "123051169"
+      ],
+      "loc_authority": [
+        "n94024387"
+      ],
+      "imdb": [
+        "nm0826888"
+      ],
+      "member_of": [
+        "Phi Beta Kappa Society"
+      ],
+      "date_of_birth": [
+        "1961-02-10T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/027j7l"
+      ]
+    }
+  },
+  "clinton_foundation": {
+    "qid": "Q1974620",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "founded_by": [
+        "Bill Clinton"
+      ],
+      "headquarters": [
+        "New York City"
+      ],
+      "isni": [
+        "0000000106491742",
+        "0000000418000148"
+      ],
+      "viaf": [
+        "159790750"
+      ],
+      "loc_authority": [
+        "no2003102297"
+      ],
+      "member_of": [
+        "Arkansas Nonprofit Alliance"
+      ],
+      "inception": [
+        "1997-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0fqw_s"
+      ]
+    }
+  },
+  "epstein": {
+    "qid": "Q2904131",
+    "properties": {
+      "father": [
+        "Seymour G. Epstein"
+      ],
+      "mother": [
+        "Pauline Epstein"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "chairperson"
+      ],
+      "educated_at": [
+        "Cooper Union",
+        "Courant Institute School of Mathematics, Computing, and Data Science",
+        "Lafayette High School"
+      ],
+      "occupation": [
+        "teacher",
+        "human trafficker",
+        "investment banker",
+        "philanthropist"
+      ],
+      "employer": [
+        "Bear Stearns",
+        "Jeffrey Epstein VI Foundation",
+        "Towers Financial Corporation"
+      ],
+      "place_of_burial": [
+        "Palm Beach Gardens"
+      ],
+      "viaf": [
+        "4498147665874060670008"
+      ],
+      "gnd": [
+        "119275476X"
+      ],
+      "loc_authority": [
+        "no2016132627"
+      ],
+      "imdb": [
+        "nm10830113"
+      ],
+      "partner": [
+        "Ghislaine Maxwell",
+        "Eva Andersson-Dubin"
+      ],
+      "member_of": [
+        "Trilateral Commission",
+        "Council on Foreign Relations",
+        "Institute of International Education"
+      ],
+      "cause_of_death": [
+        "hanging to death"
+      ],
+      "find_a_grave": [
+        "201992988"
+      ],
+      "residence": [
+        "Palm Beach",
+        "Sea Gate",
+        "Little Saint James",
+        "Herbert N. Straus House",
+        "Rancho de San Rafael"
+      ],
+      "date_of_birth": [
+        "1953-01-20T00:00:00Z"
+      ],
+      "date_of_death": [
+        "2019-08-10T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0fz196"
+      ],
+      "pseudonym": [
+        "Marius Robert Fortelni"
+      ],
+      "email": [
+        "mailto:jeevacation@gmail.com"
+      ],
+      "convicted_of": [
+        "sex trafficking"
+      ],
+      "sibling": [
+        "Mark Epstein"
+      ]
+    }
+  },
+  "dalton_school": {
+    "qid": "Q3508986",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "founded_by": [
+        "Helen Parkhurst"
+      ],
+      "isni": [
+        "0000000404247350"
+      ],
+      "loc_authority": [
+        "n85245636"
+      ],
+      "member_of": [
+        "New York State Association of Independent Schools"
+      ],
+      "inception": [
+        "1919-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/03jh1l"
+      ],
+      "geonames": [
+        "6329831"
+      ]
+    }
+  },
+  "donald_barr": {
+    "qid": "Q5294012",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "child": [
+        "William Barr"
+      ],
+      "educated_at": [
+        "Columbia University"
+      ],
+      "occupation": [
+        "head teacher",
+        "university teacher",
+        "novelist",
+        "science fiction writer"
+      ],
+      "employer": [
+        "Columbia University",
+        "Office of Strategic Services",
+        "Dalton School",
+        "Hackley School"
+      ],
+      "place_of_burial": [
+        "Flushing"
+      ],
+      "isni": [
+        "0000000110812238"
+      ],
+      "viaf": [
+        "108653872"
+      ],
+      "gnd": [
+        "104756792X"
+      ],
+      "loc_authority": [
+        "n50017484"
+      ],
+      "find_a_grave": [
+        "205908802"
+      ],
+      "date_of_birth": [
+        "1921-08-08T00:00:00Z"
+      ],
+      "date_of_death": [
+        "2004-02-05T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/06_w6r_"
+      ]
+    }
+  },
+  "glenn_dubin": {
+    "qid": "Q16189009",
+    "properties": {
+      "spouse": [
+        "Eva Andersson-Dubin"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "Stony Brook University"
+      ],
+      "occupation": [
+        "investor",
+        "financier"
+      ],
+      "date_of_birth": [
+        "1957-04-13T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0dlkym0"
+      ]
+    }
+  },
+  "geoffrey_berman": {
+    "qid": "Q47037424",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "United States Attorney for the Southern District of New York"
+      ],
+      "educated_at": [
+        "University of Pennsylvania",
+        "Stanford Law School"
+      ],
+      "occupation": [
+        "lawyer"
+      ],
+      "viaf": [
+        "4374159337568513150005"
+      ],
+      "gnd": [
+        "1212319621"
+      ],
+      "loc_authority": [
+        "n2022030962"
+      ],
+      "date_of_birth": [
+        "1959-09-12T00:00:00Z"
+      ]
+    }
+  },
+  "financial_trust": {
+    "qid": "Q65356059",
+    "properties": {
+      "country": [
+        "United States Virgin Islands"
+      ],
+      "founded_by": [
+        "Jeffrey Epstein"
+      ],
+      "headquarters": [
+        "Saint Thomas"
+      ]
+    }
+  },
+  "eva_dubin": {
+    "qid": "Q67024532",
+    "properties": {
+      "spouse": [
+        "Glenn Dubin"
+      ],
+      "citizenship": [
+        "Sweden"
+      ],
+      "educated_at": [
+        "Karolinska Institutet"
+      ],
+      "occupation": [
+        "physician",
+        "model",
+        "beauty pageant contestant"
+      ],
+      "viaf": [
+        "1814153596624751900000"
+      ],
+      "gnd": [
+        "1165839032"
+      ],
+      "imdb": [
+        "nm1491467"
+      ],
+      "partner": [
+        "Jeffrey Epstein"
+      ],
+      "date_of_birth": [
+        "1961-01-01T00:00:00Z"
+      ]
+    }
+  },
+  "gordon_brown": {
+    "qid": "Q10648",
+    "properties": {
+      "father": [
+        "Rev. John Ebenezer Brown"
+      ],
+      "mother": [
+        "Bunty Souter"
+      ],
+      "spouse": [
+        "Sarah Brown"
+      ],
+      "citizenship": [
+        "United Kingdom"
+      ],
+      "position_held": [
+        "Prime Minister of the United Kingdom",
+        "Chancellor of the Exchequer",
+        "First Lord of the Treasury",
+        "Minister for the Civil Service",
+        "Leader of the Labour Party",
+        "Shadow Chancellor of the Exchequer",
+        "Shadow Secretary of State for Business and Trade",
+        "Shadow Chief Secretary to the Treasury",
+        "Member of the Privy Council of the United Kingdom",
+        "member of the 55th Parliament of the United Kingdom",
+        "member of the 54th Parliament of the United Kingdom",
+        "member of the 53rd Parliament of the United Kingdom",
+        "member of the 52nd Parliament of the United Kingdom",
+        "member of the 49th Parliament of the United Kingdom",
+        "member of the 50th Parliament of the United Kingdom",
+        "member of the 51st Parliament of the United Kingdom"
+      ],
+      "child": [
+        "John Macaulay Brown",
+        "James Fraser Brown",
+        "Jennifer Jane Brown"
+      ],
+      "educated_at": [
+        "University of Edinburgh",
+        "Kirkcaldy High School"
+      ],
+      "occupation": [
+        "politician",
+        "historian",
+        "biographer",
+        "university teacher",
+        "journalist",
+        "autobiographer"
+      ],
+      "employer": [
+        "United Nations",
+        "Glasgow Caledonian University",
+        "The Open University"
+      ],
+      "isni": [
+        "0000000121241426"
+      ],
+      "viaf": [
+        "23234472"
+      ],
+      "gnd": [
+        "129993247"
+      ],
+      "loc_authority": [
+        "n83301868"
+      ],
+      "imdb": [
+        "nm1757623"
+      ],
+      "residence": [
+        "10 Downing Street",
+        "North Queensferry"
+      ],
+      "date_of_birth": [
+        "1951-02-20T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/03f77"
+      ],
+      "sibling": [
+        "Andrew Brown"
+      ]
+    }
+  },
+  "harvard_university": {
+    "qid": "Q13371",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "founded_by": [
+        "Massachusetts General Court"
+      ],
+      "headquarters": [
+        "Cambridge"
+      ],
+      "isni": [
+        "000000041936754X"
+      ],
+      "viaf": [
+        "128987800"
+      ],
+      "gnd": [
+        "2012974-9"
+      ],
+      "loc_authority": [
+        "n78096930"
+      ],
+      "imdb": [
+        "co0016545"
+      ],
+      "subsidiary": [
+        "Harvard Medical School",
+        "Harvard Law School",
+        "Harvard Business School",
+        "John F. Kennedy School of Government",
+        "Center for Hellenic Studies",
+        "Harvard–Smithsonian Center for Astrophysics",
+        "Dumbarton Oaks",
+        "Harvard University Press",
+        "Harvard Museum of Natural History",
+        "Harvard Graduate School of Design",
+        "Harvard University Center for Italian Renaissance Studies",
+        "Harvard Art Museums",
+        "Fairbank Center for Chinese Studies",
+        "Harvard University Faculty of Arts and Sciences",
+        "Harvard Management Company",
+        "Phillip T. and Susan M. Ragon Institute",
+        "W. E. B. Du Bois Research Institute",
+        "Harvard Extension School",
+        "Harvard Division of Continuing Education",
+        "Edmond & Lily Safra Center for Ethics",
+        "Sleep and Human Health Institute",
+        "Center for Systems Biology",
+        "Berenson Allen Center for Noninvasive Brain Stimulation",
+        "Center for Vascular Biology Research",
+        "FAS Center for Systems Biology, Harvard University",
+        "Society of Fellows, Harvard University",
+        "Weatherhead Center for International Affairs, Harvard University",
+        "Harvard Transdisciplinary Research in Energetics and Cancer Center, Harvard University",
+        "Global Health and Health Policy, Harvard University",
+        "Mahindra Humanities Center, Harvard University",
+        "Center for Arabic Study Abroad, Harvard University Center for Middle Eastern Studies",
+        "Davis Center for Russian and Eurasian Studies, Harvard University",
+        "Harvard Athletic Association",
+        "Berenson Library",
+        "Harvard Museums of Science and Culture"
+      ],
+      "industry": [
+        "higher education"
+      ],
+      "member_of": [
+        "Ivy League",
+        "Q118398",
+        "Scholarly Publishing and Academic Resources Coalition",
+        "Association of American Universities",
+        "American Council on Education",
+        "Association of American Colleges and Universities",
+        "Association of Research Libraries",
+        "Center for Research Libraries",
+        "Coalition for Networked Information",
+        "Digital Library Federation",
+        "ORCID, Inc.",
+        "IIIF Consortium",
+        "Coalition of Open Access Policy Institutions",
+        "The Research Collections And Preservation Consortium",
+        "Consortium of Social Science Associations",
+        "Council on Governmental Relations",
+        "Northeast University Semiconductor Network",
+        "Massachusetts Nonprofit Network",
+        "Higher Education Leadership Initiative for Open Scholarship",
+        "National Humanities Alliance"
+      ],
+      "inception": [
+        "1636-09-08T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/03ksy"
+      ],
+      "parent_org": [
+        "President and Fellows of Harvard College"
+      ],
+      "geonames": [
+        "4938981"
+      ]
+    }
+  },
+  "kevin_spacey": {
+    "qid": "Q25144",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "Juilliard School",
+        "Canoga Park High School",
+        "Chatsworth High School",
+        "Los Angeles Valley College"
+      ],
+      "occupation": [
+        "screenwriter",
+        "actor",
+        "television producer",
+        "character actor",
+        "stage actor",
+        "voice actor",
+        "film director",
+        "film producer",
+        "theatrical director",
+        "director",
+        "television actor",
+        "film actor"
+      ],
+      "isni": [
+        "0000000121367221"
+      ],
+      "viaf": [
+        "64203431"
+      ],
+      "gnd": [
+        "124738931"
+      ],
+      "loc_authority": [
+        "no93007294"
+      ],
+      "imdb": [
+        "nm0000228"
+      ],
+      "residence": [
+        "Baltimore"
+      ],
+      "date_of_birth": [
+        "1959-07-26T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/048lv"
+      ]
+    }
+  },
+  "james_comey": {
+    "qid": "Q167607",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "Director of the Federal Bureau of Investigation",
+        "United States Deputy Attorney General",
+        "United States Attorney for the Southern District of New York"
+      ],
+      "child": [
+        "Maurene Comey"
+      ],
+      "educated_at": [
+        "College of William & Mary",
+        "University of Chicago Law School",
+        "Northern Highlands Regional High School"
+      ],
+      "occupation": [
+        "lawyer",
+        "politician",
+        "jurist",
+        "university teacher"
+      ],
+      "employer": [
+        "University of Richmond"
+      ],
+      "isni": [
+        "0000000048220337"
+      ],
+      "viaf": [
+        "16938946"
+      ],
+      "gnd": [
+        "1154658813"
+      ],
+      "loc_authority": [
+        "no2004077346"
+      ],
+      "imdb": [
+        "nm2202811"
+      ],
+      "date_of_birth": [
+        "1960-12-14T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/06r04p"
+      ]
+    }
+  },
+  "hsbc": {
+    "qid": "Q190464",
+    "properties": {
+      "country": [
+        "United Kingdom"
+      ],
+      "founded_by": [
+        "Thomas Sutherland"
+      ],
+      "headquarters": [
+        "8 Canada Square"
+      ],
+      "ceo": [
+        "Stuart Gulliver"
+      ],
+      "isni": [
+        "000000010204374X"
+      ],
+      "viaf": [
+        "152107418"
+      ],
+      "gnd": [
+        "5166170-6"
+      ],
+      "loc_authority": [
+        "no2001061417"
+      ],
+      "subsidiary": [
+        "HSBC Bank Canada",
+        "The Hongkong and Shanghai Banking Corporation Limited",
+        "HSBC Trinkaus & Burkhardt",
+        "HSBC Bank Australia",
+        "HSBC Bank (China)",
+        "HSBC Turkey",
+        "HSBC Private Bank",
+        "Hang Seng Bank",
+        "HSBC Continental Europe",
+        "HSBC Bank",
+        "HSBC Bank Argentina",
+        "HSBC Bank Chile",
+        "HSBC Armenia",
+        "HSBC Bank Bermuda",
+        "HSBC Bank Egypt",
+        "HSBC Bank Malta",
+        "HSBC Continental Europe, Poland",
+        "HSBC Bank Malaysia",
+        "HSBC Bank Middle East",
+        "HSBC Bank USA",
+        "HSBC Finance",
+        "HSBC Life",
+        "HSBC Mexico",
+        "HSBC North America Holdings",
+        "HSBC_Bank Uruguay"
+      ],
+      "industry": [
+        "insurance",
+        "economics of banking",
+        "financial services",
+        "financial sector"
+      ],
+      "member_of": [
+        "Net-Zero Banking Alliance"
+      ],
+      "inception": [
+        "1865-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01vq1f"
+      ]
+    }
+  },
+  "jp_morgan": {
+    "qid": "Q192314",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "owned_by": [
+        "BlackRock",
+        "The Vanguard Group"
+      ],
+      "headquarters": [
+        "New York City"
+      ],
+      "ceo": [
+        "Jamie Dimon"
+      ],
+      "isni": [
+        "0000000122150980"
+      ],
+      "viaf": [
+        "126697014",
+        "267690881"
+      ],
+      "gnd": [
+        "6073167-9"
+      ],
+      "loc_authority": [
+        "no2002000775"
+      ],
+      "subsidiary": [
+        "Chase Bank",
+        "J.P. Morgan & Co.",
+        "Chase Paymentech",
+        "J P Morgan Securities PLC",
+        "J.P. Morgan Securities LLC"
+      ],
+      "industry": [
+        "economics of banking",
+        "financial services",
+        "financial sector"
+      ],
+      "member_of": [
+        "Initiative Finanzstandort Deutschland",
+        "Net-Zero Banking Alliance"
+      ],
+      "inception": [
+        "1968-01-01T00:00:00Z",
+        "2000-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01hlwv"
+      ]
+    }
+  },
+  "katie_couric": {
+    "qid": "Q230739",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "child": [
+        "Ellie Monahan"
+      ],
+      "educated_at": [
+        "University of Virginia",
+        "Yorktown High School"
+      ],
+      "occupation": [
+        "writer",
+        "news presenter",
+        "television producer",
+        "journalist",
+        "voice actor",
+        "film producer",
+        "children's writer",
+        "presenter",
+        "podcaster",
+        "talk show host"
+      ],
+      "employer": [
+        "ABC News",
+        "Q861764",
+        "NBC News"
+      ],
+      "isni": [
+        "0000000108741709"
+      ],
+      "viaf": [
+        "16850994"
+      ],
+      "gnd": [
+        "1248745221"
+      ],
+      "loc_authority": [
+        "no98127520"
+      ],
+      "imdb": [
+        "nm0183698"
+      ],
+      "date_of_birth": [
+        "1957-01-07T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01w_10"
+      ],
+      "sibling": [
+        "Jeff Wadlow",
+        "Emily Couric"
+      ]
+    }
+  },
+  "jeff_bezos": {
+    "qid": "Q312556",
+    "properties": {
+      "father": [
+        "Ted Jorgensen"
+      ],
+      "mother": [
+        "Jacklyn Gise"
+      ],
+      "spouse": [
+        "Lauren Sánchez",
+        "MacKenzie Scott"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "chief executive officer",
+        "chairman of the executive board"
+      ],
+      "child": [
+        "Preston Bezos",
+        "second son of Jeff Bezos",
+        "third son of Jeff Bezos"
+      ],
+      "educated_at": [
+        "Princeton University",
+        "Miami Palmetto High School",
+        "River Oaks Elementary School"
+      ],
+      "occupation": [
+        "computer scientist",
+        "entrepreneur",
+        "business oligarch",
+        "commercial astronaut"
+      ],
+      "employer": [
+        "Amazon",
+        "Bankers Trust",
+        "D.E. Shaw",
+        "First International Telecom"
+      ],
+      "isni": [
+        "0000000109483211"
+      ],
+      "viaf": [
+        "1808007"
+      ],
+      "gnd": [
+        "122367227"
+      ],
+      "loc_authority": [
+        "n99280137"
+      ],
+      "imdb": [
+        "nm1757263"
+      ],
+      "member_of": [
+        "American Academy of Arts and Sciences",
+        "National Academy of Engineering",
+        "Phi Beta Kappa Society"
+      ],
+      "residence": [
+        "Medina"
+      ],
+      "date_of_birth": [
+        "1964-01-12T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/011z69"
+      ],
+      "sibling": [
+        "Mark Bezos"
+      ]
+    }
+  },
+  "larry_summers": {
+    "qid": "Q317953",
+    "properties": {
+      "father": [
+        "Robert Summers"
+      ],
+      "mother": [
+        "Anita Summers"
+      ],
+      "spouse": [
+        "Elisa New",
+        "Victoria Perry"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "Chief Economist of the World Bank",
+        "United States Secretary of the Treasury",
+        "United States Deputy Secretary of the Treasury",
+        "President of Harvard University",
+        "Director of the National Economic Council"
+      ],
+      "educated_at": [
+        "Harvard University",
+        "Massachusetts Institute of Technology",
+        "Harriton High School"
+      ],
+      "occupation": [
+        "scientist",
+        "politician",
+        "professor",
+        "economist",
+        "banker",
+        "university teacher"
+      ],
+      "employer": [
+        "Harvard University",
+        "United States Department of the Treasury"
+      ],
+      "isni": [
+        "0000000078322617"
+      ],
+      "viaf": [
+        "51751591"
+      ],
+      "gnd": [
+        "132387972"
+      ],
+      "loc_authority": [
+        "n79047451"
+      ],
+      "member_of": [
+        "National Academy of Sciences",
+        "Group of Thirty",
+        "American Academy of Arts and Sciences",
+        "Econometric Society"
+      ],
+      "date_of_birth": [
+        "1954-11-30T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01d7lz"
+      ]
+    }
+  },
+  "lawrence_krauss": {
+    "qid": "Q470468",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "Massachusetts Institute of Technology",
+        "Carleton University"
+      ],
+      "occupation": [
+        "astronomer",
+        "writer",
+        "physicist",
+        "astrophysicist",
+        "university teacher",
+        "non-fiction writer",
+        "theoretical physicist"
+      ],
+      "employer": [
+        "Yale University",
+        "Arizona State University",
+        "Case Western Reserve University"
+      ],
+      "isni": [
+        "0000000116815018"
+      ],
+      "viaf": [
+        "85663330"
+      ],
+      "gnd": [
+        "120368412"
+      ],
+      "loc_authority": [
+        "n88603890"
+      ],
+      "imdb": [
+        "nm2765568"
+      ],
+      "date_of_birth": [
+        "1954-05-27T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/03kvq4"
+      ]
+    }
+  },
+  "harvey_weinstein": {
+    "qid": "Q531599",
+    "properties": {
+      "spouse": [
+        "Georgina Chapman"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "University at Buffalo",
+        "John Bowne High School",
+        "State University of New York at Buffalo School of Management"
+      ],
+      "occupation": [
+        "screenwriter",
+        "actor",
+        "executive producer",
+        "film director",
+        "film producer"
+      ],
+      "employer": [
+        "The Weinstein Company"
+      ],
+      "isni": [
+        "0000000114875631"
+      ],
+      "viaf": [
+        "161144207"
+      ],
+      "gnd": [
+        "173929400"
+      ],
+      "loc_authority": [
+        "no2001040887"
+      ],
+      "imdb": [
+        "nm0005544"
+      ],
+      "date_of_birth": [
+        "1952-03-19T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/05hj_k"
+      ],
+      "convicted_of": [
+        "rape",
+        "sexual assault"
+      ],
+      "sibling": [
+        "Bob Weinstein"
+      ]
+    }
+  },
+  "ken_starr": {
+    "qid": "Q708241",
+    "properties": {
+      "father": [
+        "Willie Douglas Bill Starr"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "chancellor",
+        "Solicitor General of the United States",
+        "Judge of the United States Court of Appeals for the D.C. Circuit"
+      ],
+      "educated_at": [
+        "Brown University",
+        "Duke University",
+        "George Washington University",
+        "Harding University"
+      ],
+      "occupation": [
+        "judge",
+        "lawyer",
+        "politician",
+        "prosecutor",
+        "university teacher"
+      ],
+      "employer": [
+        "Baylor University"
+      ],
+      "place_of_burial": [
+        "Texas State Cemetery"
+      ],
+      "isni": [
+        "0000000114973370"
+      ],
+      "viaf": [
+        "116858673"
+      ],
+      "gnd": [
+        "120557630"
+      ],
+      "loc_authority": [
+        "no91012930"
+      ],
+      "imdb": [
+        "nm1518142"
+      ],
+      "find_a_grave": [
+        "243519615"
+      ],
+      "date_of_birth": [
+        "1946-07-21T00:00:00Z"
+      ],
+      "date_of_death": [
+        "2022-09-13T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0grkx"
+      ]
+    }
+  },
+  "l_brands": {
+    "qid": "Q931354",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "founded_by": [
+        "Les Wexner"
+      ],
+      "headquarters": [
+        "Columbus"
+      ],
+      "ceo": [
+        "Les Wexner"
+      ],
+      "subsidiary": [
+        "Victoria’s Secret",
+        "Bath & Body Works",
+        "La Senza",
+        "Henri Bendel"
+      ],
+      "industry": [
+        "retail"
+      ],
+      "inception": [
+        "1963-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/02pvnb"
+      ]
+    }
+  },
+  "joichi_ito": {
+    "qid": "Q934616",
+    "properties": {
+      "citizenship": [
+        "Japan",
+        "United States"
+      ],
+      "educated_at": [
+        "Tufts University",
+        "University of Chicago",
+        "Keio University",
+        "Nishimachi International School"
+      ],
+      "occupation": [
+        "engineer",
+        "entrepreneur",
+        "blogger",
+        "activist",
+        "venture capitalist"
+      ],
+      "employer": [
+        "Massachusetts Institute of Technology",
+        "Chiba Institute of Technology"
+      ],
+      "isni": [
+        "000000008250363X"
+      ],
+      "viaf": [
+        "63764446"
+      ],
+      "gnd": [
+        "1122128312"
+      ],
+      "loc_authority": [
+        "no2006063423"
+      ],
+      "imdb": [
+        "nm1385567"
+      ],
+      "member_of": [
+        "American Academy of Arts and Sciences"
+      ],
+      "residence": [
+        "Boston"
+      ],
+      "date_of_birth": [
+        "1966-06-19T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/02x2x0"
+      ],
+      "sibling": [
+        "Mizuko Ito"
+      ]
+    }
+  },
+  "highbridge_capital": {
+    "qid": "Q5757840",
+    "properties": {
+      "founded_by": [
+        "Glenn Dubin"
+      ],
+      "owned_by": [
+        "JPMorgan Chase"
+      ],
+      "headquarters": [
+        "Solow Building"
+      ],
+      "industry": [
+        "hedge fund"
+      ],
+      "inception": [
+        "1992-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0hrgp3p"
+      ],
+      "parent_org": [
+        "JPMorgan Chase"
+      ]
+    }
+  },
+  "jes_staley": {
+    "qid": "Q6185687",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "chief executive officer"
+      ],
+      "educated_at": [
+        "Bowdoin College"
+      ],
+      "occupation": [
+        "chief executive officer",
+        "banker"
+      ],
+      "employer": [
+        "Barclays"
+      ],
+      "date_of_birth": [
+        "1956-12-27T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0c3vz13"
+      ],
+      "sibling": [
+        "Peter Staley"
+      ]
+    }
+  },
+  "josh_harris": {
+    "qid": "Q6289885",
+    "properties": {
+      "spouse": [
+        "Marjorie Harris"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "Harvard Business School",
+        "The Wharton School",
+        "The Field School"
+      ],
+      "occupation": [
+        "investor",
+        "sports team owner"
+      ],
+      "employer": [
+        "Drexel Burnham Lambert",
+        "Apollo Global Management",
+        "Blackstone Inc.",
+        "26North"
+      ],
+      "isni": [
+        "0000000417240297"
+      ],
+      "viaf": [
+        "305130164"
+      ],
+      "loc_authority": [
+        "no2013082160"
+      ],
+      "member_of": [
+        "Harvard Business School",
+        "Council on Foreign Relations",
+        "The Wharton School",
+        "Mount Sinai Hospital",
+        "Phi Delta Theta",
+        "Kappa Beta Phi",
+        "Sigma Alpha Epsilon"
+      ],
+      "residence": [
+        "Miami Beach",
+        "Upper East Side"
+      ],
+      "date_of_birth": [
+        "1964-12-29T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0kbh77t"
+      ]
+    }
+  },
+  "kathryn_ruemmler": {
+    "qid": "Q6377116",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "White House Counsel"
+      ],
+      "educated_at": [
+        "University of Washington",
+        "Georgetown University Law Center",
+        "Richland High School"
+      ],
+      "occupation": [
+        "jurist"
+      ],
+      "date_of_birth": [
+        "1971-04-19T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0gvs5b7"
+      ]
+    }
+  },
+  "kushner": {
+    "qid": "Q13628723",
+    "properties": {
+      "father": [
+        "Charles Kushner"
+      ],
+      "spouse": [
+        "Ivanka Trump"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "Senior Advisor to the President of the United States",
+        "Office of American Innovation"
+      ],
+      "child": [
+        "Arabella Rose Kushner",
+        "Joseph Frederick Kushner",
+        "Theodore James Kushner"
+      ],
+      "educated_at": [
+        "Harvard University",
+        "Stern School of Business",
+        "New York University School of Law",
+        "Frisch School"
+      ],
+      "occupation": [
+        "lawyer",
+        "businessperson",
+        "politician",
+        "entrepreneur",
+        "celebrity",
+        "investor",
+        "financier",
+        "publisher"
+      ],
+      "viaf": [
+        "1597148632930630630007"
+      ],
+      "gnd": [
+        "1124575480"
+      ],
+      "loc_authority": [
+        "n2018069658"
+      ],
+      "imdb": [
+        "nm4138582"
+      ],
+      "date_of_birth": [
+        "1981-01-10T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0fv_sp"
+      ],
+      "sibling": [
+        "Joshua Kushner"
+      ]
+    }
+  },
+  "howard_lutnick": {
+    "qid": "Q16194176",
+    "properties": {
+      "father": [
+        "Solomon Lutnick"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "United States Secretary of Commerce"
+      ],
+      "educated_at": [
+        "Haverford College"
+      ],
+      "occupation": [
+        "businessperson"
+      ],
+      "isni": [
+        "0000000038378843"
+      ],
+      "viaf": [
+        "41206531"
+      ],
+      "loc_authority": [
+        "n2002109556"
+      ],
+      "imdb": [
+        "nm2965714"
+      ],
+      "date_of_birth": [
+        "1961-07-14T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0w64tvz"
+      ],
+      "sibling": [
+        "Gary Frederick Lutnick"
+      ]
+    }
+  },
+  "obama": {
+    "qid": "Q76",
+    "properties": {
+      "father": [
+        "Barack Obama Sr."
+      ],
+      "mother": [
+        "Stanley Ann Dunham"
+      ],
+      "spouse": [
+        "Michelle Obama"
+      ],
+      "citizenship": [
+        "United States",
+        "Kenya"
+      ],
+      "position_held": [
+        "President of the United States",
+        "President-elect of the United States",
+        "United States senator",
+        "member of the State Senate of Illinois"
+      ],
+      "child": [
+        "Malia Obama",
+        "Sasha Obama"
+      ],
+      "educated_at": [
+        "Harvard University",
+        "Columbia University",
+        "Harvard Law School",
+        "Occidental College",
+        "Punahou School",
+        "State Elementary School Menteng 01",
+        "Centaurus High School",
+        "King College Prep High School",
+        "Nelson High School",
+        "Noelani Elementary School"
+      ],
+      "occupation": [
+        "lawyer",
+        "politician",
+        "jurist",
+        "statesperson",
+        "academic",
+        "memoirist",
+        "podcaster",
+        "political writer",
+        "community organizer"
+      ],
+      "employer": [
+        "University of Chicago",
+        "Sidley Austin",
+        "Business International Corporation",
+        "New York Public Interest Research Group",
+        "Gamaliel Foundation"
+      ],
+      "isni": [
+        "0000000121331026"
+      ],
+      "viaf": [
+        "52010985"
+      ],
+      "gnd": [
+        "132522136"
+      ],
+      "loc_authority": [
+        "n94112934"
+      ],
+      "imdb": [
+        "nm1682433"
+      ],
+      "member_of": [
+        "109th United States Congress",
+        "110th United States Congress",
+        "American Academy of Arts and Sciences",
+        "American Philosophical Society",
+        "Congressional Black Caucus"
+      ],
+      "residence": [
+        "Kalorama"
+      ],
+      "date_of_birth": [
+        "1961-08-04T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/02mjmr"
+      ],
+      "sibling": [
+        "Auma Obama",
+        "Maya Soetoro-Ng",
+        "Malik Obama",
+        "Mark Okoth Obama Ndesandjo",
+        "David Ndesandjo",
+        "Abo Obama",
+        "Bernard Obama",
+        "George Hussein Onyango Obama"
+      ]
+    }
+  },
+  "martin_nowak": {
+    "qid": "Q87451",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "University of Vienna"
+      ],
+      "occupation": [
+        "mathematician",
+        "biologist",
+        "university teacher"
+      ],
+      "employer": [
+        "Harvard University"
+      ],
+      "isni": [
+        "0000000116173959"
+      ],
+      "viaf": [
+        "34005721"
+      ],
+      "gnd": [
+        "1015510477"
+      ],
+      "loc_authority": [
+        "no00076460"
+      ],
+      "member_of": [
+        "Austrian Academy of Sciences"
+      ],
+      "date_of_birth": [
+        "1965-04-07T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/025rw_3"
+      ]
+    }
+  },
+  "naomi_campbell": {
+    "qid": "Q199369",
+    "properties": {
+      "mother": [
+        "Valerie Morris Campbell"
+      ],
+      "citizenship": [
+        "United Kingdom"
+      ],
+      "educated_at": [
+        "Italia Conti Academy of Theatre Arts",
+        "Dunraven School",
+        "Barbara Speake Stage School"
+      ],
+      "occupation": [
+        "actor",
+        "singer",
+        "television producer",
+        "model",
+        "film actor",
+        "philanthropist"
+      ],
+      "isni": [
+        "0000000116489611"
+      ],
+      "viaf": [
+        "56803375"
+      ],
+      "gnd": [
+        "119381869"
+      ],
+      "loc_authority": [
+        "n94087424"
+      ],
+      "imdb": [
+        "nm0001984"
+      ],
+      "partner": [
+        "Flavio Briatore"
+      ],
+      "date_of_birth": [
+        "1970-05-22T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01pcrw"
+      ]
+    }
+  },
+  "marvin_minsky": {
+    "qid": "Q204815",
+    "properties": {
+      "spouse": [
+        "Gloria Minsky"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "chairperson"
+      ],
+      "educated_at": [
+        "Harvard University",
+        "Princeton University",
+        "Harvard College",
+        "Bronx High School of Science",
+        "Phillips Academy",
+        "Ethical Culture Fieldston School"
+      ],
+      "occupation": [
+        "computer scientist",
+        "mathematician",
+        "university teacher",
+        "artificial intelligence researcher"
+      ],
+      "employer": [
+        "Massachusetts Institute of Technology"
+      ],
+      "isni": [
+        "0000000114690776"
+      ],
+      "viaf": [
+        "22166315"
+      ],
+      "gnd": [
+        "12009231X"
+      ],
+      "loc_authority": [
+        "n50032614"
+      ],
+      "imdb": [
+        "nm0591669"
+      ],
+      "member_of": [
+        "National Academy of Sciences",
+        "American Academy of Arts and Sciences",
+        "National Academy of Engineering",
+        "League for Programming Freedom",
+        "Association for the Advancement of Artificial Intelligence"
+      ],
+      "cause_of_death": [
+        "cerebral hemorrhage"
+      ],
+      "find_a_grave": [
+        "157467592"
+      ],
+      "date_of_birth": [
+        "1927-08-09T00:00:00Z"
+      ],
+      "date_of_death": [
+        "2016-01-24T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/04y_z"
+      ]
+    }
+  },
+  "morgan_stanley": {
+    "qid": "Q334204",
+    "properties": {
+      "country": [
+        "United States",
+        "United Kingdom"
+      ],
+      "founded_by": [
+        "Dean G. Witter",
+        "Henry Sturgis Morgan",
+        "Harold Stanley",
+        "Richard Samuel Reynolds Jr."
+      ],
+      "owned_by": [
+        "BlackRock",
+        "The Vanguard Group",
+        "Mitsubishi UFJ Financial Group",
+        "State Street Corporation",
+        "T. Rowe Price"
+      ],
+      "headquarters": [
+        "New York City"
+      ],
+      "ceo": [
+        "Ted Pick"
+      ],
+      "viaf": [
+        "136233836"
+      ],
+      "gnd": [
+        "5510563-4"
+      ],
+      "loc_authority": [
+        "n2002022036"
+      ],
+      "subsidiary": [
+        "Morgan Stanley Wealth Management",
+        "E-Trade",
+        "Morgan Stanley Europe S.E."
+      ],
+      "industry": [
+        "financial services",
+        "financial sector"
+      ],
+      "member_of": [
+        "Linux Foundation",
+        "Initiative Finanzstandort Deutschland",
+        "Net-Zero Banking Alliance"
+      ],
+      "inception": [
+        "1924-01-01T00:00:00Z",
+        "1931-01-01T00:00:00Z",
+        "1935-01-01T00:00:00Z",
+        "2008-07-17T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0jvs0"
+      ]
+    }
+  },
+  "melania_trump": {
+    "qid": "Q432473",
+    "properties": {
+      "father": [
+        "Viktor Knavs"
+      ],
+      "mother": [
+        "Amalija Knavs"
+      ],
+      "spouse": [
+        "Donald Trump"
+      ],
+      "citizenship": [
+        "United States",
+        "Slovenia",
+        "Socialist Federal Republic of Yugoslavia"
+      ],
+      "position_held": [
+        "First Lady of the United States"
+      ],
+      "child": [
+        "Barron Trump"
+      ],
+      "educated_at": [
+        "Secondary School for Design and Photography, Ljubljana"
+      ],
+      "occupation": [
+        "writer",
+        "businessperson",
+        "celebrity",
+        "jewelry designer",
+        "model"
+      ],
+      "isni": [
+        "0000000454327877"
+      ],
+      "viaf": [
+        "139145067461366630849"
+      ],
+      "gnd": [
+        "1123849889"
+      ],
+      "loc_authority": [
+        "n2017018517"
+      ],
+      "imdb": [
+        "nm1514936"
+      ],
+      "residence": [
+        "New York City",
+        "Sevnica"
+      ],
+      "date_of_birth": [
+        "1970-04-26T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/04hfnv"
+      ],
+      "sibling": [
+        "Ines Knauss",
+        "Denis Cigelnjak"
+      ]
+    }
+  },
+  "michael_milken": {
+    "qid": "Q918376",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "University of California, Berkeley",
+        "The Wharton School",
+        "Birmingham High School"
+      ],
+      "occupation": [
+        "banker",
+        "financier"
+      ],
+      "isni": [
+        "0000000030859263"
+      ],
+      "viaf": [
+        "31067011"
+      ],
+      "gnd": [
+        "1362797944"
+      ],
+      "loc_authority": [
+        "n87910231"
+      ],
+      "member_of": [
+        "Phi Beta Kappa Society"
+      ],
+      "residence": [
+        "Encino"
+      ],
+      "date_of_birth": [
+        "1946-07-04T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/057b4"
+      ],
+      "convicted_of": [
+        "securities fraud"
+      ],
+      "sibling": [
+        "Lowell Milken"
+      ]
+    }
+  },
+  "mar_a_lago": {
+    "qid": "Q1262898",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "owned_by": [
+        "Donald Trump"
+      ],
+      "loc_authority": [
+        "sh97005304"
+      ],
+      "freebase": [
+        "/m/052rh6"
+      ],
+      "geonames": [
+        "4163370",
+        "4163369"
+      ]
+    }
+  },
+  "mcc_manhattan": {
+    "qid": "Q1925847",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "isni": [
+        "0000000406133963"
+      ],
+      "freebase": [
+        "/m/026bp5g"
+      ],
+      "geonames": [
+        "5126696"
+      ]
+    }
+  },
+  "palantir": {
+    "qid": "Q2047336",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "founded_by": [
+        "Peter Thiel",
+        "Joe Lonsdale",
+        "Stephen Cohen",
+        "Q19560940",
+        "Nathan Gettings"
+      ],
+      "headquarters": [
+        "Denver",
+        "Palo Alto"
+      ],
+      "ceo": [
+        "Q19560940"
+      ],
+      "viaf": [
+        "620156497241917740001"
+      ],
+      "gnd": [
+        "1191698807"
+      ],
+      "subsidiary": [
+        "Palantir Technologies France"
+      ],
+      "industry": [
+        "computer and network surveillance",
+        "mass surveillance",
+        "data analytics software industry"
+      ],
+      "member_of": [
+        "American Chamber of Commerce in Germany",
+        "bitkom",
+        "Gaia-X"
+      ],
+      "inception": [
+        "2003-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0bwkm08"
+      ]
+    }
+  },
+  "leon_botstein": {
+    "qid": "Q2905309",
+    "properties": {
+      "citizenship": [
+        "United States",
+        "Switzerland"
+      ],
+      "child": [
+        "Sarah Botstein"
+      ],
+      "educated_at": [
+        "Harvard University",
+        "University of Chicago",
+        "High School of Music & Art"
+      ],
+      "occupation": [
+        "writer",
+        "conductor",
+        "university teacher",
+        "musicologist"
+      ],
+      "employer": [
+        "Central European University"
+      ],
+      "isni": [
+        "0000000118777174"
+      ],
+      "viaf": [
+        "71455316"
+      ],
+      "gnd": [
+        "134961676"
+      ],
+      "loc_authority": [
+        "n87903357"
+      ],
+      "member_of": [
+        "American Academy of Arts and Sciences"
+      ],
+      "date_of_birth": [
+        "1946-12-14T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/02b88j"
+      ],
+      "sibling": [
+        "David Botstein"
+      ]
+    }
+  },
+  "maxwell": {
+    "qid": "Q5556756",
+    "properties": {
+      "father": [
+        "Robert Maxwell"
+      ],
+      "mother": [
+        "Elisabeth Maxwell"
+      ],
+      "citizenship": [
+        "United States",
+        "France",
+        "United Kingdom"
+      ],
+      "educated_at": [
+        "Balliol College",
+        "Marlborough College",
+        "Headington School",
+        "Oxford High School",
+        "Millfield"
+      ],
+      "occupation": [
+        "businessperson",
+        "socialite"
+      ],
+      "viaf": [
+        "6732160062456335790006"
+      ],
+      "gnd": [
+        "126889284X"
+      ],
+      "loc_authority": [
+        "n2023051576"
+      ],
+      "partner": [
+        "Jeffrey Epstein"
+      ],
+      "residence": [
+        "Federal Prison Camp, Bryan"
+      ],
+      "date_of_birth": [
+        "1961-12-25T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0gw_xk8"
+      ],
+      "convicted_of": [
+        "trafficking of children",
+        "conspiracy to commit a crime"
+      ]
+    }
+  },
+  "leon_black": {
+    "qid": "Q5578461",
+    "properties": {
+      "father": [
+        "Eli M. Black"
+      ],
+      "spouse": [
+        "Debra Black"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "chairperson",
+        "chief executive officer"
+      ],
+      "educated_at": [
+        "Harvard University",
+        "Dartmouth College",
+        "Harvard Business School",
+        "Ethical Culture Fieldston School",
+        "Van High School"
+      ],
+      "occupation": [
+        "businessperson",
+        "financier",
+        "investment banker",
+        "art collector"
+      ],
+      "employer": [
+        "Drexel Burnham Lambert",
+        "Apollo Global Management"
+      ],
+      "residence": [
+        "New York City"
+      ],
+      "date_of_birth": [
+        "1951-07-31T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/03m5jfv"
+      ]
+    }
+  },
+  "little_st_james": {
+    "qid": "Q6651815",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "owned_by": [
+        "Jeffrey Epstein",
+        "SD Investments, LLC"
+      ],
+      "freebase": [
+        "/m/03h2bhh"
+      ],
+      "geonames": [
+        "4796078"
+      ]
+    }
+  },
+  "mort_zuckerman": {
+    "qid": "Q11693671",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "Harvard Law School",
+        "The Wharton School",
+        "McGill University Faculty of Law"
+      ],
+      "occupation": [
+        "businessperson",
+        "editor-in-chief",
+        "journalist",
+        "publisher"
+      ],
+      "employer": [
+        "Harvard University",
+        "Yale University",
+        "U.S. News & World Report",
+        "Boston Properties",
+        "Cabot, Cabot & Forbes"
+      ],
+      "viaf": [
+        "9277719"
+      ],
+      "loc_authority": [
+        "n2006061631"
+      ],
+      "imdb": [
+        "nm0958440"
+      ],
+      "residence": [
+        "Upper East Side"
+      ],
+      "date_of_birth": [
+        "1937-06-04T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0362r9"
+      ]
+    }
+  },
+  "nadia_marcinkova": {
+    "qid": "Q16731972",
+    "properties": {
+      "citizenship": [
+        "Slovakia"
+      ],
+      "educated_at": [
+        "New York School of Interior Design"
+      ],
+      "occupation": [
+        "aircraft pilot"
+      ],
+      "date_of_birth": [
+        "1986-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0_xbjdl"
+      ]
+    }
+  },
+  "mark_epstein": {
+    "qid": "Q108187195",
+    "properties": {
+      "father": [
+        "Seymour G. Epstein"
+      ],
+      "mother": [
+        "Pauline Epstein"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "occupation": [
+        "businessperson",
+        "artist"
+      ],
+      "date_of_birth": [
+        "1955-01-01T00:00:00Z"
+      ],
+      "sibling": [
+        "Jeffrey Epstein"
+      ]
+    }
+  },
+  "lolita_express": {
+    "qid": "Q135643381",
+    "properties": {
+      "owned_by": [
+        "Jeffrey Epstein"
+      ]
+    }
+  },
+  "liquid_funding": {
+    "qid": "Q137163817",
+    "properties": {
+      "country": [
+        "Bermuda"
+      ]
+    }
+  },
+  "stephen_hawking": {
+    "qid": "Q17714",
+    "properties": {
+      "father": [
+        "Frank Hawking"
+      ],
+      "mother": [
+        "Isobel Eileen Hawking"
+      ],
+      "spouse": [
+        "Jane Hawking",
+        "Elaine Mason"
+      ],
+      "citizenship": [
+        "United Kingdom"
+      ],
+      "position_held": [
+        "Lucasian Professor of Mathematics"
+      ],
+      "child": [
+        "Lucy Hawking",
+        "Robert Hawking",
+        "Timothy Hawking"
+      ],
+      "educated_at": [
+        "University of Cambridge",
+        "University College, Oxford",
+        "Trinity Hall",
+        "St Albans High School for Girls",
+        "St Albans School",
+        "Byron House School"
+      ],
+      "occupation": [
+        "writer",
+        "cosmologist",
+        "theoretical physicist"
+      ],
+      "employer": [
+        "University of Cambridge",
+        "California Institute of Technology",
+        "Gonville and Caius College",
+        "Perimeter Institute for Theoretical Physics",
+        "Faculty of Mathematics, University of Cambridge"
+      ],
+      "place_of_burial": [
+        "Westminster Abbey"
+      ],
+      "isni": [
+        "0000000121034996"
+      ],
+      "viaf": [
+        "102304634"
+      ],
+      "gnd": [
+        "118761285"
+      ],
+      "loc_authority": [
+        "n81020731"
+      ],
+      "imdb": [
+        "nm0370071"
+      ],
+      "member_of": [
+        "Royal Society",
+        "National Academy of Sciences",
+        "American Academy of Arts and Sciences",
+        "American Philosophical Society",
+        "Pontifical Academy of Sciences",
+        "Royal Society of Arts",
+        "Starmus Festival"
+      ],
+      "cause_of_death": [
+        "amyotrophic lateral sclerosis"
+      ],
+      "find_a_grave": [
+        "188025042"
+      ],
+      "residence": [
+        "England"
+      ],
+      "date_of_birth": [
+        "1942-01-08T00:00:00Z"
+      ],
+      "date_of_death": [
+        "2018-03-14T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01tdnyh"
+      ]
+    }
+  },
+  "sarah_ferguson": {
+    "qid": "Q55720",
+    "properties": {
+      "father": [
+        "Ronald Ferguson"
+      ],
+      "mother": [
+        "Susan Barrantes"
+      ],
+      "spouse": [
+        "Andrew Mountbatten-Windsor"
+      ],
+      "citizenship": [
+        "United Kingdom"
+      ],
+      "position_held": [
+        "chancellor",
+        "Duchess of York"
+      ],
+      "child": [
+        "Princess Beatrice of York",
+        "Princess Eugenie of York"
+      ],
+      "educated_at": [
+        "Daneshill School",
+        "Hurst Lodge School"
+      ],
+      "occupation": [
+        "writer"
+      ],
+      "isni": [
+        "0000000083761032"
+      ],
+      "viaf": [
+        "41953880"
+      ],
+      "gnd": [
+        "119089009"
+      ],
+      "loc_authority": [
+        "n86101487"
+      ],
+      "imdb": [
+        "nm0272601"
+      ],
+      "residence": [
+        "Royal Lodge"
+      ],
+      "date_of_birth": [
+        "1959-10-15T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0xnjb"
+      ],
+      "sibling": [
+        "Jane Ferguson",
+        "Andrew Ferguson",
+        "Alice Ferguson",
+        "Eliza Ferguson"
+      ]
+    }
+  },
+  "sergey_brin": {
+    "qid": "Q92764",
+    "properties": {
+      "father": [
+        "Michael Brin"
+      ],
+      "mother": [
+        "Eugenia Brin"
+      ],
+      "spouse": [
+        "Anne Wojcicki",
+        "Nicole Shanahan"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "board of directors member"
+      ],
+      "child": [
+        "Benji Wojin",
+        "Chloe Wojin"
+      ],
+      "educated_at": [
+        "Stanford University",
+        "University of Maryland",
+        "Johns Hopkins Center for Talented Youth",
+        "Eleanor Roosevelt High School"
+      ],
+      "occupation": [
+        "computer scientist",
+        "inventor",
+        "author",
+        "business executive",
+        "technology entrepreneur"
+      ],
+      "employer": [
+        "Alphabet Inc."
+      ],
+      "isni": [
+        "0000000078791368"
+      ],
+      "viaf": [
+        "120111435"
+      ],
+      "gnd": [
+        "132711648"
+      ],
+      "loc_authority": [
+        "no2005073928"
+      ],
+      "imdb": [
+        "nm1962236"
+      ],
+      "member_of": [
+        "American Academy of Arts and Sciences",
+        "National Academy of Engineering"
+      ],
+      "residence": [
+        "Los Altos"
+      ],
+      "date_of_birth": [
+        "1973-08-21T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0gjq6"
+      ],
+      "sibling": [
+        "Sam Brin"
+      ]
+    }
+  },
+  "seth_lloyd": {
+    "qid": "Q92941",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "Harvard University",
+        "Harvard College",
+        "The Rockefeller University",
+        "Phillips Academy"
+      ],
+      "occupation": [
+        "engineer",
+        "computer scientist",
+        "physicist",
+        "university teacher",
+        "non-fiction writer"
+      ],
+      "employer": [
+        "Massachusetts Institute of Technology",
+        "Santa Fe Institute"
+      ],
+      "isni": [
+        "0000000110421421"
+      ],
+      "viaf": [
+        "19088871"
+      ],
+      "gnd": [
+        "173867901"
+      ],
+      "loc_authority": [
+        "n2005037741"
+      ],
+      "date_of_birth": [
+        "1960-08-02T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/052nm8"
+      ]
+    }
+  },
+  "prince_andrew": {
+    "qid": "Q153330",
+    "properties": {
+      "father": [
+        "Prince Philip, Duke of Edinburgh"
+      ],
+      "mother": [
+        "Elizabeth II"
+      ],
+      "spouse": [
+        "Sarah Ferguson"
+      ],
+      "citizenship": [
+        "United Kingdom"
+      ],
+      "position_held": [
+        "Duke of York",
+        "Lord High Commissioner to the General Assembly of the Church of Scotland",
+        "Counsellor of State",
+        "Special Representative for International Trade and Investment",
+        "member of the House of Lords"
+      ],
+      "child": [
+        "Princess Beatrice of York",
+        "Princess Eugenie of York"
+      ],
+      "educated_at": [
+        "Gordonstoun",
+        "Britannia Royal Naval College",
+        "Heatherdown Preparatory School",
+        "Lakefield College School"
+      ],
+      "occupation": [
+        "socialite",
+        "naval officer",
+        "helicopter pilot",
+        "naval aviator"
+      ],
+      "isni": [
+        "0000000114954495"
+      ],
+      "viaf": [
+        "94139427"
+      ],
+      "gnd": [
+        "122804732"
+      ],
+      "loc_authority": [
+        "n79128351"
+      ],
+      "imdb": [
+        "nm0697605"
+      ],
+      "partner": [
+        "Koo Stark"
+      ],
+      "member_of": [
+        "Royal Society",
+        "The Scout Association",
+        "Worshipful Company of Shipwrights"
+      ],
+      "residence": [
+        "Sandringham House"
+      ],
+      "date_of_birth": [
+        "1960-02-19T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0xnh2"
+      ],
+      "sibling": [
+        "Charles III",
+        "Anne, Princess Royal",
+        "Prince Edward, Duke of Edinburgh"
+      ]
+    }
+  },
+  "richard_branson": {
+    "qid": "Q194419",
+    "properties": {
+      "father": [
+        "Edward James Branson"
+      ],
+      "mother": [
+        "Eve Branson"
+      ],
+      "spouse": [
+        "Joan Branson"
+      ],
+      "citizenship": [
+        "United Kingdom"
+      ],
+      "child": [
+        "Clare Sarah Branson",
+        "Holly Branson",
+        "Sam Branson"
+      ],
+      "educated_at": [
+        "Scaitcliffe",
+        "Stowe School"
+      ],
+      "occupation": [
+        "businessperson",
+        "entrepreneur"
+      ],
+      "isni": [
+        "0000000111616407"
+      ],
+      "viaf": [
+        "84074806"
+      ],
+      "gnd": [
+        "11886971X"
+      ],
+      "loc_authority": [
+        "n87888343"
+      ],
+      "imdb": [
+        "nm0105232"
+      ],
+      "residence": [
+        "Necker Island"
+      ],
+      "date_of_birth": [
+        "1950-07-18T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0n839"
+      ],
+      "sibling": [
+        "Vanessa Branson"
+      ]
+    }
+  },
+  "reid_hoffman": {
+    "qid": "Q211098",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "Stanford University",
+        "Wolfson College",
+        "The Putney School"
+      ],
+      "occupation": [
+        "writer",
+        "businessperson",
+        "entrepreneur",
+        "investor",
+        "podcaster"
+      ],
+      "employer": [
+        "PayPal",
+        "Chaosium",
+        "LinkedIn Corporation"
+      ],
+      "isni": [
+        "0000000139203508"
+      ],
+      "viaf": [
+        "176786429"
+      ],
+      "gnd": [
+        "1030293473"
+      ],
+      "loc_authority": [
+        "n2011050468"
+      ],
+      "member_of": [
+        "American Academy of Arts and Sciences"
+      ],
+      "date_of_birth": [
+        "1967-08-05T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/09nj7f"
+      ]
+    }
+  },
+  "steven_pinker": {
+    "qid": "Q212730",
+    "properties": {
+      "spouse": [
+        "Rebecca Goldstein",
+        "Nancy Etcoff",
+        "Ilavenil Subbiah"
+      ],
+      "citizenship": [
+        "Canada",
+        "United States"
+      ],
+      "educated_at": [
+        "Harvard University",
+        "McGill University",
+        "Dawson College",
+        "Wagar High School"
+      ],
+      "occupation": [
+        "psychologist",
+        "author",
+        "university teacher",
+        "anthropologist",
+        "philosopher",
+        "linguist",
+        "non-fiction writer",
+        "evolutionary psychologist",
+        "experimental psychologist"
+      ],
+      "employer": [
+        "Harvard University",
+        "Stanford University",
+        "Massachusetts Institute of Technology",
+        "University of California, Santa Barbara"
+      ],
+      "isni": [
+        "0000000121468153"
+      ],
+      "viaf": [
+        "108149508"
+      ],
+      "gnd": [
+        "120137305"
+      ],
+      "loc_authority": [
+        "n82245455"
+      ],
+      "imdb": [
+        "nm0684348"
+      ],
+      "member_of": [
+        "National Academy of Sciences",
+        "American Academy of Arts and Sciences",
+        "American Psychological Association",
+        "intellectual dark web"
+      ],
+      "residence": [
+        "Boston"
+      ],
+      "date_of_birth": [
+        "1954-09-18T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0c2ng"
+      ],
+      "sibling": [
+        "Susan Pinker"
+      ]
+    }
+  },
+  "peter_mandelson": {
+    "qid": "Q310046",
+    "properties": {
+      "father": [
+        "George Norman Mandelson"
+      ],
+      "mother": [
+        "Mary Joyce Morrison"
+      ],
+      "spouse": [
+        "Reinaldo Avila da Silva"
+      ],
+      "citizenship": [
+        "United Kingdom"
+      ],
+      "position_held": [
+        "Lord President of the Council",
+        "Secretary of State for Northern Ireland",
+        "European Commissioner for Trade",
+        "First Secretary of State",
+        "Secretary of State for Business and Trade",
+        "member of the House of Lords",
+        "ambassador of the United Kingdom to the United States",
+        "President of the Board of Trade",
+        "Member of the Privy Council of the United Kingdom",
+        "member of the 53rd Parliament of the United Kingdom",
+        "member of the 52nd Parliament of the United Kingdom",
+        "member of the 51st Parliament of the United Kingdom"
+      ],
+      "educated_at": [
+        "St Catherine's College",
+        "Hendon School"
+      ],
+      "occupation": [
+        "politician",
+        "record producer"
+      ],
+      "isni": [
+        "0000000108000601"
+      ],
+      "viaf": [
+        "49342029"
+      ],
+      "gnd": [
+        "143083767"
+      ],
+      "loc_authority": [
+        "n97000817"
+      ],
+      "imdb": [
+        "nm1128320"
+      ],
+      "date_of_birth": [
+        "1953-10-21T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01fs4v"
+      ]
+    }
+  },
+  "robert_maxwell": {
+    "qid": "Q333468",
+    "properties": {
+      "spouse": [
+        "Elisabeth Maxwell"
+      ],
+      "citizenship": [
+        "United Kingdom",
+        "Czechoslovakia"
+      ],
+      "position_held": [
+        "member of the 43rd Parliament of the United Kingdom",
+        "member of the 44th Parliament of the United Kingdom",
+        "substitute member of the Parliamentary Assembly of the Council of Europe"
+      ],
+      "child": [
+        "Ghislaine Maxwell",
+        "Ian Maxwell",
+        "Kevin Maxwell",
+        "Isabel Maxwell",
+        "Christine Maxwell",
+        "Karine Maxwell",
+        "Anne Maxwell",
+        "Michael Maxwell",
+        "Philip Maxwell"
+      ],
+      "occupation": [
+        "screenwriter",
+        "writer",
+        "politician",
+        "entrepreneur",
+        "media proprietor",
+        "publisher",
+        "spy"
+      ],
+      "place_of_burial": [
+        "Mount of Olives Jewish Cemetery"
+      ],
+      "isni": [
+        "0000000108598121"
+      ],
+      "viaf": [
+        "108872531"
+      ],
+      "gnd": [
+        "118841971"
+      ],
+      "loc_authority": [
+        "n81129421"
+      ],
+      "imdb": [
+        "nm0561806"
+      ],
+      "cause_of_death": [
+        "drowning"
+      ],
+      "find_a_grave": [
+        "7471219"
+      ],
+      "date_of_birth": [
+        "1923-06-10T00:00:00Z"
+      ],
+      "date_of_death": [
+        "1991-11-05T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0dklrg"
+      ]
+    }
+  },
+  "steve_cohen": {
+    "qid": "Q590212",
+    "properties": {
+      "spouse": [
+        "Alexandra M. Cohen"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "University of Pennsylvania",
+        "The Wharton School",
+        "John L. Miller Great Neck North High School"
+      ],
+      "occupation": [
+        "financier",
+        "art collector",
+        "hedge fund manager"
+      ],
+      "viaf": [
+        "9152023710003311992"
+      ],
+      "loc_authority": [
+        "no2018025206"
+      ],
+      "residence": [
+        "Greenwich"
+      ],
+      "date_of_birth": [
+        "1956-06-11T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/06bqw0"
+      ]
+    }
+  },
+  "peter_thiel": {
+    "qid": "Q705525",
+    "properties": {
+      "father": [
+        "Klaus Friedrich Thiel"
+      ],
+      "citizenship": [
+        "United States",
+        "Germany",
+        "New Zealand"
+      ],
+      "position_held": [
+        "board of directors member"
+      ],
+      "educated_at": [
+        "Stanford University",
+        "San Mateo High School",
+        "Stanford Law School"
+      ],
+      "occupation": [
+        "writer",
+        "computer scientist",
+        "entrepreneur",
+        "investor",
+        "banker",
+        "financier",
+        "manager",
+        "chess player",
+        "technology entrepreneur"
+      ],
+      "employer": [
+        "Stanford University"
+      ],
+      "isni": [
+        "0000000035464471"
+      ],
+      "viaf": [
+        "31258092"
+      ],
+      "gnd": [
+        "1059722305"
+      ],
+      "loc_authority": [
+        "n96029353"
+      ],
+      "imdb": [
+        "nm1902615"
+      ],
+      "member_of": [
+        "Students For Liberty",
+        "Steering Committee of the Bilderberg Meetings"
+      ],
+      "residence": [
+        "Cleveland",
+        "South-West Africa",
+        "Foster City"
+      ],
+      "date_of_birth": [
+        "1967-10-11T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/02w8m6"
+      ]
+    }
+  },
+  "robert_mueller": {
+    "qid": "Q715156",
+    "properties": {
+      "father": [
+        "Robert Swan Mueller Jr."
+      ],
+      "mother": [
+        "Alice C. Truesdale"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "Director of the Federal Bureau of Investigation",
+        "United States Deputy Attorney General",
+        "special prosecutor",
+        "United States Assistant Attorney General",
+        "United States Attorney for the Northern District of California"
+      ],
+      "educated_at": [
+        "Princeton University",
+        "New York University",
+        "St. Paul's School",
+        "Princeton Day School",
+        "University of Virginia School of Law"
+      ],
+      "occupation": [
+        "lawyer",
+        "politician",
+        "jurist",
+        "military officer",
+        "civil servant",
+        "official",
+        "soldier",
+        "army officer"
+      ],
+      "isni": [
+        "0000000080290511"
+      ],
+      "viaf": [
+        "107028666"
+      ],
+      "gnd": [
+        "1135446067"
+      ],
+      "loc_authority": [
+        "no91025152"
+      ],
+      "imdb": [
+        "nm1694507"
+      ],
+      "residence": [
+        "Pennsylvania"
+      ],
+      "date_of_birth": [
+        "1944-08-07T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/02djmh"
+      ]
+    }
+  },
+  "paul_cassell": {
+    "qid": "Q7150777",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "Stanford Law School"
+      ],
+      "occupation": [
+        "judge",
+        "lawyer"
+      ],
+      "employer": [
+        "University of Utah"
+      ],
+      "isni": [
+        "0000000039329517"
+      ],
+      "viaf": [
+        "69267132"
+      ],
+      "gnd": [
+        "107556803X"
+      ],
+      "loc_authority": [
+        "n2003096719"
+      ],
+      "date_of_birth": [
+        "1959-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/05p496m"
+      ]
+    }
+  },
+  "steve_bannon": {
+    "qid": "Q16146870",
+    "properties": {
+      "spouse": [
+        "Cathleen Houff",
+        "Mary Piccard",
+        "Diane Clohesy"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "Counselor to the President",
+        "White House Chief Strategist"
+      ],
+      "educated_at": [
+        "Harvard University",
+        "Harvard Business School",
+        "Virginia Tech",
+        "Walsh School of Foreign Service",
+        "Benedictine High School",
+        "Virginia Tech College of Architecture and Urban Studies"
+      ],
+      "occupation": [
+        "screenwriter",
+        "politician",
+        "entrepreneur",
+        "banker",
+        "political scientist",
+        "film director",
+        "radio personality",
+        "investment banker",
+        "adviser",
+        "film producer",
+        "publicist",
+        "strategist",
+        "political adviser"
+      ],
+      "employer": [
+        "United States Navy",
+        "Goldman Sachs",
+        "Breitbart News",
+        "Donald Trump 2016 presidential campaign",
+        "Bannon & Co.",
+        "We Build The Wall"
+      ],
+      "isni": [
+        "0000000050638767"
+      ],
+      "viaf": [
+        "1151594420905352386"
+      ],
+      "gnd": [
+        "1124574387"
+      ],
+      "loc_authority": [
+        "no2008046381"
+      ],
+      "imdb": [
+        "nm0052442"
+      ],
+      "member_of": [
+        "United States National Security Council",
+        "Council for National Policy",
+        "Committee on the Present Danger"
+      ],
+      "date_of_birth": [
+        "1953-11-27T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0bqscsg"
+      ]
+    }
+  },
+  "terramar": {
+    "qid": "Q17089943",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "founded_by": [
+        "Ghislaine Maxwell"
+      ],
+      "industry": [
+        "environment"
+      ],
+      "inception": [
+        "2012-01-01T00:00:00Z"
+      ],
+      "dissolved": [
+        "2019-07-12T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/010lsm97"
+      ],
+      "email": [
+        "mailto:hello@theterramarproject.org"
+      ]
+    }
+  },
+  "peggy_siegal": {
+    "qid": "Q84323682",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "date_of_birth": [
+        "1947-07-17T00:00:00Z"
+      ]
+    }
+  },
+  "sigrid_mccawley": {
+    "qid": "Q112758177",
+    "properties": {
+      "occupation": [
+        "lawyer"
+      ]
+    }
+  },
+  "philippe_laffont": {
+    "qid": "Q116972965",
+    "properties": {
+      "date_of_birth": [
+        "1968-01-01T00:00:00Z"
+      ]
+    }
+  },
+  "tony_blair": {
+    "qid": "Q9545",
+    "properties": {
+      "father": [
+        "Leo Blair"
+      ],
+      "mother": [
+        "Hazel Elizabeth Rosaleen Corscaden"
+      ],
+      "spouse": [
+        "Cherie Blair"
+      ],
+      "citizenship": [
+        "United Kingdom"
+      ],
+      "position_held": [
+        "Prime Minister of the United Kingdom",
+        "First Lord of the Treasury",
+        "Leader of the Opposition",
+        "Leader of the Labour Party",
+        "Shadow Home Secretary",
+        "Shadow Secretary of State for Energy Security and Net Zero",
+        "Shadow Secretary of State for Employment",
+        "Member of the Privy Council of the United Kingdom",
+        "member of the 54th Parliament of the United Kingdom",
+        "member of the 53rd Parliament of the United Kingdom",
+        "member of the 52nd Parliament of the United Kingdom",
+        "member of the 49th Parliament of the United Kingdom",
+        "member of the 50th Parliament of the United Kingdom",
+        "member of the 51st Parliament of the United Kingdom"
+      ],
+      "child": [
+        "Euan Blair",
+        "Nicholas Blair",
+        "Kathryn Blair",
+        "Leo George Blair"
+      ],
+      "educated_at": [
+        "St John's College",
+        "St. Peter's Boys School",
+        "Chorister School",
+        "City Law School",
+        "Fettes College"
+      ],
+      "occupation": [
+        "lawyer",
+        "politician",
+        "diplomat",
+        "autobiographer"
+      ],
+      "employer": [
+        "Yale University",
+        "Quartet on the Middle East"
+      ],
+      "isni": [
+        "0000000122824455"
+      ],
+      "viaf": [
+        "84213389"
+      ],
+      "gnd": [
+        "119305658"
+      ],
+      "loc_authority": [
+        "no95058170"
+      ],
+      "imdb": [
+        "nm0086363"
+      ],
+      "member_of": [
+        "Order of the Garter"
+      ],
+      "date_of_birth": [
+        "1953-05-06T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0948xk"
+      ],
+      "sibling": [
+        "William Blair"
+      ]
+    }
+  },
+  "trump": {
+    "qid": "Q22686",
+    "properties": {
+      "father": [
+        "Fred Trump"
+      ],
+      "mother": [
+        "Mary Anne MacLeod Trump"
+      ],
+      "spouse": [
+        "Melania Trump"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "President of the United States"
+      ],
+      "child": [
+        "Ivanka Trump",
+        "Donald Trump Jr.",
+        "Eric Trump",
+        "Tiffany Trump",
+        "Barron Trump"
+      ],
+      "educated_at": [
+        "University of Pennsylvania",
+        "Fordham University",
+        "The Wharton School",
+        "New York Military Academy",
+        "The Kew-Forest School"
+      ],
+      "occupation": [
+        "actor",
+        "writer",
+        "businessperson",
+        "politician",
+        "entrepreneur",
+        "merchant",
+        "chief executive officer",
+        "investor",
+        "television producer",
+        "business magnate",
+        "film producer",
+        "real estate entrepreneur",
+        "game show host"
+      ],
+      "employer": [
+        "The Trump Organization"
+      ],
+      "isni": [
+        "0000000108986765"
+      ],
+      "viaf": [
+        "49272447"
+      ],
+      "gnd": [
+        "118834312"
+      ],
+      "loc_authority": [
+        "n85387872"
+      ],
+      "imdb": [
+        "nm0874339"
+      ],
+      "member_of": [
+        "The World's Billionaires",
+        "SAG-AFTRA"
+      ],
+      "residence": [
+        "White House"
+      ],
+      "date_of_birth": [
+        "1946-06-14T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0cqt90"
+      ],
+      "pseudonym": [
+        "John Miller",
+        "John Barron",
+        "David Dennison",
+        "The Donald"
+      ],
+      "convicted_of": [
+        "falsifying business records"
+      ],
+      "sibling": [
+        "Maryanne Trump Barry",
+        "Robert Trump",
+        "Fred Trump Jr.",
+        "Elizabeth Trump Grau"
+      ]
+    }
+  },
+  "woody_allen": {
+    "qid": "Q25089",
+    "properties": {
+      "father": [
+        "Martin"
+      ],
+      "mother": [
+        "Nettie Königsberg"
+      ],
+      "spouse": [
+        "Soon-Yi Previn"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "child": [
+        "Ronan Farrow",
+        "Moses Farrow",
+        "Bechet Dumaine Allen",
+        "Manzie Tio Allen",
+        "Dylan Farrow"
+      ],
+      "educated_at": [
+        "New York University",
+        "New York University Tisch School of the Arts",
+        "Midwood High School"
+      ],
+      "occupation": [
+        "screenwriter",
+        "actor",
+        "writer",
+        "composer",
+        "clarinetist",
+        "singer",
+        "playwright",
+        "comedian",
+        "character actor",
+        "film score composer",
+        "journalist",
+        "film director",
+        "film producer",
+        "director",
+        "film actor",
+        "producer",
+        "film screenwriter"
+      ],
+      "employer": [
+        "The New School"
+      ],
+      "isni": [
+        "0000000121347589"
+      ],
+      "viaf": [
+        "59077912"
+      ],
+      "gnd": [
+        "118502077"
+      ],
+      "loc_authority": [
+        "n79090269"
+      ],
+      "imdb": [
+        "nm0000095"
+      ],
+      "partner": [
+        "Diane Keaton",
+        "Mia Farrow"
+      ],
+      "member_of": [
+        "Académie des beaux-arts",
+        "American Academy of Arts and Sciences",
+        "Writers Guild of America, East"
+      ],
+      "date_of_birth": [
+        "1935-11-30T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/081lh"
+      ],
+      "sibling": [
+        "Letty Aronson"
+      ]
+    }
+  },
+  "ubs": {
+    "qid": "Q193199",
+    "properties": {
+      "country": [
+        "Switzerland"
+      ],
+      "owned_by": [
+        "BlackRock",
+        "GIC Private Limited",
+        "Norges Bank"
+      ],
+      "headquarters": [
+        "Zurich"
+      ],
+      "ceo": [
+        "Sergio Ermotti"
+      ],
+      "isni": [
+        "000000012369308X"
+      ],
+      "viaf": [
+        "122312097"
+      ],
+      "gnd": [
+        "10002382-4"
+      ],
+      "loc_authority": [
+        "no99065828"
+      ],
+      "industry": [
+        "economics of banking",
+        "financial services",
+        "financial service activities, except insurance and pension funding",
+        "financial sector"
+      ],
+      "member_of": [
+        "Initiative Finanzstandort Deutschland",
+        "German-Swiss Chamber of Commerce",
+        "Net-Zero Banking Alliance"
+      ],
+      "inception": [
+        "1854-01-01T00:00:00Z",
+        "1862-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/031rxp"
+      ]
+    }
+  },
+  "victoria_secret": {
+    "qid": "Q332477",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "founded_by": [
+        "Roy Raymond"
+      ],
+      "headquarters": [
+        "Reynoldsburg"
+      ],
+      "viaf": [
+        "133781201"
+      ],
+      "imdb": [
+        "nm1080620"
+      ],
+      "subsidiary": [
+        "Pink"
+      ],
+      "industry": [
+        "clothing industry"
+      ],
+      "inception": [
+        "1977-06-12T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/02pvjn"
+      ],
+      "parent_org": [
+        "Morin Christophe Works, Inc."
+      ]
+    }
+  },
+  "wells_fargo": {
+    "qid": "Q744149",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "founded_by": [
+        "William Fargo",
+        "Henry Wells"
+      ],
+      "owned_by": [
+        "Berkshire Hathaway",
+        "BlackRock",
+        "The Vanguard Group"
+      ],
+      "headquarters": [
+        "San Francisco"
+      ],
+      "ceo": [
+        "Charlie Scharf"
+      ],
+      "isni": [
+        "0000000122298176"
+      ],
+      "viaf": [
+        "132150619",
+        "153241006"
+      ],
+      "loc_authority": [
+        "n78012771"
+      ],
+      "subsidiary": [
+        "Wachovia",
+        "Wells Fargo Advisors",
+        "Wells Fargo Private Bank"
+      ],
+      "industry": [
+        "economics of banking",
+        "financial services",
+        "financial sector"
+      ],
+      "member_of": [
+        "World Wide Web Consortium",
+        "FIDO Alliance",
+        "Net-Zero Banking Alliance"
+      ],
+      "inception": [
+        "1852-01-01T00:00:00Z",
+        "1852-03-18T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01kdws"
+      ]
+    }
+  },
+  "wexner": {
+    "qid": "Q1675849",
+    "properties": {
+      "citizenship": [
+        "United States"
+      ],
+      "educated_at": [
+        "Ohio State University",
+        "Bexley High School"
+      ],
+      "occupation": [
+        "entrepreneur",
+        "chief executive officer"
+      ],
+      "isni": [
+        "0000000399022527"
+      ],
+      "viaf": [
+        "263611536"
+      ],
+      "gnd": [
+        "1079241973"
+      ],
+      "loc_authority": [
+        "n85247622"
+      ],
+      "member_of": [
+        "American Academy of Arts and Sciences"
+      ],
+      "residence": [
+        "New Albany"
+      ],
+      "date_of_birth": [
+        "1937-09-08T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/01hwr1"
+      ]
+    }
+  },
+  "tom_pritzker": {
+    "qid": "Q7793302",
+    "properties": {
+      "father": [
+        "Jay Pritzker"
+      ],
+      "spouse": [
+        "Margot Pritzker"
+      ],
+      "educated_at": [
+        "University of Chicago",
+        "University of Chicago Law School",
+        "Booth School of Business",
+        "Claremont McKenna College"
+      ],
+      "occupation": [
+        "businessperson"
+      ],
+      "employer": [
+        "Hyatt Hotels Corporation"
+      ],
+      "viaf": [
+        "41151433020356420005"
+      ],
+      "gnd": [
+        "1149297859"
+      ],
+      "date_of_birth": [
+        "1950-06-06T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/04shwf"
+      ],
+      "sibling": [
+        "Daniel Pritzker",
+        "John Pritzker",
+        "Gigi Pritzker"
+      ]
+    }
+  },
+  "valar_ventures": {
+    "qid": "Q17747112",
+    "properties": {
+      "inception": [
+        "2012-01-01T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/011q7hyf"
+      ]
+    }
+  },
+  "virginia_giuffre": {
+    "qid": "Q78473599",
+    "properties": {
+      "citizenship": [
+        "Australia"
+      ],
+      "occupation": [
+        "chief executive officer",
+        "sex worker",
+        "activist"
+      ],
+      "viaf": [
+        "13164187887218202666"
+      ],
+      "gnd": [
+        "1379311462"
+      ],
+      "imdb": [
+        "nm10947513"
+      ],
+      "find_a_grave": [
+        "282035181"
+      ],
+      "date_of_birth": [
+        "1983-08-09T00:00:00Z"
+      ],
+      "date_of_death": [
+        "2025-04-25T00:00:00Z"
+      ]
+    }
+  },
+  "zorro_ranch": {
+    "qid": "Q133504290",
+    "properties": {
+      "country": [
+        "United States"
+      ],
+      "owned_by": [
+        "Jeffrey Epstein",
+        "http://www.wikidata.org/.well-known/genid/22665dc4c3a11744b2a2a52c69551ea3"
+      ]
+    }
+  }
+}
