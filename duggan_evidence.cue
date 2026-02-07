@@ -73,4 +73,57 @@ entities: {
 	valar_ventures: evidence: {"EFTA00027019": "testimonial", "EFTA00032518": "flight_log"}
 	virginia_giuffre: evidence: {"EFTA00021073": "email", "EFTA01340455": "testimonial", "EFTA00017070": "testimonial"}
 	woody_allen: evidence: {"EFTA02225097": "email", "EFTA02225120": "email", "EFTA02225325": "email"}
+	acosta: evidence: {"EFTA00010136": "email"}
+	alfredo_rodriguez: evidence: {"EFTA01326054": "testimonial", "EFTA01326080": "email"}
+	bank_of_america: evidence: {"EFTA00019755": "testimonial", "EFTA01265180": "testimonial"}
+	bear_stearns: evidence: {"EFTA00007097": "testimonial"}
+	bill_clinton: evidence: {"EFTA00037125": "testimonial", "EFTA00037126": "testimonial", "EFTA00015286": "photograph"}
+	bill_richardson: evidence: {"EFTA00028594": "email"}
+	brad_edwards: evidence: {"EFTA00014067": "email", "EFTA00014073": "testimonial", "EFTA00014652": "testimonial"}
+	brunel: evidence: {"EFTA00020911": "testimonial", "EFTA00010249": "testimonial"}
+	butterfly_trust: evidence: {"EFTA01282041": "documentary", "EFTA01282282": "documentary", "EFTA01282292": "testimonial"}
+	citibank: evidence: {"EFTA00020167": "testimonial", "EFTA01265225": "testimonial", "EFTA01265245": "testimonial"}
+	couq_foundation: evidence: {"EFTA01500794": "documentary", "EFTA01500847": "photograph", "EFTA01500867": "documentary"}
+	credit_suisse: evidence: {"EFTA01581816": "documentary", "EFTA01581818": "documentary", "EFTA01581819": "documentary"}
+	dalton_school: evidence: {"EFTA01296684": "photograph", "EFTA01296860": "flight_log", "EFTA01297066": "flight_log"}
+	dershowitz: evidence: {"EFTA01333242": "testimonial", "EFTA00013605": "email", "EFTA00013834": "email"}
+	deutsche_bank: evidence: {"EFTA01282012": "financial_record", "EFTA01282015": "financial_record", "EFTA01282376": "testimonial"}
+	financial_trust: evidence: {"EFTA01492256": "testimonial", "EFTA01492257": "testimonial", "EFTA01492258": "documentary"}
+	goldman_sachs: evidence: {"EFTA01488889": "documentary", "EFTA01489619": "documentary", "EFTA01490113": "documentary"}
+	gratitude_america: evidence: {"EFTA01297437": "testimonial", "EFTA01287458": "testimonial", "EFTA01295154": "testimonial"}
+	harvard_university: evidence: {"EFTA00009966": "testimonial"}
+	harvey_weinstein: evidence: {"EFTA00020535": "testimonial"}
+	highbridge_capital: evidence: {"EFTA01581710": "email", "EFTA01581851": "testimonial", "EFTA01581856": "testimonial"}
+	hsbc: evidence: {"EFTA01344075": "email", "EFTA01344106": "testimonial", "EFTA01344336": "documentary"}
+	jack_scarola: evidence: {"EFTA00010240": "testimonial", "EFTA00014033": "email", "EFTA00016311": "testimonial"}
+	janusz_banasiak: evidence: {"EFTA02214630": "email", "EFTA02227924": "email", "EFTA02223525": "email"}
+	jes_staley: evidence: {"EFTA00029435": "email", "EFTA01300143": "email"}
+	jp_morgan: evidence: {"EFTA01584905": "email", "EFTA01584902": "email", "EFTA01582819": "photograph"}
+	ken_starr: evidence: {"EFTA02229831": "email", "EFTA02230144": "email", "EFTA02230151": "email"}
+	laura_menninger: evidence: {"EFTA00020322": "testimonial", "EFTA00030021": "testimonial", "EFTA00032465": "testimonial"}
+	mar_a_lago: evidence: {"EFTA00010243": "email"}
+	mark_epstein: evidence: {"EFTA00009859": "documentary", "EFTA00021294": "documentary", "EFTA00023021": "documentary"}
+	martin_nowak: evidence: {"EFTA02237368": "testimonial", "EFTA02234530": "testimonial", "EFTA02237347": "testimonial"}
+	maxwell: evidence: {"EFTA00022364": "email", "EFTA00022365": "documentary", "EFTA00030419": "documentary"}
+	mc2_agency: evidence: {"EFTA01483667": "financial_record", "EFTA01580480": "financial_record", "EFTA01284548": "testimonial"}
+	michael_milken: evidence: {"EFTA00010305": "photograph"}
+	morgan_stanley: evidence: {"EFTA01279842": "email", "EFTA01557220": "email", "EFTA01477506": "email"}
+	obama: evidence: {"EFTA01300433": "email", "EFTA01300468": "testimonial"}
+	paul_cassell: evidence: {"EFTA00015560": "testimonial", "EFTA00014133": "testimonial"}
+	prince_andrew: evidence: {"EFTA00022059": "testimonial", "EFTA00023409": "email", "EFTA00027442": "email"}
+	robert_maxwell: evidence: {"EFTA01582836": "photograph", "EFTA00038980": "photograph", "EFTA01582826": "photograph"}
+	sigrid_mccawley: evidence: {"EFTA00009865": "testimonial"}
+	southern_trust: evidence: {"EFTA01297081": "documentary", "EFTA01298152": "documentary", "EFTA01298391": "documentary"}
+	terramar: evidence: {"EFTA01579713": "email", "EFTA01273257": "documentary", "EFTA01517939": "financial_record"}
+	ubs: evidence: {"EFTA00022363": "documentary", "EFTA00022367": "testimonial", "EFTA00022383": "testimonial"}
+	victoria_secret: evidence: {"EFTA00016800": "testimonial", "EFTA02731226": "testimonial"}
+	wells_fargo: evidence: {"EFTA00020171": "testimonial", "EFTA01279501": "testimonial", "EFTA01279505": "testimonial"}
+	wexner: evidence: {"EFTA01318259": "testimonial", "EFTA01319582": "email", "EFTA01314029": "testimonial"}
+	apollo: evidence: {"EFTA02730996": "testimonial", "EFTA02731018": "testimonial", "EFTA00010710": "photograph"}
+	barclays: evidence: {"EFTA01301206": "testimonial", "EFTA01483486": "financial_record", "EFTA01483636": "documentary"}
+	josh_harris: evidence: {"EFTA00011084": "photograph", "EFTA00010710": "photograph", "EFTA00011074": "email"}
+	kushner: evidence: {"EFTA00010710": "photograph", "EFTA00010305": "photograph", "EFTA00010724": "photograph"}
+	marie_villafana: evidence: {"EFTA01325031": "testimonial", "EFTA01325051": "testimonial", "EFTA00020711": "testimonial"}
+	robert_mueller: evidence: {"EFTA00032932": "testimonial", "EFTA00032642": "testimonial", "EFTA00010710": "photograph"}
+	trump: evidence: {"EFTA01297785": "testimonial", "EFTA00016732": "email", "EFTA00028716": "email"}
 }
