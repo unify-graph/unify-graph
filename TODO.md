@@ -100,3 +100,6 @@
 - [x] Doc polish pass — README, compare.html, design doc, about panel all updated for accuracy
 - [x] Wikidata QID clickable links in entity inspector
 - [x] Radial BFS visualization (8 views total, concentric ring layout from Epstein)
+- [x] Financial flows expanded 8 → 20 (Wexner, Dubin, Apollo, Staley, Harris, Rothschild, Laffont, settlements)
+- [x] Site polish: canonical URLs, favicon, WCAG contrast, aria-label, robots.txt, sitemap.xml
+- [x] ProPublica 990 enrichment (4 foundations: Clinton, Gratitude America, Terramar, Wexner)
