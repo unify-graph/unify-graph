@@ -93,6 +93,13 @@ tr.clickable { cursor: pointer; }
 .gap-orphan { background: #2a2a1a; color: #f0ad4e; }
 .gap-cluster_isolated { background: #1a1a2a; color: #6ea8fe; }
 .gap-type_inconsistent { background: #2a1a2a; color: #d68fd6; }
+.lead-callout { background: linear-gradient(135deg, #1a1a0a, #2a2a1a); border: 1px solid #f0ad4e44; border-radius: 4px; padding: 10px 14px; margin-bottom: 12px; }
+.lead-callout h3 { margin: 0 0 6px; font-size: 13px; color: #f0ad4e; }
+.lead-card { display: inline-block; background: #0a0a0f; border: 1px solid #2a2a3a; border-radius: 3px; padding: 6px 10px; margin: 3px 4px 3px 0; cursor: pointer; font-size: 12px; }
+.lead-card:hover { border-color: #f0ad4e; }
+.lead-card .lead-name { color: #e8e8f0; font-weight: bold; }
+.lead-card .lead-stat { color: #888; margin-left: 6px; }
+.lead-card .lead-ratio { color: #f85149; font-weight: bold; margin-left: 6px; }
 
 /* Cluster colors */
 .cluster-core { color: #ff6b6b; }
@@ -210,6 +217,7 @@ tr.clickable { cursor: pointer; }
     <button data-view="chord">Cluster Map</button>
     <button data-view="structural">Structural</button>
     <button data-view="radial">BFS Reach</button>
+    <button data-view="evidence">Evidence Map</button>
     <a href="compare.html" style="background:#1a1a2a;border:1px solid #2a2a3a;color:#888;padding:4px 12px;text-decoration:none;font-size:11px;border-radius:3px;display:inline-flex;align-items:center;margin-left:auto">How This Compares</a>
   </nav>
   <div class="main graph-mode" id="main">
@@ -570,7 +578,10 @@ function selectNode(d) {
         ${connections.filter(c => graphData._nodeMap[c]).map(c => {
           const target = graphData._nodeMap[c];
           const bidir = target && Object.keys(entitiesData[c]?.connections || {}).includes(d.id);
-          return `<li class="${bidir ? 'bidir' : 'unidir-out'}" onclick="selectNode(graphData._nodeMap['${c}'])">${entitiesData[c]?.name || c} <span class="badge badge-cluster cluster-${target?.cluster}">${target?.cluster}</span></li>`;
+          const cd = entity.connection_details?.[c];
+          const confBadge = cd ? `<span class="badge" style="font-size:9px;margin-left:3px;color:${cd.confidence==='high'?'#4caf50':cd.confidence==='medium'?'#f0ad4e':'#f85149'}">${cd.confidence}</span>` : '';
+          const relBadge = cd?.rel_type ? `<span class="badge" style="font-size:9px;margin-left:2px;color:#888">${cd.rel_type}</span>` : '';
+          return `<li class="${bidir ? 'bidir' : 'unidir-out'}" onclick="selectNode(graphData._nodeMap['${c}'])">${entitiesData[c]?.name || c} <span class="badge badge-cluster cluster-${target?.cluster}">${target?.cluster}</span>${confBadge}${relBadge}${cd?.notes ? `<div style="font-size:10px;color:#666;margin-top:1px">${esc(cd.notes)}</div>` : ''}</li>`;
         }).join('')}
         ${inbound.filter(c => graphData._nodeMap[c]).map(c => {
           const src = graphData._nodeMap[c];
@@ -657,6 +668,7 @@ function selectNode(d) {
 
     <div class="inspector-section leads">
       <h3>Leads</h3>
+      ${d.mention_count >= 1000 && !d.has_evidence ? `<div class="field" style="background:#2a1a0a;border:1px solid #f0ad4e44;border-radius:3px;padding:6px 8px;margin-bottom:6px"><span class="field-value" style="color:#f0ad4e;font-weight:bold">${d.mention_count.toLocaleString()} corpus mentions with zero linked evidence — top investigative priority</span></div>` : ''}
       ${d.mention_count > 0 && !d.has_evidence ? `<div class="field"><span class="field-value"><a href="https://analytics.dugganusa.com/api/v1/search?q=${encodeURIComponent(d.name)}&indexes=epstein_files" target="_blank">Search API: ${d.mention_count} hits available</a></span></div>` : ''}
       ${d.mention_count === 0 ? '<div class="field"><span class="field-value" style="color:#666">Zero corpus presence — may not appear in DOJ documents</span></div>' : ''}
       ${!d.has_evidence ? '<div class="field"><span class="field-value" style="color:#f85149">Needs evidence: find document IDs from DOJ releases, court filings, or depositions</span></div>' : ''}
@@ -675,8 +687,22 @@ function renderDashboard() {
     total_degree: n.connection_count + n.inbound_count,
   })).sort((a, b) => b.gap_count - a.gap_count || b.mention_count - a.mention_count);
 
+  // Identify top leads: high mentions + zero evidence
+  const leads = rows
+    .filter(r => r.mention_count >= 100 && !r.has_evidence)
+    .sort((a, b) => b.mention_count - a.mention_count)
+    .slice(0, 5);
+
   const dashboard = document.getElementById('dashboard');
   dashboard.innerHTML = `
+    ${leads.length > 0 ? `<div class="lead-callout">
+      <h3>Top Investigative Leads — high mentions, zero evidence</h3>
+      ${leads.map(l => `<span class="lead-card" onclick="switchToGraphAndSelect('${esc(l.id)}')">
+        <span class="lead-name">${esc(l.name)}</span>
+        <span class="lead-stat">${l.mention_count.toLocaleString()} mentions</span>
+        <span class="lead-ratio">0 evidence</span>
+      </span>`).join('')}
+    </div>` : ''}
     <div class="dash-header">
       <button class="dash-filter active" data-filter="all">All <span class="count">${rows.length}</span></button>
       <button class="dash-filter" data-filter="missing_evidence">No evidence <span class="count">${rows.filter(r => r.gap_categories.includes('missing_evidence')).length}</span></button>
@@ -1534,6 +1560,194 @@ function _renderRadial(container) {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// EVIDENCE DEPENDENCY MAP — bipartite layout: documents ↔ entities
+// Shows which documents support which entities. Click a document
+// to highlight all entities that depend on it. Entities with
+// single-source evidence are flagged as fragile.
+// ═══════════════════════════════════════════════════════════════
+
+function renderEvidenceMap() {
+  const dashboard = document.getElementById('dashboard');
+
+  // Build doc → entity mapping from documents data
+  const docEntries = Object.entries(documentsData || {});
+  const entityEvidence = {}; // entity_id → [doc_ids]
+  const docEntities = {};    // doc_id → [entity_ids]
+
+  docEntries.forEach(([docId, doc]) => {
+    docEntities[docId] = Object.keys(doc.mentions || {});
+    Object.keys(doc.mentions || {}).forEach(eid => {
+      if (!entityEvidence[eid]) entityEvidence[eid] = [];
+      entityEvidence[eid].push(docId);
+    });
+  });
+
+  // Also check entity evidence fields
+  Object.entries(entitiesData || {}).forEach(([eid, ent]) => {
+    Object.keys(ent.evidence || {}).forEach(docId => {
+      if (!entityEvidence[eid]) entityEvidence[eid] = [];
+      if (!entityEvidence[eid].includes(docId)) entityEvidence[eid].push(docId);
+      if (!docEntities[docId]) docEntities[docId] = [];
+      if (!docEntities[docId].includes(eid)) docEntities[docId].push(eid);
+    });
+  });
+
+  // Filter to docs and entities that have at least one link
+  const activeDocs = Object.keys(docEntities).filter(d => docEntities[d].length > 0).sort();
+  const activeEntities = Object.keys(entityEvidence).sort((a, b) => (entityEvidence[b].length - entityEvidence[a].length));
+
+  // Stats
+  const fragile = activeEntities.filter(e => entityEvidence[e].length === 1);
+  const noEvidence = graphData.nodes.filter(n => !n.has_evidence).length;
+
+  dashboard.innerHTML = `
+    <h2 style="margin-bottom:4px;color:#6ea8fe">Evidence Dependency Map</h2>
+    <p style="margin-bottom:4px;color:#888">Bipartite layout: documents (left) linked to entities they support (right). Click a document to see its blast radius — which entities lose evidence if it's discredited.</p>
+    <p style="margin-bottom:12px;color:#666;font-size:11px">
+      <span style="color:#6ea8fe;font-weight:600">${activeDocs.length}</span> documents &middot;
+      <span style="color:#4caf50;font-weight:600">${activeEntities.length}</span> entities with evidence &middot;
+      <span style="color:#f0ad4e;font-weight:600">${fragile.length}</span> single-source (fragile) &middot;
+      <span style="color:#f85149;font-weight:600">${noEvidence}</span> no evidence at all
+    </p>
+    <div id="evidence-container" style="width:100%;height:calc(100vh - 180px);overflow:hidden"></div>
+  `;
+
+  const container = document.getElementById('evidence-container');
+  requestAnimationFrame(() => _renderEvidenceMap(container, activeDocs, activeEntities, docEntities, entityEvidence));
+}
+
+function _renderEvidenceMap(container, activeDocs, activeEntities, docEntities, entityEvidence) {
+  const width = Math.max(400, container.clientWidth);
+  const height = Math.max(300, container.clientHeight);
+
+  const svg = d3.select(container).append('svg')
+    .attr('width', width).attr('height', height);
+
+  const margin = {top: 30, right: 200, bottom: 30, left: 200};
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  // Layout: docs on the left, entities on the right
+  const docY = d3.scaleBand().domain(activeDocs).range([0, innerH]).padding(0.1);
+  const entY = d3.scaleBand().domain(activeEntities).range([0, innerH]).padding(0.1);
+
+  // Build links
+  const links = [];
+  activeDocs.forEach(docId => {
+    (docEntities[docId] || []).forEach(eid => {
+      if (activeEntities.includes(eid)) {
+        links.push({doc: docId, entity: eid});
+      }
+    });
+  });
+
+  // Draw links
+  const linkG = g.append('g');
+  const linkPaths = linkG.selectAll('path').data(links).join('path')
+    .attr('d', d => {
+      const y0 = docY(d.doc) + docY.bandwidth() / 2;
+      const y1 = entY(d.entity) + entY.bandwidth() / 2;
+      const mx = innerW / 2;
+      return `M0,${y0} C${mx},${y0} ${mx},${y1} ${innerW},${y1}`;
+    })
+    .attr('fill', 'none')
+    .attr('stroke', '#2a2a3a')
+    .attr('stroke-width', 1.5)
+    .attr('opacity', 0.4);
+
+  // Draw doc nodes (left)
+  const docNodes = g.selectAll('.doc-node').data(activeDocs).join('g')
+    .attr('class', 'doc-node')
+    .attr('transform', d => `translate(0,${docY(d) + docY.bandwidth() / 2})`)
+    .style('cursor', 'pointer');
+
+  docNodes.append('circle')
+    .attr('r', d => Math.max(3, Math.min(8, (docEntities[d]?.length || 1) * 2)))
+    .attr('fill', '#6ea8fe');
+
+  docNodes.append('text')
+    .attr('x', -8).attr('dy', 3)
+    .attr('text-anchor', 'end')
+    .attr('fill', '#888').attr('font-size', '9px')
+    .text(d => {
+      const doc = documentsData[d];
+      if (!doc) return d.length > 20 ? d.slice(0, 20) + '...' : d;
+      const desc = doc.description || d;
+      return desc.length > 28 ? desc.slice(0, 28) + '...' : desc;
+    });
+
+  // Draw entity nodes (right)
+  const entNodes = g.selectAll('.ent-node').data(activeEntities).join('g')
+    .attr('class', 'ent-node')
+    .attr('transform', d => `translate(${innerW},${entY(d) + entY.bandwidth() / 2})`)
+    .style('cursor', 'pointer');
+
+  entNodes.append('circle')
+    .attr('r', d => Math.max(3, Math.min(8, (entityEvidence[d]?.length || 1) * 2.5)))
+    .attr('fill', d => entityEvidence[d]?.length === 1 ? '#f0ad4e' : '#4caf50');
+
+  entNodes.append('text')
+    .attr('x', 8).attr('dy', 3)
+    .attr('text-anchor', 'start')
+    .attr('fill', d => entityEvidence[d]?.length === 1 ? '#f0ad4e' : '#888')
+    .attr('font-size', '9px')
+    .text(d => {
+      const ent = entitiesData[d];
+      const name = ent?.name || d;
+      const count = entityEvidence[d]?.length || 0;
+      return `${name} (${count})`;
+    });
+
+  // Interaction: click doc to highlight its blast radius
+  let selectedDoc = null;
+  docNodes.on('click', function(event, docId) {
+    event.stopPropagation();
+    selectedDoc = selectedDoc === docId ? null : docId;
+    const affected = selectedDoc ? new Set(docEntities[selectedDoc] || []) : null;
+    const wouldLose = selectedDoc ? new Set((docEntities[selectedDoc] || []).filter(e => entityEvidence[e]?.length === 1)) : null;
+
+    linkPaths
+      .attr('stroke', d => !selectedDoc ? '#2a2a3a' : d.doc === selectedDoc ? (wouldLose?.has(d.entity) ? '#f85149' : '#6ea8fe') : '#1a1a2a')
+      .attr('opacity', d => !selectedDoc ? 0.4 : d.doc === selectedDoc ? 0.9 : 0.08)
+      .attr('stroke-width', d => !selectedDoc ? 1.5 : d.doc === selectedDoc ? 2.5 : 1);
+
+    docNodes.select('circle')
+      .attr('fill', d => !selectedDoc ? '#6ea8fe' : d === selectedDoc ? '#fff' : '#333');
+    docNodes.select('text')
+      .attr('fill', d => !selectedDoc ? '#888' : d === selectedDoc ? '#e8e8f0' : '#444');
+
+    entNodes.select('circle')
+      .attr('fill', d => {
+        if (!selectedDoc) return entityEvidence[d]?.length === 1 ? '#f0ad4e' : '#4caf50';
+        if (!affected.has(d)) return '#333';
+        return wouldLose.has(d) ? '#f85149' : '#4caf50';
+      });
+    entNodes.select('text')
+      .attr('fill', d => {
+        if (!selectedDoc) return entityEvidence[d]?.length === 1 ? '#f0ad4e' : '#888';
+        if (!affected.has(d)) return '#444';
+        return wouldLose.has(d) ? '#f85149' : '#e8e8f0';
+      });
+  });
+
+  // Click entity to navigate to graph view
+  entNodes.on('click', function(event, eid) {
+    if (graphData._nodeMap[eid]) switchToGraphAndSelect(eid);
+  });
+
+  // Click background to deselect
+  svg.on('click', () => {
+    selectedDoc = null;
+    linkPaths.attr('stroke', '#2a2a3a').attr('opacity', 0.4).attr('stroke-width', 1.5);
+    docNodes.select('circle').attr('fill', '#6ea8fe');
+    docNodes.select('text').attr('fill', '#888');
+    entNodes.select('circle').attr('fill', d => entityEvidence[d]?.length === 1 ? '#f0ad4e' : '#4caf50');
+    entNodes.select('text').attr('fill', d => entityEvidence[d]?.length === 1 ? '#f0ad4e' : '#888');
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
 // VIEW SWITCHING
 // ═══════════════════════════════════════════════════════════════
 
@@ -1565,6 +1779,7 @@ function switchView(view) {
     else if (view === 'chord') renderChordDiagram();
     else if (view === 'structural') renderStructural();
     else if (view === 'radial') renderRadialBFS();
+    else if (view === 'evidence') renderEvidenceMap();
   }
 }
 

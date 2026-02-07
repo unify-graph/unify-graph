@@ -11,8 +11,8 @@ entities: {
 		mention_count: 308
 		role: "Manhattan townhouse — primary residence"
 		connections: {epstein: true, maxwell: true, wexner: true}
-		evidence: {}
-		notes: "Largest private residence in Manhattan. Originally Wexner's."
+		evidence: {"WEXNER-MANSION-DEED": true}
+		notes: "Largest private residence in Manhattan. Originally Wexner's. Transferred to Epstein's Maple Inc for $0 in 2011."
 	}
 
 	zorro_ranch: {
@@ -22,8 +22,8 @@ entities: {
 		mention_count: 308
 		role: "New Mexico ranch — 8,000 acres"
 		connections: {epstein: true, bill_gates: true}
-		evidence: {}
-		notes: "Near Stanley, NM. Visited by Bill Gates."
+		evidence: {"NM-AG-2019-ZORRO": true}
+		notes: "Near Stanley, NM. Visited by Bill Gates. NM AG investigated."
 	}
 
 	el_brillo_way: {
@@ -33,8 +33,8 @@ entities: {
 		mention_count: 294
 		role: "Palm Beach mansion — site of initial investigation"
 		connections: {epstein: true, alfredo_rodriguez: true, juan_alessi: true}
-		evidence: {}
-		notes: "358 El Brillo Way. Where Palm Beach PD investigation started."
+		evidence: {"PBSO-2005-INVESTIGATION": true}
+		notes: "358 El Brillo Way. Where Palm Beach PD investigation started 2005."
 	}
 
 	little_st_james: {
@@ -50,8 +50,11 @@ entities: {
 			bill_clinton: true
 			prince_andrew: true
 		}
-		evidence: {}
-		notes: "Also known as 'Pedophile Island.'"
+		evidence: {
+			"USVI-2020-COMPLAINT": true
+			"FLIGHT-LOGS-N908JE":  true
+		}
+		notes: "Also known as 'Pedophile Island.' USVI AG civil suit documented operations."
 	}
 
 	mar_a_lago: {
@@ -89,8 +92,8 @@ entities: {
 			prince_andrew: true
 			trump: true
 		}
-		evidence: {}
-		notes: "N908JE. Flight logs document passengers."
+		evidence: {"FLIGHT-LOGS-N908JE": true}
+		notes: "N908JE. Flight logs document passengers. Entered as court exhibit in Giuffre v. Maxwell."
 	}
 
 	mcc_manhattan: {
@@ -100,7 +103,7 @@ entities: {
 		mention_count: 4
 		role: "Federal jail where Epstein died August 10, 2019"
 		connections: {epstein: true, bill_barr: true}
-		evidence: {}
-		notes: "Cameras malfunctioned. Guards sleeping. Death ruled suicide."
+		evidence: {"MCC-DOJ-2019-DEATH": true}
+		notes: "Cameras malfunctioned. Guards sleeping. Death ruled suicide. DOJ IG investigated."
 	}
 }

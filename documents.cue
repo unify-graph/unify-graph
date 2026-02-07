@@ -172,4 +172,87 @@ documents: {
 		source: "Deutsche Bank SDNY Production"
 		notes:  "MIT Media Lab director. What were the financial flows?"
 	}
+
+	// ═══════════════════════════════════════════════════════════
+	// PROPERTY AND LOCATION EVIDENCE
+	// ═══════════════════════════════════════════════════════════
+
+	"PBSO-2005-INVESTIGATION": {
+		description: "Palm Beach Sheriff's Office investigation report — El Brillo Way"
+		doc_type:    "court_filing"
+		mentions: {
+			epstein:         true
+			el_brillo_way:   true
+			alfredo_rodriguez: true
+			juan_alessi:     true
+		}
+		source: "Palm Beach County SO"
+		date:   "2005"
+		notes:  "Initial investigation triggered by parent's complaint. Led to search warrant for 358 El Brillo Way."
+	}
+
+	"USVI-2020-COMPLAINT": {
+		description: "USVI AG complaint — Little St. James Island operations"
+		doc_type:    "court_filing"
+		mentions: {
+			epstein:          true
+			little_st_james:  true
+			maxwell:          true
+		}
+		source: "USVI Attorney General"
+		date:   "2020-01"
+		notes:  "AG Denise George civil suit. Documented construction of compounds, trafficking on the island, destruction of evidence."
+	}
+
+	"FLIGHT-LOGS-N908JE": {
+		description: "Flight logs for N908JE (Boeing 727 'Lolita Express')"
+		doc_type:    "flight_log"
+		mentions: {
+			lolita_express: true
+			epstein:        true
+			maxwell:        true
+			bill_clinton:   true
+			prince_andrew:  true
+		}
+		source: "Court exhibits — Giuffre v. Maxwell"
+		notes:  "Partial flight logs. Document passenger lists for hundreds of flights. Key evidence for establishing who visited which properties."
+	}
+
+	"MCC-DOJ-2019-DEATH": {
+		description: "DOJ Inspector General report on Epstein death at MCC"
+		doc_type:    "court_filing"
+		mentions: {
+			epstein:       true
+			mcc_manhattan: true
+			bill_barr:     true
+		}
+		source: "DOJ Office of Inspector General"
+		date:   "2019-08"
+		notes:  "Camera malfunction, sleeping guards, removed from suicide watch. Two guards criminally charged."
+	}
+
+	"NM-AG-2019-ZORRO": {
+		description: "New Mexico AG investigation into Zorro Ranch operations"
+		doc_type:    "court_filing"
+		mentions: {
+			epstein:     true
+			zorro_ranch: true
+		}
+		source: "New Mexico Attorney General"
+		date:   "2019"
+		notes:  "State-level investigation. Ranch was 8,000 acres near Stanley, NM."
+	}
+
+	"WEXNER-MANSION-DEED": {
+		description: "Property transfer — 9 East 71st Street deed records"
+		doc_type:    "financial_record"
+		mentions: {
+			east_71st: true
+			wexner:    true
+			epstein:   true
+		}
+		source: "NYC Department of Finance property records"
+		date:   "2011"
+		notes:  "Transfer to Maple Inc (Epstein entity). Listed as $0 transaction. Originally purchased by Wexner for $13.2M in 1989."
+	}
 }

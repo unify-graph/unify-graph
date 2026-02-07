@@ -30,7 +30,7 @@
 ## Visualization — New Views
 
 - [x] Radial BFS from Epstein: concentric rings showing hop distance, evidence status
-- [ ] Evidence dependency Sankey: if a document is discredited, who loses their evidence base
+- [x] Evidence dependency map: bipartite document↔entity view with blast radius highlighting
 - [ ] Geographic map: properties (Zorro Ranch, Little St James, 71st Street, Paris apartment)
 
 ## Visualization — Enhancements
@@ -103,3 +103,8 @@
 - [x] Financial flows expanded 8 → 20 (Wexner, Dubin, Apollo, Staley, Harris, Rothschild, Laffont, settlements)
 - [x] Site polish: canonical URLs, favicon, WCAG contrast, aria-label, robots.txt, sitemap.xml
 - [x] ProPublica 990 enrichment (4 foundations: Clinton, Gratitude America, Terramar, Wexner)
+- [x] Property evidence citations (6 documents: PBSO, USVI AG, flight logs, MCC death, NM AG, Wexner deed)
+- [x] Connection confidence scoring (#ConnectionDetail schema + applied to 4 key entities)
+- [x] Top investigative leads callout in gap dashboard (algorithmic: high mentions + zero evidence)
+- [x] Connection details (confidence, rel_type, notes) surfaced in inspector
+- [x] Evidence dependency map (9th view — bipartite document↔entity with blast radius highlighting)

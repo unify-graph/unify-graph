@@ -55,6 +55,10 @@ import "list"
 	// unresolvable keys are investigative gaps.
 	connections: {[string]: true}
 
+	// Optional: structured connection metadata (confidence, evidence, type).
+	// Keys MUST match entries in `connections`.
+	connection_details?: {[string]: #ConnectionDetail}
+
 	// Evidence: document IDs supporting this entity's inclusion.
 	// Every key MUST resolve to a defined document.
 	evidence: {[string]: true}
@@ -103,6 +107,28 @@ import "list"
 	// Content summary
 	summary?: string
 
+	...
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CONNECTION DETAIL — structured metadata for individual connections
+// ═══════════════════════════════════════════════════════════════
+
+#ConnectionDetail: {
+	// How well-supported is this connection?
+	confidence: "high" | "medium" | "low" | *"unassessed"
+
+	// What kind of relationship?
+	rel_type?: "financial" | "social" | "professional" | "familial" |
+		"legal" | "alleged" | "employer" | "client" | "associate"
+
+	// Evidence supporting this specific connection
+	evidence?: {[string]: true}
+
+	// When was this connection active?
+	period?: string
+
+	notes?: string
 	...
 }
 

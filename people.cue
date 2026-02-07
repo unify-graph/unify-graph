@@ -96,6 +96,18 @@ entities: {
 			laura_menninger: true
 		}
 		evidence: {}
+		connection_details: {
+			epstein:           {confidence: "high", rel_type: "professional", notes: "Primary co-conspirator. Convicted of trafficking conspiracy."}
+			brunel:            {confidence: "high", rel_type: "professional", notes: "MC2 modeling agency founder. Recruited models. Died in custody 2022."}
+			lesley_groff:      {confidence: "high", rel_type: "professional", notes: "Both inner circle staff. Co-operated scheduling."}
+			sarah_kellen:      {confidence: "high", rel_type: "professional", notes: "Both NPA immunity recipients. Inner circle."}
+			nadia_marcinkova:  {confidence: "high", rel_type: "professional", notes: "Inner circle. NPA immunity recipient."}
+			prince_andrew:     {confidence: "high", rel_type: "social", notes: "Long-standing social connection. Maxwell facilitated introductions."}
+			virginia_giuffre:  {confidence: "high", rel_type: "alleged", notes: "Giuffre alleged Maxwell recruited and groomed her."}
+			bill_clinton:      {confidence: "medium", rel_type: "social", notes: "Flight logs, social events. Clinton Foundation connections."}
+			trump:             {confidence: "medium", rel_type: "social", notes: "Mar-a-Lago social circle. Attended events together."}
+			robert_maxwell:    {confidence: "high", rel_type: "familial", notes: "Father. Media baron. Died 1991 under mysterious circumstances."}
+		}
 		notes: "Convicted Dec 2021. Serving 20-year sentence."
 	}
 
@@ -134,6 +146,12 @@ entities: {
 			sarah_ferguson: true
 		}
 		evidence: {}
+		connection_details: {
+			epstein:         {confidence: "high", rel_type: "social", evidence: {"FLIGHT-LOGS-N908JE": true}, notes: "Multiple visits to island and properties. Flight log evidence."}
+			maxwell:         {confidence: "high", rel_type: "social", notes: "Long-standing social relationship. Maxwell facilitated introductions."}
+			virginia_giuffre: {confidence: "high", rel_type: "alleged", notes: "Civil suit settled for reported $12M in Feb 2022."}
+			sarah_ferguson:  {confidence: "high", rel_type: "familial", notes: "Ex-wife. Fergie received $18K from Epstein to settle debts."}
+		}
 		notes: "441 hits. Settled civil case. Stripped of titles by King Charles."
 	}
 
@@ -199,6 +217,13 @@ entities: {
 			michael_milken: true
 		}
 		evidence: {"DB-SDNY-0002962": true}
+		connection_details: {
+			epstein:        {confidence: "high", rel_type: "financial", evidence: {"DB-SDNY-0002962": true, "EFTA02730996": true}, period: "2000-2015", notes: "$158M+ over ~15 years. Dechert LLP investigation."}
+			josh_harris:    {confidence: "high", rel_type: "professional", notes: "Apollo co-founders. Both had Epstein financial ties."}
+			apollo:         {confidence: "high", rel_type: "professional", notes: "Co-founded Apollo Global Management 1990."}
+			dechert_llp:    {confidence: "high", rel_type: "client", evidence: {"EFTA02730996": true}, notes: "Hired Dechert to investigate $158M payments."}
+			michael_milken: {confidence: "medium", rel_type: "professional", notes: "Both in leveraged buyout / PE world. Connection details unclear."}
+		}
 	}
 
 	brad_edwards: {
@@ -874,6 +899,14 @@ entities: {
 			brad_edwards: true
 		}
 		evidence: {}
+		connection_details: {
+			epstein:         {confidence: "high", rel_type: "alleged", evidence: {"FLIGHT-LOGS-N908JE": true}, notes: "Recruited at age 16 at Mar-a-Lago"}
+			maxwell:         {confidence: "high", rel_type: "alleged", evidence: {"FLIGHT-LOGS-N908JE": true}, notes: "Alleged recruiter/groomer"}
+			prince_andrew:   {confidence: "high", rel_type: "alleged", notes: "Civil suit settled for reported $12M. Photo evidence."}
+			dershowitz:      {confidence: "medium", rel_type: "alleged", notes: "Mutual accusations. Giuffre alleged abuse; Dershowitz denied and counter-sued."}
+			sigrid_mccawley: {confidence: "high", rel_type: "legal", notes: "Giuffre's attorney in multiple civil suits"}
+			brad_edwards:    {confidence: "high", rel_type: "legal", notes: "Represented Giuffre and other victims. Author of 'Relentless Pursuit'."}
+		}
 		notes: "Also known as Virginia Roberts."
 	}
 
