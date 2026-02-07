@@ -16,9 +16,8 @@
 - [x] Reconciliation script (`scripts/wikidata_reconcile.py`) + CI job (`wikidata-reconcile`)
 - [x] Fill remaining 21 entities → 3 new matches (dechert_llp, east_71st, rothschild_geneva), 18 confirmed no QID
 - [ ] Query OpenCorporates for corporate entities (J. Epstein & Co, Southern Trust, etc.)
-- [ ] Query LittleSis for relationship cross-referencing
 - [~] Cross-reference against OpenSanctions dataset (script ready, API needs auth key)
-- [~] Query LittleSis for relationship cross-referencing (script ready, needs API run)
+- [~] Query LittleSis for relationship cross-referencing (script fixed, running against API)
 - [ ] Add CourtListener case IDs for legal entities / proceedings
 
 ## Data Enrichment — API Integrations
@@ -40,7 +39,7 @@
 - [x] Compare algorithmic communities (12) vs manual clusters (19) — highlight disagreements
 - [x] Add community detection overlay to force graph (toggle between manual clusters / algorithmic)
 - [x] Color-code bottleneck scores in force graph (heatmap gradient)
-- [ ] Live DugganUSA API search from inspector panel (query on entity select)
+- [x] Live DugganUSA API search from inspector panel (CORS enabled, cached, top 10 results)
 
 ## Schema & Export
 

@@ -757,7 +757,69 @@ function selectNode(d) {
       ${d.mention_count === 0 ? '<div class="field"><span class="field-value" style="color:#666">Zero corpus presence — may not appear in DOJ documents</span></div>' : ''}
       ${!d.has_evidence ? '<div class="field"><span class="field-value" style="color:#f85149">Needs evidence: find document IDs from DOJ releases, court filings, or depositions</span></div>' : ''}
     </div>
+
+    <div class="inspector-section">
+      <h3>DugganUSA Search <span id="duggan-status" style="font-size:10px;color:#666;font-weight:normal"></span></h3>
+      <div id="duggan-results" style="max-height:200px;overflow-y:auto"></div>
+    </div>
   `;
+
+  // Live DugganUSA API search
+  fetchDugganResults(d.name, d.id);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DUGGANUSA LIVE SEARCH
+// ═══════════════════════════════════════════════════════════════
+
+const _dugganCache = {};
+async function fetchDugganResults(name, entityId) {
+  const status = document.getElementById('duggan-status');
+  const results = document.getElementById('duggan-results');
+  if (!status || !results) return;
+
+  // Check cache
+  if (_dugganCache[entityId]) {
+    renderDugganResults(results, _dugganCache[entityId]);
+    status.textContent = '(cached)';
+    return;
+  }
+
+  status.textContent = '(loading...)';
+  results.innerHTML = '<div style="color:#666;font-size:11px">Searching corpus...</div>';
+
+  try {
+    const url = `https://analytics.dugganusa.com/api/v1/search?q=${encodeURIComponent(name)}&indexes=epstein_files`;
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    _dugganCache[entityId] = data;
+    status.textContent = '';
+    renderDugganResults(results, data);
+  } catch (err) {
+    status.textContent = '(error)';
+    results.innerHTML = `<div style="color:#f85149;font-size:11px">${esc(err.message)}</div>`;
+  }
+}
+
+function renderDugganResults(container, data) {
+  const hits = data.hits || data.results || [];
+  if (!hits.length) {
+    container.innerHTML = '<div style="color:#666;font-size:11px">No documents found in corpus.</div>';
+    return;
+  }
+
+  const total = data.total || data.estimatedTotalHits || hits.length;
+  const items = hits.slice(0, 10).map(h => {
+    const title = h.title || h.document_title || h.id || 'Untitled';
+    const snippet = h.snippet || h._formatted?.content?.slice(0, 150) || '';
+    return `<div style="margin-bottom:6px;padding:4px 0;border-bottom:1px solid #1a1a2a">
+      <div style="color:#6ea8fe;font-size:11px;font-weight:500">${esc(title)}</div>
+      ${snippet ? `<div style="color:#888;font-size:10px;margin-top:2px">${esc(snippet.slice(0, 120))}...</div>` : ''}
+    </div>`;
+  }).join('');
+
+  container.innerHTML = `<div style="color:#888;font-size:10px;margin-bottom:6px">${total.toLocaleString()} results</div>${items}`;
 }
 
 // ═══════════════════════════════════════════════════════════════
