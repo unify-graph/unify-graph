@@ -10,6 +10,10 @@ analysis_export.json
 discovery.json
 discovery2.json
 
+# Python
+__pycache__/
+*.pyc
+
 # Editor / OS
 .DS_Store
 *.swp
