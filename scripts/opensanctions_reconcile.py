@@ -23,7 +23,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-API = "https://api.opensanctions.org/match/default"
+API = "http://localhost:8000/match/default"
 UA = "unify-graph/1.0 (https://github.com/unify-graph/unify-graph; entity reconciliation)"
 MIN_SCORE = 0.7
 
@@ -92,8 +92,8 @@ def query_opensanctions(
         with urllib.request.urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read())
 
-        # Extract match results
-        results = data.get("results", {}).get("q1", {}).get("results", [])
+        # Extract match results (yente uses "responses" key)
+        results = data.get("responses", data.get("results", {})).get("q1", {}).get("results", [])
         if results:
             match = results[0]
             score = match.get("score", 0.0)
@@ -147,7 +147,7 @@ def main():
 
         # Query API
         result = query_opensanctions(entity_id, name, wikidata_qid, schema)
-        time.sleep(1)  # Rate limit: 1 req/sec
+        time.sleep(0.1)  # Local instance: minimal delay
 
         if result:
             matches[entity_id] = result

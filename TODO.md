@@ -16,9 +16,9 @@
 - [x] Reconciliation script (`scripts/wikidata_reconcile.py`) + CI job (`wikidata-reconcile`)
 - [x] Fill remaining 21 entities → 3 new matches (dechert_llp, east_71st, rothschild_geneva), 18 confirmed no QID
 - [ ] Query OpenCorporates for corporate entities (J. Epstein & Co, Southern Trust, etc.)
-- [~] Cross-reference against OpenSanctions dataset (script ready, API needs auth key)
+- [x] Cross-reference against OpenSanctions dataset — self-hosted yente (civic), 64/132 matched (73 raw - 9 false positives removed). Notable: Liquid Funding in ICIJ Offshore Leaks.
 - [x] Query LittleSis for relationship cross-referencing (81/88 matched, CUE overlay generated)
-- [ ] Add CourtListener case IDs for legal entities / proceedings
+- [x] Add CourtListener case IDs for legal entities / proceedings — 6 case documents, 7 entity IDs
 
 ## Data Enrichment — API Integrations
 
@@ -112,3 +112,5 @@
 - [x] GEXF + GraphML exports for Gephi/Cytoscape interoperability
 - [x] FtM JSONL export (424 entities: Person, Company, Organization, RealEstate, Airplane, Payment, Document, Family, UnknownLink)
 - [x] Signatures sub-tab in Structural view (pattern bars, network metrics, broker table, core members)
+- [x] OpenSanctions reconciliation — self-hosted yente (podman pod + ES 8.14.3), civic dataset (4.1M entities), 64/132 matched
+- [x] CourtListener integration — 6 case documents (Brown v. Maxwell, Giuffre v. Maxwell, US v. Maxwell, Doe v. Epstein, Edwards v. Epstein), 7 entity IDs
