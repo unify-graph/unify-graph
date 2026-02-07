@@ -27,6 +27,8 @@ build:
     - cue export -e flows ./... > site/data/flows.json
     - cue export -e documents ./... > site/data/documents.json
     - .venv/bin/python3 scripts/analyze.py
+    - .venv/bin/python3 scripts/toon_export.py
+    - for f in scripts/wikidata_enriched.json scripts/propublica_enriched.json; do [ -f "$f" ] && cp "$f" "site/data/$(basename "$f")"; done
   artifacts:
     paths:
       - site/

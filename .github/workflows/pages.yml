@@ -25,6 +25,14 @@ jobs:
           curl -sSL https://github.com/cue-lang/cue/releases/download/v0.15.4/cue_v0.15.4_linux_amd64.tar.gz | tar xz
           sudo mv cue /usr/local/bin/
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
       - name: Validate & Export
         run: |
           cue vet ./...
@@ -36,6 +44,20 @@ jobs:
           cue export -e entities ./... > site/data/entities.json
           cue export -e flows ./... > site/data/flows.json
           cue export -e documents ./... > site/data/documents.json
+
+      - name: Run NetworkX analysis
+        run: |
+          python3 scripts/analyze.py
+          python3 scripts/toon_export.py
+
+      - name: Copy enrichment data
+        run: |
+          for f in scripts/wikidata_enriched.json scripts/propublica_enriched.json; do
+            if [ -f "$f" ]; then
+              cp "$f" "site/data/$(basename "$f")"
+              echo "Copied $f → site/data/"
+            fi
+          done
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
