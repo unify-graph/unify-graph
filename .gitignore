@@ -17,6 +17,8 @@ discovery2.json
 scripts/opensanctions_results.json
 scripts/littlesis_results.json
 scripts/duggan_sweep_results.json
+scripts/duggan_cooccurrence.json
+scripts/littlesis_connections.json
 opensanctions_ids.cue
 
 # Python
