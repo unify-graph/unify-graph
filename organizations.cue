@@ -98,7 +98,7 @@ entities: {
 		mention_count: 45
 		role: "Law firm — $158M investigation"
 		connections: {leon_black: true, epstein: true}
-		evidence: {EFTA02730996: true}
+		evidence: {EFTA02730996: "court_filing"}
 	}
 
 	apollo: {
@@ -247,7 +247,7 @@ entities: {
 		cluster: "financial"
 		role: "Geneva banking — Epstein financial relationship"
 		connections: {epstein: true}
-		evidence: {"DB-SDNY-0005122": true}
+		evidence: {"DB-SDNY-0005122": "financial_record"}
 		notes: "On visualization but zero direct hits in corpus."
 	}
 }

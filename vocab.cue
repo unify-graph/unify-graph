@@ -61,7 +61,8 @@ import "list"
 
 	// Evidence: document IDs supporting this entity's inclusion.
 	// Every key MUST resolve to a defined document.
-	evidence: {[string]: true}
+	// Value is `true` (presence only) or an #EvidenceStrength tag.
+	evidence: {[string]: true | #EvidenceStrength}
 
 	// Optional: structured metadata
 	mention_count?: int & >=0
@@ -123,7 +124,7 @@ import "list"
 		"legal" | "alleged" | "employer" | "client" | "associate"
 
 	// Evidence supporting this specific connection
-	evidence?: {[string]: true}
+	evidence?: {[string]: true | #EvidenceStrength}
 
 	// When was this connection active?
 	period?: string
@@ -144,7 +145,7 @@ import "list"
 	currency:    *"USD" | string
 
 	// Evidence supporting this flow
-	evidence: {[string]: true}
+	evidence: {[string]: true | #EvidenceStrength}
 
 	// Temporal
 	date?:   string

@@ -70,7 +70,7 @@ entities: {
 			jp_morgan: true
 			bear_stearns: true
 		}
-		evidence: {EFTA02731082: true}
+		evidence: {EFTA02731082: "court_filing"}
 	}
 
 	maxwell: {
@@ -216,7 +216,7 @@ entities: {
 			dechert_llp: true
 			michael_milken: true
 		}
-		evidence: {"DB-SDNY-0002962": true}
+		evidence: {"DB-SDNY-0002962": "financial_record"}
 		connection_details: {
 			epstein:        {confidence: "high", rel_type: "financial", evidence: {"DB-SDNY-0002962": true, "EFTA02730996": true}, period: "2000-2015", notes: "$158M+ over ~15 years. Dechert LLP investigation."}
 			josh_harris:    {confidence: "high", rel_type: "professional", notes: "Apollo co-founders. Both had Epstein financial ties."}
@@ -482,7 +482,7 @@ entities: {
 		mention_count: 40
 		role: "Former WH strategist — text messages on iPhone 7"
 		connections: {epstein: true, trump: true}
-		evidence: {EFTA00027289: true}
+		evidence: {EFTA00027289: "text_message"}
 		notes: "TEXT MESSAGES on iPhone 7."
 	}
 
@@ -850,7 +850,7 @@ entities: {
 		mention_count: 7
 		role: "Point72/SAC Capital — $10M to Honeycomb"
 		connections: {epstein: true, honeycomb: true}
-		evidence: {"DB-SDNY-0008151": true}
+		evidence: {"DB-SDNY-0008151": "financial_record"}
 	}
 
 	elon_musk: {
@@ -938,7 +938,7 @@ entities: {
 		mention_count: 4
 		role: "Former MIT Media Lab director — resigned over Epstein ties"
 		connections: {epstein: true, reid_hoffman: true}
-		evidence: {"DB-SDNY-0003972": true}
+		evidence: {"DB-SDNY-0003972": "financial_record"}
 	}
 
 	casey_wasserman: {
@@ -1092,7 +1092,7 @@ entities: {
 		cluster: "hedge_fund"
 		role: "Coatue Management founder"
 		connections: {epstein: true, coatue_management: true}
-		evidence: {"DB-SDNY-0007748": true}
+		evidence: {"DB-SDNY-0007748": "financial_record"}
 		notes: "ZERO corpus hits but listed on DugganUSA visualization."
 	}
 
@@ -1102,7 +1102,7 @@ entities: {
 		cluster: "paypal_mafia"
 		role: "Palantir/PayPal — $4.45M+ to Valar Ventures"
 		connections: {epstein: true, reid_hoffman: true, valar_ventures: true}
-		evidence: {"DB-SDNY-0004924": true}
+		evidence: {"DB-SDNY-0004924": "financial_record"}
 		notes: "ZERO corpus hits. On visualization but not in DOJ text."
 	}
 
@@ -1122,7 +1122,7 @@ entities: {
 		cluster: "crypto"
 		role: "Blockstream CEO"
 		connections: {epstein: true, blockstream: true}
-		evidence: {"DB-SDNY-0000478": true}
+		evidence: {"DB-SDNY-0000478": "financial_record"}
 		notes: "ZERO corpus hits."
 	}
 

@@ -11,7 +11,7 @@ entities: {
 		mention_count: 308
 		role: "Manhattan townhouse — primary residence"
 		connections: {epstein: true, maxwell: true, wexner: true}
-		evidence: {"WEXNER-MANSION-DEED": true}
+		evidence: {"WEXNER-MANSION-DEED": "financial_record"}
 		notes: "Largest private residence in Manhattan. Originally Wexner's. Transferred to Epstein's Maple Inc for $0 in 2011."
 	}
 
@@ -22,7 +22,7 @@ entities: {
 		mention_count: 308
 		role: "New Mexico ranch — 8,000 acres"
 		connections: {epstein: true, bill_gates: true}
-		evidence: {"NM-AG-2019-ZORRO": true}
+		evidence: {"NM-AG-2019-ZORRO": "court_filing"}
 		notes: "Near Stanley, NM. Visited by Bill Gates. NM AG investigated."
 	}
 
@@ -33,7 +33,7 @@ entities: {
 		mention_count: 294
 		role: "Palm Beach mansion — site of initial investigation"
 		connections: {epstein: true, alfredo_rodriguez: true, juan_alessi: true}
-		evidence: {"PBSO-2005-INVESTIGATION": true}
+		evidence: {"PBSO-2005-INVESTIGATION": "court_filing"}
 		notes: "358 El Brillo Way. Where Palm Beach PD investigation started 2005."
 	}
 
@@ -92,7 +92,7 @@ entities: {
 			prince_andrew: true
 			trump: true
 		}
-		evidence: {"FLIGHT-LOGS-N908JE": true}
+		evidence: {"FLIGHT-LOGS-N908JE": "flight_log"}
 		notes: "N908JE. Flight logs document passengers. Entered as court exhibit in Giuffre v. Maxwell."
 	}
 
@@ -103,7 +103,7 @@ entities: {
 		mention_count: 4
 		role: "Federal jail where Epstein died August 10, 2019"
 		connections: {epstein: true, bill_barr: true}
-		evidence: {"MCC-DOJ-2019-DEATH": true}
+		evidence: {"MCC-DOJ-2019-DEATH": "documentary"}
 		notes: "Cameras malfunctioned. Guards sleeping. Death ruled suicide. DOJ IG investigated."
 	}
 }
