@@ -106,7 +106,7 @@ entities: {
 		name: "Metropolitan Correctional Center"
 		"@type": {Property: true}
 		cluster: "doj"
-		mention_count: 4
+		mention_count: 1000
 		role: "Federal jail where Epstein died August 10, 2019"
 		location: {lat: 40.714, lon: -74.000, address: "150 Park Row, New York, NY"}
 		connections: {epstein: true, bill_barr: true}
