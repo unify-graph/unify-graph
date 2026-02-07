@@ -36,6 +36,14 @@ else
   echo "Run: python3 -m venv .venv && .venv/bin/pip install -r requirements.txt"
 fi
 
+# Copy pre-computed enrichment data (not regenerated on every build)
+for f in scripts/wikidata_enriched.json scripts/propublica_enriched.json; do
+  if [ -f "$f" ]; then
+    cp "$f" "site/data/$(basename "$f")"
+    echo "Copied $f → site/data/"
+  fi
+done
+
 echo ""
 echo "Build complete. Data files in site/data/"
 echo "Serve with: python3 -m http.server -d site 8080"

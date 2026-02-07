@@ -239,7 +239,7 @@ const CLUSTER_COLORS = {
   family: '#e84393', unclassified: '#636e72'
 };
 
-let graphData, reportData, insightsData, analysisData, entitiesData, flowsData, docsData, networkxData;
+let graphData, reportData, insightsData, analysisData, entitiesData, flowsData, docsData, networkxData, enrichedData, propublicaData;
 let selectedNode = null;
 let currentColorMode = 'clusters';
 let bottleneckScores = {};
@@ -256,6 +256,18 @@ async function loadData() {
       })
     ));
     [graphData, reportData, insightsData, analysisData, entitiesData, flowsData, docsData, networkxData] = results;
+
+    // Load enrichment data (optional — graceful fallback)
+    enrichedData = {};
+    propublicaData = {};
+    try {
+      const wd = await fetch('data/wikidata_enriched.json').then(r => r.ok ? r.json() : {});
+      Object.assign(enrichedData, wd);
+    } catch(e) { /* enrichment data not available */ }
+    try {
+      const pp = await fetch('data/propublica_enriched.json').then(r => r.ok ? r.json() : {});
+      Object.assign(propublicaData, pp);
+    } catch(e) { /* ProPublica data not available */ }
 
     // Build node lookup
     graphData._nodeMap = {};
@@ -606,6 +618,40 @@ function selectNode(d) {
       ` : '<div class="field"><span class="field-value" style="color:#666">No network data</span></div>'}
     </div>
 
+
+    ${(() => {
+      const wd = enrichedData[d.id];
+      if (!wd || !wd.properties || Object.keys(wd.properties).length === 0) return '';
+      const p = wd.properties;
+      const show = ['employer','educated_at','member_of','position_held','partner','spouse','convicted_of','pseudonym','occupation','residence','child','sibling','father','mother','founded_by','owned_by','headquarters','ceo','industry'];
+      const labels = {employer:'Employer',educated_at:'Education',member_of:'Member of',position_held:'Position',partner:'Partner',spouse:'Spouse',convicted_of:'Convicted',pseudonym:'Pseudonym',occupation:'Occupation',residence:'Residence',child:'Children',sibling:'Siblings',father:'Father',mother:'Mother',founded_by:'Founded by',owned_by:'Owned by',headquarters:'HQ',ceo:'CEO',industry:'Industry'};
+      const rows = show.filter(k => p[k]).map(k =>
+        `<div class="field"><span class="field-label">${labels[k]||k}</span><span class="field-value">${p[k].map(v => esc(v.replace(/ \(Q\d+\)$/,''))).join(', ')}</span></div>`
+      ).join('');
+      const extIds = ['imdb','loc_authority','viaf','isni','gnd'].filter(k => p[k]);
+      const extRow = extIds.length ? `<div class="field" style="margin-top:4px"><span class="field-label">External IDs</span><span class="field-value" style="font-size:10px">${extIds.map(k => esc(k)+':'+esc(p[k][0])).join(' · ')}</span></div>` : '';
+      return `<div class="inspector-section"><h3>Wikidata</h3>${rows}${extRow}</div>`;
+    })()}
+
+    ${(() => {
+      const pp = propublicaData[d.id];
+      if (!pp) return '';
+      const fmt = v => v != null ? '$' + v.toLocaleString() : 'N/A';
+      const latest = pp.filings && pp.filings[0];
+      let filingRow = '';
+      if (latest) {
+        filingRow = `<div class="field"><span class="field-label">${latest.tax_period} Filing</span><span class="field-value">Rev: ${fmt(latest.revenue)} · Assets: ${fmt(latest.assets)} · Exp: ${fmt(latest.expenses)}</span></div>`;
+      }
+      return `<div class="inspector-section"><h3>ProPublica 990</h3>
+        <div class="field"><span class="field-label">Name</span><span class="field-value">${esc(pp.name)}</span></div>
+        <div class="field"><span class="field-label">EIN</span><span class="field-value">${pp.ein}</span></div>
+        <div class="field"><span class="field-label">Location</span><span class="field-value">${esc(pp.city||'')}, ${esc(pp.state||'')}</span></div>
+        <div class="field"><span class="field-label">Total Revenue</span><span class="field-value">${fmt(pp.total_revenue)}</span></div>
+        <div class="field"><span class="field-label">Total Assets</span><span class="field-value">${fmt(pp.total_assets)}</span></div>
+        ${filingRow}
+        <div class="field"><span class="field-label">Filings</span><span class="field-value"><a href="https://projects.propublica.org/nonprofits/organizations/${pp.ein}" target="_blank">${pp.filings ? pp.filings.length : 0} filings on ProPublica</a></span></div>
+      </div>`;
+    })()}
 
     <div class="inspector-section leads">
       <h3>Leads</h3>

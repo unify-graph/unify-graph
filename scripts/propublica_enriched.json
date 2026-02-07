@@ -1,0 +1,274 @@
+{
+  "clinton_foundation": {
+    "ein": 311580204,
+    "name": "Bill Hillary & Chelsea Clinton Foundation",
+    "city": "Little Rock",
+    "state": "AR",
+    "ntee_code": "E70",
+    "total_revenue": 83422797,
+    "total_assets": 317117567,
+    "filings": [
+      {
+        "tax_period": 2023,
+        "revenue": 30509666,
+        "assets": 304045623,
+        "expenses": 57597174
+      },
+      {
+        "tax_period": 2022,
+        "revenue": 32598951,
+        "assets": 306402788,
+        "expenses": 49335460
+      },
+      {
+        "tax_period": 2021,
+        "revenue": 66347107,
+        "assets": 353185170,
+        "expenses": 35150013
+      },
+      {
+        "tax_period": 2020,
+        "revenue": 28953184,
+        "assets": 328318812,
+        "expenses": 39537235
+      },
+      {
+        "tax_period": 2019,
+        "revenue": 42816475,
+        "assets": 318631559,
+        "expenses": 43674695
+      },
+      {
+        "tax_period": 2018,
+        "revenue": 30703366,
+        "assets": 299540673,
+        "expenses": 47510175
+      },
+      {
+        "tax_period": 2017,
+        "revenue": 38439854,
+        "assets": 329702628,
+        "expenses": 54553115
+      },
+      {
+        "tax_period": 2016,
+        "revenue": 70776528,
+        "assets": 335481447,
+        "expenses": 87415298
+      },
+      {
+        "tax_period": 2015,
+        "revenue": 116082508,
+        "assets": 359923364,
+        "expenses": 98877350
+      },
+      {
+        "tax_period": 2014,
+        "revenue": 177804612,
+        "assets": 354190170,
+        "expenses": 91281145
+      },
+      {
+        "tax_period": 2013,
+        "revenue": 148889439,
+        "assets": 277805820,
+        "expenses": 84684494
+      },
+      {
+        "tax_period": 2012,
+        "revenue": 54712950,
+        "assets": 225703274,
+        "expenses": 58751898
+      },
+      {
+        "tax_period": 2011,
+        "revenue": 57147869,
+        "assets": 197890114,
+        "expenses": 57606827
+      }
+    ]
+  },
+  "gratitude_america": {
+    "ein": 660789697,
+    "name": "Gratitude America Ltd",
+    "city": "St Thomas",
+    "state": "VI",
+    "ntee_code": "T20",
+    "total_revenue": 1,
+    "total_assets": 8175884,
+    "filings": [
+      {
+        "tax_period": 2022,
+        "revenue": 1,
+        "assets": 8175884,
+        "expenses": 0
+      },
+      {
+        "tax_period": 2021,
+        "revenue": 1,
+        "assets": 8175884,
+        "expenses": 0
+      },
+      {
+        "tax_period": 2020,
+        "revenue": 1,
+        "assets": 8175884,
+        "expenses": 8400
+      },
+      {
+        "tax_period": 2019,
+        "revenue": 242470,
+        "assets": 8184284,
+        "expenses": 110433
+      },
+      {
+        "tax_period": 2015,
+        "revenue": 10007332,
+        "assets": 10006564,
+        "expenses": 768
+      },
+      {
+        "tax_period": 2014,
+        "revenue": 1,
+        "assets": 1,
+        "expenses": 0
+      },
+      {
+        "tax_period": 2013,
+        "revenue": 1,
+        "assets": 1,
+        "expenses": 0
+      },
+      {
+        "tax_period": 2012,
+        "revenue": 1,
+        "assets": 1,
+        "expenses": 0
+      }
+    ]
+  },
+  "terramar": {
+    "ein": 455091884,
+    "name": "Terramar Project Inc",
+    "city": "Woburn",
+    "state": "MA",
+    "ntee_code": "C32",
+    "total_revenue": 24979,
+    "total_assets": 10252,
+    "filings": [
+      {
+        "tax_period": 2018,
+        "revenue": 24979,
+        "assets": 10252,
+        "expenses": 26172
+      },
+      {
+        "tax_period": 2017,
+        "revenue": 583,
+        "assets": 266,
+        "expenses": 18462
+      },
+      {
+        "tax_period": 2016,
+        "revenue": 31900,
+        "assets": 17019,
+        "expenses": 25093
+      },
+      {
+        "tax_period": 2015,
+        "revenue": 6974,
+        "assets": 1223,
+        "expenses": 211688
+      },
+      {
+        "tax_period": 2014,
+        "revenue": 132572,
+        "assets": 41789,
+        "expenses": 156347
+      },
+      {
+        "tax_period": 2013,
+        "revenue": 24567,
+        "assets": 21564,
+        "expenses": 189888
+      },
+      {
+        "tax_period": 2012,
+        "revenue": 127379,
+        "assets": 98608,
+        "expenses": 223923
+      }
+    ]
+  },
+  "wexner_foundation": {
+    "ein": 237320631,
+    "name": "Wexner Foundation",
+    "city": "New Albany",
+    "state": "OH",
+    "ntee_code": null,
+    "total_revenue": 12842712,
+    "total_assets": 4640042,
+    "filings": [
+      {
+        "tax_period": 2023,
+        "revenue": 14917241,
+        "assets": 3686906,
+        "expenses": 16360440
+      },
+      {
+        "tax_period": 2022,
+        "revenue": 10927166,
+        "assets": 5094557,
+        "expenses": 12275970
+      },
+      {
+        "tax_period": 2021,
+        "revenue": 9976190,
+        "assets": 6442852,
+        "expenses": 9376596
+      },
+      {
+        "tax_period": 2020,
+        "revenue": 10734234,
+        "assets": 5787648,
+        "expenses": 10686719
+      },
+      {
+        "tax_period": 2019,
+        "revenue": 14011293,
+        "assets": 5691851,
+        "expenses": 13831023
+      },
+      {
+        "tax_period": 2015,
+        "revenue": 15181043,
+        "assets": 5095951,
+        "expenses": 15288406
+      },
+      {
+        "tax_period": 2014,
+        "revenue": 11075242,
+        "assets": 5171973,
+        "expenses": 10729711
+      },
+      {
+        "tax_period": 2013,
+        "revenue": 10794979,
+        "assets": 4756669,
+        "expenses": 10848639
+      },
+      {
+        "tax_period": 2012,
+        "revenue": 9152751,
+        "assets": 4758670,
+        "expenses": 9450726
+      },
+      {
+        "tax_period": 2011,
+        "revenue": 10330871,
+        "assets": 5018091,
+        "expenses": 9177343
+      }
+    ]
+  }
+}
