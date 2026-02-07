@@ -21,7 +21,9 @@ scripts/duggan_cooccurrence.json
 scripts/littlesis_connections.json
 scripts/courtlistener_results.json
 scripts/courtlistener_cases.json
+scripts/wikidata_enrichment.json
 # opensanctions_ids.cue is tracked (manually reviewed)
+# wikidata_bio.cue is tracked (manually reviewed)
 
 # Python
 __pycache__/
