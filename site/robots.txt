@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://unify-graph.github.io/unify-graph/sitemap.xml

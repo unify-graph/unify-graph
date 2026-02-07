@@ -22,7 +22,7 @@
 
 ## Data Enrichment — API Integrations
 
-- [ ] Query ProPublica Nonprofit Explorer for foundations (Wexner Foundation, Epstein VI Foundation, etc.)
+- [x] Query ProPublica Nonprofit Explorer — 4 foundations enriched (Clinton Foundation, Gratitude America, Terramar, Wexner Foundation)
 - [ ] Query CourtListener API for case documents
 - [ ] Bulk DugganUSA API sweep for remaining low-mention entities
 - [ ] Reconcile DugganUSA results → CUE evidence citations
