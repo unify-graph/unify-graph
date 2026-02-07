@@ -220,6 +220,7 @@ tr.clickable { cursor: pointer; }
     <button data-view="radial">BFS Reach</button>
     <button data-view="evidence">Evidence Map</button>
     <button data-view="map">Geo Map</button>
+    <button data-view="timeline">Timeline</button>
     <a href="compare.html" style="background:#1a1a2a;border:1px solid #2a2a3a;color:#888;padding:4px 12px;text-decoration:none;font-size:11px;border-radius:3px;display:inline-flex;align-items:center;margin-left:auto">How This Compares</a>
   </nav>
   <div class="main graph-mode" id="main">
@@ -2094,6 +2095,167 @@ function renderMap() {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// TIMELINE VIEW
+// ═══════════════════════════════════════════════════════════════
+
+function renderTimeline() {
+  const dash = document.getElementById('dashboard');
+  dash.innerHTML = '<h2 style="margin-bottom:16px">Network Timeline</h2><div id="timeline-container" style="width:100%;height:calc(100vh - 140px);overflow-y:auto"></div>';
+
+  const container = document.getElementById('timeline-container');
+  const width = container.clientWidth || 900;
+
+  // Parse dates from entities
+  const parseDate = s => {
+    if (!s) return null;
+    if (s.length === 4) return new Date(+s, 0, 1);
+    if (s.length === 7) return new Date(+s.slice(0,4), +s.slice(5,7)-1, 1);
+    return new Date(s);
+  };
+
+  // Collect entities with temporal data
+  const temporal = graphData.nodes.filter(n => {
+    const ent = entitiesData?.[n.id];
+    return ent?.first_appearance || ent?.last_appearance;
+  }).map(n => {
+    const ent = entitiesData[n.id];
+    return {
+      ...n,
+      start: parseDate(ent.first_appearance),
+      end: parseDate(ent.last_appearance),
+      startLabel: ent.first_appearance || '',
+      endLabel: ent.last_appearance || '',
+    };
+  }).filter(d => d.start).sort((a, b) => a.start - b.start);
+
+  // Collect events
+  const evts = Object.values(docsData || {});
+  // Events from the events export (load from analysis data or inline)
+  const events = [];
+  // Parse events from entities.json metadata or known events
+  const knownEvents = [
+    {date: new Date(1973, 0), label: 'Epstein at Dalton School', type: 'other'},
+    {date: new Date(1985, 0), label: 'Meets Wexner', type: 'financial'},
+    {date: new Date(2005, 2), label: 'Palm Beach investigation', type: 'investigation'},
+    {date: new Date(2008, 5), label: 'NPA deal / Florida plea', type: 'plea_deal'},
+    {date: new Date(2018, 10), label: 'Miami Herald exposé', type: 'investigation'},
+    {date: new Date(2019, 6, 6), label: 'Arrested by FBI (SDNY)', type: 'arrest'},
+    {date: new Date(2019, 7, 10), label: 'Death at MCC', type: 'death'},
+    {date: new Date(2020, 6, 2), label: 'Maxwell arrested', type: 'arrest'},
+    {date: new Date(2021, 11, 29), label: 'Maxwell convicted', type: 'trial'},
+    {date: new Date(2022, 1, 15), label: 'Andrew settles', type: 'civil_suit'},
+    {date: new Date(2022, 1, 19), label: 'Brunel dies in prison', type: 'death'},
+    {date: new Date(2026, 0), label: 'EFTA document release', type: 'investigation'},
+  ];
+
+  if (!temporal.length) {
+    container.innerHTML = '<p style="color:#888;padding:40px">No entities with temporal data.</p>';
+    return;
+  }
+
+  const rowHeight = 28;
+  const marginLeft = 180;
+  const marginTop = 60;
+  const height = marginTop + temporal.length * rowHeight + 80;
+
+  // Time scale
+  const minDate = new Date(1970, 0);
+  const maxDate = new Date(2027, 0);
+  const x = d3.scaleTime().domain([minDate, maxDate]).range([marginLeft, width - 40]);
+
+  const svg = d3.select('#timeline-container').append('svg')
+    .attr('width', width).attr('height', height)
+    .style('background', '#0a0a0f');
+
+  // Time axis
+  const xAxis = d3.axisTop(x).ticks(d3.timeYear.every(5)).tickFormat(d3.timeFormat('%Y'));
+  svg.append('g')
+    .attr('transform', `translate(0,${marginTop})`)
+    .call(xAxis)
+    .selectAll('text').attr('fill', '#888').attr('font-size', '10px');
+  svg.selectAll('.domain, .tick line').attr('stroke', '#333');
+
+  // Grid lines
+  svg.append('g').selectAll('line')
+    .data(x.ticks(d3.timeYear.every(5))).join('line')
+    .attr('x1', d => x(d)).attr('x2', d => x(d))
+    .attr('y1', marginTop).attr('y2', height - 20)
+    .attr('stroke', '#1a1a22').attr('stroke-width', 0.5);
+
+  // Event markers (vertical lines with labels)
+  const eventColors = {
+    arrest: '#e15759', death: '#b07aa1', investigation: '#4e79a7',
+    plea_deal: '#f28e2b', trial: '#59a14f', civil_suit: '#edc948',
+    financial: '#76b7b2', other: '#636e72'
+  };
+
+  svg.append('g').selectAll('line')
+    .data(knownEvents).join('line')
+    .attr('x1', d => x(d.date)).attr('x2', d => x(d.date))
+    .attr('y1', marginTop + 5).attr('y2', height - 20)
+    .attr('stroke', d => eventColors[d.type] || '#444')
+    .attr('stroke-width', 1.5)
+    .attr('stroke-dasharray', '4,4')
+    .attr('opacity', 0.5);
+
+  svg.append('g').selectAll('text')
+    .data(knownEvents).join('text')
+    .attr('x', d => x(d.date) + 3)
+    .attr('y', marginTop + 16)
+    .attr('fill', d => eventColors[d.type] || '#666')
+    .attr('font-size', '8px')
+    .attr('font-family', 'inherit')
+    .attr('transform', d => `rotate(-35, ${x(d.date) + 3}, ${marginTop + 16})`)
+    .text(d => d.label);
+
+  // Entity timelines (horizontal bars)
+  const rows = svg.append('g').selectAll('g')
+    .data(temporal).join('g')
+    .attr('transform', (d, i) => `translate(0,${marginTop + 40 + i * rowHeight})`);
+
+  // Entity name labels
+  rows.append('text')
+    .attr('x', marginLeft - 8)
+    .attr('y', rowHeight / 2 + 1)
+    .attr('fill', d => CLUSTER_COLORS[d.cluster] || '#888')
+    .attr('font-size', '10px')
+    .attr('font-family', 'inherit')
+    .attr('text-anchor', 'end')
+    .text(d => d.name.length > 22 ? d.name.slice(0, 20) + '…' : d.name);
+
+  // Timeline bars
+  rows.append('rect')
+    .attr('x', d => x(d.start))
+    .attr('y', 4)
+    .attr('width', d => {
+      const endX = d.end ? x(d.end) : x(new Date());
+      return Math.max(4, endX - x(d.start));
+    })
+    .attr('height', rowHeight - 10)
+    .attr('rx', 3)
+    .attr('fill', d => CLUSTER_COLORS[d.cluster] || '#636e72')
+    .attr('opacity', d => d.has_evidence ? 0.8 : 0.35)
+    .style('cursor', 'pointer')
+    .on('click', (e, d) => { selectNode(d); e.stopPropagation(); });
+
+  // Date labels on bars
+  rows.append('text')
+    .attr('x', d => x(d.start) + 4)
+    .attr('y', rowHeight / 2 + 1)
+    .attr('fill', '#fff')
+    .attr('font-size', '8px')
+    .attr('font-family', 'inherit')
+    .attr('opacity', 0.7)
+    .text(d => d.startLabel + (d.endLabel ? ' — ' + d.endLabel : ''));
+
+  // Legend
+  svg.append('text')
+    .attr('x', marginLeft).attr('y', height - 5)
+    .attr('fill', '#666').attr('font-size', '10px').attr('font-family', 'inherit')
+    .text(`${temporal.length} entities with temporal data | ${knownEvents.length} key events | opacity = evidence strength`);
+}
+
+// ═══════════════════════════════════════════════════════════════
 // VIEW SWITCHING
 // ═══════════════════════════════════════════════════════════════
 
@@ -2127,6 +2289,7 @@ function switchView(view) {
     else if (view === 'radial') renderRadialBFS();
     else if (view === 'evidence') renderEvidenceMap();
     else if (view === 'map') renderMap();
+    else if (view === 'timeline') renderTimeline();
   }
 }
 

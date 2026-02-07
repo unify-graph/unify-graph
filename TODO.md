@@ -62,7 +62,7 @@
 - [x] Add SKOS vocabulary for cluster taxonomy (cluster_taxonomy.cue — 20 clusters with hierarchy + domains)
 - [x] FollowTheMoney (FtM) schema alignment — OCCRP/Aleph interoperability
 - [x] Jupyter notebook companion (exploration.ipynb: centrality, communities, paths, gaps)
-- [ ] Temporal modeling — add date ranges to connections for timeline view
+- [x] Temporal modeling — 21 entities dated, 18 events, timeline view (11th view)
 - [x] Multi-source provenance tracking — #DataSource enum + sources field on #Entity
 
 ---

@@ -54,8 +54,21 @@ def search_littlesis(name):
     params = urllib.parse.urlencode({"q": name})
     url = f"{ENTITY_SEARCH}?{params}"
     data = api_get(url)
-    if data and "results" in data:
-        return data.get("results", [])
+    if data and "data" in data:
+        # Normalize: flatten attributes into top-level for matching
+        results = []
+        for item in data["data"]:
+            attrs = item.get("attributes", {})
+            results.append({
+                "id": item.get("id") or attrs.get("id"),
+                "name": attrs.get("name", ""),
+                "blurb": attrs.get("blurb", ""),
+                "primary_ext": attrs.get("primary_ext", ""),
+                "types": attrs.get("types", []),
+                "start_date": attrs.get("start_date"),
+                "end_date": attrs.get("end_date"),
+            })
+        return results
     return []
 
 
@@ -64,7 +77,22 @@ def get_relationships(entity_id):
     url = RELATIONSHIPS.format(id=entity_id)
     data = api_get(url)
     if data and "data" in data:
-        return data.get("data", [])
+        # Normalize relationship data
+        rels = []
+        for item in data["data"]:
+            attrs = item.get("attributes", {})
+            rels.append({
+                "id": item.get("id") or attrs.get("id"),
+                "description1": attrs.get("description1", ""),
+                "description2": attrs.get("description2", ""),
+                "category_id": attrs.get("category_id"),
+                "entity1_id": attrs.get("entity1_id"),
+                "entity2_id": attrs.get("entity2_id"),
+                "start_date": attrs.get("start_date"),
+                "end_date": attrs.get("end_date"),
+                "amount": attrs.get("amount"),
+            })
+        return rels
     return []
 
 
