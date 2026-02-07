@@ -61,7 +61,7 @@
 
 - [ ] Add SKOS vocabulary for cluster taxonomy (ConceptScheme for manual clusters + algorithmic communities)
 - [x] FollowTheMoney (FtM) schema alignment — OCCRP/Aleph interoperability
-- [ ] Jupyter notebook companion (interactive analysis using NetworkX data)
+- [x] Jupyter notebook companion (exploration.ipynb: centrality, communities, paths, gaps)
 - [ ] Temporal modeling — add date ranges to connections for timeline view
 - [x] Multi-source provenance tracking — #DataSource enum + sources field on #Entity
 
