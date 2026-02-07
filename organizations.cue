@@ -82,6 +82,7 @@ entities: {
 		cluster: "academia"
 		mention_count: 62
 		role: "Academic institution — Epstein donations"
+		location: {lat: 42.374, lon: -71.117, address: "Cambridge, MA"}
 		connections: {
 			larry_summers: true
 			martin_nowak: true

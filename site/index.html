@@ -14,6 +14,7 @@
 <link rel="canonical" href="https://unify-graph.github.io/unify-graph/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/topojson.v3.min.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; background: #0a0a0f; color: #c8c8d0; font-size: 13px; overflow: hidden; height: 100vh; }
@@ -218,6 +219,7 @@ tr.clickable { cursor: pointer; }
     <button data-view="structural">Structural</button>
     <button data-view="radial">BFS Reach</button>
     <button data-view="evidence">Evidence Map</button>
+    <button data-view="map">Geo Map</button>
     <a href="compare.html" style="background:#1a1a2a;border:1px solid #2a2a3a;color:#888;padding:4px 12px;text-decoration:none;font-size:11px;border-radius:3px;display:inline-flex;align-items:center;margin-left:auto">How This Compares</a>
   </nav>
   <div class="main graph-mode" id="main">
@@ -1918,6 +1920,180 @@ function _renderEvidenceMap(container, activeDocs, activeEntities, docEntities, 
 }
 
 // ═══════════════════════════════════════════════════════════════
+// GEOGRAPHIC MAP
+// ═══════════════════════════════════════════════════════════════
+
+function renderMap() {
+  const dash = document.getElementById('dashboard');
+  dash.innerHTML = '<h2 style="margin-bottom:16px">Geographic Map</h2><div id="map-container" style="width:100%;height:calc(100vh - 140px)"></div>';
+
+  const container = document.getElementById('map-container');
+  const width = container.clientWidth || 900;
+  const height = container.clientHeight || 600;
+
+  // Collect entities with location data
+  const locations = graphData.nodes.filter(n => {
+    const ent = entitiesData?.[n.id];
+    return ent?.location?.lat && ent?.location?.lon;
+  }).map(n => {
+    const ent = entitiesData[n.id];
+    return { ...n, lat: ent.location.lat, lon: ent.location.lon, address: ent.location.address || '' };
+  });
+
+  if (!locations.length) {
+    container.innerHTML = '<p style="color:#888;padding:40px">No entities with location data found.</p>';
+    return;
+  }
+
+  // Find connected people for each location
+  const locationConnections = {};
+  locations.forEach(loc => {
+    const conns = Object.keys(entitiesData[loc.id]?.connections || {});
+    locationConnections[loc.id] = conns.filter(c => {
+      const e = entitiesData[c];
+      return e && !e.location; // people, not other locations
+    });
+  });
+
+  const svg = d3.select('#map-container').append('svg')
+    .attr('width', width).attr('height', height)
+    .style('background', '#080812');
+
+  // Mercator projection centered on Americas
+  const projection = d3.geoMercator()
+    .center([-72, 30])
+    .scale(Math.min(width, height) * 1.8)
+    .translate([width / 2, height / 2]);
+
+  const path = d3.geoPath().projection(projection);
+
+  // Load world basemap
+  const worldUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json';
+  fetch(worldUrl).then(r => r.json()).then(world => {
+    const land = topojson.feature(world, world.objects.land);
+
+    // Draw land
+    svg.append('g').selectAll('path')
+      .data(land.features).join('path')
+      .attr('d', path)
+      .attr('fill', '#151520')
+      .attr('stroke', '#252535')
+      .attr('stroke-width', 0.5);
+
+    // Draw graticule
+    svg.append('path')
+      .datum(d3.geoGraticule10())
+      .attr('d', path)
+      .attr('fill', 'none')
+      .attr('stroke', '#1a1a25')
+      .attr('stroke-width', 0.3);
+
+    // Connection lines from epstein to each property
+    const epsteinLoc = locations.find(l => l.id === 'east_71st') || locations[0];
+    locations.forEach(loc => {
+      if (loc.id === epsteinLoc.id) return;
+      svg.append('path')
+        .datum({type: 'LineString', coordinates: [[epsteinLoc.lon, epsteinLoc.lat], [loc.lon, loc.lat]]})
+        .attr('d', path)
+        .attr('fill', 'none')
+        .attr('stroke', '#3a3a5a')
+        .attr('stroke-width', 1)
+        .attr('stroke-dasharray', '4,4')
+        .attr('opacity', 0.5);
+    });
+
+    // Location markers
+    const markers = svg.append('g').selectAll('g')
+      .data(locations).join('g')
+      .attr('transform', d => {
+        const [x, y] = projection([d.lon, d.lat]);
+        return `translate(${x},${y})`;
+      })
+      .style('cursor', 'pointer');
+
+    // Pulsing outer ring for evidence
+    markers.append('circle')
+      .attr('r', d => d.has_evidence ? 14 : 10)
+      .attr('fill', 'none')
+      .attr('stroke', d => d.has_evidence ? '#4caf50' : '#f0ad4e')
+      .attr('stroke-width', 1)
+      .attr('opacity', 0.3);
+
+    // Main dot
+    markers.append('circle')
+      .attr('r', d => 4 + Math.sqrt(d.mention_count || 1) * 0.5)
+      .attr('fill', d => CLUSTER_COLORS[d.cluster] || '#636e72')
+      .attr('stroke', d => d.has_evidence ? '#4caf50' : '#f0ad4e')
+      .attr('stroke-width', 1.5)
+      .attr('opacity', 0.9);
+
+    // Labels
+    markers.append('text')
+      .text(d => d.name)
+      .attr('x', 10).attr('y', 4)
+      .attr('fill', '#c8c8d0')
+      .attr('font-size', '11px')
+      .attr('font-family', 'inherit');
+
+    // Connected entity count badge
+    markers.append('text')
+      .text(d => {
+        const count = locationConnections[d.id]?.length || 0;
+        return count ? `${count} connected` : '';
+      })
+      .attr('x', 10).attr('y', 16)
+      .attr('fill', '#888')
+      .attr('font-size', '9px')
+      .attr('font-family', 'inherit');
+
+    // Tooltip on hover
+    const tooltip = d3.select('body').append('div')
+      .style('position', 'absolute')
+      .style('background', '#1a1a2a')
+      .style('border', '1px solid #333')
+      .style('padding', '8px 12px')
+      .style('border-radius', '4px')
+      .style('font-size', '11px')
+      .style('color', '#c8c8d0')
+      .style('pointer-events', 'none')
+      .style('display', 'none')
+      .style('z-index', '1000');
+
+    markers.on('mouseover', (e, d) => {
+      const people = locationConnections[d.id] || [];
+      const names = people.slice(0, 8).map(pid => entitiesData[pid]?.name || pid).join(', ');
+      tooltip.html(`<strong>${esc(d.name)}</strong><br>${esc(d.address)}<br><br>` +
+        `<span style="color:#6ea8fe">${people.length} connected entities</span>` +
+        (names ? `<br><span style="color:#888">${esc(names)}${people.length > 8 ? '...' : ''}</span>` : ''))
+        .style('display', 'block')
+        .style('left', (e.pageX + 12) + 'px')
+        .style('top', (e.pageY - 10) + 'px');
+    }).on('mousemove', e => {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 10) + 'px');
+    }).on('mouseout', () => tooltip.style('display', 'none'))
+    .on('click', (e, d) => { selectNode(d); e.stopPropagation(); });
+
+    // Zoom
+    svg.call(d3.zoom().scaleExtent([0.5, 8]).on('zoom', e => {
+      svg.selectAll('g').attr('transform', e.transform);
+      svg.selectAll('path').attr('transform', e.transform);
+    }));
+
+  }).catch(err => {
+    // Fallback: plot points without basemap
+    console.warn('Could not load world basemap:', err);
+    const markers = svg.append('g').selectAll('circle')
+      .data(locations).join('circle')
+      .attr('cx', d => projection([d.lon, d.lat])[0])
+      .attr('cy', d => projection([d.lon, d.lat])[1])
+      .attr('r', 6)
+      .attr('fill', d => CLUSTER_COLORS[d.cluster] || '#636e72')
+      .attr('stroke', '#4caf50')
+      .attr('stroke-width', 1.5);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
 // VIEW SWITCHING
 // ═══════════════════════════════════════════════════════════════
 
@@ -1950,6 +2126,7 @@ function switchView(view) {
     else if (view === 'structural') renderStructural();
     else if (view === 'radial') renderRadialBFS();
     else if (view === 'evidence') renderEvidenceMap();
+    else if (view === 'map') renderMap();
   }
 }
 

@@ -32,7 +32,7 @@
 
 - [x] Radial BFS from Epstein: concentric rings showing hop distance, evidence status
 - [x] Evidence dependency map: bipartite document↔entity view with blast radius highlighting
-- [ ] Geographic map: properties (Zorro Ranch, Little St James, 71st Street, Paris apartment)
+- [x] Geographic map: 8 locations with basemap, connections, tooltips (10th view)
 
 ## Visualization — Enhancements
 

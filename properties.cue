@@ -10,6 +10,7 @@ entities: {
 		cluster: "core"
 		mention_count: 308
 		role: "Manhattan townhouse — primary residence"
+		location: {lat: 40.771, lon: -73.965, address: "9 East 71st Street, New York, NY"}
 		connections: {epstein: true, maxwell: true, wexner: true}
 		evidence: {"WEXNER-MANSION-DEED": "financial_record"}
 		notes: "Largest private residence in Manhattan. Originally Wexner's. Transferred to Epstein's Maple Inc for $0 in 2011."
@@ -21,6 +22,7 @@ entities: {
 		cluster: "core"
 		mention_count: 308
 		role: "New Mexico ranch — 8,000 acres"
+		location: {lat: 34.837, lon: -105.984, address: "Stanley, NM"}
 		connections: {epstein: true, bill_gates: true}
 		evidence: {"NM-AG-2019-ZORRO": "court_filing"}
 		notes: "Near Stanley, NM. Visited by Bill Gates. NM AG investigated."
@@ -32,6 +34,7 @@ entities: {
 		cluster: "core"
 		mention_count: 294
 		role: "Palm Beach mansion — site of initial investigation"
+		location: {lat: 26.701, lon: -80.037, address: "358 El Brillo Way, Palm Beach, FL"}
 		connections: {epstein: true, alfredo_rodriguez: true, juan_alessi: true}
 		evidence: {"PBSO-2005-INVESTIGATION": "court_filing"}
 		notes: "358 El Brillo Way. Where Palm Beach PD investigation started 2005."
@@ -43,6 +46,7 @@ entities: {
 		cluster: "core"
 		mention_count: 255
 		role: "Private Caribbean island — US Virgin Islands"
+		location: {lat: 18.300, lon: -64.825, address: "Little Saint James, US Virgin Islands"}
 		connections: {
 			epstein: true
 			maxwell: true
@@ -63,6 +67,7 @@ entities: {
 		cluster: "political"
 		mention_count: 69
 		role: "Trump's Palm Beach club — Epstein was a member"
+		location: {lat: 26.677, lon: -80.037, address: "1100 S Ocean Blvd, Palm Beach, FL"}
 		connections: {trump: true, epstein: true, maxwell: true}
 		evidence: {}
 		notes: "Epstein reportedly banned after incident with member's daughter."
@@ -74,6 +79,7 @@ entities: {
 		cluster: "core"
 		mention_count: 42
 		role: "NYC prep school — Epstein taught here 1973-75"
+		location: {lat: 40.778, lon: -73.954, address: "108 East 89th Street, New York, NY"}
 		connections: {epstein: true, donald_barr: true, bill_barr: true}
 		evidence: {}
 		notes: "Donald Barr (AG Barr's father) hired Epstein despite no degree."
@@ -102,6 +108,7 @@ entities: {
 		cluster: "doj"
 		mention_count: 4
 		role: "Federal jail where Epstein died August 10, 2019"
+		location: {lat: 40.714, lon: -74.000, address: "150 Park Row, New York, NY"}
 		connections: {epstein: true, bill_barr: true}
 		evidence: {"MCC-DOJ-2019-DEATH": "documentary"}
 		notes: "Cameras malfunctioned. Guards sleeping. Death ruled suicide. DOJ IG investigated."

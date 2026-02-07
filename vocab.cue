@@ -75,6 +75,13 @@ import "list"
 	role?:          string
 	notes?:         string
 
+	// Optional: geographic location
+	location?: {
+		lat:      number & >=-90 & <=90
+		lon:      number & >=-180 & <=180
+		address?: string
+	}
+
 	// Optional: temporal bounds
 	first_appearance?: string // date or year
 	last_appearance?:  string
