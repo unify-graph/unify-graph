@@ -19,6 +19,8 @@ scripts/littlesis_results.json
 scripts/duggan_sweep_results.json
 scripts/duggan_cooccurrence.json
 scripts/littlesis_connections.json
+scripts/courtlistener_results.json
+scripts/courtlistener_cases.json
 opensanctions_ids.cue
 
 # Python

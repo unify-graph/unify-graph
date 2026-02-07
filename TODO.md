@@ -23,7 +23,7 @@
 ## Data Enrichment — API Integrations
 
 - [x] Query ProPublica Nonprofit Explorer — 4 foundations enriched (Clinton Foundation, Gratitude America, Terramar, Wexner Foundation)
-- [ ] Query CourtListener API for case documents
+- [x] Query CourtListener API — 6 case documents, 7 entity IDs (Brown v. Maxwell, Giuffre v. Maxwell, US v. Maxwell, etc.)
 - [x] Bulk DugganUSA API sweep — 69 entities swept, 65 with new/increased hits, mention_counts updated in CUE
 - [x] Reconcile DugganUSA results → CUE evidence citations (177 new citations across 68 entities, evidence coverage 21→79/132)
 
