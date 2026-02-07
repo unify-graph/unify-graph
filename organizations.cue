@@ -143,7 +143,7 @@ entities: {
 
 	cantor_fitzgerald: {
 		name: "Cantor Fitzgerald"
-		"@type": {Organization: true}
+		"@type": {Organization: true, FinancialInstitution: true}
 		cluster: "financial"
 		mention_count: 15
 		role: "Financial services — Lutnick CEO"

@@ -167,7 +167,7 @@ entities: {
 
 	sigrid_mccawley: {
 		name: "Sigrid McCawley"
-		"@type": {Person: true}
+		"@type": {Person: true, LegalProtection: true}
 		cluster: "legal"
 		mention_count: 363
 		role: "Victim attorney — Boies Schiller Flexner"
@@ -228,7 +228,7 @@ entities: {
 
 	brad_edwards: {
 		name: "Brad Edwards"
-		"@type": {Person: true}
+		"@type": {Person: true, LegalProtection: true}
 		cluster: "legal"
 		mention_count: 255
 		role: "Victim attorney — represented multiple Epstein accusers"
@@ -290,7 +290,7 @@ entities: {
 
 	jack_scarola: {
 		name: "Jack Scarola"
-		"@type": {Person: true}
+		"@type": {Person: true, LegalProtection: true}
 		cluster: "legal"
 		mention_count: 157
 		role: "Attorney — represented Epstein victims"
@@ -373,7 +373,7 @@ entities: {
 
 	alfredo_rodriguez: {
 		name: "Alfredo Rodriguez"
-		"@type": {Person: true}
+		"@type": {Person: true, Informant: true}
 		cluster: "staff"
 		mention_count: 76
 		role: "Former house manager — stole Epstein's black book"
@@ -417,7 +417,7 @@ entities: {
 
 	paul_cassell: {
 		name: "Paul Cassell"
-		"@type": {Person: true}
+		"@type": {Person: true, LegalProtection: true}
 		cluster: "legal"
 		mention_count: 57
 		role: "Law professor / victim attorney"
@@ -499,7 +499,7 @@ entities: {
 
 	marie_villafana: {
 		name: "Marie Villafana"
-		"@type": {Person: true, Prosecutor: true}
+		"@type": {Person: true, Prosecutor: true, GovernmentOfficial: true}
 		cluster: "doj"
 		mention_count: 24
 		role: "AUSA who worked under Acosta on Epstein case"
@@ -601,7 +601,7 @@ entities: {
 
 	juan_alessi: {
 		name: "Juan Alessi"
-		"@type": {Person: true}
+		"@type": {Person: true, Witness: true}
 		cluster: "staff"
 		mention_count: 14
 		role: "Former house manager — testified extensively"
@@ -886,7 +886,7 @@ entities: {
 
 	virginia_giuffre: {
 		name: "Virginia Giuffre"
-		"@type": {Person: true}
+		"@type": {Person: true, Victim: true}
 		cluster: "victim"
 		mention_count: 5
 		role: "Key accuser — civil suits against Prince Andrew, Dershowitz"

@@ -28,7 +28,8 @@ import "list"
 	"HedgeFund" | "InvestmentFirm" | "ModelingAgency" |
 	"CoreNetwork" | "FinancialEnabler" | "LegalProtection" |
 	"Allegations" | "Prosecutor" | "Scheduler" | "Recruiter" |
-	"Fixer" | "Aircraft" | "Property" | "Foundation"
+	"Fixer" | "Aircraft" | "Property" | "Foundation" |
+	"Victim" | "Witness" | "Informant"
 
 // #EvidenceStrength — how well-sourced is a claim?
 #EvidenceStrength: "documentary" | "testimonial" | "circumstantial" |
