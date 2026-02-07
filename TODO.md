@@ -59,7 +59,7 @@
 
 ## Longer Term
 
-- [ ] Add SKOS vocabulary for cluster taxonomy (ConceptScheme for manual clusters + algorithmic communities)
+- [x] Add SKOS vocabulary for cluster taxonomy (cluster_taxonomy.cue — 20 clusters with hierarchy + domains)
 - [x] FollowTheMoney (FtM) schema alignment — OCCRP/Aleph interoperability
 - [x] Jupyter notebook companion (exploration.ipynb: centrality, communities, paths, gaps)
 - [ ] Temporal modeling — add date ranges to connections for timeline view
