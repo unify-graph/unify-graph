@@ -193,6 +193,16 @@ td:last-child { font-weight: 600; }
     <div class="lead-desc">Entity is assigned to a cluster but has zero connections to peers.</div>
     <div class="lead-example">→ Misclassified, or genuinely isolated?</div>
   </div>
+  <div class="lead-card">
+    <div class="lead-title">Community vs Cluster Mismatch</div>
+    <div class="lead-desc">NetworkX Louvain community detection disagrees with the manual cluster label.</div>
+    <div class="lead-example">→ 73/132 entities structurally belong to a different group than their label says. Either the label is wrong or the entity operates across domains.</div>
+  </div>
+  <div class="lead-card">
+    <div class="lead-title">Entity Reconciliation</div>
+    <div class="lead-desc">111/132 entities linked to Wikidata QIDs. CUE validates the mapping at compile time.</div>
+    <div class="lead-example">→ QIDs enable federated queries: SPARQL can pull in all linked identifiers (OpenCorporates, LittleSis, court records) from a single ID.</div>
+  </div>
 </div>
 
 <h2>Detailed Comparison</h2>
@@ -277,7 +287,18 @@ td:last-child { font-weight: 600; }
       <td>Legal framework</td>
       <td>Full-text search</td>
       <td>—</td>
-      <td class="col-ug">Gap detection, bridges, cascades, BFS, reciprocity</td>
+      <td class="col-ug">Gap detection, bridges, cascades, BFS, reciprocity, NetworkX (betweenness, PageRank, community detection)</td>
+    </tr>
+    <tr>
+      <td>External ID reconciliation</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td class="col-ug">111/132 Wikidata QIDs</td>
     </tr>
     <tr>
       <td>Completeness enforcement</td>
@@ -310,7 +331,7 @@ td:last-child { font-weight: 600; }
       <td>Vanilla JS + D3</td>
       <td>React + Express</td>
       <td>CSV + GDrive</td>
-      <td class="col-ug">CUE + D3</td>
+      <td class="col-ug">CUE + Python/NetworkX + D3</td>
     </tr>
   </tbody>
 </table>
@@ -333,12 +354,21 @@ td:last-child { font-weight: 600; }
     <span class="complement-arrow">→</span>
     <div class="complement-box" style="border-color:#5a3a6a">
       <div class="box-name" style="color:#a29bfe">unify-graph</div>
-      <div class="box-desc">Gap analysis (132 entities)</div>
+      <div class="box-desc">Typed model + gap analysis</div>
     </div>
-    <span class="complement-arrow">→</span>
+    <span class="complement-arrow">←</span>
     <div class="complement-box">
-      <div class="box-name">Investigative leads</div>
-      <div class="box-desc">What to look at next</div>
+      <div class="box-name">Wikidata</div>
+      <div class="box-desc">111 QIDs (entity reconciliation)</div>
+    </div>
+  </div>
+  <div class="complement-flow" style="margin-top:4px">
+    <div style="width:1px"></div>
+    <div style="width:1px"></div>
+    <div style="width:1px"></div>
+    <div class="complement-box" style="border-color:#5a3a6a;margin-left:auto;margin-right:auto">
+      <div class="box-name" style="color:#a29bfe">↓</div>
+      <div class="box-desc">Investigative leads + LLM context (TOON)</div>
     </div>
   </div>
   <p style="color:#888;margin-bottom:0">DugganUSA tells you what's <strong>in</strong> the documents. This project tells you what's <strong>still missing from the picture</strong>.</p>
@@ -354,12 +384,13 @@ td:last-child { font-weight: 600; }
     <tr><td>Fragility</td><td>Most cross-cluster relationships depend on a single bridge entity. Discredit that person and the connection between those worlds disappears from the public record. <em>This is a genuine structural finding</em> — the graph looks dense but is actually hub-and-spoke.</td></tr>
     <tr><td>Directionality bias</td><td>Almost all connections are one-way — the model reflects who investigators connected to whom, not mutual relationships. The graph shows the investigation's perspective, not the network's actual topology.</td></tr>
     <tr><td>Reachability</td><td>Everyone is within 2 hops of Epstein. This is a mathematical consequence of hub-and-spoke structure, not an investigative finding — it would be true of any network built around a central figure.</td></tr>
+    <tr><td>Cluster validation</td><td>NetworkX Louvain detected 12 communities vs. 19 manual clusters. 73/132 entities mismatch. Community 0 alone spans 45 entities across 11 clusters — the "banking" label is structurally a broader financial orbit. <em>This validates the model's usefulness</em> — the disagreements identify cross-domain operators and potential misclassifications.</td></tr>
   </tbody>
 </table>
 
 <p style="margin-top:32px;color:#555;font-size:11px">
-  Built with <a href="https://cuelang.org">CUE</a> and <a href="https://d3js.org">D3.js</a>.
-  Data from <a href="https://analytics.dugganusa.com/epstein/">DugganUSA</a>, DOJ EFTA Release, and public reporting.
+  Built with <a href="https://cuelang.org">CUE</a>, <a href="https://networkx.org">NetworkX</a>, and <a href="https://d3js.org">D3.js</a>.
+  Data from <a href="https://analytics.dugganusa.com/epstein/">DugganUSA</a>, <a href="https://www.wikidata.org">Wikidata</a>, DOJ EFTA Release, and public reporting.
   <a href="https://github.com/unify-graph/unify-graph">Source on GitHub</a>.
 </p>
 

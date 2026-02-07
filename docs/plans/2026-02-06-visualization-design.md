@@ -44,8 +44,8 @@ Key adaptation: infrastructure uses directed DAGs (`depends_on`). Social network
 ### 1. Force Graph + Entity Inspector
 
 - **Node size** = total degree (outbound + inbound connections)
-- **Node color** = cluster
-- **Node opacity** = evidence coverage (opaque = has evidence, ghost = unverified)
+- **Node color** = cluster (default), algorithmic community (Louvain), or bottleneck score (heatmap) — toggled via graph controls
+- **Node opacity** = evidence coverage (opaque = has evidence, ghost = unverified); bottleneck mode uses score-based opacity
 - **Node ring** = gap severity (red = 3+ gaps, orange = 1-2 gaps)
 - **Edge style** = solid (bidirectional) / dashed (unidirectional)
 - **Click node** → inspector panel with Known / Missing / Leads sections
@@ -114,6 +114,22 @@ Per brainstorming decision: review suitability of data model regularly. Check:
 
 **Data:** `graph.json` links (compute cluster-pair matrix), `analysis.json` sole_connectors (pairs/by_entity)
 
+### 7. Structural Analysis View
+
+**Purpose:** Pure topology derivations. Sub-tabs: structural holes (clustering coefficient), power asymmetry, cluster density, bridge redundancy, cascading orphans, cluster affinity, bottleneck ranking.
+
+**Data:** `analysis.json` structural (clustering_coeff, power_asymmetry, cluster_density, cascading_orphans, bottleneck, resilience), `graph.json` nodes
+
+### Graph Color Mode Toggle
+
+Three modes switch node fill color and legend, accessible from controls in the graph container:
+
+- **Clusters** (default): manual cluster assignment, opacity = evidence status
+- **Communities**: NetworkX Louvain community detection (12 communities), stroke = cluster color for visual disagreement, legend shows community-cluster mismatch count
+- **Bottleneck**: `d3.interpolateYlOrRd` heatmap of bottleneck composite score, zero-score nodes fade to near-invisible
+
+**Data:** `networkx.json` nodes (community field), `analysis.json` structural.bottleneck (score field)
+
 ## Rejected Alternatives
 
 - **Sankey (financial flows):** DugganUSA already has one. Redundant.
@@ -127,8 +143,12 @@ Per brainstorming decision: review suitability of data model regularly. Check:
 - Radial BFS from Epstein: concentric rings showing hop distance, evidence status
 - Evidence dependency Sankey: if a document is discredited, who loses their evidence base
 - Geographic map: properties are modeled (Zorro Ranch, Little St James, 71st Street)
-- JSON-LD `@context` for semantic web interoperability
-- Jupyter notebook for NetworkX analysis (betweenness centrality, community detection)
+- ~~JSON-LD `@context` for semantic web interoperability~~ ✓ `site/data/context.jsonld`
+- ~~NetworkX analysis (betweenness centrality, community detection)~~ ✓ `scripts/analyze.py`
+- ~~TOON compact export for token-efficient LLM context~~ ✓ `scripts/toon_export.py` → `site/data/graph.toon` (87% smaller than graph.json)
+- ~~Community vs cluster comparison~~ ✓ 73/132 mismatches, C0 mega-community spans 11 clusters
 - Live DugganUSA API integration (search directly from inspector)
-- TOON compact export for token-efficient LLM context
 - Role-scoped views (legal, financial, political)
+- SKOS vocabulary for cluster/community taxonomy
+
+See `TODO.md` at project root for the full task list.

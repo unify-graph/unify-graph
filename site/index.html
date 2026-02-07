@@ -119,6 +119,12 @@ tr.clickable { cursor: pointer; }
 .legend-item { display: flex; align-items: center; gap: 3px; }
 .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
 
+/* Graph controls */
+.graph-controls { position: absolute; top: 10px; left: 10px; display: flex; gap: 4px; z-index: 10; }
+.graph-controls button { background: rgba(26,26,42,0.9); border: 1px solid #2a2a3a; color: #888; padding: 3px 8px; cursor: pointer; font-family: inherit; font-size: 10px; border-radius: 3px; }
+.graph-controls button.active { background: #2a2a4a; color: #e8e8f0; border-color: #4a4a6a; }
+.graph-controls button:hover { color: #c8c8d0; }
+
 /* Tooltip */
 .tooltip { position: absolute; background: #1a1a2a; border: 1px solid #3a3a5a; padding: 6px 10px; border-radius: 4px; pointer-events: none; font-size: 11px; z-index: 100; white-space: nowrap; }
 
@@ -129,6 +135,37 @@ tr.clickable { cursor: pointer; }
 #loading .load-text { color: #888; font-size: 12px; }
 .error-banner { background: #2a1a1a; border: 1px solid #5a3a3a; color: #f85149; padding: 12px 16px; margin: 16px; border-radius: 4px; }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Epstein Network Investigation Model",
+  "description": "CUE-typed investigation model of the Jeffrey Epstein network. 132 entities, 398 connections across 19 clusters. Emphasizes structural gaps and missing evidence rather than known connections.",
+  "url": "https://unify-graph.github.io/unify-graph/",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": {
+    "@type": "Organization",
+    "name": "unify-graph",
+    "url": "https://github.com/unify-graph/unify-graph"
+  },
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://unify-graph.github.io/unify-graph/data/graph.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/ld+json",
+      "contentUrl": "https://unify-graph.github.io/unify-graph/data/context.jsonld"
+    }
+  ],
+  "temporalCoverage": "1993/2026",
+  "spatialCoverage": "Global",
+  "keywords": ["Epstein", "network analysis", "investigation", "gap analysis", "CUE", "knowledge graph"]
+}
+</script>
+
 </head>
 <body>
 <div id="loading"><div class="spinner"></div><div class="load-text">Loading 132 entities...</div></div>
@@ -156,6 +193,9 @@ tr.clickable { cursor: pointer; }
     <br><br>
     <strong style="color:#e8e8f0">Reading the graph:</strong> Node size = degree. Opacity = evidence (opaque = documented, ghost = unverified).
     Red/orange rings = gap severity. Solid lines = bidirectional. Dashed = one-way claims.
+    Toggle buttons switch between manual <strong style="color:#e8e8f0">Clusters</strong> (19 curated),
+    algorithmic <strong style="color:#e8e8f0">Communities</strong> (12 from NetworkX — stroke shows cluster for comparison),
+    and <strong style="color:#e8e8f0">Bottleneck</strong> heatmap (composite risk score).
     <br><br>
     <span style="color:#555">CUE files are the source of truth. <a href="https://cuelang.org">cuelang.org</a></span>
   </div>
@@ -171,6 +211,11 @@ tr.clickable { cursor: pointer; }
   </nav>
   <div class="main graph-mode" id="main">
     <div id="graph-container">
+      <div class="graph-controls" id="graph-controls">
+        <button class="active" data-color="clusters">Clusters</button>
+        <button data-color="communities">Communities</button>
+        <button data-color="bottleneck">Bottleneck</button>
+      </div>
       <div class="legend" id="legend"></div>
     </div>
     <div id="inspector" class="empty">Click a node to inspect</div>
@@ -193,23 +238,31 @@ const CLUSTER_COLORS = {
   family: '#e84393', unclassified: '#636e72'
 };
 
-let graphData, reportData, insightsData, analysisData, entitiesData, flowsData, docsData;
+let graphData, reportData, insightsData, analysisData, entitiesData, flowsData, docsData, networkxData;
 let selectedNode = null;
+let currentColorMode = 'clusters';
+let bottleneckScores = {};
+let maxBottleneck = 1;
+const COMMUNITY_COLORS = ['#4e79a7','#f28e2b','#e15759','#76b7b2','#59a14f','#edc948','#b07aa1','#ff9da7','#9c755f','#bab0ac','#86bcb6','#8cd17d'];
 
 async function loadData() {
   try {
-    const files = ['graph','report','insights','analysis','entities','flows','documents'];
+    const files = ['graph','report','insights','analysis','entities','flows','documents','networkx'];
     const results = await Promise.all(files.map(f =>
       fetch(`data/${f}.json`).then(r => {
         if (!r.ok) throw new Error(`Failed to load ${f}.json: ${r.status}`);
         return r.json();
       })
     ));
-    [graphData, reportData, insightsData, analysisData, entitiesData, flowsData, docsData] = results;
+    [graphData, reportData, insightsData, analysisData, entitiesData, flowsData, docsData, networkxData] = results;
 
     // Build node lookup
     graphData._nodeMap = {};
     graphData.nodes.forEach(n => graphData._nodeMap[n.id] = n);
+
+    // Build bottleneck score lookup
+    (analysisData.structural?.bottleneck || []).forEach(b => bottleneckScores[b.entity] = b.score);
+    maxBottleneck = Math.max(...Object.values(bottleneckScores), 1);
 
     document.getElementById('loading').remove();
     renderStats();
@@ -348,6 +401,11 @@ function renderGraph() {
   window._graphLink = link;
   window._graphNode = node;
 
+  // Graph color mode controls
+  document.querySelectorAll('#graph-controls button').forEach(btn => {
+    btn.addEventListener('click', () => recolorNodes(btn.dataset.color));
+  });
+
   // Tooltip element
   const tooltip = d3.select('body').append('div').attr('class', 'tooltip').style('display', 'none');
   function showTooltip(e, d) {
@@ -358,6 +416,76 @@ function renderGraph() {
         ${d.mention_count > 0 ? '<br>' + d.mention_count + ' corpus mentions' : ''}`);
   }
   function hideTooltip() { tooltip.style('display', 'none'); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// GRAPH COLOR MODES
+// ═══════════════════════════════════════════════════════════════
+
+function recolorNodes(mode) {
+  currentColorMode = mode;
+  document.querySelectorAll('#graph-controls button').forEach(b =>
+    b.classList.toggle('active', b.dataset.color === mode));
+
+  window._graphNode.select('circle')
+    .transition().duration(400)
+    .attr('fill', d => {
+      if (mode === 'communities') {
+        const comm = networkxData?.nodes?.[d.id]?.community;
+        return comm !== undefined ? COMMUNITY_COLORS[comm % COMMUNITY_COLORS.length] : '#333';
+      }
+      if (mode === 'bottleneck') {
+        const score = bottleneckScores[d.id] || 0;
+        return score > 0 ? d3.interpolateYlOrRd(0.2 + 0.8 * score / maxBottleneck) : '#1a1a2a';
+      }
+      return CLUSTER_COLORS[d.cluster] || '#636e72';
+    })
+    .attr('fill-opacity', d => {
+      if (mode === 'bottleneck') return Math.max(0.15, (bottleneckScores[d.id] || 0) / maxBottleneck);
+      if (mode === 'communities') return 0.8;
+      return d.has_evidence ? 0.9 : 0.25;
+    })
+    .attr('stroke', d => {
+      if (mode === 'communities') return CLUSTER_COLORS[d.cluster] || '#636e72';
+      if (d.gap_count >= 3) return '#f85149';
+      if (d.gap_count >= 1) return '#f0ad4e';
+      return CLUSTER_COLORS[d.cluster] || '#636e72';
+    });
+
+  updateLegend(mode);
+}
+
+function updateLegend(mode) {
+  const legend = document.getElementById('legend');
+  if (mode === 'communities') {
+    const commCounts = {};
+    Object.values(networkxData?.nodes || {}).forEach(n => {
+      commCounts[n.community] = (commCounts[n.community] || 0) + 1;
+    });
+    const disagreements = Object.entries(networkxData?.nodes || {}).filter(([id, n]) => {
+      const node = graphData._nodeMap[id];
+      if (!node) return false;
+      // Find most common cluster in this community
+      const commMembers = Object.entries(networkxData.nodes).filter(([, m]) => m.community === n.community);
+      const clusterVotes = {};
+      commMembers.forEach(([mid]) => { const mn = graphData._nodeMap[mid]; if (mn) clusterVotes[mn.cluster] = (clusterVotes[mn.cluster] || 0) + 1; });
+      const topCluster = Object.entries(clusterVotes).sort((a, b) => b[1] - a[1])[0]?.[0];
+      return node.cluster !== topCluster;
+    }).length;
+    legend.innerHTML = Object.entries(commCounts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([c, n]) => `<div class="legend-item"><div class="legend-dot" style="background:${COMMUNITY_COLORS[c % COMMUNITY_COLORS.length]}"></div>C${c} (${n})</div>`)
+      .join('') +
+      `<div class="legend-item" style="margin-left:8px;color:#f0ad4e">${disagreements} cluster/community mismatches</div>`;
+  } else if (mode === 'bottleneck') {
+    legend.innerHTML =
+      '<div class="legend-item"><div class="legend-dot" style="background:#1a1a2a;border:1px solid #333"></div>0</div>' +
+      '<div class="legend-item"><div class="legend-dot" style="background:' + d3.interpolateYlOrRd(0.35) + '"></div>low</div>' +
+      '<div class="legend-item"><div class="legend-dot" style="background:' + d3.interpolateYlOrRd(0.6) + '"></div>med</div>' +
+      '<div class="legend-item"><div class="legend-dot" style="background:' + d3.interpolateYlOrRd(1.0) + '"></div>high (' + maxBottleneck + ')</div>';
+  } else {
+    renderLegend();
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -400,6 +528,7 @@ function selectNode(d) {
 
   // Check sole connector status
   const soleConn = analysisData.sole_connectors.by_entity.find(e => e.entity === d.id);
+  const networkxNode = networkxData?.nodes?.[d.id];
 
   panel.innerHTML = `
     <div class="entity-name">${esc(d.name)}</div>
@@ -463,6 +592,18 @@ function selectNode(d) {
       ${d.unidirectional_out > 0 ? `<div class="field"><span class="field-value" style="color:#f0ad4e">${d.unidirectional_out} connections not reciprocated</span></div>` : ''}
     </div>
     ` : ''}
+
+    <div class="inspector-section">
+      <h3>Network Metrics</h3>
+      ${networkxNode ? `
+        <div class="field"><span class="field-label">Betweenness</span><span class="field-value">${(networkxNode.betweenness * 100).toFixed(1)}%</span></div>
+        <div class="field"><span class="field-label">PageRank</span><span class="field-value">${(networkxNode.pagerank * 100).toFixed(1)}%</span></div>
+        <div class="field"><span class="field-label">Eigenvector</span><span class="field-value">${(networkxNode.eigenvector * 100).toFixed(1)}%</span></div>
+        <div class="field"><span class="field-label">K-core</span><span class="field-value">${networkxNode.coreness}</span></div>
+        <div class="field"><span class="field-label">Community</span><span class="field-value">Community ${networkxNode.community}</span></div>
+      ` : '<div class="field"><span class="field-value" style="color:#666">No network data</span></div>'}
+    </div>
+
 
     <div class="inspector-section leads">
       <h3>Leads</h3>

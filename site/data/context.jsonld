@@ -10,8 +10,8 @@
     "GovernmentOfficial": "schema:GovernmentOrganization",
     "LawFirm": "schema:LegalService",
     "FinancialInstitution": "schema:FinancialService",
-    "HedgeFund": "schema:FinancialService",
-    "InvestmentFirm": "schema:FinancialService",
+    "HedgeFund": "https://unify-graph.github.io/schema/HedgeFund",
+    "InvestmentFirm": "https://unify-graph.github.io/schema/InvestmentFirm",
     "Foundation": "schema:NGO",
     "Property": "schema:Place",
     "Aircraft": "schema:Vehicle",
@@ -19,7 +19,7 @@
     "name": "schema:name",
     "description": "schema:description",
     "identifier": "schema:identifier",
-    "cluster": "unify:cluster",
+    "cluster": "https://unify-graph.github.io/schema/cluster",
     "connections": {
       "@id": "schema:knows",
       "@type": "@id"

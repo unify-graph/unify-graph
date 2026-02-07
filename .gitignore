@@ -1,5 +1,6 @@
 # Generated exports (rebuilt by build.sh)
 site/data/*.json
+site/data/*.toon
 graph.json
 report.json
 insights.json

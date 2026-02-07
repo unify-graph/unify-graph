@@ -20,6 +20,7 @@ Most network analyses start with raw data and compute metrics at query time or i
 - `cue vet` catches referential integrity errors — if you reference a connection that doesn't exist, it fails. That failure is a lead.
 - `cue export` unifies all data and pre-computes every metric (gap counts, bridge analysis, BFS hop distance, exposure cascades) into static JSON. The browser does zero computation.
 - Adding an entity means satisfying the schema — you must declare a cluster, connection set, and evidence map. Empty evidence maps are valid but flagged.
+- CUE unification merges data across files — `external_ids.cue` adds Wikidata QIDs as an additive overlay. If a QID targets an entity key that doesn't exist, `cue vet` fails. The type system validates external ID assignments at compile time.
 
 ```
 *.cue files  →  cue vet  →  cue export  →  JSON  →  static D3 site
@@ -50,13 +51,13 @@ Key difference: infrastructure graphs are directed acyclic (`depends_on`). Socia
 
 Seven views, all rendering pre-computed JSON:
 
-1. **Force Graph + Entity Inspector** — click any node to see known info, gaps, and investigative leads
+1. **Force Graph + Entity Inspector** — click any node to see known info, gaps, NetworkX metrics, and investigative leads. Three color modes: manual clusters, algorithmic communities (Louvain), bottleneck heatmap.
 2. **Gap Dashboard** — sortable table of all entities with gap category filters
 3. **Sole Connectors** — entities that are the only bridge between two cluster worlds
 4. **Exposure Cascade** — if entity X cooperates, who's exposed at wave 1 (direct) and wave 2 (second-degree)
 5. **Evidence Gap Scatter** — corpus mentions vs. evidence citations; high-mention entities with zero evidence are work prioritization targets
 6. **Cluster Chord Diagram** — cross-cluster connection volume with SPOF highlighting
-7. **Structural Analysis** — clustering coefficient, power asymmetry, cluster density, bridge redundancy, cascading orphans, cluster affinity
+7. **Structural Analysis** — clustering coefficient, power asymmetry, cluster density, bridge redundancy, cascading orphans, cluster affinity, bottleneck ranking
 
 ### Reading the graph
 
@@ -64,6 +65,7 @@ Seven views, all rendering pre-computed JSON:
 - **Node opacity** = evidence coverage (opaque = has evidence, ghost = unverified)
 - **Node ring** = gap severity (red = 3+ gaps, orange = 1-2 gaps)
 - **Edge style** = solid (bidirectional) / dashed (one-way claim)
+- **Color mode toggle** = Clusters (manual), Communities (NetworkX Louvain), Bottleneck (heatmap by composite score)
 
 ## How this compares
 
@@ -109,9 +111,10 @@ Entities → Typed Schema → Constraint Violations → Structured leads
 | **Docs indexed** | 71k+ | 19,154 | House Oversight | 69k chunks | 14,674 | 51k+ | ~20k pages + DOJ + FBI | Consumes DugganUSA API |
 | **Entities** | — | 47 | 15k+ triples | 31 | 30+ | 86k | — | **132 (typed, curated)** |
 | **Entity method** | API search results | pdfplumber + regex | Claude AI + dedup | Ollama embeddings | OWL autonomous | NLP pipeline | OCR text | **Human-authored CUE schemas** |
-| **Analysis** | Preset visualizations | Co-occurrence | Cluster filtering | Embedding clusters, RAG | Legal framework | Full-text search | — | **Sole connectors, exposure cascades, evidence chains, BFS, clustering coefficient, structural analysis** |
+| **Analysis** | Preset visualizations | Co-occurrence | Cluster filtering | Embedding clusters, RAG | Legal framework | Full-text search | — | **Sole connectors, exposure cascades, evidence chains, BFS, structural analysis, NetworkX (betweenness, PageRank, community detection, k-core)** |
 | **Completeness enforcement** | — | — | — | — | — | — | — | **CUE type constraints** |
-| **Tech** | Custom backend | Python + vis-network | React + Claude + SQLite | Python + Plotly + Ollama | Vanilla JS + D3 | React + Express + SQLite | CSV + GDrive | **CUE + D3 (static, zero backend)** |
+| **External ID reconciliation** | — | — | — | — | — | — | — | **111/132 Wikidata QIDs** |
+| **Tech** | Custom backend | Python + vis-network | React + Claude + SQLite | Python + Plotly + Ollama | Vanilla JS + D3 | React + Express + SQLite | CSV + GDrive | **CUE + Python/NetworkX + D3 (static, zero backend)** |
 
 ### Complementary, not competing
 
@@ -121,10 +124,11 @@ See the [full interactive comparison](https://unify-graph.github.io/unify-graph/
 
 ## Build & run
 
-Requires [CUE](https://cuelang.org/docs/install/).
+Requires [CUE](https://cuelang.org/docs/install/) and Python 3 (for NetworkX analysis).
 
 ```bash
-./build.sh                              # validate + export
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # one-time setup
+./build.sh                              # validate + export + NetworkX analysis
 python3 -m http.server -d site 8080     # serve locally
 ```
 
@@ -136,6 +140,8 @@ python3 -m http.server -d site 8080     # serve locally
 | `insights` | Top bridges, research priorities, multi-flag entities, cluster connectivity |
 | `analysis` | Hop distance (BFS), sole connectors, exposure cascades, evidence chains |
 | `report` | Gap analysis — dangling connections, missing evidence, orphans, type inconsistencies |
+| `networkx` | Betweenness, PageRank, eigenvector, community detection, k-core decomposition |
+| `graph.toon` | TOON compact format — 87% smaller than graph.json, for LLM context |
 | `entities` / `flows` / `documents` | Raw data |
 
 ## Data sources
@@ -152,17 +158,27 @@ python3 -m http.server -d site 8080     # serve locally
   validate.cue         10 validation checks, report export
   exports.cue          Graph/insights exports with CUE unification
   analysis.cue         BFS reachability, sole connectors, exposure cascades, structural analysis
+  external_ids.cue     Wikidata QIDs for 111/132 entities (additive overlay)
   people.cue           Person entities
   organizations.cue    Organization entities
   financial_*.cue      Financial institution entities
   properties.cue       Property entities
 
+scripts/               Analysis & reconciliation
+  analyze.py           NetworkX graph analysis (betweenness, PageRank, communities, k-core)
+  toon_export.py       TOON compact export for LLM context (25KB vs 198KB)
+  wikidata_reconcile.py  Batch Wikidata QID lookup, generates external_ids.cue
+  discover.py          DugganUSA API corpus sweep
+
 site/                  Static visualization
-  index.html           D3 force graph + inspector + 7 dashboard views
+  index.html           D3 force graph + inspector + 7 views + 3 color modes
   compare.html         Comparison page vs other Epstein projects
   data/*.json          Pre-computed exports (generated by build.sh)
+  data/graph.toon      TOON compact format for LLM context windows
+  data/context.jsonld  JSON-LD context for semantic web interoperability
 
-build.sh               Validate + export pipeline
+build.sh               Validate + export + NetworkX pipeline
+requirements.txt       Python deps (networkx, numpy, scipy)
 ```
 
 ## Contributing
