@@ -57,7 +57,8 @@ import "list"
 
 	// Evidence: document IDs supporting this entity's inclusion.
 	// Every key MUST resolve to a defined document.
-	evidence: {[string]: true}
+	// Values: true (untyped) or #EvidenceStrength (e.g., "court_filing").
+	evidence: {[string]: true | #EvidenceStrength}
 
 	// Optional: structured metadata
 	mention_count?: int & >=0
@@ -118,7 +119,7 @@ import "list"
 	currency:    *"USD" | string
 
 	// Evidence supporting this flow
-	evidence: {[string]: true}
+	evidence: {[string]: true | #EvidenceStrength}
 
 	// Temporal
 	date?:   string
@@ -145,7 +146,7 @@ import "list"
 	entities: {[string]: true}
 
 	// Evidence
-	evidence: {[string]: true}
+	evidence: {[string]: true | #EvidenceStrength}
 
 	event_type: "arrest" | "indictment" | "trial" | "plea_deal" |
 		"death" | "civil_suit" | "investigation" | "political" |

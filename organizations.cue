@@ -98,7 +98,7 @@ entities: {
 		mention_count: 45
 		role: "Law firm — $158M investigation"
 		connections: {leon_black: true, epstein: true}
-		evidence: {EFTA02730996: true}
+		evidence: {EFTA02730996: "financial_record"}
 	}
 
 	apollo: {
@@ -143,7 +143,7 @@ entities: {
 
 	cantor_fitzgerald: {
 		name: "Cantor Fitzgerald"
-		"@type": {Organization: true}
+		"@type": {Organization: true, FinancialInstitution: true}
 		cluster: "financial"
 		mention_count: 15
 		role: "Financial services — Lutnick CEO"
@@ -213,8 +213,8 @@ entities: {
 
 	valar_ventures: {
 		name: "Valar Ventures"
-		"@type": {Organization: true, ShellCompany: true, InvestmentFirm: true}
-		cluster: "shell"
+		"@type": {Organization: true, InvestmentFirm: true}
+		cluster: "paypal_mafia"
 		mention_count: 1
 		role: "Investment vehicle — $40M, Thiel invested $4.45M+"
 		connections: {peter_thiel: true, epstein: true}
@@ -243,11 +243,11 @@ entities: {
 
 	rothschild_geneva: {
 		name: "Rothschild Geneva"
-		"@type": {Organization: true, FinancialInstitution: true, FinancialEnabler: true}
+		"@type": {Organization: true, FinancialInstitution: true}
 		cluster: "financial"
 		role: "Geneva banking — Epstein financial relationship"
 		connections: {epstein: true}
-		evidence: {"DB-SDNY-0005122": true}
+		evidence: {"DB-SDNY-0005122": "financial_record"}
 		notes: "On visualization but zero direct hits in corpus."
 	}
 }

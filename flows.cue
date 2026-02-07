@@ -19,8 +19,8 @@ flows: {
 		flow_type:   "payment"
 		period:      "2000-2015"
 		evidence: {
-			"DB-SDNY-0002962": true
-			"EFTA02730996":    true
+			"DB-SDNY-0002962": "financial_record"
+			"EFTA02730996":    "financial_record"
 		}
 		notes: "$158M+ over ~15 years. For what services? Tax advice? Financial management? Something else?"
 	}
@@ -31,7 +31,7 @@ flows: {
 		amount:      "$4.45M+"
 		flow_type:   "investment"
 		evidence: {
-			"DB-SDNY-0004924": true
+			"DB-SDNY-0004924": "financial_record"
 		}
 		notes: "Thiel's investment into Valar. Was Epstein a co-investor or intermediary?"
 	}
@@ -42,7 +42,7 @@ flows: {
 		amount:      "$10M"
 		flow_type:   "investment"
 		evidence: {
-			"DB-SDNY-0008151": true
+			"DB-SDNY-0008151": "financial_record"
 		}
 		notes: "What was Honeycomb's purpose? Where did the $10M go next?"
 	}

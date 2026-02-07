@@ -70,7 +70,7 @@ entities: {
 			jp_morgan: true
 			bear_stearns: true
 		}
-		evidence: {EFTA02731082: true}
+		evidence: {EFTA02731082: "court_filing"}
 	}
 
 	maxwell: {
@@ -144,12 +144,12 @@ entities: {
 		mention_count: 420
 		role: "Scheduler — NPA immunity recipient. Arranged Reid Hoffman meetings."
 		connections: {epstein: true, maxwell: true, reid_hoffman: true, sarah_kellen: true}
-		evidence: {EFTA02731039: true}
+		evidence: {EFTA02731039: "court_filing"}
 	}
 
 	sigrid_mccawley: {
 		name: "Sigrid McCawley"
-		"@type": {Person: true}
+		"@type": {Person: true, LegalProtection: true}
 		cluster: "legal"
 		mention_count: 363
 		role: "Victim attorney — Boies Schiller Flexner"
@@ -198,12 +198,12 @@ entities: {
 			dechert_llp: true
 			michael_milken: true
 		}
-		evidence: {"DB-SDNY-0002962": true}
+		evidence: {"DB-SDNY-0002962": "financial_record"}
 	}
 
 	brad_edwards: {
 		name: "Brad Edwards"
-		"@type": {Person: true}
+		"@type": {Person: true, LegalProtection: true}
 		cluster: "legal"
 		mention_count: 255
 		role: "Victim attorney — represented multiple Epstein accusers"
@@ -265,7 +265,7 @@ entities: {
 
 	jack_scarola: {
 		name: "Jack Scarola"
-		"@type": {Person: true}
+		"@type": {Person: true, LegalProtection: true}
 		cluster: "legal"
 		mention_count: 157
 		role: "Attorney — represented Epstein victims"
@@ -304,7 +304,7 @@ entities: {
 		mention_count: 115
 		role: "Former US Attorney SDNY — co-conspirators memo"
 		connections: {epstein: true, bill_barr: true, robert_mueller: true}
-		evidence: {EFTA02731082: true}
+		evidence: {EFTA02731082: "court_filing"}
 		notes: "Barr attempted to fire him during Epstein investigation."
 	}
 
@@ -359,7 +359,7 @@ entities: {
 
 	kushner: {
 		name: "Jared Kushner"
-		"@type": {Person: true, Politician: true}
+		"@type": {Person: true, GovernmentOfficial: true}
 		cluster: "political"
 		mention_count: 75
 		role: "Senior advisor — Kushner Companies"
@@ -381,7 +381,7 @@ entities: {
 
 	brunel: {
 		name: "Jean-Luc Brunel"
-		"@type": {Person: true, CoreNetwork: true}
+		"@type": {Person: true, CoreNetwork: true, Recruiter: true}
 		cluster: "core"
 		mention_count: 59
 		role: "Modeling industry — MC2 Model Management"
@@ -392,7 +392,7 @@ entities: {
 
 	paul_cassell: {
 		name: "Paul Cassell"
-		"@type": {Person: true}
+		"@type": {Person: true, LegalProtection: true}
 		cluster: "legal"
 		mention_count: 57
 		role: "Law professor / victim attorney"
@@ -452,12 +452,12 @@ entities: {
 
 	steve_bannon: {
 		name: "Steve Bannon"
-		"@type": {Person: true, Politician: true}
+		"@type": {Person: true, Politician: true, GovernmentOfficial: true}
 		cluster: "political"
 		mention_count: 40
 		role: "Former WH strategist — text messages on iPhone 7"
 		connections: {epstein: true, trump: true}
-		evidence: {EFTA00027289: true}
+		evidence: {EFTA00027289: "text_message"}
 		notes: "TEXT MESSAGES on iPhone 7."
 	}
 
@@ -474,7 +474,7 @@ entities: {
 
 	marie_villafana: {
 		name: "Marie Villafana"
-		"@type": {Person: true, Prosecutor: true}
+		"@type": {Person: true, GovernmentOfficial: true, Prosecutor: true}
 		cluster: "doj"
 		mention_count: 24
 		role: "AUSA who worked under Acosta on Epstein case"
@@ -534,7 +534,7 @@ entities: {
 		mention_count: 17
 		role: "Illusionist — named in documents"
 		connections: {epstein: true}
-		evidence: {EFTA00013505: true}
+		evidence: {EFTA00013505: "documentary"}
 	}
 
 	peter_mandelson: {
@@ -603,7 +603,7 @@ entities: {
 
 	marvin_minsky: {
 		name: "Marvin Minsky"
-		"@type": {Person: true}
+		"@type": {Person: true, Allegations: true}
 		cluster: "academia"
 		mention_count: 14
 		role: "MIT AI pioneer — allegations in Virginia Giuffre deposition"
@@ -669,7 +669,7 @@ entities: {
 
 	larry_summers: {
 		name: "Larry Summers"
-		"@type": {Person: true}
+		"@type": {Person: true, GovernmentOfficial: true}
 		cluster: "academia"
 		mention_count: 11
 		role: "Former Treasury Secretary / Harvard president"
@@ -825,7 +825,7 @@ entities: {
 		mention_count: 7
 		role: "Point72/SAC Capital — $10M to Honeycomb"
 		connections: {epstein: true, honeycomb: true}
-		evidence: {"DB-SDNY-0008151": true}
+		evidence: {"DB-SDNY-0008151": "financial_record"}
 	}
 
 	elon_musk: {
@@ -861,7 +861,7 @@ entities: {
 
 	virginia_giuffre: {
 		name: "Virginia Giuffre"
-		"@type": {Person: true}
+		"@type": {Person: true, Allegations: true}
 		cluster: "victim"
 		mention_count: 5
 		role: "Key accuser — civil suits against Prince Andrew, Dershowitz"
@@ -905,7 +905,7 @@ entities: {
 		mention_count: 4
 		role: "Former MIT Media Lab director — resigned over Epstein ties"
 		connections: {epstein: true, reid_hoffman: true}
-		evidence: {"DB-SDNY-0003972": true}
+		evidence: {"DB-SDNY-0003972": "financial_record"}
 	}
 
 	casey_wasserman: {
@@ -920,7 +920,7 @@ entities: {
 
 	sarah_kellen: {
 		name: "Sarah Kellen"
-		"@type": {Person: true, CoreNetwork: true, Scheduler: true}
+		"@type": {Person: true, CoreNetwork: true, Scheduler: true, Recruiter: true}
 		cluster: "staff"
 		mention_count: 3
 		role: "Alleged recruiter/scheduler — named co-conspirator"
@@ -940,7 +940,7 @@ entities: {
 		mention_count: 2
 		role: "LinkedIn founder — newsletter email to Epstein April 2014"
 		connections: {epstein: true, peter_thiel: true, lesley_groff: true, joichi_ito: true}
-		evidence: {EFTA01925403: true}
+		evidence: {EFTA01925403: "email"}
 	}
 
 	howard_lutnick: {
@@ -950,7 +950,7 @@ entities: {
 		mention_count: 2
 		role: "Commerce Secretary — Cantor Fitzgerald CEO"
 		connections: {epstein: true, trump: true, cantor_fitzgerald: true}
-		evidence: {EFTA00020515: true}
+		evidence: {EFTA00020515: "documentary"}
 	}
 
 	tony_blair: {
@@ -1005,7 +1005,7 @@ entities: {
 
 	kathryn_ruemmler: {
 		name: "Kathryn Ruemmler"
-		"@type": {Person: true}
+		"@type": {Person: true, GovernmentOfficial: true}
 		cluster: "legal"
 		mention_count: 1
 		role: "Former White House Counsel — Goldman Sachs general counsel"
@@ -1015,7 +1015,7 @@ entities: {
 
 	adriana_ross: {
 		name: "Adriana Ross"
-		"@type": {Person: true}
+		"@type": {Person: true, CoreNetwork: true}
 		cluster: "staff"
 		mention_count: 1
 		role: "Epstein associate — named co-conspirator"
@@ -1059,7 +1059,7 @@ entities: {
 		cluster: "hedge_fund"
 		role: "Coatue Management founder"
 		connections: {epstein: true, coatue_management: true}
-		evidence: {"DB-SDNY-0007748": true}
+		evidence: {"DB-SDNY-0007748": "financial_record"}
 		notes: "ZERO corpus hits but listed on DugganUSA visualization."
 	}
 
@@ -1069,7 +1069,7 @@ entities: {
 		cluster: "paypal_mafia"
 		role: "Palantir/PayPal — $4.45M+ to Valar Ventures"
 		connections: {epstein: true, reid_hoffman: true, valar_ventures: true}
-		evidence: {"DB-SDNY-0004924": true}
+		evidence: {"DB-SDNY-0004924": "financial_record"}
 		notes: "ZERO corpus hits. On visualization but not in DOJ text."
 	}
 
@@ -1089,7 +1089,7 @@ entities: {
 		cluster: "crypto"
 		role: "Blockstream CEO"
 		connections: {epstein: true, blockstream: true}
-		evidence: {"DB-SDNY-0000478": true}
+		evidence: {"DB-SDNY-0000478": "financial_record"}
 		notes: "ZERO corpus hits."
 	}
 
