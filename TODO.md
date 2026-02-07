@@ -17,7 +17,7 @@
 - [x] Fill remaining 21 entities → 3 new matches (dechert_llp, east_71st, rothschild_geneva), 18 confirmed no QID
 - [ ] Query OpenCorporates for corporate entities (J. Epstein & Co, Southern Trust, etc.)
 - [~] Cross-reference against OpenSanctions dataset (script ready, API needs auth key)
-- [~] Query LittleSis for relationship cross-referencing (script fixed, running against API)
+- [x] Query LittleSis for relationship cross-referencing (81/88 matched, CUE overlay generated)
 - [ ] Add CourtListener case IDs for legal entities / proceedings
 
 ## Data Enrichment — API Integrations
