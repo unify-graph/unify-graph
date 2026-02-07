@@ -59,7 +59,7 @@
 ## Longer Term
 
 - [ ] Add SKOS vocabulary for cluster taxonomy (ConceptScheme for manual clusters + algorithmic communities)
-- [ ] FollowTheMoney (FtM) schema alignment — OCCRP/Aleph interoperability
+- [x] FollowTheMoney (FtM) schema alignment — OCCRP/Aleph interoperability
 - [ ] Jupyter notebook companion (interactive analysis using NetworkX data)
 - [ ] Temporal modeling — add date ranges to connections for timeline view
 - [ ] Multi-source provenance tracking — which API/source contributed each fact
@@ -108,3 +108,7 @@
 - [x] Top investigative leads callout in gap dashboard (algorithmic: high mentions + zero evidence)
 - [x] Connection details (confidence, rel_type, notes) surfaced in inspector
 - [x] Evidence dependency map (9th view — bipartite document↔entity with blast radius highlighting)
+- [x] Structural signatures analysis (criminology pattern matching — 11 metrics, 6 network type scores)
+- [x] GEXF + GraphML exports for Gephi/Cytoscape interoperability
+- [x] FtM JSONL export (424 entities: Person, Company, Organization, RealEstate, Airplane, Payment, Document, Family, UnknownLink)
+- [x] Signatures sub-tab in Structural view (pattern bars, network metrics, broker table, core members)

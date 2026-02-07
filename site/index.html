@@ -1232,6 +1232,7 @@ function renderStructural() {
       <button class="dash-filter" data-stab="orphans">Cascading Orphans</button>
       <button class="dash-filter" data-stab="affinity">Cluster Affinity</button>
       <button class="dash-filter" data-stab="bottleneck">Bottleneck</button>
+      <button class="dash-filter" data-stab="signatures">Signatures</button>
     </div>
     <div id="structural-content"></div>
   `;
@@ -1387,6 +1388,94 @@ function renderStructural() {
             </tr>
           `).join('')}
         </tbody></table>
+      `;
+    } else if (tab === 'signatures') {
+      const sig = networkxData?.structural_signatures;
+      if (!sig) {
+        content.innerHTML = '<p style="color:#888">Structural signatures not available. Run build.sh with NetworkX.</p>';
+        return;
+      }
+
+      const pm = sig.pattern_match || {};
+      const scores = pm.scores || {};
+      const scoreEntries = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+      const brokers = (sig.broker_detection?.top_brokers || []).slice(0, 10);
+      const core = sig.core_periphery?.core_members || [];
+
+      const barColor = v => v >= 0.8 ? '#f85149' : v >= 0.5 ? '#f0ad4e' : v >= 0.3 ? '#6ea8fe' : '#4a4a5a';
+      const pctWidth = v => Math.round(v * 100);
+
+      content.innerHTML = `
+        <p style="color:#888;margin-bottom:12px;font-size:11px"><strong style="color:#e8e8f0">Criminology Structural Signatures</strong> — composite pattern matching against academic literature on criminal network topologies. Scores (0–1) measure how closely this network's structure resembles known patterns for trafficking, money laundering, intelligence operations, corruption, coercive control, and normal social networks.</p>
+
+        <h3 style="color:#6ea8fe;margin-bottom:8px;font-size:13px">Pattern Match Scores</h3>
+        <div style="display:grid;gap:6px;margin-bottom:16px;max-width:500px">
+          ${scoreEntries.map(([name, score]) => `
+            <div style="display:grid;grid-template-columns:160px 1fr 40px;align-items:center;gap:8px">
+              <span style="color:#c8c8d0;font-size:12px;text-transform:capitalize">${name.replace(/_/g, ' ')}</span>
+              <div style="background:#1a1a2a;border-radius:3px;height:16px;overflow:hidden">
+                <div style="background:${barColor(score)};height:100%;width:${pctWidth(score)}%;border-radius:3px;transition:width 0.3s"></div>
+              </div>
+              <span style="color:${barColor(score)};font-size:12px;font-weight:600">${Math.round(score * 100)}%</span>
+            </div>
+          `).join('')}
+        </div>
+
+        <h3 style="color:#6ea8fe;margin-bottom:8px;font-size:13px">Network Metrics</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:16px">
+          <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+            <div style="color:#888;font-size:10px">SMALL-WORLD σ</div>
+            <div style="color:${sig.small_world?.is_small_world ? '#f85149' : '#4caf50'};font-size:18px;font-weight:600">${sig.small_world?.sigma?.toFixed(1) || '?'}</div>
+            <div style="color:#666;font-size:10px">${sig.small_world?.is_small_world ? 'small-world confirmed (σ>1)' : 'not small-world'}</div>
+          </div>
+          <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+            <div style="color:#888;font-size:10px">ASSORTATIVITY</div>
+            <div style="color:${sig.assortativity?.coefficient < -0.1 ? '#f0ad4e' : '#4caf50'};font-size:18px;font-weight:600">${sig.assortativity?.coefficient?.toFixed(3) || '?'}</div>
+            <div style="color:#666;font-size:10px">${sig.assortativity?.interpretation?.split('(')[0] || ''}</div>
+          </div>
+          <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+            <div style="color:#888;font-size:10px">FREEMAN CENTRALIZATION</div>
+            <div style="color:${sig.centralization?.freeman > 0.5 ? '#f85149' : '#f0ad4e'};font-size:18px;font-weight:600">${sig.centralization?.freeman?.toFixed(3) || '?'}</div>
+            <div style="color:#666;font-size:10px">${sig.centralization?.interpretation || ''}</div>
+          </div>
+          <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+            <div style="color:#888;font-size:10px">TRANSITIVITY</div>
+            <div style="color:${sig.transitivity?.global < 0.15 ? '#f0ad4e' : '#4caf50'};font-size:18px;font-weight:600">${sig.transitivity?.global?.toFixed(4) || '?'}</div>
+            <div style="color:#666;font-size:10px">${sig.transitivity?.interpretation?.split('(')[0] || ''}</div>
+          </div>
+          <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+            <div style="color:#888;font-size:10px">MODULARITY</div>
+            <div style="color:${sig.modularity?.value > 0.4 ? '#f85149' : '#f0ad4e'};font-size:18px;font-weight:600">${sig.modularity?.value?.toFixed(3) || '?'}</div>
+            <div style="color:#666;font-size:10px">${sig.modularity?.num_communities || '?'} communities</div>
+          </div>
+          <div style="background:#12121a;border:1px solid #2a2a3a;padding:10px;border-radius:4px">
+            <div style="color:#888;font-size:10px">RECIPROCITY</div>
+            <div style="color:${sig.reciprocity?.value > 0.5 ? '#f0ad4e' : '#4caf50'};font-size:18px;font-weight:600">${sig.reciprocity?.value?.toFixed(3) || '?'}</div>
+            <div style="color:#666;font-size:10px">${sig.reciprocity?.interpretation?.split('(')[0] || ''}</div>
+          </div>
+        </div>
+
+        <h3 style="color:#6ea8fe;margin-bottom:8px;font-size:13px">Top Brokers — Betweenness/Degree Ratio</h3>
+        <p style="color:#888;margin-bottom:8px;font-size:11px">High ratio = strategic positioning with minimal direct exposure. These entities punch above their weight — they control information flow with few connections.</p>
+        <table><thead><tr>
+          <th>Entity</th><th>Ratio</th><th>Betweenness</th><th>Degree</th><th style="width:120px">Bar</th>
+        </tr></thead><tbody>
+          ${brokers.map(b => `
+            <tr class="clickable" onclick="switchToGraphAndSelect('${esc(b.entity)}')">
+              <td><strong>${esc(entitiesData[b.entity]?.name || b.entity)}</strong></td>
+              <td style="color:#f0ad4e;font-weight:600">${b.ratio.toFixed(3)}</td>
+              <td>${b.betweenness.toFixed(4)}</td>
+              <td>${b.degree}</td>
+              <td><div style="background:#1a1a2a;border-radius:2px;height:12px"><div style="background:#f0ad4e;height:100%;width:${Math.min(100, Math.round(b.ratio / (brokers[0]?.ratio || 1) * 100))}%;border-radius:2px"></div></div></td>
+            </tr>
+          `).join('')}
+        </tbody></table>
+
+        <h3 style="color:#6ea8fe;margin:16px 0 8px;font-size:13px">Core Members (k-core = ${sig.core_periphery?.max_k_core || '?'})</h3>
+        <p style="color:#888;margin-bottom:8px;font-size:11px">${core.length} entities in the ${sig.core_periphery?.max_k_core}-core (each connected to at least ${sig.core_periphery?.max_k_core} others in the core). Core density: ${Math.round((sig.core_periphery?.core_density || 0) * 100)}%. Periphery density: ${(sig.core_periphery?.periphery_density * 100)?.toFixed(1) || '?'}%.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">
+          ${core.map(id => `<span class="badge badge-cluster cluster-${esc(entitiesData[id]?.cluster || 'unclassified')}" style="cursor:pointer" onclick="switchToGraphAndSelect('${esc(id)}')">${esc(entitiesData[id]?.name || id)}</span>`).join('')}
+        </div>
       `;
     }
   }

@@ -31,8 +31,10 @@ if [ -d ".venv" ]; then
   .venv/bin/python3 scripts/analyze.py
   echo "Generating TOON export..."
   .venv/bin/python3 scripts/toon_export.py
+  echo "Generating FtM export..."
+  .venv/bin/python3 scripts/ftm_export.py
 else
-  echo "Warning: .venv not found, skipping NetworkX analysis and TOON export"
+  echo "Warning: .venv not found, skipping NetworkX analysis, TOON, and FtM export"
   echo "Run: python3 -m venv .venv && .venv/bin/pip install -r requirements.txt"
 fi
 
