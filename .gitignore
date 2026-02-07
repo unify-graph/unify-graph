@@ -21,6 +21,8 @@ __pycache__/
 .vscode/
 .idea/
 
-# Claude session data
-.claude/
+# Claude — ignore session data, keep hooks and settings
+.claude/*
+!.claude/hooks/
+!.claude/settings.json
 .venv/
