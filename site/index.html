@@ -207,6 +207,7 @@ tr.clickable { cursor: pointer; }
     <button data-view="scatter">Evidence Gaps</button>
     <button data-view="chord">Cluster Map</button>
     <button data-view="structural">Structural</button>
+    <button data-view="radial">BFS Reach</button>
     <a href="compare.html" style="background:#1a1a2a;border:1px solid #2a2a3a;color:#888;padding:4px 12px;text-decoration:none;font-size:11px;border-radius:3px;display:inline-flex;align-items:center;margin-left:auto">How This Compares</a>
   </nav>
   <div class="main graph-mode" id="main">
@@ -529,10 +530,11 @@ function selectNode(d) {
   // Check sole connector status
   const soleConn = analysisData.sole_connectors.by_entity.find(e => e.entity === d.id);
   const networkxNode = networkxData?.nodes?.[d.id];
+  const extIds = entity.external_ids || {};
 
   panel.innerHTML = `
     <div class="entity-name">${esc(d.name)}</div>
-    <div class="entity-id">${esc(d.id)}</div>
+    <div class="entity-id">${esc(d.id)}${extIds.wikidata ? ` · <a href="https://www.wikidata.org/wiki/${esc(extIds.wikidata)}" target="_blank" style="color:#6ea8fe;font-size:11px">${esc(extIds.wikidata)}</a>` : ''}</div>
 
     <div class="inspector-section">
       <h3>Known</h3>
@@ -1324,6 +1326,166 @@ function renderStructural() {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// RADIAL BFS — concentric ring layout by hop distance from Epstein
+// Center = Epstein. Ring 1 = 120 direct connections. Ring 2 = 11 at 2 hops.
+// Reveals extreme centralization: 91% of the network is 1 hop away.
+// ═══════════════════════════════════════════════════════════════
+
+function renderRadialBFS() {
+  const dashboard = document.getElementById('dashboard');
+  const hop = analysisData.hop_distance.from_epstein;
+
+  dashboard.innerHTML = `
+    <h2 style="margin-bottom:4px;color:#6ea8fe">BFS Reach from Epstein — Who's How Many Hops Away?</h2>
+    <p style="margin-bottom:4px;color:#888">Concentric rings = BFS distance from Jeffrey Epstein. Sorted by cluster within each ring. Edges show ring 2 → ring 1 intermediary paths.</p>
+    <p style="margin-bottom:12px;color:#666;font-size:11px">
+      <span style="color:#6ea8fe;font-weight:600">${hop.wave_0.length}</span> center &middot;
+      <span style="color:#6ea8fe;font-weight:600">${hop.wave_1.length}</span> at hop 1 (${Math.round(hop.wave_1.length / hop.reachability.total_reachable * 100)}%) &middot;
+      <span style="color:#6ea8fe;font-weight:600">${hop.wave_2.length}</span> at hop 2 &middot;
+      <span style="color:#4caf50;font-weight:600">${hop.reachability.total_reachable}</span> total reachable
+    </p>
+    <div id="radial-container" style="width:100%;height:calc(100vh - 180px);position:relative;display:flex;align-items:center;justify-content:center"></div>
+  `;
+
+  const container = document.getElementById('radial-container');
+  requestAnimationFrame(() => _renderRadial(container));
+}
+
+function _renderRadial(container) {
+  const hop = analysisData.hop_distance.from_epstein;
+  const width = Math.max(400, container.clientWidth);
+  const height = Math.max(300, container.clientHeight);
+  const cx = width / 2;
+  const cy = height / 2;
+  const maxR = Math.min(cx, cy) - 50;
+
+  // Wave definitions with radii
+  const waves = [
+    { distance: 0, ids: hop.wave_0, radius: 0 },
+    { distance: 1, ids: hop.wave_1, radius: maxR * 0.45 },
+    { distance: 2, ids: hop.wave_2, radius: maxR * 0.88 },
+  ];
+  if (hop.wave_3.length) waves.push({ distance: 3, ids: hop.wave_3, radius: maxR * 0.96 });
+
+  // Position nodes radially, sorted by cluster within each ring
+  const positioned = [];
+  const posMap = {};
+  waves.forEach(wave => {
+    const sorted = wave.ids
+      .map(id => graphData._nodeMap[id])
+      .filter(Boolean)
+      .sort((a, b) => a.cluster.localeCompare(b.cluster) || (b.connection_count + b.inbound_count) - (a.connection_count + a.inbound_count));
+
+    sorted.forEach((node, i) => {
+      const angle = sorted.length === 1 ? -Math.PI / 2 : (2 * Math.PI * i / sorted.length) - Math.PI / 2;
+      const p = {
+        ...node,
+        wave: wave.distance,
+        px: cx + wave.radius * Math.cos(angle),
+        py: cy + wave.radius * Math.sin(angle),
+      };
+      positioned.push(p);
+      posMap[node.id] = p;
+    });
+  });
+
+  const svg = d3.select('#radial-container').append('svg')
+    .attr('width', width).attr('height', height);
+
+  const g = svg.append('g');
+  svg.call(d3.zoom().scaleExtent([0.3, 6]).on('zoom', e => g.attr('transform', e.transform)));
+
+  // Concentric ring guides
+  waves.filter(w => w.radius > 0).forEach(wave => {
+    g.append('circle')
+      .attr('cx', cx).attr('cy', cy).attr('r', wave.radius)
+      .attr('fill', 'none').attr('stroke', '#1a1a2a').attr('stroke-width', 1)
+      .attr('stroke-dasharray', '4,4');
+
+    g.append('text')
+      .attr('x', cx + 8).attr('y', cy - wave.radius - 6)
+      .attr('text-anchor', 'start').attr('fill', '#444').attr('font-size', '10px')
+      .text(`hop ${wave.distance} (${wave.ids.length})`);
+  });
+
+  // Edges: only ring 2 → ring 1 (shows intermediary paths)
+  const edgeData = [];
+  graphData.links.forEach(l => {
+    const srcId = l.source.id || l.source;
+    const tgtId = l.target.id || l.target;
+    const src = posMap[srcId];
+    const tgt = posMap[tgtId];
+    if (src && tgt && src.wave !== tgt.wave) {
+      // Only keep edges where one end is in ring 2
+      if (src.wave === 2 || tgt.wave === 2) {
+        edgeData.push({ src, tgt, bidirectional: l.bidirectional });
+      }
+    }
+  });
+
+  const edges = g.append('g').selectAll('line.radial-edge')
+    .data(edgeData).join('line')
+    .attr('class', 'radial-edge')
+    .attr('x1', d => d.src.px).attr('y1', d => d.src.py)
+    .attr('x2', d => d.tgt.px).attr('y2', d => d.tgt.py)
+    .attr('stroke', '#2a2a3a').attr('stroke-width', 0.8)
+    .attr('stroke-opacity', 0.4)
+    .attr('stroke-dasharray', d => d.bidirectional ? null : '3,3');
+
+  // Tooltip
+  const tip = d3.select('#radial-container').append('div')
+    .attr('class', 'tooltip').style('display', 'none');
+
+  const nodeR = d => d.wave === 0 ? 14 : Math.max(2.5, Math.min(10, Math.sqrt(d.connection_count + d.inbound_count) * 1.8));
+
+  // Nodes
+  const nodes = g.append('g').selectAll('g.radial-node')
+    .data(positioned).join('g')
+    .attr('class', 'radial-node')
+    .attr('transform', d => `translate(${d.px},${d.py})`);
+
+  nodes.append('circle')
+    .attr('r', nodeR)
+    .attr('fill', d => CLUSTER_COLORS[d.cluster] || '#636e72')
+    .attr('fill-opacity', d => d.has_evidence ? 0.9 : 0.25)
+    .attr('stroke', d => {
+      if (d.gap_count >= 3) return '#f85149';
+      if (d.gap_count >= 1) return '#f0ad4e';
+      return CLUSTER_COLORS[d.cluster] || '#636e72';
+    })
+    .attr('stroke-width', 1.5)
+    .attr('cursor', 'pointer')
+    .on('click', (e, d) => switchToGraphAndSelect(d.id))
+    .on('mouseover', (e, d) => {
+      // Highlight edges connected to this node
+      edges.attr('stroke', ed => (ed.src.id === d.id || ed.tgt.id === d.id) ? '#6ea8fe' : '#2a2a3a')
+        .attr('stroke-opacity', ed => (ed.src.id === d.id || ed.tgt.id === d.id) ? 0.9 : 0.15)
+        .attr('stroke-width', ed => (ed.src.id === d.id || ed.tgt.id === d.id) ? 1.5 : 0.5);
+
+      tip.style('display', 'block')
+        .style('left', (e.offsetX + 14) + 'px')
+        .style('top', (e.offsetY - 14) + 'px')
+        .html(`<strong>${esc(d.name)}</strong> [${esc(d.cluster)}]<br>
+          Hop ${d.wave} from Epstein<br>
+          ${d.connection_count} out / ${d.inbound_count} in / ${d.gap_count} gaps
+          ${d.mention_count > 0 ? '<br>' + d.mention_count + ' corpus mentions' : ''}`);
+    })
+    .on('mouseout', () => {
+      edges.attr('stroke', '#2a2a3a').attr('stroke-opacity', 0.4).attr('stroke-width', 0.8);
+      tip.style('display', 'none');
+    });
+
+  // Labels: all ring 0 and 2 nodes, plus high-degree ring 1 nodes
+  nodes.filter(d => d.wave === 0 || d.wave === 2 || (d.connection_count + d.inbound_count) >= 10)
+    .append('text')
+    .attr('dx', d => nodeR(d) + 3)
+    .attr('dy', 3)
+    .attr('fill', '#888').attr('font-size', d => d.wave === 0 ? '11px' : '9px')
+    .attr('pointer-events', 'none')
+    .text(d => d.name);
+}
+
+// ═══════════════════════════════════════════════════════════════
 // VIEW SWITCHING
 // ═══════════════════════════════════════════════════════════════
 
@@ -1354,6 +1516,7 @@ function switchView(view) {
     else if (view === 'scatter') renderGapScatter();
     else if (view === 'chord') renderChordDiagram();
     else if (view === 'structural') renderStructural();
+    else if (view === 'radial') renderRadialBFS();
   }
 }
 

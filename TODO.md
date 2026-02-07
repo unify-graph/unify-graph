@@ -29,7 +29,7 @@
 
 ## Visualization — New Views
 
-- [ ] Radial BFS from Epstein: concentric rings showing hop distance, evidence status
+- [x] Radial BFS from Epstein: concentric rings showing hop distance, evidence status
 - [ ] Evidence dependency Sankey: if a document is discredited, who loses their evidence base
 - [ ] Geographic map: properties (Zorro Ranch, Little St James, 71st Street, Paris apartment)
 
@@ -98,3 +98,5 @@
 - [x] JSON-LD validation — prefix fix, type collision fix
 - [x] Cluster vs community comparison (73/132 mismatches, C0=45 entities across 11 clusters)
 - [x] Doc polish pass — README, compare.html, design doc, about panel all updated for accuracy
+- [x] Wikidata QID clickable links in entity inspector
+- [x] Radial BFS visualization (8 views total, concentric ring layout from Epstein)

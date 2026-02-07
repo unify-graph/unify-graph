@@ -120,6 +120,24 @@ Per brainstorming decision: review suitability of data model regularly. Check:
 
 **Data:** `analysis.json` structural (clustering_coeff, power_asymmetry, cluster_density, cascading_orphans, bottleneck, resilience), `graph.json` nodes
 
+### 8. BFS Reach (Radial Layout)
+
+**Purpose:** Visualize the extreme centralization of the Epstein network. Concentric rings show BFS hop distance — 91% of entities are directly connected (1 hop). Only 11 entities require an intermediary. Edges between rings reveal which ring-1 entities serve as gateways to ring-2 entities.
+
+**Encoding:**
+- Center: Epstein (large node, 14px radius)
+- Ring 1 (45% of viewport radius): 120 entities, sorted by cluster
+- Ring 2 (88% of viewport radius): 11 entities, sorted by cluster
+- Node color/opacity/stroke: same as force graph (cluster, evidence, gap severity)
+- Node size: degree (sqrt scale, capped smaller than force graph for density)
+- Edges: only ring 2 ↔ ring 1 connections (intermediary paths)
+- Hover: highlights connected edges blue, tooltip shows hop/degree/gaps
+- Labels: all ring 0/2 nodes + ring 1 nodes with degree >= 10
+- Click → jump to force graph view
+- Zoom/pan enabled
+
+**Data:** `analysis.json` hop_distance.from_epstein (wave_0/1/2), `graph.json` nodes + links
+
 ### Graph Color Mode Toggle
 
 Three modes switch node fill color and legend, accessible from controls in the graph container:
@@ -135,12 +153,12 @@ Three modes switch node fill color and legend, accessible from controls in the g
 - **Sankey (financial flows):** DugganUSA already has one. Redundant.
 - **Timeline:** Would need temporal data not yet modeled.
 - **Treemap (gaps by cluster):** Less immediately legible than scatter.
-- **Radial BFS tree:** Interesting but doesn't speak to "what's missing" thesis directly.
+- ~~**Radial BFS tree:**~~ Implemented as view 8 — reveals extreme centralization (91% within 1 hop).
 - **Adjacency matrix heatmap:** Too abstract for pitch; chord is more striking.
 
 ## Future Work
 
-- Radial BFS from Epstein: concentric rings showing hop distance, evidence status
+- ~~Radial BFS from Epstein~~ ✓ View 8: concentric rings, hover highlights intermediary edges, cluster sorting
 - Evidence dependency Sankey: if a document is discredited, who loses their evidence base
 - Geographic map: properties are modeled (Zorro Ranch, Little St James, 71st Street)
 - ~~JSON-LD `@context` for semantic web interoperability~~ ✓ `site/data/context.jsonld`
