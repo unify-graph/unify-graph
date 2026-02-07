@@ -14,9 +14,10 @@ from typing import Any, Dict, List, Tuple
 
 import networkx as nx
 
-# Input/output paths
-INPUT_FILE = Path("/home/mthdn/unify-graph/site/data/graph.json")
-OUTPUT_FILE = Path("/home/mthdn/unify-graph/site/data/networkx.json")
+# Input/output paths (relative to repo root via script location)
+_SITE_DATA = Path(__file__).resolve().parent.parent / "site" / "data"
+INPUT_FILE = _SITE_DATA / "graph.json"
+OUTPUT_FILE = _SITE_DATA / "networkx.json"
 
 
 def load_graph_json(filepath: Path) -> Tuple[List[Dict], List[Dict]]:
