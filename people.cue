@@ -858,10 +858,10 @@ entities: {
 		"@type": {Person: true}
 		cluster: "tech"
 		mention_count: 22
-		role: "Tesla/SpaceX founder — mentioned in Epstein communications"
+		role: "Tesla/SpaceX founder — 16+ emails with Epstein (2012-2013)"
 		connections: {epstein: true}
 		evidence: {}
-		notes: "22 hits. Discussed island visits per reporting."
+		notes: "22 corpus hits. House Oversight Democrats released Sept 2025: 16+ emails (2012-2013), asked about 'wildest party' on island, Dec 2014 calendar entry re island visit. Now heads DOGE with access to Treasury, SSA, OPM systems."
 	}
 
 	sarah_ferguson: {
