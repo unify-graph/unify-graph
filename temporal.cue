@@ -11,7 +11,7 @@ entities: {
 	}
 	maxwell: {
 		first_appearance: "1991"    // met Epstein after father's death
-		last_appearance:  "2021-12-29" // convicted
+		last_appearance:  "2026-02-09" // House Oversight closed-door testimony, pleaded Fifth
 	}
 	brunel: {
 		first_appearance: "1997"    // MC2 founded
@@ -61,7 +61,7 @@ entities: {
 	}
 	prince_andrew: {
 		first_appearance: "1999"    // introduced by Maxwell
-		last_appearance:  "2022-02" // settled with Giuffre
+		last_appearance:  "2026-02-19" // arrested on suspicion of misconduct in public office
 	}
 	trump: {
 		first_appearance: "1987"    // social circles in Palm Beach
@@ -248,5 +248,95 @@ events: {
 		entities: {epstein: true, maxwell: true}
 		evidence: {}
 		event_type: "investigation"
+	}
+
+	maxwell_scotus_denied: {
+		id:          "maxwell_scotus_denied"
+		date:        "2025-10-06"
+		description: "US Supreme Court denies Maxwell certiorari — NPA appeal exhausted"
+		entities: {maxwell: true}
+		evidence: {}
+		event_type: "trial"
+	}
+
+	transparency_act_signed: {
+		id:          "transparency_act_signed"
+		date:        "2025-11-19"
+		description: "Epstein Files Transparency Act signed into law — requires DOJ to release all files within 30 days"
+		entities: {epstein: true, maxwell: true}
+		evidence: {}
+		event_type: "political"
+	}
+
+	andrew_titles_stripped: {
+		id:          "andrew_titles_stripped"
+		date:        "2025-10"
+		description: "King Charles strips Andrew of titles, honors, and banishes him from Royal Lodge"
+		entities: {prince_andrew: true}
+		evidence: {}
+		event_type: "political"
+	}
+
+	maxwell_habeas: {
+		id:          "maxwell_habeas"
+		date:        "2025-12-17"
+		description: "Maxwell files habeas petition citing 'substantial new evidence' of constitutional violations at trial"
+		entities: {maxwell: true}
+		evidence: {}
+		event_type: "civil_suit"
+	}
+
+	doj_initial_release: {
+		id:          "doj_initial_release"
+		date:        "2025-12-19"
+		description: "DOJ releases initial batch of Epstein files — heavily redacted, criticized as incomplete"
+		entities: {epstein: true, maxwell: true}
+		evidence: {}
+		event_type: "investigation"
+	}
+
+	doj_major_release: {
+		id:          "doj_major_release"
+		date:        "2026-01-30"
+		description: "DOJ releases 3M+ pages, 180K images, 2K videos — Data Sets 9-12"
+		entities: {epstein: true, maxwell: true}
+		evidence: {}
+		event_type: "investigation"
+	}
+
+	maxwell_house_testimony: {
+		id:          "maxwell_house_testimony"
+		date:        "2026-02-09"
+		description: "Maxwell meets House Oversight in closed session — pleads the Fifth on all questions"
+		entities: {maxwell: true}
+		evidence: {}
+		event_type: "testimony"
+	}
+
+	andrew_arrested: {
+		id:          "andrew_arrested"
+		date:        "2026-02-19"
+		description: "Andrew Mountbatten-Windsor arrested on suspicion of misconduct in public office — sharing trade secrets with Epstein. First British royal arrested in 379 years."
+		entities: {prince_andrew: true, epstein: true}
+		evidence: {}
+		event_type: "arrest"
+	}
+
+	estate_settlement: {
+		id:          "estate_settlement"
+		date:        "2026-02"
+		description: "Epstein estate agrees to $35M settlement with victim class action — Indyke and Kahn named defendants"
+		entities: {epstein: true, darren_indyke: true, richard_kahn: true}
+		evidence: {}
+		event_type: "civil_suit"
+	}
+
+	doj_files_removed: {
+		id:          "doj_files_removed"
+		date:        "2026-03-04"
+		description: "DOJ admits removing 47,635 files from Epstein Library — House Oversight subpoenas AG Bondi"
+		entities: {epstein: true}
+		evidence: {}
+		event_type: "political"
 	}
 }

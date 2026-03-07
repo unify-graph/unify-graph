@@ -227,6 +227,40 @@ flows: {
 	}
 
 	// ═══════════════════════════════════════════════════════════
+	// ESTATE SETTLEMENTS (2026)
+	// ═══════════════════════════════════════════════════════════
+
+	estate_victim_settlement: {
+		source:      "epstein"
+		destination: "virginia_giuffre"
+		amount:      "$35M"
+		flow_type:   "settlement"
+		date:        "2026-02"
+		evidence: {}
+		notes: "Epstein estate class action settlement. Indyke and Kahn (co-executors) named defendants. Up to $35M if 40+ eligible claimants, $25M if fewer. Virginia Giuffre used as destination representing victim class."
+	}
+
+	estate_restitution_fund: {
+		source:      "epstein"
+		destination: "virginia_giuffre"
+		amount:      "$121M"
+		flow_type:   "settlement"
+		date:        "2020"
+		evidence: {}
+		notes: "Epstein estate restitution fund paid out $121M to victims. Separate from the $35M class action."
+	}
+
+	deutsche_bank_victim_settlement: {
+		source:      "deutsche_bank"
+		destination: "virginia_giuffre"
+		amount:      "$75M"
+		flow_type:   "settlement"
+		date:        "2023"
+		evidence: {}
+		notes: "Deutsche Bank settlement with Epstein victims. Virginia Giuffre used as destination representing victim class."
+	}
+
+	// ═══════════════════════════════════════════════════════════
 	// KNOWN GAPS — FinancialEnabler entities with no flows
 	// These are flagged by validate.cue type consistency check.
 	// Research needed: michael_milken, mort_zuckerman,

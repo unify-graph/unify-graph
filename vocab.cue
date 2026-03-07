@@ -39,7 +39,9 @@ import "list"
 // #DataSource — which system contributed a fact?
 #DataSource: "manual" | "dugganusa" | "wikidata" | "propublica" |
 	"opensanctions" | "littlesis" | "courtlistener" |
-	"opencorporates" | "court_filing" | *"unknown"
+	"opencorporates" | "court_filing" |
+	"epstein_archive" | "epstein_exposed" | "rhowardstone" |
+	"doj_efta" | "house_oversight" | "grand_jury" | *"unknown"
 
 // ═══════════════════════════════════════════════════════════════
 // ENTITY — the core node type (analogous to quicue.ca #Resource)
@@ -88,11 +90,14 @@ import "list"
 
 	// Optional: external identifiers for cross-source linking
 	external_ids?: {
-		wikidata?:       string // e.g., "Q312959"
-		opencorporates?: string
-		littlesis?:      string
-		opensanctions?:  string
-		courtlistener?:  string
+		wikidata?:        string // e.g., "Q312959"
+		opencorporates?:  string
+		littlesis?:       string
+		opensanctions?:   string
+		courtlistener?:   string
+		epstein_archive?: string
+		epstein_exposed?: string
+		rhowardstone?:    string
 	}
 
 	// Optional: data provenance — which sources contributed to this entity

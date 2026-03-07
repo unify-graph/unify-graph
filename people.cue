@@ -108,7 +108,7 @@ entities: {
 			trump:             {confidence: "medium", rel_type: "social", notes: "Mar-a-Lago social circle. Attended events together."}
 			robert_maxwell:    {confidence: "high", rel_type: "familial", notes: "Father. Media baron. Died 1991 under mysterious circumstances."}
 		}
-		notes: "Convicted Dec 2021. Serving 20-year sentence."
+		notes: "Convicted Dec 2021. Serving 20-year sentence. SCOTUS denied cert Oct 2025. Filed habeas petition Dec 2025 citing 'substantial new evidence'. Pleaded Fifth to House Oversight Feb 2026. Offered clemency deal to Trump."
 	}
 
 	laura_menninger: {
@@ -134,11 +134,11 @@ entities: {
 	}
 
 	prince_andrew: {
-		name: "Prince Andrew"
-		"@type": {Person: true, Allegations: true}
+		name: "Andrew Mountbatten-Windsor"
+		"@type": {Person: true, Allegations: true, GovernmentOfficial: true}
 		cluster: "allegations"
 		mention_count: 441
-		role: "Duke of York — civil settlement with Virginia Giuffre"
+		role: "Former Duke of York — stripped of titles Oct 2025, arrested Feb 2026"
 		connections: {
 			epstein: true
 			maxwell: true
@@ -147,12 +147,12 @@ entities: {
 		}
 		evidence: {}
 		connection_details: {
-			epstein:         {confidence: "high", rel_type: "social", evidence: {"FLIGHT-LOGS-N908JE": true}, notes: "Multiple visits to island and properties. Flight log evidence."}
+			epstein:         {confidence: "high", rel_type: "social", evidence: {"FLIGHT-LOGS-N908JE": true}, notes: "Multiple visits to island and properties. Flight log evidence. Shared confidential UK trade information while serving as trade envoy."}
 			maxwell:         {confidence: "high", rel_type: "social", notes: "Long-standing social relationship. Maxwell facilitated introductions."}
 			virginia_giuffre: {confidence: "high", rel_type: "alleged", notes: "Civil suit settled for reported $12M in Feb 2022."}
 			sarah_ferguson:  {confidence: "high", rel_type: "familial", notes: "Ex-wife. Fergie received $18K from Epstein to settle debts."}
 		}
-		notes: "441 hits. Settled civil case. Stripped of titles by King Charles."
+		notes: "Stripped of titles and honors by King Charles Oct 2025. Arrested Feb 19 2026 on suspicion of misconduct in public office — sharing confidential trade information with Epstein while UK trade envoy. First British royal arrested in 379 years. Released after ~11 hours, still under investigation."
 	}
 
 	lesley_groff: {
@@ -1150,5 +1150,31 @@ entities: {
 		connections: {bill_barr: true, dalton_school: true, epstein: true}
 		evidence: {}
 		notes: "564 EFTA hits. Hired Epstein to teach at Dalton despite no degree."
+	}
+
+	darren_indyke: {
+		name:    "Darren Indyke"
+		"@type": {Person: true, LegalProtection: true, FinancialEnabler: true}
+		cluster: "legal"
+		role:    "Epstein estate co-executor, personal lawyer"
+		connections: {
+			epstein:      true
+			richard_kahn: true
+		}
+		evidence: {}
+		notes: "Co-executor of Epstein estate. Named defendant in $35M class action settlement (Feb 2026). Structured bank accounts and cash withdrawals for Epstein."
+	}
+
+	richard_kahn: {
+		name:    "Richard Kahn"
+		"@type": {Person: true, FinancialEnabler: true}
+		cluster: "financial"
+		role:    "Epstein estate co-executor, accountant"
+		connections: {
+			epstein:       true
+			darren_indyke: true
+		}
+		evidence: {}
+		notes: "Co-executor of Epstein estate. Named defendant in $35M class action settlement (Feb 2026). Created complex financial infrastructure using dozens of bank accounts."
 	}
 }
