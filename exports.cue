@@ -175,6 +175,21 @@ graph: {
 			if _e.notes != _|_ {
 				notes: _e.notes
 			}
+			if _e.nationality != _|_ {
+				nationality: _e.nationality
+			}
+			if _e.birth_date != _|_ {
+				birth_date: _e.birth_date
+			}
+			if _e.death_date != _|_ {
+				death_date: _e.death_date
+			}
+			if _e.founding_date != _|_ {
+				founding_date: _e.founding_date
+			}
+			if _e.location != _|_ {
+				location: _e.location
+			}
 		},
 	]
 	links: [

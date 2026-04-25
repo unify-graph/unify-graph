@@ -1162,7 +1162,7 @@ entities: {
 			richard_kahn: true
 		}
 		evidence: {}
-		notes: "Co-executor of Epstein estate. Named defendant in $35M class action settlement (Feb 2026). Structured bank accounts and cash withdrawals for Epstein."
+		notes: "Co-executor of Epstein estate. Named defendant in $35M class action settlement (Feb 2026). Structured bank accounts and cash withdrawals for Epstein. Closed-door House Oversight deposition Mar 19 2026: acknowledged $700K+ in repeated $7,500 cash withdrawals for Epstein; would not confirm or deny existence of Jane Doe 4 settlement; confirmed hard drives held by Epstein-hired private investigators."
 	}
 
 	richard_kahn: {
@@ -1175,6 +1175,18 @@ entities: {
 			darren_indyke: true
 		}
 		evidence: {}
-		notes: "Co-executor of Epstein estate. Named defendant in $35M class action settlement (Feb 2026). Created complex financial infrastructure using dozens of bank accounts."
+		notes: "Co-executor of Epstein estate. Named defendant in $35M class action settlement (Feb 2026). Closed-door House Oversight deposition Mar 11 2026 (~7 hours): claims he saw no red flags in Epstein's spending."
+	}
+
+	pam_bondi: {
+		name:    "Pam Bondi"
+		"@type": {Person: true, GovernmentOfficial: true, Politician: true}
+		cluster: "cabinet"
+		role:    "U.S. Attorney General (2025-Apr 2026), fired over Epstein files handling"
+		connections: {
+			epstein: true
+		}
+		evidence: {}
+		notes: "Trump's first AG. Fired Apr 2 2026 after sustained pressure over DOJ's incomplete compliance with Epstein Files Transparency Act. Claimed in Feb 2025 Fox News interview that an Epstein client list was 'sitting on my desk' — DOJ later said no such list existed."
 	}
 }

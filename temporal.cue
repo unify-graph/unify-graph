@@ -335,8 +335,71 @@ events: {
 		id:          "doj_files_removed"
 		date:        "2026-03-04"
 		description: "DOJ admits removing 47,635 files from Epstein Library — House Oversight subpoenas AG Bondi"
-		entities: {epstein: true}
+		entities: {epstein: true, pam_bondi: true}
 		evidence: {}
 		event_type: "political"
+	}
+
+	maxwell_habeas_denied: {
+		id:          "maxwell_habeas_denied"
+		date:        "2026-01-13"
+		description: "Federal judge denies Maxwell's habeas corpus petition — court rules issues already addressed in prior proceedings, threshold for habeas relief not met. Combined with Oct 2025 SCOTUS denial, exhausts direct challenges to her conviction."
+		entities: {maxwell: true}
+		evidence: {}
+		event_type: "civil_suit"
+	}
+
+	doj_files_restored: {
+		id:          "doj_files_restored"
+		date:        "2026-03-05"
+		description: "Sixth DOJ Epstein Files release — ~50,000 previously removed files restored after DOJ/FBI review. Includes documents referencing unidentified woman who alleged abuse by Epstein and Trump."
+		entities: {epstein: true, trump: true}
+		evidence: {}
+		event_type: "investigation"
+	}
+
+	kahn_house_deposition: {
+		id:          "kahn_house_deposition"
+		date:        "2026-03-11"
+		description: "Richard Kahn (Epstein's longtime accountant, estate co-executor) testifies in closed-door House Oversight deposition (~7 hours). Claims he saw no red flags in Epstein's spending or business dealings."
+		entities: {richard_kahn: true, epstein: true}
+		evidence: {}
+		event_type: "testimony"
+	}
+
+	indyke_house_deposition: {
+		id:          "indyke_house_deposition"
+		date:        "2026-03-19"
+		description: "Darren Indyke (Epstein's longtime lawyer, estate co-executor) testifies in closed-door House Oversight deposition. Claims 'no knowledge whatsoever' of trafficking. Acknowledges $700K+ in repeated $7,500 cash withdrawals for Epstein. Confirms hard drives held by Epstein-hired private investigators. Will not confirm or deny existence of Jane Doe 4 settlement (Trump accuser)."
+		entities: {darren_indyke: true, epstein: true, trump: true}
+		evidence: {}
+		event_type: "testimony"
+	}
+
+	depositions_videos_released: {
+		id:          "depositions_videos_released"
+		date:        "2026-03-25"
+		description: "House Oversight Committee publicly releases full video of Indyke and Kahn closed-door depositions. Democrats call to 'turn Epstein files into Epstein trials.'"
+		entities: {darren_indyke: true, richard_kahn: true, epstein: true}
+		evidence: {}
+		event_type: "political"
+	}
+
+	bondi_fired: {
+		id:          "bondi_fired"
+		date:        "2026-04-02"
+		description: "Trump fires Pam Bondi as Attorney General after sustained pressure over DOJ handling of Epstein files. Deputy AG Todd Blanche named Acting AG. Bondi's tenure marked by failed compliance with Epstein Files Transparency Act and the rescinded 'client list on my desk' claim."
+		entities: {pam_bondi: true, trump: true, epstein: true}
+		evidence: {}
+		event_type: "political"
+	}
+
+	doj_ig_audit: {
+		id:          "doj_ig_audit"
+		date:        "2026-04-23"
+		description: "DOJ Inspector General launches audit of DOJ compliance with the Epstein Files Transparency Act. Triggered by months of complaints over redactions covering material the Act explicitly required disclosed (e.g., Epstein attempts to pay off witnesses)."
+		entities: {epstein: true}
+		evidence: {}
+		event_type: "investigation"
 	}
 }

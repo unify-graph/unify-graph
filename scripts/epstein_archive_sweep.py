@@ -14,6 +14,7 @@ import csv
 import difflib
 import io
 import json
+import pathlib
 import subprocess
 import sys
 import urllib.error
@@ -30,7 +31,7 @@ def load_graph_nodes():
         result = subprocess.run(
             ["cue", "export", "-e", "graph.nodes", "./..."],
             capture_output=True, text=True, check=True,
-            cwd="/home/mthdn/unify-graph",
+            cwd=str(pathlib.Path(__file__).resolve().parent.parent),
         )
         nodes = json.loads(result.stdout)
         return {n["id"]: n["name"] for n in nodes}

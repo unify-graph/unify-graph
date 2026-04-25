@@ -14,6 +14,7 @@ No authentication required. Rate limit: 100 req/min.
 """
 import difflib
 import json
+import pathlib
 import subprocess
 import sys
 import time
@@ -85,7 +86,7 @@ def load_entities():
         proc = subprocess.run(
             ["cue", "export", "-e", "graph.nodes", "./..."],
             capture_output=True, text=True, timeout=30,
-            cwd="/home/mthdn/unify-graph",
+            cwd=str(pathlib.Path(__file__).resolve().parent.parent),
         )
         if proc.returncode != 0:
             print(f"ERROR: cue export failed:\n{proc.stderr}", file=sys.stderr)

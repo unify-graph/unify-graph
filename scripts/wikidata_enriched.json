@@ -211,7 +211,8 @@
         "One Churchill Place"
       ],
       "ceo": [
-        "Jes Staley"
+        "Jes Staley",
+        "C. S. Venkatakrishnan"
       ],
       "isni": [
         "0000000115338731"
@@ -300,6 +301,13 @@
       ],
       "imdb": [
         "nm1807680"
+      ],
+      "member_of": [
+        "Delta Tau Delta"
+      ],
+      "residence": [
+        "Santa Fe",
+        "Coyoacán"
       ],
       "date_of_birth": [
         "1947-11-15T00:00:00Z"
@@ -503,7 +511,7 @@
       ],
       "employer": [
         "Central Intelligence Agency",
-        "Verizon Communications",
+        "Verizon",
         "Executive Office of the President of the United States",
         "United States Department of Justice",
         "Kirkland & Ellis",
@@ -537,7 +545,7 @@
         "United States"
       ],
       "headquarters": [
-        "New York City"
+        "Cothen"
       ],
       "ceo": [
         "Alan Schwartz"
@@ -644,7 +652,16 @@
         "Brentwood School"
       ],
       "occupation": [
+        "sports agent",
+        "talent agent",
         "investment banker"
+      ],
+      "employer": [
+        "Wasserman Media Group",
+        "Los Angeles Organizing Committee for the 2028 Olympic Games"
+      ],
+      "imdb": [
+        "nm2680998"
       ],
       "date_of_birth": [
         "1974-01-01T00:00:00Z"
@@ -740,8 +757,14 @@
       "employer": [
         "Karin Models"
       ],
+      "imdb": [
+        "nm4257803"
+      ],
       "cause_of_death": [
         "hanging to death"
+      ],
+      "residence": [
+        "United States"
       ],
       "date_of_birth": [
         "1946-09-18T00:00:00Z"
@@ -1228,7 +1251,7 @@
       ],
       "employer": [
         "SpaceX",
-        "Tesla, Inc.",
+        "Tesla",
         "PayPal",
         "SolarCity",
         "OpenAI",
@@ -1546,7 +1569,8 @@
         "United States"
       ],
       "position_held": [
-        "chairperson"
+        "chairperson",
+        "trustee"
       ],
       "educated_at": [
         "Cooper Union",
@@ -1555,17 +1579,23 @@
       ],
       "occupation": [
         "teacher",
+        "merchant",
+        "financier",
         "human trafficker",
-        "investment banker",
-        "philanthropist"
+        "investment banker"
       ],
       "employer": [
         "Bear Stearns",
+        "Dalton School",
+        "Wexner Foundation",
         "Jeffrey Epstein VI Foundation",
         "Towers Financial Corporation"
       ],
       "place_of_burial": [
         "Palm Beach Gardens"
+      ],
+      "isni": [
+        "0000000502663104"
       ],
       "viaf": [
         "4498147665874060670008"
@@ -1581,7 +1611,9 @@
       ],
       "partner": [
         "Ghislaine Maxwell",
-        "Eva Andersson-Dubin"
+        "Stacey Williams",
+        "Eva Andersson-Dubin",
+        "Karyna Shuliak"
       ],
       "member_of": [
         "Trilateral Commission",
@@ -1660,7 +1692,8 @@
         "United States"
       ],
       "child": [
-        "William Barr"
+        "William Barr",
+        "Stephen Barr"
       ],
       "educated_at": [
         "Columbia University"
@@ -1790,6 +1823,9 @@
         "physician",
         "model",
         "beauty pageant contestant"
+      ],
+      "employer": [
+        "Mount Sinai Hospital"
       ],
       "viaf": [
         "1814153596624751900000"
@@ -2194,7 +2230,7 @@
         "267690881"
       ],
       "gnd": [
-        "6073167-9"
+        "7580674-5"
       ],
       "loc_authority": [
         "no2002000775"
@@ -2288,7 +2324,7 @@
         "Ted Jorgensen"
       ],
       "mother": [
-        "Jacklyn Gise"
+        "Jackie Bezos"
       ],
       "spouse": [
         "Lauren Sánchez",
@@ -2367,8 +2403,7 @@
         "Anita Summers"
       ],
       "spouse": [
-        "Elisa New",
-        "Victoria Perry"
+        "Elisa New"
       ],
       "citizenship": [
         "United States"
@@ -2661,7 +2696,7 @@
         "American Academy of Arts and Sciences"
       ],
       "residence": [
-        "Boston"
+        "Tokyo"
       ],
       "date_of_birth": [
         "1966-06-19T00:00:00Z"
@@ -2671,6 +2706,59 @@
       ],
       "sibling": [
         "Mizuko Ito"
+      ]
+    }
+  },
+  "howard_lutnick": {
+    "qid": "Q16194176",
+    "properties": {
+      "residence": [
+        "Washington, D.C.",
+        "Miami Beach",
+        "Bridgehampton",
+        "Jericho",
+        "The Pierre"
+      ],
+      "date_of_birth": [
+        "1961-07-14T00:00:00Z"
+      ],
+      "freebase": [
+        "/m/0w64tvz"
+      ],
+      "sibling": [
+        "Gary Frederick Lutnick"
+      ],
+      "father": [
+        "Solomon Lutnick"
+      ],
+      "citizenship": [
+        "United States"
+      ],
+      "position_held": [
+        "United States Secretary of Commerce"
+      ],
+      "educated_at": [
+        "Haverford College",
+        "Jericho High School"
+      ],
+      "occupation": [
+        "businessperson",
+        "trader"
+      ],
+      "employer": [
+        "Cantor Fitzgerald"
+      ],
+      "isni": [
+        "0000000038378843"
+      ],
+      "viaf": [
+        "41206531"
+      ],
+      "loc_authority": [
+        "n2002109556"
+      ],
+      "imdb": [
+        "nm2965714"
       ]
     }
   },
@@ -2801,6 +2889,10 @@
       "occupation": [
         "jurist"
       ],
+      "employer": [
+        "Goldman Sachs",
+        "Latham & Watkins"
+      ],
       "date_of_birth": [
         "1971-04-19T00:00:00Z"
       ],
@@ -2869,47 +2961,6 @@
       ]
     }
   },
-  "howard_lutnick": {
-    "qid": "Q16194176",
-    "properties": {
-      "father": [
-        "Solomon Lutnick"
-      ],
-      "citizenship": [
-        "United States"
-      ],
-      "position_held": [
-        "United States Secretary of Commerce"
-      ],
-      "educated_at": [
-        "Haverford College"
-      ],
-      "occupation": [
-        "businessperson"
-      ],
-      "isni": [
-        "0000000038378843"
-      ],
-      "viaf": [
-        "41206531"
-      ],
-      "loc_authority": [
-        "n2002109556"
-      ],
-      "imdb": [
-        "nm2965714"
-      ],
-      "date_of_birth": [
-        "1961-07-14T00:00:00Z"
-      ],
-      "freebase": [
-        "/m/0w64tvz"
-      ],
-      "sibling": [
-        "Gary Frederick Lutnick"
-      ]
-    }
-  },
   "obama": {
     "qid": "Q76",
     "properties": {
@@ -2923,8 +2974,7 @@
         "Michelle Obama"
       ],
       "citizenship": [
-        "United States",
-        "Kenya"
+        "United States"
       ],
       "position_held": [
         "President of the United States",
@@ -3013,7 +3063,7 @@
     "qid": "Q87451",
     "properties": {
       "citizenship": [
-        "United States"
+        "Austria"
       ],
       "educated_at": [
         "University of Vienna"
@@ -3146,7 +3196,8 @@
         "American Academy of Arts and Sciences",
         "National Academy of Engineering",
         "League for Programming Freedom",
-        "Association for the Advancement of Artificial Intelligence"
+        "Association for the Advancement of Artificial Intelligence",
+        "Harvard Society of Fellows"
       ],
       "cause_of_death": [
         "cerebral hemorrhage"
@@ -3387,9 +3438,14 @@
         "Q19560940",
         "Nathan Gettings"
       ],
+      "owned_by": [
+        "BlackRock",
+        "Peter Thiel",
+        "The Vanguard Group",
+        "Q19560940"
+      ],
       "headquarters": [
-        "Denver",
-        "Palo Alto"
+        "Miami"
       ],
       "ceo": [
         "Q19560940"
@@ -3488,13 +3544,17 @@
       "educated_at": [
         "Balliol College",
         "Marlborough College",
-        "Headington School",
+        "Headington Rye Oxford",
         "Oxford High School",
         "Millfield"
       ],
       "occupation": [
         "businessperson",
         "socialite"
+      ],
+      "employer": [
+        "Oxford United F.C.",
+        "The European"
       ],
       "viaf": [
         "6732160062456335790006"
@@ -3504,6 +3564,9 @@
       ],
       "loc_authority": [
         "n2023051576"
+      ],
+      "imdb": [
+        "nm10830056"
       ],
       "partner": [
         "Jeffrey Epstein"
@@ -3520,6 +3583,12 @@
       "convicted_of": [
         "trafficking of children",
         "conspiracy to commit a crime"
+      ],
+      "sibling": [
+        "Ian Maxwell",
+        "Kevin Maxwell",
+        "Isabel Maxwell",
+        "Christine Maxwell"
       ]
     }
   },
@@ -3537,7 +3606,11 @@
       ],
       "position_held": [
         "chairperson",
-        "chief executive officer"
+        "chief executive officer",
+        "trustee"
+      ],
+      "child": [
+        "Benjamin Black"
       ],
       "educated_at": [
         "Harvard University",
@@ -3548,6 +3621,7 @@
       ],
       "occupation": [
         "businessperson",
+        "investor",
         "financier",
         "investment banker",
         "art collector"
@@ -3594,7 +3668,7 @@
       "educated_at": [
         "Harvard Law School",
         "The Wharton School",
-        "McGill University Faculty of Law"
+        "McGill Faculty of Law"
       ],
       "occupation": [
         "businessperson",
@@ -3632,20 +3706,50 @@
   "nadia_marcinkova": {
     "qid": "Q16731972",
     "properties": {
+      "father": [
+        "Peter Marcinko"
+      ],
       "citizenship": [
-        "Slovakia"
+        "Slovakia",
+        "Czechoslovakia"
       ],
       "educated_at": [
-        "New York School of Interior Design"
+        "New York School of Interior Design",
+        "http://www.wikidata.org/.well-known/genid/2836eb54e74a7b6033d8a8e418c69741"
       ],
       "occupation": [
-        "aircraft pilot"
+        "flight instructor",
+        "aircraft pilot",
+        "influencer"
+      ],
+      "employer": [
+        "Jeffrey Epstein",
+        "Karin Models",
+        "MC2 Model Management"
+      ],
+      "partner": [
+        "Jeffrey Epstein"
+      ],
+      "residence": [
+        "United States",
+        "New York City",
+        "Manchester",
+        "Palm Beach"
       ],
       "date_of_birth": [
-        "1986-01-01T00:00:00Z"
+        "1985-02-01T00:00:00Z",
+        "1985-02-21T00:00:00Z"
       ],
       "freebase": [
         "/m/0_xbjdl"
+      ],
+      "email": [
+        "mailto:nadja2102@yahoo.com",
+        "mailto:nadia.marcinkova@yahoo.com",
+        "mailto:x0nadia.marcinkova@bellsouth.net",
+        "mailto:nadmardesign@gmail.com",
+        "mailto:nadia@aviloop.com",
+        "mailto:nadia@jeffreyepstein.com"
       ]
     }
   },
@@ -3677,6 +3781,7 @@
     "qid": "Q135643381",
     "properties": {
       "owned_by": [
+        "Trans World Airlines",
         "Jeffrey Epstein"
       ]
     }
@@ -3686,6 +3791,20 @@
     "properties": {
       "country": [
         "Bermuda"
+      ]
+    }
+  },
+  "lesley_groff": {
+    "qid": "Q138024689",
+    "properties": {
+      "occupation": [
+        "management assistant"
+      ],
+      "imdb": [
+        "nm14430558"
+      ],
+      "residence": [
+        "New Canaan"
       ]
     }
   },
@@ -4011,7 +4130,8 @@
         "nm0697605"
       ],
       "partner": [
-        "Koo Stark"
+        "Koo Stark",
+        "Victoria Hervey"
       ],
       "member_of": [
         "Royal Society",
@@ -4019,7 +4139,7 @@
         "Worshipful Company of Shipwrights"
       ],
       "residence": [
-        "Sandringham House"
+        "Marsh Farm"
       ],
       "date_of_birth": [
         "1960-02-19T00:00:00Z"
@@ -4379,6 +4499,9 @@
       "father": [
         "Klaus Friedrich Thiel"
       ],
+      "spouse": [
+        "Matt Danzeisen"
+      ],
       "citizenship": [
         "United States",
         "Germany",
@@ -4422,7 +4545,7 @@
         "nm1902615"
       ],
       "member_of": [
-        "Students For Liberty",
+        "Q6421870",
         "Steering Committee of the Bilderberg Meetings"
       ],
       "residence": [
@@ -4469,10 +4592,11 @@
         "politician",
         "jurist",
         "military officer",
-        "civil servant",
         "official",
-        "soldier",
-        "army officer"
+        "soldier"
+      ],
+      "place_of_burial": [
+        "Druid Ridge Cemetery"
       ],
       "isni": [
         "0000000080290511"
@@ -4489,11 +4613,17 @@
       "imdb": [
         "nm1694507"
       ],
-      "residence": [
-        "Pennsylvania"
+      "cause_of_death": [
+        "Parkinson's disease"
+      ],
+      "find_a_grave": [
+        "295143960"
       ],
       "date_of_birth": [
         "1944-08-07T00:00:00Z"
+      ],
+      "date_of_death": [
+        "2026-03-20T00:00:00Z"
       ],
       "freebase": [
         "/m/02djmh"
@@ -4564,7 +4694,9 @@
         "politician",
         "entrepreneur",
         "banker",
+        "executive producer",
         "political scientist",
+        "pundit",
         "film director",
         "radio personality",
         "investment banker",
@@ -4579,8 +4711,9 @@
         "Goldman Sachs",
         "Breitbart News",
         "Donald Trump 2016 presidential campaign",
+        "Cambridge Analytica",
         "Bannon & Co.",
-        "We Build The Wall"
+        "Q60583871"
       ],
       "isni": [
         "0000000050638767"
@@ -4607,6 +4740,9 @@
       ],
       "freebase": [
         "/m/0bqscsg"
+      ],
+      "convicted_of": [
+        "contempt of Congress"
       ]
     }
   },
@@ -4641,6 +4777,15 @@
     "properties": {
       "citizenship": [
         "United States"
+      ],
+      "occupation": [
+        "publicist"
+      ],
+      "imdb": [
+        "nm0796879"
+      ],
+      "residence": [
+        "Englewood Cliffs"
       ],
       "date_of_birth": [
         "1947-07-17T00:00:00Z"
@@ -4810,6 +4955,9 @@
       ],
       "imdb": [
         "nm0874339"
+      ],
+      "partner": [
+        "Kara Young"
       ],
       "member_of": [
         "The World's Billionaires",
@@ -4989,12 +5137,6 @@
       "viaf": [
         "133781201"
       ],
-      "imdb": [
-        "nm1080620"
-      ],
-      "subsidiary": [
-        "Pink"
-      ],
       "industry": [
         "clothing industry"
       ],
@@ -5005,7 +5147,7 @@
         "/m/02pvjn"
       ],
       "parent_org": [
-        "Morin Christophe Works, Inc."
+        "Bath & Body Works, Inc."
       ]
     }
   },
@@ -5070,9 +5212,14 @@
       "citizenship": [
         "United States"
       ],
+      "position_held": [
+        "chief executive officer",
+        "trustee"
+      ],
       "educated_at": [
         "Ohio State University",
-        "Bexley High School"
+        "Bexley High School",
+        "Moritz College of Law"
       ],
       "occupation": [
         "entrepreneur",
@@ -5091,7 +5238,8 @@
         "n85247622"
       ],
       "member_of": [
-        "American Academy of Arts and Sciences"
+        "American Academy of Arts and Sciences",
+        "Sigma Alpha Mu"
       ],
       "residence": [
         "New Albany"
@@ -5120,7 +5268,8 @@
         "Claremont McKenna College"
       ],
       "occupation": [
-        "businessperson"
+        "businessperson",
+        "hotel owner"
       ],
       "employer": [
         "Hyatt Hotels Corporation"
@@ -5130,6 +5279,10 @@
       ],
       "gnd": [
         "1149297859"
+      ],
+      "member_of": [
+        "Council on Foreign Relations",
+        "Aspen Strategy Group"
       ],
       "date_of_birth": [
         "1950-06-06T00:00:00Z"
@@ -5159,11 +5312,15 @@
     "qid": "Q78473599",
     "properties": {
       "citizenship": [
+        "United States",
         "Australia"
       ],
+      "educated_at": [
+        "Royal Palm Beach High School"
+      ],
       "occupation": [
+        "lawyer",
         "chief executive officer",
-        "sex worker",
         "activist"
       ],
       "viaf": [
@@ -5177,6 +5334,15 @@
       ],
       "find_a_grave": [
         "282035181"
+      ],
+      "residence": [
+        "Colorado",
+        "Miami",
+        "Cairns",
+        "Glenning Valley",
+        "Loxahatchee",
+        "Ocean Reef",
+        "Neergabby"
       ],
       "date_of_birth": [
         "1983-08-09T00:00:00Z"
@@ -5194,7 +5360,7 @@
       ],
       "owned_by": [
         "Jeffrey Epstein",
-        "http://www.wikidata.org/.well-known/genid/22665dc4c3a11744b2a2a52c69551ea3"
+        "Don Huffines"
       ]
     }
   }
